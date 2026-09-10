@@ -4,6 +4,8 @@ import ModuleStats from "./../../../Components/LeadStats/LeadStats.jsx";
 import ModuleTable from "./../../../Components/ModuleTable/ModuleTable.jsx";
 import { PhoneCall } from "lucide-react";
 
+import API_BASE_URL from "./../../../config/api.js"
+
 //============== Action Button Forms ==================
 import VisitForm from "./../../../Components/LeadForms/VitisForm/VisitForm.jsx";
 import ScheduleForm from "../../../Components/LeadForms/ScheduleForm/ScheduleForm.jsx";
@@ -21,7 +23,7 @@ function FollowUp(){
     
      //Fetch Follow-ups from API
         const fetchFollowUps = () => {
-    fetch("http://localhost:8080/api/leads/status/FOLLOW_UP")
+    fetch("${API_BASE_URL}/leads/status/FOLLOW_UP")
         .then((response) => {
             if (!response.ok) {
                 throw new Error("Failed to fetch follow-ups");
@@ -60,7 +62,7 @@ function FollowUp(){
     try {
 
         const response = await fetch(
-            `http://localhost:8080/api/leads/${lead.id}`,
+            `${API_BASE_URL}/leads/${lead.id}`,
             {
                 method: "DELETE"
             }

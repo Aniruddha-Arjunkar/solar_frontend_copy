@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import API_BASE_URL from "./../../../config/api";
+
 import {
     Clock3,
     Plus,
@@ -38,7 +40,7 @@ function PendingWorkSection({ clientId }) {
             setLoading(true);
 
             const response = await fetch(
-                `http://localhost:8080/api/pending-work/client/${clientId}`
+                `${API_BASE_URL}/pending-work/client/${clientId}`
             );
 
             if (!response.ok) {
@@ -160,7 +162,7 @@ function PendingWorkSection({ clientId }) {
             if (editingWork) {
 
                 response = await fetch(
-                    `http://localhost:8080/api/pending-work/${editingWork.id}`,
+                    `${API_BASE_URL}/pending-work/${editingWork.id}`,
                     {
                         method: "PUT",
 
@@ -180,7 +182,7 @@ function PendingWorkSection({ clientId }) {
             else {
 
                 response = await fetch(
-                    `http://localhost:8080/api/pending-work/client/${clientId}`,
+                    `${API_BASE_URL}/pending-work/client/${clientId}`,
                     {
                         method: "POST",
 
@@ -238,7 +240,7 @@ function PendingWorkSection({ clientId }) {
         try {
 
             const response = await fetch(
-                `http://localhost:8080/api/pending-work/${work.id}/complete`,
+                `${API_BASE_URL}/pending-work/${work.id}/complete`,
                 {
                     method: "PUT"
                 }
@@ -289,7 +291,7 @@ function PendingWorkSection({ clientId }) {
         try {
 
             const response = await fetch(
-                `http://localhost:8080/api/pending-work/${work.id}`,
+                `${API_BASE_URL}/pending-work/${work.id}`,
                 {
                     method: "DELETE"
                 }

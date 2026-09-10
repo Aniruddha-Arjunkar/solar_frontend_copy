@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import API_BASE_URL from "./../../../config/api.js";
+
 import {
     Clock,
     LoaderCircle
@@ -89,7 +91,7 @@ function PendingWork() {
             setError("");
 
             const response = await fetch(
-                "http://localhost:8080/api/pending-work/pending-with-client"
+                "${API_BASE_URL}/pending-work/pending-with-client"
             );
 
 
@@ -198,7 +200,7 @@ function PendingWork() {
 
 
             const response = await fetch(
-                `http://localhost:8080/api/pending-work/${work.id}/complete`,
+                `${API_BASE_URL}/pending-work/${work.id}/complete`,
                 {
                     method: "PUT"
                 }
@@ -266,7 +268,7 @@ function PendingWork() {
 
 
             const response = await fetch(
-                `http://localhost:8080/api/pending-work/${work.id}`,
+                `${API_BASE_URL}/pending-work/${work.id}`,
                 {
                     method: "DELETE"
                 }

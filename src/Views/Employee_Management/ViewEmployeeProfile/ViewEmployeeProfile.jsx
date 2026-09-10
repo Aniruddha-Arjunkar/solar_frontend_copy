@@ -20,6 +20,8 @@ import {
     CalendarCheck
 } from "lucide-react";
 
+import API_BASE_URL from "./../../../config/api";
+
 import {
     useEffect,
     useState
@@ -60,7 +62,7 @@ function ViewEmployeeProfile() {
 
 
                 const response = await fetch(
-                    `http://localhost:8080/api/employees/${employeeId}`
+                    `${API_BASE_URL}/employees/${employeeId}`
                 );
 
 
@@ -196,7 +198,7 @@ const handleViewSalary = async () => {
 
 
         const response = await fetch(
-            `http://localhost:8080/api/salaries/employee/${employeeId}/month/${salaryMonth}`
+            `${API_BASE_URL}/salaries/employee/${employeeId}/month/${salaryMonth}`
         );
 
         if (!response.ok) {

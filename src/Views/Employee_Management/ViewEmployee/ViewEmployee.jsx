@@ -4,6 +4,8 @@ import {
     RotateCcw
 } from "lucide-react";
 
+import API_BASE_URL from "./../../../config/api.js"
+
 import {
     useEffect,
     useState
@@ -38,18 +40,7 @@ function ViewEmployee() {
     const [activeAction, setActiveAction] =
         useState(null);
 
-
-    // ============================================================
-    // EMPLOYEE DATA
-    // ============================================================
-    /*
-     * Employee data now comes from the Spring Boot backend.
-     *
-     * Backend API:
-     *
-     * GET http://localhost:8080/api/employees
-     */
-
+        
     const [employeeData, setEmployeeData] =
         useState([]);
 
@@ -71,7 +62,7 @@ function ViewEmployee() {
 
 
                 const response = await fetch(
-                    "http://localhost:8080/api/employees"
+                    "${API_BASE_URL}/employees"
                 );
 
 

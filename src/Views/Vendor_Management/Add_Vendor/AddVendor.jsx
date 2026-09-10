@@ -3,6 +3,8 @@ import { useState } from "react";
 import VendorHeader
     from "./../../../Components/Vendor_Module_Components/VendorHeader/VendorHeader.jsx";
 
+import API_BASE_URL from "./../../../config/api.js";
+
 import {
     UserRoundPlus,
     User,
@@ -87,7 +89,7 @@ function AddVendor() {
             // ====================================================
 
             const response = await fetch(
-                "http://localhost:8080/api/vendors",
+                "${API_BASE_URL}/vendors",
                 {
                     method: "POST",
 

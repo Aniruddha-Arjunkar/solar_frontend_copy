@@ -2,6 +2,8 @@ import { useState , useEffect} from "react";
 
 import { useNavigate } from "react-router";
 
+import API_BASE_URL from "./../../../config/api.js";
+
 import ModuleHeader from "./../../../Components/ModulePageHeader/ModulePageHeader.jsx";
 import ModuleStats from "./../../../Components/LeadStats/LeadStats.jsx";
 import ModuleTable from "./../../../Components/ModuleTable/ModuleTable.jsx";
@@ -28,7 +30,7 @@ function ScheduleClient(){
     const fetchScheduleLeads = () => {
 
     fetch(
-        "http://localhost:8080/api/leads/status/SCHEDULED"
+        "${API_BASE_URL}/leads/status/SCHEDULED"
     )
 
         .then((response) => {
@@ -82,7 +84,7 @@ function ScheduleClient(){
     try {
 
         const response = await fetch(
-            `http://localhost:8080/api/leads/${lead.id}`,
+            `${API_BASE_URL}/leads/${lead.id}`,
             {
                 method: "DELETE"
             }

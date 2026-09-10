@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { ArrowBigLeft } from "lucide-react";
 
+import API_BASE_URL from "./../../../config/api";
+
 import "./AddQuotation.css";
 
 function AddQuotation() {
@@ -107,7 +109,7 @@ function AddQuotation() {
 
     useEffect(() => {
 
-        fetch(`http://localhost:8080/api/leads/${leadId}`)
+        fetch(`${API_BASE_URL}/leads/${leadId}`)
             .then((response) => {
 
                 if (!response.ok) {
@@ -291,7 +293,7 @@ function AddQuotation() {
         try {
 
             const response = await fetch(
-                `http://localhost:8080/api/quotations/lead/${leadId}`,
+                `${API_BASE_URL}/quotations/lead/${leadId}`,
                 {
                     method: "POST",
 

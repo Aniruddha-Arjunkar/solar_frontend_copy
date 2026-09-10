@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+
+import API_BASE_URL from "./../../../config/api";
+
 import {
     ArrowLeft,
     CalendarDays,
@@ -48,7 +51,7 @@ function ViewClientInvoice() {
                 setError("");
 
                 const response = await fetch(
-                    `http://localhost:8080/api/invoices/${invoiceId}`
+                    `${API_BASE_URL}/invoices/${invoiceId}`
                 );
 
                 if (!response.ok) {
@@ -89,7 +92,7 @@ function ViewClientInvoice() {
     const handleViewPdf = () => {
 
         window.open(
-            `http://localhost:8080/api/invoices/${invoiceId}/pdf`,
+            `${API_BASE_URL}/invoices/${invoiceId}/pdf`,
             "_blank",
             "noopener,noreferrer"
         );

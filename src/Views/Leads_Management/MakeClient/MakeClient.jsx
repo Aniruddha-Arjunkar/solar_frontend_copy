@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
+import API_BASE_URL from "./../../../config/api";
+
 import {
     UserRoundPlus,
     ArrowLeft,
@@ -86,7 +88,7 @@ function MakeClient() {
                 setLoading(true);
 
                 const response = await fetch(
-                    `http://localhost:8080/api/leads/${leadId}`
+                    `${API_BASE_URL}/leads/${leadId}`
                 );
 
                 if (!response.ok) {
@@ -298,7 +300,7 @@ function MakeClient() {
             //================================================
 
             const response = await fetch(
-                `http://localhost:8080/api/clients/convert-from-lead/${leadId}`,
+                `${API_BASE_URL}/clients/convert-from-lead/${leadId}`,
                 {
                     method: "POST",
                     headers: {

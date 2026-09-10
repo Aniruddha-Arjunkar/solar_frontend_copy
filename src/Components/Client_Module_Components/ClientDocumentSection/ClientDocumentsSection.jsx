@@ -9,6 +9,8 @@ import {
     LoaderCircle
 } from "lucide-react";
 
+import API_BASE_URL from "./../../../config/api";
+
 import "./ClientDocumentSection.css";
 
 
@@ -18,42 +20,21 @@ import "./ClientDocumentSection.css";
 
 function ClientDocumentsSection({ clientId }) {
 
-    //================================================
-    // STATES
-    //================================================
-
     const [documents, setDocuments] = useState([]);
-
     const [selectedFile, setSelectedFile] = useState(null);
-
-    const [showUploadForm, setShowUploadForm] =
-        useState(false);
-
-    const [loading, setLoading] =
-        useState(false);
-
-    const [uploading, setUploading] =
-        useState(false);
-
+    const [showUploadForm, setShowUploadForm] = useState(false);
+    const [loading, setLoading] =useState(false);
+    const [uploading, setUploading] =useState(false);
     const fileInputRef = useRef(null);
 
-
-    //================================================
-    // FETCH DOCUMENTS
-    //================================================
-
     const fetchDocuments = async () => {
-
         if (!clientId) {
             return;
         }
-
         setLoading(true);
-
         try {
-
             const response = await fetch(
-                `http://localhost:8080/api/client-documents/client/${clientId}`
+                `${API_BASE_URL}/client-documents/client/${clientId}`
             );
 
             if (!response.ok) {
@@ -196,7 +177,7 @@ function ClientDocumentsSection({ clientId }) {
 
 
             const response = await fetch(
-                `http://localhost:8080/api/client-documents/client/${clientId}`,
+                `${API_BASE_URL}/client-documents/client/${clientId}`,
                 {
                     method: "POST",
                     body: formData
@@ -259,7 +240,7 @@ function ClientDocumentsSection({ clientId }) {
     const handleViewDocument = (documentId) => {
 
         const documentUrl =
-            `http://localhost:8080/api/client-documents/${documentId}/view`;
+            `${API_BASE_URL}/client-documents/${documentId}/view`;
 
         window.open(
             documentUrl,
@@ -289,7 +270,7 @@ function ClientDocumentsSection({ clientId }) {
         try {
 
             const response = await fetch(
-                `http://localhost:8080/api/client-documents/${document.id}`,
+                `${API_BASE_URL}/client-documents/${document.id}`,
                 {
                     method: "DELETE"
                 }

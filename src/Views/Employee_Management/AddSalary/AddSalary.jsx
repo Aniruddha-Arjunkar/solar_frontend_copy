@@ -13,6 +13,8 @@ import {
     X
 } from "lucide-react";
 
+import API_BASE_URL from "./../../../config/api.js"
+
 import {
     useEffect,
     useState
@@ -64,7 +66,7 @@ function AddSalary() {
                 setEmployeesError("");
 
                 const response = await fetch(
-                    "http://localhost:8080/api/employees"
+                    "${API_BASE_URL}/employees"
                 );
 
                 if (!response.ok) {
@@ -268,7 +270,7 @@ const handleSubmit = async (e) => {
     try {
 
         const response = await fetch(
-            `http://localhost:8080/api/salaries/employee/${formData.employeeId}`,
+            `${API_BASE_URL}/salaries/employee/${formData.employeeId}`,
             {
                 method: "POST",
 

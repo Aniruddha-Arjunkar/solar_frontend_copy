@@ -7,6 +7,8 @@ import {
   RotateCcw
 } from "lucide-react";
 
+import API_BASE_URL from "./../../../config/api";
+
 import {
   useEffect,
   useMemo,
@@ -117,7 +119,7 @@ function ViewAttendence() {
 
 
         const response = await fetch(
-          "http://localhost:8080/api/employees"
+          "${API_BASE_URL}/employees"
         );
 
 
@@ -186,7 +188,7 @@ useEffect(() => {
 
 
       const response = await fetch(
-        `http://localhost:8080/api/attendance/month/${viewMonth}`
+        `${API_BASE_URL}/attendance/month/${viewMonth}`
       );
 
 

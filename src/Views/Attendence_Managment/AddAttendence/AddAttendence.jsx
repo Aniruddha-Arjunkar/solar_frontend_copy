@@ -6,6 +6,8 @@ import {
   UsersRound
 } from "lucide-react";
 
+import API_BASE_URL from "./../../../config/api";
+
 import {
   useEffect,
   useState
@@ -60,7 +62,7 @@ function AddAttendence() {
         setEmployeesError("");
 
         const response = await fetch(
-          "http://localhost:8080/api/employees"
+          "${API_BASE_URL}/employees"
         );
 
         if (!response.ok) {
@@ -207,7 +209,7 @@ const handleSaveAttendance = async () => {
     try {
 
         const response = await fetch(
-            "http://localhost:8080/api/attendance",
+            "${API_BASE_URL}/attendance",
             {
                 method: "POST",
 

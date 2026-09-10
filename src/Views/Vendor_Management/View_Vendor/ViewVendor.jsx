@@ -22,6 +22,8 @@ import ShowVendorDetail
 
 import "./ViewVendor.css";
 
+import API_BASE_URL from "./../../../config/api.js";
+
 
 function ViewVendor() {
 
@@ -99,7 +101,7 @@ function ViewVendor() {
             // ====================================================
 
             const response = await fetch(
-                "http://localhost:8080/api/vendors"
+                "${API_BASE_URL}/vendors"
             );
 
 
@@ -191,7 +193,7 @@ function ViewVendor() {
             // ====================================================
 
             const response = await fetch(
-                `http://localhost:8080/api/clients/vendor/${vendorId}`
+                `${API_BASE_URL}/clients/vendor/${vendorId}`
             );
 
 

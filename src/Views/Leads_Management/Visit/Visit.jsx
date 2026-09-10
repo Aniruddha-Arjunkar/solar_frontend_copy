@@ -4,6 +4,8 @@ import ModuleHeader from "./../../../Components/ModulePageHeader/ModulePageHeade
 import ModuleStats from "./../../../Components/LeadStats/LeadStats.jsx";
 import ModuleTable from "./../../../Components/ModuleTable/ModuleTable.jsx";
 
+import API_BASE_URL from "./../../../config/api.js";
+
 import {MapPinHouse} from "lucide-react";
 //========== Action Button Form ==================
 import VisitForm from "./../../../Components/LeadForms/VitisForm/VisitForm.jsx";
@@ -23,7 +25,7 @@ function Visit(){
      
       const fetchVisitLeads = () => {
 
-    fetch("http://localhost:8080/api/leads/status/VISIT")
+    fetch("${API_BASE_URL}/leads/status/VISIT")
         .then((response) => {
 
             if (!response.ok) {
@@ -75,7 +77,7 @@ function Visit(){
     try {
 
         const response = await fetch(
-            `http://localhost:8080/api/leads/${lead.id}`,
+            `${API_BASE_URL}/leads/${lead.id}`,
             {
                 method: "DELETE"
             }

@@ -15,6 +15,8 @@ import {
     UserPen
 } from "lucide-react";
 
+import API_BASE_URL from "./../../../config/api.js";
+
 import {
     useState,
     useEffect
@@ -51,7 +53,7 @@ useEffect(() => {
             setError("");
         
             const response = await fetch(
-                `http://localhost:8080/api/employees/${employeeId}`
+                `${API_BASE_URL}/employees/${employeeId}`
             );
             if (!response.ok) {
 
@@ -545,7 +547,7 @@ const handleSubmit = async (e) => {
     try {
 
         const response = await fetch(
-            `http://localhost:8080/api/employees/${employeeId}`,
+            `${API_BASE_URL}/employees/${employeeId}`,
             {
                 method: "PUT",
 

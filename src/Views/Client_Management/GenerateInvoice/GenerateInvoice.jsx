@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
+import API_BASE_URL from "./../../../config/api";
+
 import {
     FileText,
     Plus,
@@ -70,7 +72,7 @@ function GenerateInvoice() {
 
 
             const response = await fetch(
-                `http://localhost:8080/api/clients/${clientId}`
+                `${API_BASE_URL}/clients/${clientId}`
             );
 
 
@@ -153,7 +155,7 @@ const handleViewPdf = () => {
     }
 
     window.open(
-        `http://localhost:8080/api/invoices/${createdInvoice.id}/pdf`,
+        `${API_BASE_URL}/invoices/${createdInvoice.id}/pdf`,
         "_blank",
         "noopener,noreferrer"
     );
@@ -535,7 +537,7 @@ const handleViewPdf = () => {
 
             const response = await fetch(
 
-                `http://localhost:8080/api/invoices/client/${clientId}`,
+                `${API_BASE_URL}/invoices/client/${clientId}`,
 
                 {
 

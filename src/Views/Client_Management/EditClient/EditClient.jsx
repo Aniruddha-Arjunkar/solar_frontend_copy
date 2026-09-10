@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
+import API_BASE_URL from "./../../../config/api"; 
+
 import {
     UserRoundPlus,
     ArrowLeft,
@@ -80,7 +82,7 @@ function EditClient() {
                 setLoading(true);
 
                 const response = await fetch(
-                    `http://localhost:8080/api/clients/${clientId}`
+                    `${API_BASE_URL}/clients/${clientId}`
                 );
 
                 if (!response.ok) {
@@ -432,7 +434,7 @@ function EditClient() {
             // =================================================
 
             const response = await fetch(
-                `http://localhost:8080/api/clients/${clientId}`,
+                `${API_BASE_URL}/clients/${clientId}`,
                 {
                     method: "PUT",
 

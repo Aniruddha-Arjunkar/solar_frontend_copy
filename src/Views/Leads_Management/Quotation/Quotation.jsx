@@ -4,6 +4,8 @@ import ModuleStats from "./../../../Components/LeadStats/LeadStats.jsx";
 import ModuleHeader from "./../../../Components/ModulePageHeader/ModulePageHeader.jsx";
 import ModuleTable from "./../../../Components/ModuleTable/ModuleTable.jsx";
 
+import API_BASE_URL from "./../../../config/api.js";
+
 import { FileText } from "lucide-react";
 
 import "./Quotation.css";
@@ -17,7 +19,7 @@ function Quotation() {
     
     useEffect(() => {
 
-        fetch("http://localhost:8080/api/leads/quotations")
+        fetch("${API_BASE_URL}/leads/quotations")
 
             .then((response) => {
                 if (!response.ok) {
@@ -55,7 +57,7 @@ function Quotation() {
         // FETCH QUOTATIONS FOR THIS LEAD
 
         const response = await fetch(
-            `http://localhost:8080/api/quotations/lead/${leadId}`
+            `${API_BASE_URL}/quotations/lead/${leadId}`
         );
 
         if (!response.ok) {
@@ -98,7 +100,7 @@ function Quotation() {
 
         // Open PDF
         const pdfUrl =
-            `http://localhost:8080/api/quotations/${quotationId}/pdf`;
+            `${API_BASE_URL}/quotations/${quotationId}/pdf`;
 
         window.open(
             pdfUrl,

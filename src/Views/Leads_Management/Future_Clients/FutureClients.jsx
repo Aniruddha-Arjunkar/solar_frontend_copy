@@ -10,7 +10,7 @@ import VisitForm from "./../../../Components/LeadForms/VitisForm/VisitForm.jsx";
 import ReFollowUpForm from "./../../../Components/LeadForms/ReFollowupForm/ReFollowupForm.jsx";
 import ServiceForm from "./../../../Components/LeadForms/ServiceForm/ServiceForm.jsx"
 import ScheduleForm from "./../../../Components/LeadForms/ScheduleForm/ScheduleForm.jsx";
-
+import API_BASE_URL from "./../../../config/api.js";
 
 function FutureClients(){
 
@@ -21,7 +21,7 @@ function FutureClients(){
 
     const fetchFutureLeads = () => {
 
-    fetch("http://localhost:8080/api/leads/status/SERVICE")
+    fetch("${API_BASE_URL}/leads/status/SERVICE")
         .then((response) => {
 
             if (!response.ok) {
@@ -73,7 +73,7 @@ function FutureClients(){
     try {
 
         const response = await fetch(
-            `http://localhost:8080/api/leads/${lead.id}`,
+            `${API_BASE_URL}/leads/${lead.id}`,
             {
                 method: "DELETE"
             }
