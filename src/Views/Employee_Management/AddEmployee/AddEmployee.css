@@ -1,0 +1,580 @@
+/* ============================================================
+   ADD EMPLOYEE PAGE
+============================================================ */
+
+.add-employee-page {
+    width: 100%;
+    padding-bottom: 30px;
+}
+
+
+/* ============================================================
+   EMPLOYEE FORM
+============================================================ */
+
+.add-employee-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+
+/* ============================================================
+   FORM SECTION
+============================================================ */
+
+.employee-form-section {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(31, 49, 95, 0.06);
+}
+
+
+/* ============================================================
+   SECTION HEADER
+============================================================ */
+
+.employee-form-section-header {
+    min-height: 38px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 0 15px;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   SECTION HEADER COLORS
+============================================================ */
+
+.employee-form-section-header.personal {
+    background: #2563eb;
+}
+
+.employee-form-section-header.education {
+    background: #15803d;
+}
+
+.employee-form-section-header.experience {
+    background: #7c3aed;
+}
+
+.employee-form-section-header.employee {
+    background: #f59e0b;
+}
+
+.employee-form-section-header.bank {
+    background: #475569;
+}
+
+.employee-form-section-header.kyc {
+    background: #06b6d4;
+}
+
+.employee-form-section-header.pf {
+    background: #1f2937;
+}
+
+.employee-form-section-header.documents {
+    background: #64748b;
+}
+
+
+.employee-form-section-header h3 {
+    margin: 0;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   FORM GRID
+============================================================ */
+
+.employee-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 13px 15px;
+
+    padding: 15px;
+}
+
+
+/* ============================================================
+   FORM GROUP
+============================================================ */
+
+.employee-form-group {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+
+/* ============================================================
+   LABEL
+============================================================ */
+
+.employee-form-group label {
+    margin-bottom: 5px;
+
+    color: #334155;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   INPUT / SELECT / TEXTAREA
+============================================================ */
+
+.employee-form-group input,
+.employee-form-group select,
+.employee-form-group textarea {
+
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #334155;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.employee-form-group input,
+.employee-form-group select {
+    height: 36px;
+    padding: 0 11px;
+}
+
+/* ============================================================
+   CUSTOM SELECT
+============================================================ */
+
+.employee-form-group select {
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 38px;
+    cursor: pointer;
+
+    background-color: #ffffff;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364758b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+
+    background-repeat: no-repeat;
+    background-position:
+        right 11px center;
+    background-size: 15px 15px;
+
+}
+
+
+/* ============================================================
+   SELECT HOVER
+============================================================ */
+
+.employee-form-group select:hover {
+    border-color: #94a3b8;
+    background-color: #f8fafc;
+}
+
+
+/* ============================================================
+   SELECT FOCUS
+============================================================ */
+
+.employee-form-group select:focus {
+    border-color: #2563eb;
+    background-color: #ffffff;
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+
+}
+
+.employee-form-group textarea {
+    min-height: 65px;
+
+    padding: 9px 10px;
+
+    resize: vertical;
+}
+
+
+/* ============================================================
+   PLACEHOLDER
+============================================================ */
+
+.employee-form-group input::placeholder,
+.employee-form-group textarea::placeholder {
+    color: #94a3b8;
+}
+
+
+/* ============================================================
+   FOCUS
+============================================================ */
+
+.employee-form-group input:focus,
+.employee-form-group select:focus,
+.employee-form-group textarea:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 2px rgba(37, 99, 235, 0.10);
+}
+
+
+/* ============================================================
+   INPUT WITH ICON
+============================================================ */
+
+.employee-input-with-icon {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+.employee-input-with-icon svg {
+    position: absolute;
+
+    left: 10px;
+
+    color: #94a3b8;
+
+    pointer-events: none;
+}
+
+
+.employee-input-with-icon input,
+.employee-input-with-icon textarea {
+    padding-left: 32px;
+}
+
+
+/* ============================================================
+   FULL WIDTH
+============================================================ */
+
+.employee-full-width {
+    grid-column: 1 / -1;
+}
+
+
+/* ============================================================
+   FILE INPUT
+============================================================ */
+
+.employee-form-group input[type="file"] {
+    height: auto;
+
+    min-height: 35px;
+
+    padding: 7px 9px;
+
+    cursor: pointer;
+
+    background: #f8fafc;
+}
+
+
+/* ============================================================
+   SMALL HELP TEXT
+============================================================ */
+
+.employee-form-group small {
+    margin-top: 5px;
+
+    color: #64748b;
+
+    font-size: 11px;
+}
+
+
+/* ============================================================
+   FORM ACTIONS
+============================================================ */
+
+.employee-form-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: end;
+
+    gap: 10px;
+
+    padding: 18px;
+
+    /* background: #ffffff; */
+
+    /* border: 1px solid #e2e8f0; */
+
+    /* border-radius: 10px;
+
+    box-shadow:
+        0 3px 12px rgba(31, 49, 95, 0.06); */
+}
+
+
+/* ============================================================
+   SAVE BUTTON
+============================================================ */
+
+.employee-save-btn {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    min-width: 145px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    padding: 11px 18px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.employee-save-btn:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 10px rgba(37, 99, 235, 0.20);
+}
+
+
+/* ============================================================
+   CANCEL BUTTON
+============================================================ */
+
+.employee-cancel-btn {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    min-width: 100px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    padding: 11px 18px;
+
+    background: #64748b;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.employee-cancel-btn:hover {
+    background: #475569;
+
+    transform: translateY(-1px);
+}
+
+/* ============================================================
+   PERMANENT ADDRESS HEADER
+============================================================ */
+
+.employee-permanent-address-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    width: 100%;
+
+    margin-bottom: 6px;
+
+}
+
+
+/* ============================================================
+   SAME AS CURRENT ADDRESS CHECKBOX
+============================================================ */
+
+.employee-same-address-checkbox {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin: 0;
+
+    color: #475569;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    user-select: none;
+
+}
+
+
+/* ============================================================
+   CHECKBOX
+============================================================ */
+
+.employee-same-address-checkbox input {
+
+    width: 15px;
+
+    height: 15px;
+
+    margin: 0;
+
+    padding: 0;
+
+    accent-color: #2563eb;
+
+    cursor: pointer;
+
+}
+
+
+/* ============================================================
+   CHECKBOX HOVER
+============================================================ */
+
+.employee-same-address-checkbox:hover {
+
+    color: #1e40af;
+
+}
+
+
+/* ============================================================
+   DISABLED PERMANENT ADDRESS
+============================================================ */
+
+.employee-input-with-icon textarea:disabled {
+
+    background: #f1f5f9;
+
+    color: #64748b;
+
+    cursor: not-allowed;
+
+    opacity: 0.85;
+
+}
+
+/* ============================================================
+   RESPONSIVE - TABLET
+============================================================ */
+
+@media (max-width: 1100px) {
+
+    .employee-form-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* ============================================================
+   RESPONSIVE - MOBILE
+============================================================ */
+
+@media (max-width: 650px) {
+
+    .employee-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .employee-full-width {
+        grid-column: auto;
+    }
+
+
+    .employee-form-actions {
+        flex-direction: column;
+    }
+
+
+    .employee-save-btn,
+    .employee-cancel-btn {
+        width: 100%;
+    }
+
+}

@@ -1,0 +1,165 @@
+/* ============================================================
+   EMPLOYEE ACTION CONTAINER
+============================================================ */
+
+.employee-action-container {
+    position: relative;
+    display: inline-block;
+}
+
+
+/* ============================================================
+   ACTION BUTTON
+============================================================ */
+
+.employee-action-button {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    min-width: 95px;
+
+    padding: 9px 13px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #1677f0;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+
+.employee-action-button:hover {
+
+    background: #1269d6;
+
+}
+
+
+.employee-action-button svg {
+
+    transition: transform 0.2s ease;
+
+}
+
+
+.employee-action-arrow-open {
+
+    transform: rotate(180deg);
+
+}
+
+
+/* ============================================================
+   ACTION MENU
+============================================================ */
+
+.employee-action-menu {
+
+    position: absolute;
+
+    top: calc(100% + 5px);
+
+    right: 0;
+
+    width: 190px;
+
+    background: #ffffff;
+
+    border-radius: 8px;
+
+    padding: 6px 0;
+
+    border: 1px solid #e2e8f0;
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, 0.15),
+        0 2px 6px rgba(15, 23, 42, 0.08);
+
+    z-index: 1000;
+
+}
+
+
+/* ============================================================
+   MENU BUTTON
+============================================================ */
+
+.employee-action-menu button {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 13px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #334155;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.15s ease;
+
+}
+
+
+.employee-action-menu button:hover {
+
+    background: #f1f5f9;
+
+}
+
+
+.employee-action-menu button svg {
+
+    flex-shrink: 0;
+
+}
+
+
+/* ============================================================
+   ICON COLORS
+============================================================ */
+
+.employee-action-menu button:first-child svg {
+
+    color: #2563eb;
+
+}
+
+
+.employee-action-menu button:last-child svg {
+
+    color: #f59e0b;
+
+}

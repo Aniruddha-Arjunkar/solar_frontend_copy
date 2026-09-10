@@ -1,0 +1,375 @@
+/* ============================================================
+   EDIT PENDING WORK
+   ============================================================ */
+
+.edit-pendingwork-page-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    z-index: 9999;
+}
+
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+
+.edit-pendingwork-page-modal {
+    width: 100%;
+    max-width: 620px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #ffffff;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.20);
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.edit-pendingwork-page-header {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 22px 24px;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.edit-pendingwork-page-header h2 {
+    margin: 0;
+
+    font-size: 21px;
+    font-weight: 600;
+
+    color: #111827;
+}
+
+.edit-pendingwork-page-header p {
+    margin: 6px 0 0;
+
+    font-size: 14px;
+
+    color: #6b7280;
+}
+
+
+/* ============================================================
+   CLOSE BUTTON
+   ============================================================ */
+
+.edit-pendingwork-page-close {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #6b7280;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.edit-pendingwork-page-close:hover {
+    background: #f3f4f6;
+
+    color: #111827;
+}
+
+
+/* ============================================================
+   FORM
+   ============================================================ */
+
+.edit-pendingwork-page-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+    padding: 24px;
+}
+
+
+/* ============================================================
+   FORM FIELD
+   ============================================================ */
+
+.edit-pendingwork-page-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.edit-pendingwork-page-field label {
+    font-size: 14px;
+
+    font-weight: 500;
+
+    color: #374151;
+}
+
+
+/* ============================================================
+   INPUTS
+   ============================================================ */
+
+.edit-pendingwork-page-field input,
+.edit-pendingwork-page-field textarea,
+.edit-pendingwork-page-field select {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 11px 13px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.edit-pendingwork-page-field textarea {
+    resize: vertical;
+
+    min-height: 100px;
+}
+
+.edit-pendingwork-page-field input:focus,
+.edit-pendingwork-page-field textarea:focus,
+.edit-pendingwork-page-field select:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+
+/* ============================================================
+   READ ONLY CLIENT NAME
+   ============================================================ */
+
+.edit-pendingwork-page-field
+.edit-pendingwork-page-readonly {
+    background: #f3f4f6;
+
+    color: #6b7280;
+
+    cursor: not-allowed;
+}
+
+
+/* ============================================================
+   ERROR
+   ============================================================ */
+
+.edit-pendingwork-page-error {
+    padding: 11px 13px;
+
+    border: 1px solid #fecaca;
+
+    border-radius: 8px;
+
+    background: #fef2f2;
+
+    color: #b91c1c;
+
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   ACTION BUTTONS
+   ============================================================ */
+
+.edit-pendingwork-page-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    padding-top: 5px;
+}
+
+
+/* ============================================================
+   CANCEL BUTTON
+   ============================================================ */
+
+.edit-pendingwork-page-cancel,
+.edit-pendingwork-page-save {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 40px;
+
+    padding: 0 17px;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.edit-pendingwork-page-cancel {
+    border: 1px solid #d1d5db;
+
+    background: #ffffff;
+
+    color: #374151;
+}
+
+.edit-pendingwork-page-cancel:hover {
+    background: #f9fafb;
+}
+
+
+/* ============================================================
+   SAVE BUTTON
+   ============================================================ */
+
+.edit-pendingwork-page-save {
+    border: 1px solid #2563eb;
+
+    background: #2563eb;
+
+    color: #ffffff;
+}
+
+.edit-pendingwork-page-save:hover {
+    background: #1d4ed8;
+
+    border-color: #1d4ed8;
+}
+
+
+/* ============================================================
+   DISABLED BUTTONS
+   ============================================================ */
+
+.edit-pendingwork-page-cancel:disabled,
+.edit-pendingwork-page-save:disabled,
+.edit-pendingwork-page-close:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* ============================================================
+   LOADER
+   ============================================================ */
+
+.edit-pendingwork-page-loader {
+    animation:
+        edit-pendingwork-page-spin 1s linear infinite;
+}
+
+@keyframes edit-pendingwork-page-spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .edit-pendingwork-page-overlay {
+        padding: 12px;
+    }
+
+    .edit-pendingwork-page-header {
+        padding: 18px;
+    }
+
+    .edit-pendingwork-page-form {
+        padding: 18px;
+    }
+
+    .edit-pendingwork-page-actions {
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+    .edit-pendingwork-page-cancel,
+    .edit-pendingwork-page-save {
+        width: 100%;
+    }
+}

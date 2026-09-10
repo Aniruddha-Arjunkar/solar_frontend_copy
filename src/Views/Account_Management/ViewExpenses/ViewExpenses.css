@@ -1,0 +1,921 @@
+/* ============================================================
+   VIEW EXPENSES PAGE
+============================================================ */
+
+.accounts-view-expense-page {
+    padding: 34px 34px 45px;
+    min-height: 100%;
+    background: #f7f8fc;
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   PAGE HEADER
+============================================================ */
+
+.accounts-view-expense-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 28px;
+}
+
+
+.accounts-view-expense-header-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+
+.accounts-view-expense-header-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eef0ff;
+    color: #4f46e5;
+
+    flex-shrink: 0;
+}
+
+
+.accounts-view-expense-breadcrumb {
+    margin: 0 0 7px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    color: #7b8498;
+}
+
+
+.accounts-view-expense-header h1 {
+    margin: 0;
+
+    font-size: 30px;
+    line-height: 1.2;
+
+    color: #18243a;
+}
+
+
+.accounts-view-expense-subtitle {
+    margin: 7px 0 0;
+
+    font-size: 15px;
+
+    color: #7c8495;
+}
+
+
+.accounts-view-expense-refresh-btn {
+    min-width: 118px;
+    height: 46px;
+
+    padding: 0 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    border: 1px solid #dce1eb;
+    border-radius: 11px;
+
+    background: #ffffff;
+    color: #26344d;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.accounts-view-expense-refresh-btn:hover {
+    background: #f8f9fc;
+    border-color: #cbd2df;
+    transform: translateY(-1px);
+}
+
+
+.accounts-view-expense-refresh-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+.accounts-view-expense-refresh-spin {
+    animation: accounts-view-expense-spin 1s linear infinite;
+}
+
+
+@keyframes accounts-view-expense-spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* ============================================================
+   STATISTICS
+============================================================ */
+
+.accounts-view-expense-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 26px;
+}
+
+
+.accounts-view-expense-stat-card {
+    min-height: 96px;
+
+    padding: 18px 20px;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    border: 1px solid #e2e5ec;
+    border-radius: 17px;
+
+    background: #ffffff;
+
+    box-sizing: border-box;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.accounts-view-expense-stat-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 22px rgba(34, 44, 70, 0.07);
+}
+
+
+.accounts-view-expense-stat-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #f1f3f7;
+    color: #4c586d;
+
+    flex-shrink: 0;
+}
+
+
+.accounts-view-expense-stat-danger {
+    background: #fff0f0;
+    color: #e34848;
+}
+
+
+.accounts-view-expense-stat-primary {
+    background: #eef2ff;
+    color: #4f46e5;
+}
+
+
+.accounts-view-expense-stat-success {
+    background: #edf9f3;
+    color: #15965a;
+}
+
+
+.accounts-view-expense-stat-average {
+    border-color: #e4e0ff;
+}
+
+
+.accounts-view-expense-stat-card span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    color: #7c8494;
+}
+
+
+.accounts-view-expense-stat-card strong {
+    display: block;
+
+    font-size: 20px;
+
+    color: #18243a;
+}
+
+
+/* ============================================================
+   MAIN CONTENT
+============================================================ */
+
+.accounts-view-expense-content {
+    overflow: hidden;
+
+    border: 1px solid #e0e4ec;
+    border-radius: 18px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 8px 25px rgba(31, 41, 65, 0.05);
+}
+
+
+/* ============================================================
+   TABLE TOP
+============================================================ */
+
+.accounts-view-expense-table-top {
+    padding: 25px 27px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+
+    border-bottom: 1px solid #edf0f4;
+}
+
+
+.accounts-view-expense-table-top h2 {
+    margin: 0 0 6px;
+
+    font-size: 20px;
+
+    color: #1c2940;
+}
+
+
+.accounts-view-expense-table-top p {
+    margin: 0;
+
+    font-size: 14px;
+
+    color: #8991a1;
+}
+
+
+.accounts-view-expense-search {
+    width: 400px;
+    height: 45px;
+
+    padding: 0 14px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    border: 1px solid #dce1e9;
+    border-radius: 11px;
+
+    background: #ffffff;
+
+    color: #8791a4;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.accounts-view-expense-search:focus-within {
+    border-color: #818cf8;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.08);
+}
+
+
+.accounts-view-expense-search input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    font-size: 14px;
+
+    color: #253149;
+}
+
+
+.accounts-view-expense-search input::placeholder {
+    color: #9ba3b2;
+}
+
+
+/* ============================================================
+   DATE FILTERS
+============================================================ */
+
+.accounts-view-expense-filters {
+    padding: 17px 27px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    border-bottom: 1px solid #edf0f4;
+
+    background: #fafbfc;
+}
+
+
+.accounts-view-expense-filter-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-right: 5px;
+
+    color: #5c6678;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+.accounts-view-expense-date-field {
+    width: 175px;
+    height: 40px;
+
+    padding: 0 11px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    border: 1px solid #dce1e9;
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #8992a2;
+
+    box-sizing: border-box;
+}
+
+
+.accounts-view-expense-date-field:focus-within {
+    border-color: #818cf8;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.07);
+}
+
+
+.accounts-view-expense-date-field input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #3d485c;
+
+    font-size: 13px;
+}
+
+
+.accounts-view-expense-date-separator {
+    font-size: 13px;
+    color: #9098a8;
+}
+
+
+.accounts-view-expense-reset-btn {
+    height: 40px;
+
+    padding: 0 17px;
+
+    border: 1px solid #d7dce5;
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: #5d6677;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.accounts-view-expense-reset-btn:hover {
+    background: #f2f4f7;
+    border-color: #c8ced9;
+}
+
+
+/* ============================================================
+   ERROR
+============================================================ */
+
+.accounts-view-expense-error {
+    margin: 20px 27px;
+
+    padding: 13px 15px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    border: 1px solid #f1caca;
+    border-radius: 10px;
+
+    background: #fff5f5;
+    color: #c33c3c;
+
+    font-size: 14px;
+}
+
+
+.accounts-view-expense-error span {
+    flex: 1;
+}
+
+
+.accounts-view-expense-error button {
+    border: none;
+
+    background: transparent;
+    color: #c33c3c;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   LOADING
+============================================================ */
+
+.accounts-view-expense-loading {
+    min-height: 320px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    color: #727c8e;
+}
+
+
+.accounts-view-expense-loading p {
+    margin: 0;
+
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   EMPTY STATE
+============================================================ */
+
+.accounts-view-expense-empty {
+    min-height: 320px;
+
+    padding: 45px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+
+.accounts-view-expense-empty-icon {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: #f0f2ff;
+    color: #6366f1;
+
+    margin-bottom: 15px;
+}
+
+
+.accounts-view-expense-empty h3 {
+    margin: 0 0 7px;
+
+    font-size: 18px;
+
+    color: #26334a;
+}
+
+
+.accounts-view-expense-empty p {
+    max-width: 450px;
+
+    margin: 0;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    color: #8a92a1;
+}
+
+
+/* ============================================================
+   TABLE
+============================================================ */
+
+.accounts-view-expense-table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+.accounts-view-expense-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 850px;
+}
+
+
+.accounts-view-expense-table thead {
+    background: #fafbfc;
+}
+
+
+.accounts-view-expense-table th {
+    padding: 15px 17px;
+
+    border-bottom: 1px solid #e1e5ec;
+
+    text-align: left;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 0.02em;
+
+    color: #70798a;
+
+    white-space: nowrap;
+}
+
+
+.accounts-view-expense-table th:first-child,
+.accounts-view-expense-table td:first-child {
+    text-align: center;
+}
+
+
+.accounts-view-expense-table td {
+    padding: 17px;
+
+    border-bottom: 1px solid #edf0f4;
+
+    font-size: 14px;
+
+    color: #3f4a5d;
+
+    vertical-align: middle;
+}
+
+
+.accounts-view-expense-table tbody tr {
+    transition:
+        background 0.18s ease;
+}
+
+
+.accounts-view-expense-table tbody tr:hover {
+    background: #fafbff;
+}
+
+
+.accounts-view-expense-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* ============================================================
+   INDEX
+============================================================ */
+
+.accounts-view-expense-index {
+    width: 30px;
+    height: 30px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #f0f2f7;
+
+    color: #596579;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   EXPENSE NAME
+============================================================ */
+
+.accounts-view-expense-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.accounts-view-expense-avatar {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #eef1ff;
+    color: #5961d8;
+
+    flex-shrink: 0;
+}
+
+
+.accounts-view-expense-name strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #263249;
+
+    font-size: 14px;
+}
+
+
+.accounts-view-expense-name small {
+    display: block;
+
+    color: #9299a8;
+
+    font-size: 11px;
+}
+
+
+/* ============================================================
+   DATE
+============================================================ */
+
+.accounts-view-expense-date {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    color: #647084;
+
+    white-space: nowrap;
+}
+
+
+.accounts-view-expense-date svg {
+    color: #9098a8;
+}
+
+
+/* ============================================================
+   AMOUNT
+============================================================ */
+
+.accounts-view-expense-amount {
+    color: #d83c43;
+
+    font-size: 14px;
+
+    white-space: nowrap;
+}
+
+
+/* ============================================================
+   PAID BY
+============================================================ */
+
+.accounts-view-expense-paid-by {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 7px 11px;
+
+    border-radius: 9px;
+
+    background: #f1f3f8;
+
+    color: #4e5870;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* ============================================================
+   SERVICE
+============================================================ */
+
+.accounts-view-expense-service {
+    display: inline-block;
+
+    max-width: 210px;
+
+    padding: 7px 10px;
+
+    border-radius: 9px;
+
+    background: #f7f7fb;
+
+    color: #5d6678;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* ============================================================
+   RESULT SUMMARY
+============================================================ */
+
+.accounts-view-expense-result-summary {
+    padding: 17px 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    border-top: 1px solid #edf0f4;
+
+    background: #fafbfc;
+
+    color: #7c8595;
+
+    font-size: 13px;
+}
+
+
+.accounts-view-expense-result-summary strong {
+    color: #29354a;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 1200px) {
+
+    .accounts-view-expense-stats {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .accounts-view-expense-page {
+        padding: 25px 20px 35px;
+    }
+
+
+    .accounts-view-expense-header {
+        align-items: flex-start;
+    }
+
+
+    .accounts-view-expense-header-left {
+        align-items: flex-start;
+    }
+
+
+    .accounts-view-expense-header h1 {
+        font-size: 25px;
+    }
+
+
+    .accounts-view-expense-table-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+
+    .accounts-view-expense-search {
+        width: 100%;
+    }
+
+
+    .accounts-view-expense-filters {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .accounts-view-expense-stats {
+        grid-template-columns: 1fr;
+    }
+
+
+    .accounts-view-expense-header {
+        flex-direction: column;
+    }
+
+
+    .accounts-view-expense-refresh-btn {
+        align-self: flex-start;
+    }
+
+
+    .accounts-view-expense-header-icon {
+        width: 55px;
+        height: 55px;
+    }
+
+
+    .accounts-view-expense-result-summary {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}

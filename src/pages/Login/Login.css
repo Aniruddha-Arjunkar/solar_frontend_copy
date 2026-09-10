@@ -1,0 +1,432 @@
+
+/* =============== ADMIN LOGIN PAGE =============== */
+.admin-login-page {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    box-sizing: border-box;
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(32, 188, 185, 0.08),
+            transparent 35%
+        ),
+        #f4f7fb;
+}
+
+/* ================= LOGIN CONTAINER ============== */
+
+.admin-login-container {
+    width: 900px;
+    min-height: 540px;
+    display: flex;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+        0 20px 50px rgba(30, 58, 112, 0.10),
+        0 5px 15px rgba(15, 23, 42, 0.05);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* ===== LEFT GREETING SECTION ============ */
+.admin-login-greet {
+    width: 43%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 50px 40px;
+    box-sizing: border-box;
+    color: #ffffff;
+    background:
+        linear-gradient(
+            145deg,
+            #1e3a70 0%,
+            #23457f 55%,
+            #1a3567 100%
+        );
+    overflow: hidden;
+}
+
+/* Decorative Circle */
+.admin-login-greet::before {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.035);
+    top: -100px;
+    left: -100px;
+}
+
+/* Decorative Circle */
+.admin-login-greet::after {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: rgba(32, 188, 185, 0.08);
+    bottom: -100px;
+    right: -80px;
+}
+
+/* =================== GREETING CONTENT =========== */
+
+.admin-login-greet-content {
+    position: relative;
+    z-index: 2;
+    max-width: 290px;
+}
+
+/* ============ LOGIN ICON ============ */
+.admin-login-icon {
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.10);
+}
+
+/* ============= GREETING HEADING =========== */
+.admin-login-greet h1 {
+    margin: 0;
+    font-size: 34px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.admin-login-greet h2 {
+    margin: 7px 0 18px;
+    font-size: 22px;
+    font-weight: 500;
+    color: #55d5d1;
+}
+
+.admin-login-greet p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* ======== RIGHT LOGIN SECTION ================= */
+.admin-login-main {
+    width: 57%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 55px 65px;
+    box-sizing: border-box;
+}
+
+/* ============== FORM WRAPPER ============== */
+.admin-login-form-wrapper {
+    width: 100%;
+    max-width: 390px;
+}
+
+/* =============== LOGIN HEADING ========== */
+
+.admin-login-heading {
+    margin-bottom: 35px;
+}
+
+.admin-login-small-heading {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #20bcb9;
+}
+
+.admin-login-heading h1 {
+    margin: 0;
+    color: #1e3a70;
+    font-size: 32px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.admin-login-heading p {
+    margin: 10px 0 0;
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* ======== FORM ================ */
+.admin-login-form {
+    width: 100%;
+}
+
+/* =========== INPUT CONTAINER ============ */
+.admin-login-input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 22px;
+}
+
+/* ================ LABEL ============== */
+
+.admin-input-label {
+    margin-bottom: 8px;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* ========== INPUT WRAPPER ============ */
+
+.admin-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* ======= INPUT ICON =============== */
+
+.admin-input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+/* ================ INPUT ============= */
+
+.admin-input-field {
+    width: 100%;
+    height: 48px;
+    box-sizing: border-box;
+    padding: 0 15px 0 44px;
+    border: 1px solid #dbe2ea;
+    border-radius: 8px;
+    outline: none;
+    background: #ffffff;
+    color: #1e293b;
+    font-size: 16px;
+    font-family: inherit;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background 0.2s;
+}
+
+.admin-input-field:hover {
+    border-color: #b8c4d3;
+}
+
+.admin-input-field:focus {
+    border-color: #20bcb9;
+    background: #ffffff;
+    box-shadow:
+        0 0 0 3px rgba(32, 188, 185, 0.10);
+}
+
+/* Change icon when input focused */
+.admin-input-wrapper:focus-within .admin-input-icon {
+    color: #20bcb9;
+}
+
+.admin-input-field::placeholder {
+    color: #a0aec0;
+}
+
+/* ============ BUTTON SECTION ==================== */
+
+.admin-login-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+/* ========== COMMON BUTTON =================== */
+.admin-clear-btn,
+.admin-login-btn {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        transform 0.2s,
+        background 0.2s,
+        box-shadow 0.2s;
+}
+
+/* ============== LOGIN MESSAGE ========== */
+
+.login-message {
+    margin: 5px 0 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Successful login */
+.login-message.success {
+    color: #16a34a;
+}
+
+/* Failed login */
+
+.login-message.error {
+    color: #dc2626;
+}
+
+/* =============== CLEAR BUTTON ============== */
+.admin-clear-btn {
+    padding: 0 17px;
+    border: 1px solid #d7dee7;
+    background: #ffffff;
+    color: #64748b;
+}
+
+.admin-clear-btn:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    color: #334155;
+}
+
+/* ========== LOGIN BUTTON =============== */
+
+.admin-login-btn {
+    min-width: 105px;
+    padding: 0 20px;
+    border: none;
+    color: #ffffff;
+    background: #20bcb9;
+    box-shadow:
+        0 5px 15px rgba(32, 188, 185, 0.20);
+}
+
+.admin-login-btn:hover {
+    background: #18a7a5;
+    transform: translateY(-1px);
+    box-shadow:
+        0 7px 18px rgba(32, 188, 185, 0.25);
+}
+
+.admin-login-btn:active {
+    transform: translateY(0);
+}
+
+.admin-login-btn:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+}
+
+/* ======= RESPONSIVE ================ */
+
+@media (max-width: 800px) {
+
+    .admin-login-page {
+        padding: 20px;
+    }
+
+    .admin-login-container {
+        width: 100%;
+        max-width: 500px;
+        flex-direction: column;
+    }
+
+    .admin-login-greet {
+        width: 100%;
+        min-height: 260px;
+        padding: 35px 30px;
+    }
+
+    .admin-login-greet h1 {
+        font-size: 27px;
+    }
+
+    .admin-login-greet h2 {
+        font-size: 19px;
+    }
+
+    .admin-login-main {
+        width: 100%;
+        padding: 40px 35px;
+    }
+
+}
+
+/* ========= SMALL MOBILE ============ */
+@media (max-width: 480px) {
+
+    .admin-login-page {
+        padding: 12px;
+    }
+
+    .admin-login-container {
+        border-radius: 14px;
+    }
+
+    .admin-login-greet {
+        min-height: 230px;
+        padding: 30px 20px;
+    }
+
+    .admin-login-icon {
+        width: 58px;
+        height: 58px;
+        margin-bottom: 20px;
+    }
+
+    .admin-login-greet h1 {
+        font-size: 24px;
+    }
+
+    .admin-login-greet h2 {
+        font-size: 17px;
+        margin-bottom: 12px;
+    }
+
+    .admin-login-greet p {
+        font-size: 13px;
+    }
+
+    .admin-login-main {
+        padding: 35px 25px;
+    }
+
+    .admin-login-heading h1 {
+        font-size: 28px;
+    }
+
+    .admin-login-footer {
+        justify-content: stretch;
+    }
+
+    .admin-clear-btn,
+    .admin-login-btn {
+        flex: 1;
+    }
+}
+

@@ -1,0 +1,841 @@
+/* ============================================================
+   GST INVOICE PAGE
+   ============================================================ */
+
+.accounts-gst-invoice-page {
+    width: 100%;
+    padding: 28px;
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+
+.accounts-gst-invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+
+.accounts-gst-invoice-header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+
+.accounts-gst-invoice-header-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f1f5f9;
+    color: #334155;
+
+    flex-shrink: 0;
+}
+
+
+.accounts-gst-invoice-breadcrumb {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 5px;
+}
+
+
+.accounts-gst-invoice-header h1 {
+    margin: 0;
+    font-size: 27px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+
+.accounts-gst-invoice-header p {
+    margin: 5px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   REFRESH BUTTON
+   ============================================================ */
+
+.accounts-gst-invoice-refresh-btn {
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #334155;
+
+    padding: 10px 16px;
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.accounts-gst-invoice-refresh-btn:hover:not(:disabled) {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+
+.accounts-gst-invoice-refresh-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+
+/* ============================================================
+   SPIN ANIMATION
+   ============================================================ */
+
+.accounts-gst-invoice-spin {
+    animation: accounts-gst-invoice-spin-animation 1s linear infinite;
+}
+
+
+@keyframes accounts-gst-invoice-spin-animation {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* ============================================================
+   STATISTICS
+   ============================================================ */
+
+.accounts-gst-invoice-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+
+    margin-bottom: 24px;
+}
+
+
+.accounts-gst-invoice-stat-card {
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+
+.accounts-gst-invoice-stat-icon {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f1f5f9;
+    color: #334155;
+
+    flex-shrink: 0;
+}
+
+
+.accounts-gst-invoice-stat-card span {
+    display: block;
+
+    font-size: 13px;
+    color: #64748b;
+
+    margin-bottom: 4px;
+}
+
+
+.accounts-gst-invoice-stat-card strong {
+    display: block;
+
+    font-size: 23px;
+    font-weight: 700;
+
+    color: #0f172a;
+}
+
+
+/* ============================================================
+   FILTER CARD
+   ============================================================ */
+
+.accounts-gst-invoice-filter-card {
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+
+    padding: 22px;
+
+    margin-bottom: 24px;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+
+.accounts-gst-invoice-filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+
+.accounts-gst-invoice-filter-header h3 {
+    margin: 0;
+
+    color: #0f172a;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+.accounts-gst-invoice-filter-header p {
+    margin: 5px 0 0;
+
+    color: #64748b;
+    font-size: 13px;
+}
+
+
+/* ============================================================
+   FILTER ROW
+   ============================================================ */
+
+.accounts-gst-invoice-filter-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+
+    gap: 16px;
+}
+
+
+.accounts-gst-invoice-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+
+.accounts-gst-invoice-input-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+}
+
+
+.accounts-gst-invoice-input-wrapper {
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 0 12px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #64748b;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.accounts-gst-invoice-input-wrapper:focus-within {
+    border-color: #64748b;
+
+    box-shadow:
+        0 0 0 3px rgba(100, 116, 139, 0.1);
+}
+
+
+.accounts-gst-invoice-input-wrapper input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    font-size: 14px;
+    color: #0f172a;
+}
+
+
+.accounts-gst-invoice-input-wrapper input::placeholder {
+    color: #94a3b8;
+}
+
+
+/* ============================================================
+   RESET BUTTON
+   ============================================================ */
+
+.accounts-gst-invoice-reset-btn {
+    border: none;
+
+    background: #f8fafc;
+    color: #475569;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.accounts-gst-invoice-reset-btn:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+
+/* ============================================================
+   ERROR
+   ============================================================ */
+
+.accounts-gst-invoice-error {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 14px 16px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+
+    background: #fef2f2;
+    color: #991b1b;
+
+    font-size: 14px;
+}
+
+
+.accounts-gst-invoice-error span {
+    flex: 1;
+}
+
+
+.accounts-gst-invoice-error button {
+    border: none;
+    background: transparent;
+
+    color: #991b1b;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   TABLE CARD
+   ============================================================ */
+
+.accounts-gst-invoice-table-card {
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+
+.accounts-gst-invoice-table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px 22px;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+
+.accounts-gst-invoice-table-header h2 {
+    margin: 0;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    color: #0f172a;
+}
+
+
+.accounts-gst-invoice-table-header p {
+    margin: 5px 0 0;
+
+    font-size: 13px;
+    color: #64748b;
+}
+
+
+/* ============================================================
+   TABLE
+   ============================================================ */
+
+.accounts-gst-invoice-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+
+.accounts-gst-invoice-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 850px;
+}
+
+
+.accounts-gst-invoice-table thead {
+    background: #f8fafc;
+}
+
+
+.accounts-gst-invoice-table th {
+    padding: 13px 18px;
+
+    text-align: left;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+
+    color: #64748b;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+
+.accounts-gst-invoice-table td {
+    padding: 15px 18px;
+
+    font-size: 14px;
+
+    color: #334155;
+
+    border-bottom: 1px solid #f1f5f9;
+
+    vertical-align: middle;
+}
+
+
+.accounts-gst-invoice-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+
+.accounts-gst-invoice-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+
+.accounts-gst-invoice-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* ============================================================
+   SERIAL NUMBER
+   ============================================================ */
+
+.accounts-gst-invoice-serial {
+    color: #64748b;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   INVOICE NUMBER
+   ============================================================ */
+
+.accounts-gst-invoice-number {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+
+.accounts-gst-invoice-number-icon {
+    width: 32px;
+    height: 32px;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f1f5f9;
+    color: #334155;
+
+    flex-shrink: 0;
+}
+
+
+.accounts-gst-invoice-number span {
+    font-weight: 700;
+    color: #0f172a;
+}
+
+
+/* ============================================================
+   CLIENT
+   ============================================================ */
+
+.accounts-gst-invoice-client {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+
+.accounts-gst-invoice-client strong {
+    font-size: 14px;
+    color: #0f172a;
+}
+
+
+.accounts-gst-invoice-client small {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+
+/* ============================================================
+   DATE
+   ============================================================ */
+
+.accounts-gst-invoice-date {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    color: #475569;
+    white-space: nowrap;
+}
+
+
+.accounts-gst-invoice-date svg {
+    color: #64748b;
+}
+
+
+/* ============================================================
+   VIEW PDF BUTTON
+   ============================================================ */
+
+.accounts-gst-invoice-view-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 8px 13px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+
+    background: #ffffff;
+    color: #334155;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.accounts-gst-invoice-view-btn:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+    color: #0f172a;
+
+    transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   LOADING
+   ============================================================ */
+
+.accounts-gst-invoice-loading {
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    color: #64748b;
+}
+
+
+.accounts-gst-invoice-loading p {
+    margin: 0;
+
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+
+.accounts-gst-invoice-empty {
+    min-height: 320px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 40px 20px;
+}
+
+
+.accounts-gst-invoice-empty-icon {
+    width: 68px;
+    height: 68px;
+
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f1f5f9;
+    color: #64748b;
+
+    margin-bottom: 16px;
+}
+
+
+.accounts-gst-invoice-empty h3 {
+    margin: 0 0 7px;
+
+    color: #0f172a;
+
+    font-size: 17px;
+}
+
+
+.accounts-gst-invoice-empty p {
+    margin: 0;
+
+    max-width: 420px;
+
+    color: #64748b;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+.accounts-gst-invoice-empty button {
+    margin-top: 18px;
+
+    border: 1px solid #cbd5e1;
+
+    background: #ffffff;
+    color: #334155;
+
+    padding: 9px 14px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.accounts-gst-invoice-empty button:hover {
+    background: #f8fafc;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1000px) {
+
+    .accounts-gst-invoice-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .accounts-gst-invoice-filter-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .accounts-gst-invoice-search-group {
+        grid-column: 1 / -1;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .accounts-gst-invoice-page {
+        padding: 18px;
+    }
+
+
+    .accounts-gst-invoice-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+
+    .accounts-gst-invoice-refresh-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+
+    .accounts-gst-invoice-stats {
+        grid-template-columns: 1fr;
+    }
+
+
+    .accounts-gst-invoice-filter-row {
+        grid-template-columns: 1fr;
+    }
+
+
+    .accounts-gst-invoice-search-group {
+        grid-column: auto;
+    }
+
+
+    .accounts-gst-invoice-filter-header {
+        flex-direction: column;
+    }
+
+
+    .accounts-gst-invoice-reset-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .accounts-gst-invoice-header-left {
+        align-items: flex-start;
+    }
+
+
+    .accounts-gst-invoice-header-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+
+    .accounts-gst-invoice-header h1 {
+        font-size: 23px;
+    }
+
+
+    .accounts-gst-invoice-filter-card {
+        padding: 16px;
+    }
+
+
+    .accounts-gst-invoice-table-header {
+        padding: 17px;
+    }
+
+}

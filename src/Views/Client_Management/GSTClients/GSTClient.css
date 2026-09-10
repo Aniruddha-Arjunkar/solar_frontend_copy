@@ -1,0 +1,17 @@
+/* =====================================================
+   LOADING / ERROR
+===================================================== */
+
+.gst-client-loading,
+.gst-client-error {
+    margin-top: 25px;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.gst-client-error {
+    color: #d32f2f;
+}

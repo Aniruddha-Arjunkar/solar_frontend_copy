@@ -1,0 +1,323 @@
+/* ============================================================
+   VIEW EMPLOYEE PAGE
+============================================================ */
+
+.view-employee-page {
+
+    width: 100%;
+
+}
+
+
+/* ============================================================
+   SEARCH SECTION
+============================================================ */
+
+.employee-search-section {
+
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 10px;
+
+    padding: 14px 18px;
+
+    margin-bottom: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 5px 15px rgba(15, 23, 42, 0.05);
+
+}
+
+
+/* ============================================================
+   SEARCH BOX
+============================================================ */
+
+.employee-search-box {
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+/* ============================================================
+   SEARCH INPUT WRAPPER
+============================================================ */
+
+.employee-search-input-wrapper {
+
+    width: 350px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 0 12px;
+
+    border: 1px solid #dbe2ea;
+
+    border-radius: 7px 0 0 7px;
+
+    background: #ffffff;
+
+    box-sizing: border-box;
+
+}
+
+
+.employee-search-input-wrapper svg {
+
+    color: #64748b;
+
+    flex-shrink: 0;
+
+}
+
+
+.employee-search-input-wrapper input {
+
+    width: 100%;
+
+    height: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    color: #334155;
+
+}
+
+
+.employee-search-input-wrapper input::placeholder {
+
+    color: #94a3b8;
+
+}
+
+
+/* ============================================================
+   SEARCH BUTTON
+============================================================ */
+
+.employee-search-btn {
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 0 18px;
+
+    border: none;
+
+    background: #1677f0;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+
+.employee-search-btn:hover {
+
+    background: #1269d6;
+
+}
+
+
+/* ============================================================
+   RESET BUTTON
+============================================================ */
+
+.employee-reset-btn {
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 0 16px;
+
+    border: none;
+
+    border-radius: 0 7px 7px 0;
+
+    background: #64748b;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+
+.employee-reset-btn:hover {
+
+    background: #475569;
+
+}
+
+
+/* ============================================================
+   RESULT COUNT
+============================================================ */
+
+.employee-search-result {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 14px;
+
+    color: #334155;
+
+}
+
+
+.employee-search-result strong {
+
+    min-width: 25px;
+
+    height: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #1677f0;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 850px) {
+
+    .employee-search-section {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 15px;
+
+    }
+
+
+    .employee-search-box {
+
+        width: 100%;
+
+    }
+
+
+    .employee-search-input-wrapper {
+
+        flex: 1;
+
+        width: auto;
+
+    }
+
+
+    .employee-search-result {
+
+        justify-content: flex-end;
+
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .employee-search-box {
+
+        flex-wrap: wrap;
+
+    }
+
+
+    .employee-search-input-wrapper {
+
+        width: 100%;
+
+        border-radius: 7px;
+
+        margin-bottom: 8px;
+
+    }
+
+
+    .employee-search-btn {
+
+        border-radius: 7px 0 0 7px;
+
+    }
+
+}

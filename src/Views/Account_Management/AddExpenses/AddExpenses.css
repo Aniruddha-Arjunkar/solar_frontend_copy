@@ -1,0 +1,539 @@
+/* ============================================================
+   ADD EXPENSE PAGE
+============================================================ */
+
+.accounts-add-expense-page {
+    width: 100%;
+    min-height: 100%;
+    padding: 34px 36px 50px;
+    background: #f7f8fc;
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   PAGE HEADER
+============================================================ */
+
+.accounts-add-expense-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+
+.accounts-add-expense-header-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+
+.accounts-add-expense-header-icon {
+    width: 62px;
+    height: 62px;
+    border-radius: 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eef1ff;
+    color: #5146e5;
+
+    flex-shrink: 0;
+}
+
+
+.accounts-add-expense-breadcrumb {
+    margin: 0 0 6px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    color: #7d879c;
+}
+
+
+.accounts-add-expense-header h1 {
+    margin: 0;
+
+    font-size: 31px;
+    line-height: 1.2;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+.accounts-add-expense-subtitle {
+    margin: 7px 0 0;
+
+    font-size: 14px;
+    color: #8992a6;
+}
+
+
+/* ============================================================
+   MAIN CONTENT CARD
+============================================================ */
+
+.accounts-add-expense-content {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e4e8f0;
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 24px rgba(35, 42, 58, 0.05);
+
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   FORM HEADER
+============================================================ */
+
+.accounts-add-expense-form-header {
+    padding: 24px 28px;
+
+    border-bottom: 1px solid #edf0f5;
+
+    background: #ffffff;
+}
+
+
+.accounts-add-expense-form-header h2 {
+    margin: 0;
+
+    font-size: 21px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+.accounts-add-expense-form-header p {
+    margin: 6px 0 0;
+
+    font-size: 14px;
+
+    color: #8992a6;
+}
+
+
+/* ============================================================
+   MESSAGE
+============================================================ */
+
+.accounts-add-expense-message {
+    margin: 22px 28px 0;
+
+    min-height: 48px;
+
+    padding: 12px 15px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.accounts-add-expense-error {
+    background: #fff1f2;
+    border: 1px solid #ffd5d8;
+    color: #d92d3a;
+}
+
+
+.accounts-add-expense-success {
+    background: #edfdf4;
+    border: 1px solid #c9f1d9;
+    color: #16804a;
+}
+
+
+/* ============================================================
+   FORM
+============================================================ */
+
+.accounts-add-expense-form {
+    padding: 30px 28px 28px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 24px 24px;
+}
+
+
+/* ============================================================
+   FORM FIELD
+============================================================ */
+
+.accounts-add-expense-field {
+    min-width: 0;
+}
+
+
+.accounts-add-expense-field-full {
+    grid-column: 1 / -1;
+}
+
+
+.accounts-add-expense-field label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    margin-bottom: 9px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #344054;
+}
+
+
+.accounts-add-expense-field label > span {
+    color: #e04444;
+}
+
+
+.accounts-add-expense-field label small {
+    margin-left: 5px;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    color: #98a1b2;
+}
+
+
+/* ============================================================
+   INPUT WRAPPER
+============================================================ */
+
+.accounts-add-expense-input-wrapper {
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 0 15px;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe4ec;
+    border-radius: 10px;
+
+    box-sizing: border-box;
+
+    color: #7d8799;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.accounts-add-expense-input-wrapper:focus-within {
+    border-color: #6373e8;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 115, 232, 0.10);
+
+    background: #ffffff;
+}
+
+
+.accounts-add-expense-input-wrapper input,
+.accounts-add-expense-input-wrapper select {
+    width: 100%;
+    height: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    color: #273142;
+}
+
+
+.accounts-add-expense-input-wrapper input::placeholder {
+    color: #a3adbd;
+}
+
+
+.accounts-add-expense-input-wrapper select {
+    cursor: pointer;
+}
+
+
+.accounts-add-expense-input-wrapper input[type="date"] {
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   ACTION BUTTONS
+============================================================ */
+
+.accounts-add-expense-actions {
+    grid-column: 1 / -1;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 8px;
+
+    padding-top: 24px;
+
+    border-top: 1px solid #edf0f5;
+}
+
+
+/* ============================================================
+   BACK BUTTON
+============================================================ */
+
+.accounts-add-expense-back-btn {
+    min-width: 105px;
+    height: 45px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 18px;
+
+    border: 1px solid #d9dee8;
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #566174;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.accounts-add-expense-back-btn:hover {
+    background: #f7f8fb;
+    border-color: #c8cfdb;
+    color: #303b4e;
+}
+
+
+.accounts-add-expense-back-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* ============================================================
+   SAVE BUTTON
+============================================================ */
+
+.accounts-add-expense-save-btn {
+    min-width: 145px;
+    height: 45px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 20px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #5146e5;
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 12px rgba(81, 70, 229, 0.18);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.accounts-add-expense-save-btn:hover {
+    background: #453bd0;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 16px rgba(81, 70, 229, 0.24);
+}
+
+
+.accounts-add-expense-save-btn:disabled {
+    opacity: 0.7;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* ============================================================
+   LOADING SPINNER
+============================================================ */
+
+.accounts-add-expense-spinner {
+    width: 15px;
+    height: 15px;
+
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #ffffff;
+
+    border-radius: 50%;
+
+    animation:
+        accounts-add-expense-spin
+        0.7s linear infinite;
+}
+
+
+@keyframes accounts-add-expense-spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 900px) {
+
+    .accounts-add-expense-page {
+        padding: 26px 22px 40px;
+    }
+
+
+    .accounts-add-expense-form {
+        grid-template-columns: 1fr;
+    }
+
+
+    .accounts-add-expense-field-full {
+        grid-column: auto;
+    }
+
+
+    .accounts-add-expense-actions {
+        grid-column: auto;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .accounts-add-expense-page {
+        padding: 20px 15px 30px;
+    }
+
+
+    .accounts-add-expense-header-left {
+        align-items: flex-start;
+    }
+
+
+    .accounts-add-expense-header-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+    }
+
+
+    .accounts-add-expense-header h1 {
+        font-size: 25px;
+    }
+
+
+    .accounts-add-expense-subtitle {
+        line-height: 1.5;
+    }
+
+
+    .accounts-add-expense-form-header,
+    .accounts-add-expense-form {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+
+    .accounts-add-expense-message {
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+
+
+    .accounts-add-expense-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+
+    .accounts-add-expense-back-btn,
+    .accounts-add-expense-save-btn {
+        width: 100%;
+    }
+
+}

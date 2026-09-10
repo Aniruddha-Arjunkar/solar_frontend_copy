@@ -1,0 +1,260 @@
+/* ============================================================
+   EMPLOYEE MODULE HEADER
+============================================================ */
+
+.employee-module-header {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 25px;
+
+    margin-bottom: 25px;
+
+}
+
+
+/* ============================================================
+   HEADING SECTION
+============================================================ */
+
+.employee-module-heading {
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+
+}
+
+
+/* ============================================================
+   CURRENT PAGE / BREADCRUMB
+============================================================ */
+
+.employee-current-page-location {
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+    font-weight: 400;
+
+    color: #64748b;
+
+    line-height: 1.4;
+
+}
+
+
+.employee-current-page-location span {
+
+    margin: 0 8px;
+
+    color: #94a3b8;
+
+}
+
+
+/* ============================================================
+   PAGE TITLE
+============================================================ */
+
+.employee-module-heading h1 {
+
+    margin: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #1e3a70;
+
+    font-size: 29px;
+
+    font-weight: 650;
+
+    line-height: 1.2;
+
+}
+
+
+.employee-module-heading h1 svg {
+
+    flex-shrink: 0;
+
+    color: #20b7b5;
+
+}
+
+
+/* ============================================================
+   DESCRIPTION
+============================================================ */
+
+.employee-module-heading p {
+    margin: 8px 0 0 45px;
+    color: #64748b;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
+
+}
+
+
+/* ============================================================
+   HEADER BUTTON SECTION
+============================================================ */
+
+.employee-module-header-button {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-shrink: 0;
+
+}
+
+
+/* ============================================================
+   HEADER BUTTON
+============================================================ */
+
+.employee-module-header-btn {
+
+    margin-top: 27px;
+
+    min-height: 44px;
+
+    padding: 11px 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    border: 1px solid transparent;
+
+    border-radius: 7px;
+
+    background: #20b7b5;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+/* ============================================================
+   HEADER BUTTON HOVER
+============================================================ */
+
+.employee-module-header-btn:hover {
+
+    background: #159f9d;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 14px rgba(32, 183, 181, 0.20);
+
+}
+
+
+/* ============================================================
+   HEADER BUTTON ACTIVE
+============================================================ */
+
+.employee-module-header-btn:active {
+
+    transform: translateY(0);
+
+    box-shadow: none;
+
+}
+
+
+/* ============================================================
+   RESPONSIVE - TABLET
+============================================================ */
+
+@media (max-width: 750px) {
+
+    .employee-module-header {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+
+    .employee-module-header-button {
+
+        width: 100%;
+
+    }
+
+
+    .employee-module-header-btn {
+
+        width: fit-content;
+
+        margin-top: 0;
+
+    }
+
+}
+
+
+/* ============================================================
+   RESPONSIVE - MOBILE
+============================================================ */
+
+@media (max-width: 500px) {
+
+    .employee-module-heading h1 {
+
+        font-size: 30px;
+
+    }
+
+
+    .employee-module-heading p {
+
+        margin-left: 0;
+
+    }
+
+
+    .employee-module-header-btn {
+
+        width: 100%;
+
+    }
+
+}

@@ -1,0 +1,1587 @@
+we already have implemented Invoice entity in Client Management > GST client and also implement pdf generation from the data in entity 
+"package com.shulventures.solarservicesbackend.entity;
+
+import jakarta.persistence.*;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "invoices")
+public class Invoice {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+
+    @Column(nullable = false, unique = true)
+    private String gstInvoiceNo;
+
+    @Column(nullable = false)
+    private LocalDate invoiceDate;
+
+    @Column(nullable = false)
+    private LocalDate dueDate;
+
+
+    // =====================================================
+    // CLIENT REFERENCE
+    // =====================================================
+
+    /*
+     * Invoice belongs to an existing Client.
+     *
+     * Unlike Lead -> Client conversion, the Client will
+     * NOT be deleted.
+     *
+     * Therefore we can safely keep a relationship here.
+     */
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
+
+
+    /*
+     * Original Lead ID.
+     *
+     * This is only for historical/reference purposes.
+     */
+
+    private Long inquiryId;
+
+
+    // =====================================================
+    // CUSTOMER SNAPSHOT
+    // =====================================================
+
+    /*
+     * We intentionally store customer information inside
+     * the invoice as a snapshot.
+     *
+     * If the Client's address/name changes later,
+     * the old invoice should still show the original
+     * information.
+     */
+
+    private String custName;
+
+    private String custPhone;
+
+    private String custEmail;
+
+    @Column(columnDefinition = "TEXT")
+    private String billingAddress;
+
+    @Column(columnDefinition = "TEXT")
+    private String shippingAddress;
+
+
+    // =====================================================
+    // INVOICE ITEMS
+    // =====================================================
+
+    @OneToMany(
+            mappedBy = "invoice",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<InvoiceItem> items = new ArrayList<>();
+
+
+    // =====================================================
+    // TOTALS
+    // =====================================================
+
+    private BigDecimal subtotal = BigDecimal.ZERO;
+
+    private BigDecimal totalCgst = BigDecimal.ZERO;
+
+    private BigDecimal totalSgst = BigDecimal.ZERO;
+
+    private BigDecimal grandTotal = BigDecimal.ZERO;
+
+
+    // =====================================================
+    // NOTES
+    // =====================================================
+
+    @Column(columnDefinition = "TEXT")
+    private String notes;
+
+
+    // =====================================================
+    // PDF
+    // =====================================================
+
+    /*
+     * Path/name of generated invoice PDF.
+     */
+
+    private String pdfFile;
+
+
+    // =====================================================
+    // TIMESTAMPS
+    // =====================================================
+
+    private LocalDateTime createdAt;
+
+
+    // =====================================================
+    // LIFECYCLE
+    // =====================================================
+
+    @PrePersist
+    protected void onCreate() {
+
+        createdAt = LocalDateTime.now();
+
+        if (subtotal == null) {
+            subtotal = BigDecimal.ZERO;
+        }
+
+        if (totalCgst == null) {
+            totalCgst = BigDecimal.ZERO;
+        }
+
+        if (totalSgst == null) {
+            totalSgst = BigDecimal.ZERO;
+        }
+
+        if (grandTotal == null) {
+            grandTotal = BigDecimal.ZERO;
+        }
+    }
+
+
+    // =====================================================
+    // GETTERS & SETTERS
+    // =====================================================
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    public String getGstInvoiceNo() {
+        return gstInvoiceNo;
+    }
+
+    public void setGstInvoiceNo(String gstInvoiceNo) {
+        this.gstInvoiceNo = gstInvoiceNo;
+    }
+
+
+    public LocalDate getInvoiceDate() {
+        return invoiceDate;
+    }
+
+    public void setInvoiceDate(LocalDate invoiceDate) {
+        this.invoiceDate = invoiceDate;
+    }
+
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+
+    public Long getInquiryId() {
+        return inquiryId;
+    }
+
+    public void setInquiryId(Long inquiryId) {
+        this.inquiryId = inquiryId;
+    }
+
+
+    public String getCustName() {
+        return custName;
+    }
+
+    public void setCustName(String custName) {
+        this.custName = custName;
+    }
+
+
+    public String getCustPhone() {
+        return custPhone;
+    }
+
+    public void setCustPhone(String custPhone) {
+        this.custPhone = custPhone;
+    }
+
+
+    public String getCustEmail() {
+        return custEmail;
+    }
+
+    public void setCustEmail(String custEmail) {
+        this.custEmail = custEmail;
+    }
+
+
+    public String getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(String billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
+
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+
+    public List<InvoiceItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<InvoiceItem> items) {
+        this.items = items;
+    }
+
+
+    public BigDecimal getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(BigDecimal subtotal) {
+        this.subtotal = subtotal;
+    }
+
+
+    public BigDecimal getTotalCgst() {
+        return totalCgst;
+    }
+
+    public void setTotalCgst(BigDecimal totalCgst) {
+        this.totalCgst = totalCgst;
+    }
+
+
+    public BigDecimal getTotalSgst() {
+        return totalSgst;
+    }
+
+    public void setTotalSgst(BigDecimal totalSgst) {
+        this.totalSgst = totalSgst;
+    }
+
+
+    public BigDecimal getGrandTotal() {
+        return grandTotal;
+    }
+
+    public void setGrandTotal(BigDecimal grandTotal) {
+        this.grandTotal = grandTotal;
+    }
+
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+
+    public String getPdfFile() {
+        return pdfFile;
+    }
+
+    public void setPdfFile(String pdfFile) {
+        this.pdfFile = pdfFile;
+    }
+
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+}
+" "package com.shulventures.solarservicesbackend.entity;
+
+import jakarta.persistence.*;
+
+import java.math.BigDecimal;
+
+@Entity
+@Table(name = "invoice_items")
+public class InvoiceItem {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "invoice_id", nullable = false)
+    private Invoice invoice;
+
+
+    // =====================================================
+    // ITEM INFORMATION
+    // =====================================================
+
+    @Column(nullable = false)
+    private String itemName;
+
+    private String hsn;
+
+    private BigDecimal qty = BigDecimal.ONE;
+
+    private BigDecimal serviceCharge;
+
+    private BigDecimal rate;
+
+    private BigDecimal baseAmount;
+
+
+    // =====================================================
+    // CGST
+    // =====================================================
+
+    private BigDecimal cgstPer;
+
+    private BigDecimal cgstAmt;
+
+
+    // =====================================================
+    // SGST
+    // =====================================================
+
+    private BigDecimal sgstPer;
+
+    private BigDecimal sgstAmt;
+
+
+    // =====================================================
+    // ITEM TOTAL
+    // =====================================================
+
+    private BigDecimal itemTotal;
+
+
+    // =====================================================
+    // GETTERS & SETTERS
+    // =====================================================
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
+
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+
+    public String getHsn() {
+        return hsn;
+    }
+
+    public void setHsn(String hsn) {
+        this.hsn = hsn;
+    }
+
+
+    public BigDecimal getQty() {
+        return qty;
+    }
+
+    public void setQty(BigDecimal qty) {
+        this.qty = qty;
+    }
+
+
+    public BigDecimal getServiceCharge() {
+        return serviceCharge;
+    }
+
+    public void setServiceCharge(BigDecimal serviceCharge) {
+        this.serviceCharge = serviceCharge;
+    }
+
+
+    public BigDecimal getRate() {
+        return rate;
+    }
+
+    public void setRate(BigDecimal rate) {
+        this.rate = rate;
+    }
+
+
+    public BigDecimal getBaseAmount() {
+        return baseAmount;
+    }
+
+    public void setBaseAmount(BigDecimal baseAmount) {
+        this.baseAmount = baseAmount;
+    }
+
+
+    public BigDecimal getCgstPer() {
+        return cgstPer;
+    }
+
+    public void setCgstPer(BigDecimal cgstPer) {
+        this.cgstPer = cgstPer;
+    }
+
+
+    public BigDecimal getCgstAmt() {
+        return cgstAmt;
+    }
+
+    public void setCgstAmt(BigDecimal cgstAmt) {
+        this.cgstAmt = cgstAmt;
+    }
+
+
+    public BigDecimal getSgstPer() {
+        return sgstPer;
+    }
+
+    public void setSgstPer(BigDecimal sgstPer) {
+        this.sgstPer = sgstPer;
+    }
+
+
+    public BigDecimal getSgstAmt() {
+        return sgstAmt;
+    }
+
+    public void setSgstAmt(BigDecimal sgstAmt) {
+        this.sgstAmt = sgstAmt;
+    }
+
+
+    public BigDecimal getItemTotal() {
+        return itemTotal;
+    }
+
+    public void setItemTotal(BigDecimal itemTotal) {
+        this.itemTotal = itemTotal;
+    }
+}
+""package com.shulventures.solarservicesbackend.controller;
+
+import com.shulventures.solarservicesbackend.service.InvoicePdfService;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+
+import com.shulventures.solarservicesbackend.dto.InvoiceResponse;
+import com.shulventures.solarservicesbackend.entity.Invoice;
+import com.shulventures.solarservicesbackend.service.InvoiceService;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+/**
+ * ============================================================
+ * INVOICE CONTROLLER
+ * ============================================================
+ *
+ * API endpoints for Invoice Management.
+ *
+ * ============================================================
+ */
+
+@RestController
+@RequestMapping("/api/invoices")
+@CrossOrigin(origins = "http://localhost:5173")
+public class InvoiceController {
+
+
+    private final InvoiceService invoiceService;
+    private final InvoicePdfService invoicePdfService;
+
+    public InvoiceController(
+            InvoiceService invoiceService,
+            InvoicePdfService invoicePdfService
+    ) {
+
+        this.invoiceService = invoiceService;
+        this.invoicePdfService = invoicePdfService;
+    }
+
+
+    // ============================================================
+    // CREATE INVOICE FOR CLIENT
+    // ============================================================
+
+    @PostMapping("/client/{clientId}")
+    public ResponseEntity<InvoiceResponse> createInvoice(
+            @PathVariable Long clientId,
+            @RequestBody Invoice invoice
+    ) {
+
+        Invoice savedInvoice =
+                invoiceService.createInvoice(
+                        clientId,
+                        invoice
+                );
+
+        InvoiceResponse response =
+                invoiceService.toInvoiceResponse(savedInvoice);
+
+        return new ResponseEntity<>(
+                response,
+                HttpStatus.CREATED
+        );
+    }
+
+    // ============================================================
+    // GET ALL INVOICES
+    // ============================================================
+
+    @GetMapping
+    public ResponseEntity<List<InvoiceResponse>> getAllInvoices() {
+
+        return ResponseEntity.ok(
+                invoiceService.getAllInvoices()
+        );
+    }
+
+
+    // ============================================================
+    // GET INVOICES OF SPECIFIC CLIENT
+    // ============================================================
+
+    @GetMapping("/client/{clientId}")
+    public ResponseEntity<List<InvoiceResponse>> getInvoicesByClient(
+            @PathVariable Long clientId
+    ) {
+
+        return ResponseEntity.ok(
+                invoiceService.getInvoicesByClient(clientId)
+        );
+    }
+
+
+    // ============================================================
+    // GET INVOICE BY ID
+    // ============================================================
+    @GetMapping("/{id}")
+    public ResponseEntity<InvoiceResponse> getInvoiceById(
+            @PathVariable Long id
+    ) {
+
+        return ResponseEntity.ok(
+                invoiceService.getInvoiceById(id)
+        );
+    }
+
+
+    // ============================================================
+    // GET INVOICE BY INVOICE NUMBER
+    // ============================================================
+
+    @GetMapping("/number/{gstInvoiceNo}")
+    public ResponseEntity<InvoiceResponse> getInvoiceByNumber(
+            @PathVariable String gstInvoiceNo
+    ) {
+
+        return ResponseEntity.ok(
+                invoiceService.getInvoiceByNumber(
+                        gstInvoiceNo
+                )
+        );
+    }
+
+
+    // ============================================================
+// GENERATE INVOICE PDF
+// ============================================================
+
+    @GetMapping("/{id}/pdf")
+    public ResponseEntity<byte[]> generateInvoicePdf(
+            @PathVariable Long id
+    ) {
+
+        byte[] pdf =
+                invoicePdfService.generateInvoicePdf(id);
+
+        return ResponseEntity.ok()
+                .header(
+                        HttpHeaders.CONTENT_DISPOSITION,
+                        "inline; filename=invoice-" + id + ".pdf"
+                )
+                .contentType(
+                        MediaType.APPLICATION_PDF
+                )
+                .body(pdf);
+    }
+}
+""package com.shulventures.solarservicesbackend.repository;
+
+import com.shulventures.solarservicesbackend.entity.Invoice;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
+    
+    // FIND INVOICES BY CLIENT
+    List<Invoice> findByClientId(Long clientId);
+
+    
+    // FIND INVOICE BY INVOICE NUMBER
+    Optional<Invoice> findByGstInvoiceNo(String gstInvoiceNo);
+
+    
+    // CHECK DUPLICATE INVOICE NUMBER
+    boolean existsByGstInvoiceNo(String gstInvoiceNo);
+}
+""package com.shulventures.solarservicesbackend.repository;
+
+import com.shulventures.solarservicesbackend.entity.InvoiceItem;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface InvoiceItemRepository
+        extends JpaRepository<InvoiceItem, Long> {
+    List<InvoiceItem> findByInvoiceId(Long invoiceId);
+}""package com.shulventures.solarservicesbackend.service;
+
+import com.shulventures.solarservicesbackend.entity.Client;
+import com.shulventures.solarservicesbackend.entity.Invoice;
+import com.shulventures.solarservicesbackend.entity.InvoiceItem;
+import com.shulventures.solarservicesbackend.repository.ClientRepository;
+import com.shulventures.solarservicesbackend.repository.InvoiceRepository;
+
+//For DTO
+import com.shulventures.solarservicesbackend.dto.InvoiceResponse;
+import com.shulventures.solarservicesbackend.dto.InvoiceItemResponse;
+import java.util.ArrayList;
+
+import jakarta.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.util.List;
+
+/**
+ * ============================================================
+ * INVOICE SERVICE
+ * ============================================================
+ *
+ * Responsible for:
+ *
+ * 1. Creating invoices
+ * 2. Creating invoice items
+ * 3. Calculating GST
+ * 4. Calculating invoice totals
+ * 5. Getting invoices
+ * 6. Getting invoices for a specific client
+ * 7. Getting invoice by ID
+ *
+ * PDF generation will be connected after the
+ * basic invoice creation flow is confirmed.
+ *
+ * ============================================================
+ */
+
+@Service
+public class InvoiceService {
+
+    private final InvoiceRepository invoiceRepository;
+    private final ClientRepository clientRepository;
+
+    public InvoiceService(
+            InvoiceRepository invoiceRepository,
+            ClientRepository clientRepository
+    ) {
+        this.invoiceRepository = invoiceRepository;
+        this.clientRepository = clientRepository;
+    }
+
+
+    // ============================================================
+    // CREATE INVOICE
+    // ============================================================
+
+    @Transactional
+    public Invoice createInvoice(
+            Long clientId,
+            Invoice invoice
+    ) {
+
+        // --------------------------------------------------------
+        // FIND CLIENT
+        // --------------------------------------------------------
+
+        Client client = clientRepository.findById(clientId)
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Client not found with id: " + clientId
+                        )
+                );
+
+
+        // --------------------------------------------------------
+        // ONLY GST CLIENT SHOULD GENERATE GST INVOICE
+        // --------------------------------------------------------
+
+        if (!Boolean.TRUE.equals(client.getApplyGst())) {
+
+            throw new RuntimeException(
+                    "Invoice can only be generated for a GST client."
+            );
+        }
+
+
+        // --------------------------------------------------------
+        // CHECK INVOICE NUMBER
+        // --------------------------------------------------------
+
+        if (invoice.getGstInvoiceNo() == null ||
+                invoice.getGstInvoiceNo().isBlank()) {
+
+            throw new RuntimeException(
+                    "GST Invoice Number is required."
+            );
+        }
+
+
+        // --------------------------------------------------------
+        // CHECK DUPLICATE INVOICE NUMBER
+        // --------------------------------------------------------
+
+        if (invoiceRepository.existsByGstInvoiceNo(
+                invoice.getGstInvoiceNo()
+        )) {
+
+            throw new RuntimeException(
+                    "Invoice number already exists: "
+                            + invoice.getGstInvoiceNo()
+            );
+        }
+
+
+        // --------------------------------------------------------
+        // REQUIRED DATES
+        // --------------------------------------------------------
+
+        if (invoice.getInvoiceDate() == null) {
+
+            invoice.setInvoiceDate(LocalDate.now());
+        }
+
+        if (invoice.getDueDate() == null) {
+
+            throw new RuntimeException(
+                    "Due date is required."
+            );
+        }
+
+
+        // ========================================================
+        // CLIENT REFERENCE
+        // ========================================================
+
+        invoice.setClient(client);
+
+
+        // ========================================================
+        // CLIENT SNAPSHOT
+        // ========================================================
+        //
+        // We copy client information into the invoice.
+        //
+        // This is important because the client may be edited
+        // later, but the old invoice should remain unchanged.
+        //
+        // ========================================================
+
+        invoice.setCustName(client.getCustName());
+
+        invoice.setCustPhone(client.getCustPhone());
+
+        invoice.setCustEmail(client.getCustEmail());
+
+        invoice.setBillingAddress(
+                client.getBillingAddress()
+        );
+
+        invoice.setShippingAddress(
+                client.getShippingAddress()
+        );
+
+        invoice.setInquiryId(
+                client.getInquiryId()
+        );
+
+
+        // ========================================================
+        // ITEMS
+        // ========================================================
+
+        if (invoice.getItems() == null ||
+                invoice.getItems().isEmpty()) {
+
+            throw new RuntimeException(
+                    "At least one invoice item is required."
+            );
+        }
+
+
+        // ========================================================
+        // CALCULATE TOTALS
+        // ========================================================
+
+        BigDecimal subtotal = BigDecimal.ZERO;
+
+        BigDecimal totalCgst = BigDecimal.ZERO;
+
+        BigDecimal totalSgst = BigDecimal.ZERO;
+
+
+        // --------------------------------------------------------
+        // PROCESS EVERY ITEM
+        // --------------------------------------------------------
+
+        for (InvoiceItem item : invoice.getItems()) {
+
+            // Connect item to invoice
+            item.setInvoice(invoice);
+
+
+            // ----------------------------------------------------
+            // DEFAULT QUANTITY
+            // ----------------------------------------------------
+
+            if (item.getQty() == null) {
+
+                item.setQty(BigDecimal.ONE);
+            }
+
+
+            // ----------------------------------------------------
+            // VALIDATE ITEM NAME
+            // ----------------------------------------------------
+
+            if (item.getItemName() == null ||
+                    item.getItemName().isBlank()) {
+
+                throw new RuntimeException(
+                        "Item name is required."
+                );
+            }
+
+
+            // ----------------------------------------------------
+            // RATE
+            // ----------------------------------------------------
+
+            BigDecimal rate = item.getRate();
+
+            if (rate == null) {
+
+                rate = BigDecimal.ZERO;
+
+                item.setRate(rate);
+            }
+
+
+            // ----------------------------------------------------
+            // QUANTITY
+            // ----------------------------------------------------
+
+            BigDecimal quantity = item.getQty();
+
+
+            // ----------------------------------------------------
+            // BASE AMOUNT
+            // ----------------------------------------------------
+
+            BigDecimal baseAmount =
+                    rate.multiply(quantity);
+
+
+            item.setBaseAmount(
+                    baseAmount.setScale(
+                            2,
+                            RoundingMode.HALF_UP
+                    )
+            );
+
+
+            // ----------------------------------------------------
+            // GST %
+            // ----------------------------------------------------
+
+            BigDecimal cgstPer = item.getCgstPer();
+
+            BigDecimal sgstPer = item.getSgstPer();
+
+
+            if (cgstPer == null) {
+
+                cgstPer = BigDecimal.ZERO;
+
+                item.setCgstPer(cgstPer);
+            }
+
+            if (sgstPer == null) {
+
+                sgstPer = BigDecimal.ZERO;
+
+                item.setSgstPer(sgstPer);
+            }
+
+
+            // ----------------------------------------------------
+            // CGST AMOUNT
+            // ----------------------------------------------------
+
+            BigDecimal cgstAmount =
+                    baseAmount
+                            .multiply(cgstPer)
+                            .divide(
+                                    new BigDecimal("100"),
+                                    2,
+                                    RoundingMode.HALF_UP
+                            );
+
+
+            // ----------------------------------------------------
+            // SGST AMOUNT
+            // ----------------------------------------------------
+
+            BigDecimal sgstAmount =
+                    baseAmount
+                            .multiply(sgstPer)
+                            .divide(
+                                    new BigDecimal("100"),
+                                    2,
+                                    RoundingMode.HALF_UP
+                            );
+
+
+            item.setCgstAmt(cgstAmount);
+
+            item.setSgstAmt(sgstAmount);
+
+
+            // ----------------------------------------------------
+            // ITEM TOTAL
+            // ----------------------------------------------------
+
+            BigDecimal itemTotal =
+                    baseAmount
+                            .add(cgstAmount)
+                            .add(sgstAmount);
+
+
+            item.setItemTotal(
+                    itemTotal.setScale(
+                            2,
+                            RoundingMode.HALF_UP
+                    )
+            );
+
+
+            // ----------------------------------------------------
+            // ADD TO INVOICE TOTALS
+            // ----------------------------------------------------
+
+            subtotal = subtotal.add(baseAmount);
+
+            totalCgst = totalCgst.add(cgstAmount);
+
+            totalSgst = totalSgst.add(sgstAmount);
+        }
+
+
+        // ========================================================
+        // GRAND TOTAL
+        // ========================================================
+
+        BigDecimal grandTotal =
+                subtotal
+                        .add(totalCgst)
+                        .add(totalSgst);
+
+
+        // ========================================================
+        // SET INVOICE TOTALS
+        // ========================================================
+
+        invoice.setSubtotal(
+                subtotal.setScale(
+                        2,
+                        RoundingMode.HALF_UP
+                )
+        );
+
+        invoice.setTotalCgst(
+                totalCgst.setScale(
+                        2,
+                        RoundingMode.HALF_UP
+                )
+        );
+
+        invoice.setTotalSgst(
+                totalSgst.setScale(
+                        2,
+                        RoundingMode.HALF_UP
+                )
+        );
+
+        invoice.setGrandTotal(
+                grandTotal.setScale(
+                        2,
+                        RoundingMode.HALF_UP
+                )
+        );
+
+
+        // ========================================================
+        // SAVE INVOICE
+        // ========================================================
+
+        return invoiceRepository.save(invoice);
+    }
+
+
+    // ============================================================
+    // GET ALL INVOICES
+    // ============================================================
+    public List<InvoiceResponse> getAllInvoices() {
+
+        return invoiceRepository.findAll()
+                .stream()
+                .map(this::toInvoiceResponse)
+                .toList();
+    }
+//    public List<Invoice> getAllInvoices() {
+//
+//        return invoiceRepository.findAll();
+//    }
+
+
+
+
+    // ============================================================
+    // GET INVOICES BY CLIENT
+    // ============================================================
+    public List<InvoiceResponse> getInvoicesByClient(
+            Long clientId
+    ) {
+
+        return invoiceRepository.findByClientId(clientId)
+                .stream()
+                .map(this::toInvoiceResponse)
+                .toList();
+    }
+
+
+    // ============================================================
+    // GET INVOICE BY ID
+    // ============================================================
+
+    public InvoiceResponse getInvoiceById(Long id) {
+
+        Invoice invoice = invoiceRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Invoice not found with id: " + id
+                        )
+                );
+
+        return toInvoiceResponse(invoice);
+    }
+//    public Invoice getInvoiceById(Long id) {
+//
+//        return invoiceRepository.findById(id)
+//                .orElseThrow(() ->
+//                        new RuntimeException(
+//                                "Invoice not found with id: " + id
+//                        )
+//                );
+//    }
+
+
+    // ============================================================
+    // GET INVOICE BY NUMBER
+    // ============================================================
+
+    public InvoiceResponse getInvoiceByNumber(
+            String gstInvoiceNo
+    ) {
+
+        Invoice invoice = invoiceRepository
+                .findByGstInvoiceNo(gstInvoiceNo)
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Invoice not found with number: "
+                                        + gstInvoiceNo
+                        )
+                );
+
+        return toInvoiceResponse(invoice);
+    }
+
+
+    // ============================================================
+// CONVERT INVOICE ENTITY TO RESPONSE DTO
+// ============================================================
+
+    public InvoiceResponse toInvoiceResponse(Invoice invoice) {
+
+        InvoiceResponse response = new InvoiceResponse();
+
+        // --------------------------------------------------------
+        // INVOICE INFORMATION
+        // --------------------------------------------------------
+
+        response.setId(invoice.getId());
+        response.setGstInvoiceNo(invoice.getGstInvoiceNo());
+        response.setInvoiceDate(invoice.getInvoiceDate());
+        response.setDueDate(invoice.getDueDate());
+
+        // --------------------------------------------------------
+        // CUSTOMER SNAPSHOT
+        // --------------------------------------------------------
+
+        response.setInquiryId(invoice.getInquiryId());
+        response.setCustName(invoice.getCustName());
+        response.setCustPhone(invoice.getCustPhone());
+        response.setCustEmail(invoice.getCustEmail());
+        response.setBillingAddress(invoice.getBillingAddress());
+        response.setShippingAddress(invoice.getShippingAddress());
+
+        // --------------------------------------------------------
+        // TOTALS
+        // --------------------------------------------------------
+
+        response.setSubtotal(invoice.getSubtotal());
+        response.setTotalCgst(invoice.getTotalCgst());
+        response.setTotalSgst(invoice.getTotalSgst());
+        response.setGrandTotal(invoice.getGrandTotal());
+
+        // --------------------------------------------------------
+        // OTHER INFORMATION
+        // --------------------------------------------------------
+
+        response.setNotes(invoice.getNotes());
+        response.setPdfFile(invoice.getPdfFile());
+        response.setCreatedAt(invoice.getCreatedAt());
+
+        // --------------------------------------------------------
+        // ITEMS
+        // --------------------------------------------------------
+
+        List<InvoiceItemResponse> itemResponses = new ArrayList<>();
+
+        if (invoice.getItems() != null) {
+
+            for (InvoiceItem item : invoice.getItems()) {
+
+                InvoiceItemResponse itemResponse =
+                        new InvoiceItemResponse();
+                itemResponse.setId(item.getId());
+                itemResponse.setItemName(item.getItemName());
+                itemResponse.setHsn(item.getHsn());
+                itemResponse.setQty(item.getQty());
+                itemResponse.setServiceCharge(item.getServiceCharge());
+                itemResponse.setRate(item.getRate());
+                itemResponse.setBaseAmount(item.getBaseAmount());
+                itemResponse.setCgstPer(item.getCgstPer());
+                itemResponse.setCgstAmt(item.getCgstAmt());
+                itemResponse.setSgstPer(item.getSgstPer());
+                itemResponse.setSgstAmt(item.getSgstAmt());
+                itemResponse.setItemTotal(item.getItemTotal());
+                itemResponses.add(itemResponse);
+            }
+        }
+        response.setItems(itemResponses);
+        return response;
+    }
+
+
+    // GET INVOICE ENTITY BY ID
+    public Invoice getInvoiceEntityById(Long id) {
+
+        return invoiceRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Invoice not found with id: " + id
+                        )
+                );
+    }
+}""package com.shulventures.solarservicesbackend.dto;
+
+import java.math.BigDecimal;
+
+public class InvoiceItemResponse {
+    
+    private Long id;
+    private String itemName;
+    private String hsn;
+    private BigDecimal qty;
+    private BigDecimal serviceCharge;
+    private BigDecimal rate;
+    private BigDecimal baseAmount;
+    
+    private BigDecimal cgstPer;
+    private BigDecimal cgstAmt;
+    private BigDecimal sgstPer;
+    private BigDecimal sgstAmt;
+    
+
+    private BigDecimal itemTotal;
+    
+
+    public InvoiceItemResponse() {
+    }
+
+    // =====================================================
+    // GETTERS & SETTERS
+    // =====================================================
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public String getHsn() {
+        return hsn;
+    }
+
+    public void setHsn(String hsn) {
+        this.hsn = hsn;
+    }
+
+    public BigDecimal getQty() {
+        return qty;
+    }
+
+    public void setQty(BigDecimal qty) {
+        this.qty = qty;
+    }
+
+    public BigDecimal getServiceCharge() {
+        return serviceCharge;
+    }
+
+    public void setServiceCharge(BigDecimal serviceCharge) {
+        this.serviceCharge = serviceCharge;
+    }
+
+    public BigDecimal getRate() {
+        return rate;
+    }
+
+    public void setRate(BigDecimal rate) {
+        this.rate = rate;
+    }
+
+    public BigDecimal getBaseAmount() {
+        return baseAmount;
+    }
+
+    public void setBaseAmount(BigDecimal baseAmount) {
+        this.baseAmount = baseAmount;
+    }
+
+    public BigDecimal getCgstPer() {
+        return cgstPer;
+    }
+
+    public void setCgstPer(BigDecimal cgstPer) {
+        this.cgstPer = cgstPer;
+    }
+
+    public BigDecimal getCgstAmt() {
+        return cgstAmt;
+    }
+
+    public void setCgstAmt(BigDecimal cgstAmt) {
+        this.cgstAmt = cgstAmt;
+    }
+
+    public BigDecimal getSgstPer() {
+        return sgstPer;
+    }
+
+    public void setSgstPer(BigDecimal sgstPer) {
+        this.sgstPer = sgstPer;
+    }
+
+    public BigDecimal getSgstAmt() {
+        return sgstAmt;
+    }
+
+    public void setSgstAmt(BigDecimal sgstAmt) {
+        this.sgstAmt = sgstAmt;
+    }
+
+    public BigDecimal getItemTotal() {
+        return itemTotal;
+    }
+
+    public void setItemTotal(BigDecimal itemTotal) {
+        this.itemTotal = itemTotal;
+    }
+}
+""package com.shulventures.solarservicesbackend.dto;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
+public class InvoiceResponse {
+
+    private Long id;
+    private String gstInvoiceNo;
+    private LocalDate invoiceDate;
+    private LocalDate dueDate;
+
+    private Long inquiryId;
+    private String custName;
+    private String custPhone;
+    private String custEmail;
+    private String billingAddress;
+    private String shippingAddress;
+
+    private List<InvoiceItemResponse> items;
+
+
+
+    private BigDecimal subtotal;
+    private BigDecimal totalCgst;
+    private BigDecimal totalSgst;
+    private BigDecimal grandTotal;
+
+    private String notes;
+    private String pdfFile;
+    private LocalDateTime createdAt;
+
+    // =====================================================
+    // CONSTRUCTOR
+    // =====================================================
+
+    public InvoiceResponse() {
+    }
+
+    // =====================================================
+    // GETTERS & SETTERS
+    // =====================================================
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getGstInvoiceNo() {
+        return gstInvoiceNo;
+    }
+
+    public void setGstInvoiceNo(String gstInvoiceNo) {
+        this.gstInvoiceNo = gstInvoiceNo;
+    }
+
+    public LocalDate getInvoiceDate() {
+        return invoiceDate;
+    }
+
+    public void setInvoiceDate(LocalDate invoiceDate) {
+        this.invoiceDate = invoiceDate;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public Long getInquiryId() {
+        return inquiryId;
+    }
+
+    public void setInquiryId(Long inquiryId) {
+        this.inquiryId = inquiryId;
+    }
+
+    public String getCustName() {
+        return custName;
+    }
+
+    public void setCustName(String custName) {
+        this.custName = custName;
+    }
+
+    public String getCustPhone() {
+        return custPhone;
+    }
+
+    public void setCustPhone(String custPhone) {
+        this.custPhone = custPhone;
+    }
+
+    public String getCustEmail() {
+        return custEmail;
+    }
+
+    public void setCustEmail(String custEmail) {
+        this.custEmail = custEmail;
+    }
+
+    public String getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(String billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+    public List<InvoiceItemResponse> getItems() {
+        return items;
+    }
+
+    public void setItems(List<InvoiceItemResponse> items) {
+        this.items = items;
+    }
+
+    public BigDecimal getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(BigDecimal subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public BigDecimal getTotalCgst() {
+        return totalCgst;
+    }
+
+    public void setTotalCgst(BigDecimal totalCgst) {
+        this.totalCgst = totalCgst;
+    }
+
+    public BigDecimal getTotalSgst() {
+        return totalSgst;
+    }
+
+    public void setTotalSgst(BigDecimal totalSgst) {
+        this.totalSgst = totalSgst;
+    }
+
+    public BigDecimal getGrandTotal() {
+        return grandTotal;
+    }
+
+    public void setGrandTotal(BigDecimal grandTotal) {
+        this.grandTotal = grandTotal;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getPdfFile() {
+        return pdfFile;
+    }
+
+    public void setPdfFile(String pdfFile) {
+        this.pdfFile = pdfFile;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+}"

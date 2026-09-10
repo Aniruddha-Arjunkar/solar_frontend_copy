@@ -1,0 +1,840 @@
+/* ============== MAIN DASHBOARD BODY ================== */
+
+.main-body {
+    width: 100%;
+
+    /* padding: 24px 24px 40px; */
+
+    /* box-sizing: border-box; */
+
+    /* color: #26345f; */
+}
+
+
+/* ============= PAGE HEADER ============== */
+
+.page-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+
+.breadcrumb {
+    margin: 0 0 5px;
+
+    color: #8b95ad;
+
+    font-size: 12px;
+
+    font-weight: 500;
+}
+
+
+.page-heading {
+    margin: 0;
+
+    color: #26345f;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.3px;
+}
+
+
+/* ======== WELCOME BANNER ============= */
+
+.greet_bar {
+    position: relative;
+
+    width: 100%;
+    min-height: 180px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+
+    padding: 28px 34px;
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #3f518c 0%,
+            #435e9d 55%,
+            #287f91 100%
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    box-shadow:
+        0 10px 30px rgba(63, 81, 140, 0.18);
+}
+
+
+/* Decorative circle */
+
+.greet_bar::before {
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+    height: 230px;
+
+    right: 80px;
+    top: -120px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.07);
+}
+
+
+/* Decorative circle */
+
+.greet_bar::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: -70px;
+    bottom: -100px;
+
+    border-radius: 50%;
+
+    background: rgba(20, 202, 190, 0.18);
+}
+
+
+/* ========== WELCOME CONTENT =============== */
+
+.greet_bar_greeting {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 650px;
+}
+
+
+.welcome-label {
+    display: inline-block;
+
+    margin-bottom: 7px;
+
+    color: rgba(255, 255, 255, 0.65);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+}
+
+
+.greet_bar_greeting h1 {
+    margin: 0 0 8px;
+
+    color: white;
+
+    font-size: 27px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.4px;
+}
+
+
+.greet_bar_greeting p {
+    margin: 0 0 18px;
+
+    color: rgba(255, 255, 255, 0.78);
+
+    font-size: 13px;
+}
+
+
+.greet_bar_greeting p strong {
+    color: #ffffff;
+
+    font-weight: 700;
+}
+
+
+/* ======== CHECK NOW BUTTON ========== */
+
+.check-now-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 9px 15px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #14cabe;
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.15);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.check-now-btn:hover {
+    background: #0fb4aa;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 7px 16px rgba(0, 0, 0, 0.20);
+}
+
+
+/* ===== WELCOME ILLUSTRATION ============ */
+
+.greet_bar_image {
+    position: relative;
+
+    z-index: 2;
+
+    width: 180px;
+    height: 150px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.welcome-illustration {
+    width: 115px;
+    height: 115px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    color: rgba(255, 255, 255, 0.85);
+
+    backdrop-filter: blur(10px);
+}
+
+
+/* ============== CARDS SECTION =============== */
+
+.cards_section {
+    width: 100%;
+
+    display: flex;
+
+    gap: 18px;
+
+    margin-top: 24px;
+}
+
+
+/* ======= GREETING CARD ====================== */
+
+.greet_card {
+    width: 235px;
+
+    min-width: 235px;
+
+    min-height: 170px;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    border: 1px solid rgba(63, 81, 140, 0.10);
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.95),
+            rgba(241, 245, 252, 0.85)
+        );
+
+    box-shadow:
+        0 6px 20px rgba(35, 50, 90, 0.07);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.greet_card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(35, 50, 90, 0.11);
+}
+
+
+/* ============= GREETING CARD TOP ======= */
+
+.greet_card_top {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 12px;
+}
+
+
+.sun-icon {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: rgba(255, 183, 77, 0.14);
+
+    color: #e59a20;
+}
+
+
+.greet_card_label {
+    color: #8b95ad;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+}
+
+
+/* =======GREETING CARD HEADING =============== */
+
+.greet_card h2 {
+    margin: 0;
+
+    color: #26345f;
+
+    font-size: 20px;
+
+    line-height: 1.35;
+
+    font-weight: 700;
+}
+
+
+.greet_card h2 span {
+    color: #3f518c;
+}
+
+
+/* ======== CARD DATE ========= */
+
+.card-date {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 18px;
+
+    padding-top: 13px;
+
+    border-top: 1px solid rgba(63, 81, 140, 0.10);
+
+    color: #3f518c;
+}
+
+
+.card-date div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+
+.card-date span {
+    color: #9aa3b8;
+
+    font-size: 9px;
+
+    font-weight: 500;
+}
+
+
+.card-date strong {
+    color: #536180;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* ===   DATA CARDS ============ */
+
+.data_cards {
+    flex: 1;
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    min-width: 0;
+}
+
+
+/* ============ INDIVIDUAL CARD ========= */
+
+.card {
+    position: relative;
+    min-height: 150px;
+    
+    padding: 18px;
+    box-sizing: border-box;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(63, 81, 140, 0.09);
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.90);
+
+    box-shadow:
+        0 6px 18px rgba(35, 50, 90, 0.06);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 25px rgba(35, 50, 90, 0.11);
+}
+
+
+/* ============ CARD TOP =========== */
+
+.card-top {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.card-title {
+    color: #7d88a4;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    line-height: 1.3;
+}
+
+
+.card-number {
+    color: #26345f;
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+
+/* ================= CARD BOTTOM ================ */
+
+.card-bottom {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-top: 12px;
+
+    border-top: 1px solid rgba(63, 81, 140, 0.08);
+
+    color: #8b95ad;
+
+    font-size: 13px;
+
+    font-weight: 500;
+}
+
+
+.card-bottom svg {
+    color: #3f518c;
+}
+
+
+/* =========== CARD VARIATIONS ============= */
+
+.card.total {
+    border-top: 3px solid #3f518c;
+}
+
+
+.card.new {
+    border-top: 3px solid #14cabe;
+}
+
+
+.card.resolved {
+    border-top: 3px solid #43b581;
+}
+
+
+.card.scheduled {
+    border-top: 3px solid #f0a43c;
+}
+
+/* ============================================================
+   DASHBOARD ERROR
+============================================================ */
+
+.dashboard-error {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    margin-bottom: 18px;
+
+    padding: 12px 16px;
+
+    border: 1px solid #fecaca;
+
+    border-radius: 8px;
+
+    background: #fef2f2;
+
+    color: #b91c1c;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+}
+
+
+/* ============================================================
+   ANALYTICS SECTION
+============================================================ */
+
+.analytics-section {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-top: 24px;
+
+}
+
+
+/* ============================================================
+   CHART CARD
+============================================================ */
+
+.chart-card {
+
+    min-width: 0;
+
+    box-sizing: border-box;
+
+    padding: 22px;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 6px 20px rgba(35, 50, 90, 0.06);
+
+}
+
+
+/* ============================================================
+   CHART HEADER
+============================================================ */
+
+.chart-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.chart-header h2 {
+
+    margin: 0 0 5px;
+
+    color: #26345f;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+}
+
+
+.chart-header p {
+
+    margin: 0;
+
+    color: #8b95ad;
+
+    font-size: 12px;
+
+}
+
+
+.chart-period {
+
+    flex-shrink: 0;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    background: #eefafa;
+
+    color: #168f8d;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+/* ============================================================
+   PIE CHART
+============================================================ */
+
+.pie-chart-container {
+
+    width: 100%;
+
+    min-width: 0;
+
+}
+
+
+/* ============================================================
+   LINE CHART
+============================================================ */
+
+.line-chart-container {
+
+    width: 100%;
+
+    min-width: 0;
+
+}
+
+
+/* ============================================================
+   TABLET / SMALL MONITOR
+============================================================ */
+
+@media (max-width: 1100px) {
+
+    .analytics-section {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 700px) {
+
+    .analytics-section {
+
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+
+        margin-top: 18px;
+
+    }
+
+
+    .chart-card {
+
+        padding: 16px;
+
+    }
+
+
+    .chart-header {
+
+        align-items: flex-start;
+
+    }
+
+
+    .chart-header h2 {
+
+        font-size: 16px;
+
+    }
+
+}
+
+
+/* ============================================================
+   VERY SMALL MOBILE
+============================================================ */
+
+@media (max-width: 400px) {
+
+    .chart-card {
+
+        padding: 12px;
+
+    }
+
+
+    .chart-header {
+
+        flex-direction: column;
+
+        gap: 8px;
+
+    }
+
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 1200px) {
+
+    .cards_section {
+        flex-direction: column;
+    }
+
+
+    .greet_card {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+
+    .data_cards {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .main-body {
+        padding: 18px;
+    }
+
+
+    .greet_bar {
+        min-height: 200px;
+
+        padding: 24px;
+    }
+
+
+    .greet_bar_image {
+        display: none;
+    }
+
+
+    .data_cards {
+        grid-template-columns: 1fr;
+    }
+
+}

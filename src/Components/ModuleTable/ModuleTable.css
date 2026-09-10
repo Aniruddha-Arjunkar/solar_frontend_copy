@@ -1,0 +1,156 @@
+/* ======== TABLE SECTION ====== */
+.module-table-section {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 11px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(15, 23, 42, 0.05);
+}
+
+/* =========== TABLE HEADER =============== */
+
+.module-table-header {
+    padding: 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.module-table-header h2 {
+    margin: 0;
+    font-size: 25px;
+    color: #1e3a70;
+}
+
+.module-table-header p {
+    margin: 5px 0 0;
+    font-size: 15px;
+    color: #64748b;
+}
+
+.lead-record-count {
+    background: #eafafa;
+    color: #159c9a;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* ======== TABLE WRAPPER ===================== */
+.module-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+}
+
+/* ================ TABLE =================== */
+.module-data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.module-data-table th {
+    background: #f8fafc;
+    color: #475569;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: left;
+    padding: 13px 15px;
+    border-bottom: 1px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+.module-data-table td {
+    padding: 14px 15px;
+    font-size: 16px;
+    color: #334155;
+    border-bottom: 1px solid #edf2f7;
+    white-space: nowrap;
+    height:50px;
+}
+
+.module-data-table tbody tr {
+    transition: background 0.15s ease;
+}
+
+.module-data-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* ======= ACTION BUTTONS ================ */
+.module-table-action-btn {
+    display: flex;
+    gap: 7px;
+}
+
+/* .module-table-edit-btn,
+.module-table-delete-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.module-table-edit-btn {
+    color: #2563eb;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+}
+
+.module-table-edit-btn:hover {
+    background: #dbeafe;
+}
+
+.module-table-delete-btn {
+    color: #dc2626;
+    background: #fff1f2;
+    border: 1px solid #fecdd3;
+}
+
+.module-table-delete-btn:hover {
+    background: #ffe4e6;
+} */
+
+/* ======== NO DATA ============== */
+.lead-no-data {
+    text-align: center !important;
+    padding: 35px !important;
+    color: #94a3b8 !important;
+}
+
+/* PDF Button for the Quotation to open pdf for specific Lead */
+
+.module-table-pdf-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 14px;
+
+    border: none;
+    border-radius: 5px;
+
+    background: #ed352f;
+
+    color: white;
+
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.module-table-pdf-btn:hover {
+    background: #e42626;
+}

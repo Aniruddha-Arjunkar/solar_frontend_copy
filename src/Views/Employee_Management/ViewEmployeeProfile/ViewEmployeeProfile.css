@@ -1,0 +1,1279 @@
+/* ============================================================
+   VIEW PROFILE PAGE
+============================================================ */
+
+.view-profile-page {
+    width: 100%;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   PROFILE HEADER
+============================================================ */
+
+.view-profile-header {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 22px 25px;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+
+    box-shadow: 0 5px 15px rgba(15, 23, 42, 0.06);
+}
+
+
+/* ============================================================
+   HEADER LEFT
+============================================================ */
+
+.view-profile-header-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+
+/* ============================================================
+   PROFILE PHOTO
+============================================================ */
+
+.view-profile-photo {
+    width: 78px;
+    height: 78px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eef4ff;
+    color: #2563eb;
+
+    border: 3px solid #dbeafe;
+
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+
+.view-profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* ============================================================
+   BASIC INFORMATION
+============================================================ */
+
+.view-profile-basic-info {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.view-profile-id {
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+
+.view-profile-basic-info h1 {
+    margin: 0;
+
+    color: #1e3a70;
+
+    font-size: 30px;
+    font-weight: 700;
+}
+
+
+.view-profile-designation {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-top: 6px;
+
+    color: #64748b;
+    font-size: 15px;
+}
+
+
+.view-profile-designation svg {
+    color: #0d9488;
+}
+
+
+/* ============================================================
+   HEADER ACTIONS
+============================================================ */
+
+.view-profile-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+
+.view-profile-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    border: none;
+    border-radius: 7px;
+
+    padding: 11px 15px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+/* ===== BACK ===== */
+
+.view-profile-btn.back {
+    background: #64748b;
+    color: #ffffff;
+}
+
+
+.view-profile-btn.back:hover {
+    background: #475569;
+}
+
+
+/* ===== DOCUMENT ===== */
+
+.view-profile-btn.document {
+    background: #0ea5e9;
+    color: #ffffff;
+}
+
+
+.view-profile-btn.document:hover {
+    background: #0284c7;
+}
+
+
+/* ===== SALARY ===== */
+
+.view-profile-btn.salary {
+    background: #16a34a;
+    color: #ffffff;
+}
+
+
+.view-profile-btn.salary:hover {
+    background: #15803d;
+}
+
+
+/* ============================================================
+   PROFILE SECTION
+============================================================ */
+
+.view-profile-section {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 11px;
+
+    margin-bottom: 18px;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 13px rgba(15, 23, 42, 0.05);
+}
+
+
+/* ============================================================
+   SECTION HEADER
+============================================================ */
+
+.view-profile-section-header {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 12px 18px;
+
+    color: #ffffff;
+}
+
+
+.view-profile-section-header h2 {
+    margin: 0;
+
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+.view-profile-section-header svg {
+    flex-shrink: 0;
+}
+
+
+/* ============================================================
+   SECTION COLORS
+============================================================ */
+
+.view-profile-section-header.personal {
+    background: #2563eb;
+}
+
+
+.view-profile-section-header.address {
+    background: #0f766e;
+}
+
+
+.view-profile-section-header.education {
+    background: #16a34a;
+}
+
+
+.view-profile-section-header.experience {
+    background: #9333ea;
+}
+
+
+.view-profile-section-header.employee {
+    background: #f59e0b;
+}
+
+
+.view-profile-section-header.bank {
+    background: #475569;
+}
+
+
+.view-profile-section-header.kyc {
+    background: #0891b2;
+}
+
+
+.view-profile-section-header.pf {
+    background: #334155;
+}
+
+
+.view-profile-section-header.documents {
+    background: #7c3aed;
+}
+
+
+/* ============================================================
+   INFORMATION GRID
+============================================================ */
+
+.view-profile-info-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 14px;
+
+    padding: 20px;
+}
+
+
+/* ============================================================
+   INFORMATION ITEM
+============================================================ */
+
+.view-profile-info-item {
+    min-height: 76px;
+
+    padding: 12px 14px;
+
+    box-sizing: border-box;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+/* ============================================================
+   INFORMATION LABEL
+============================================================ */
+
+.view-profile-info-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    margin-bottom: 7px;
+
+    color: #64748b;
+
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+.view-profile-info-label svg {
+    color: #64748b;
+}
+
+
+/* ============================================================
+   INFORMATION VALUE
+============================================================ */
+
+.view-profile-info-item strong {
+    color: #334155;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    word-break: break-word;
+}
+
+
+/* ============================================================
+   HIGHLIGHTED INFORMATION
+============================================================ */
+
+.view-profile-info-item.highlight {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+}
+
+
+.view-profile-info-item.highlight strong {
+    color: #1d4ed8;
+}
+
+
+/* ============================================================
+   ADDRESS GRID
+============================================================ */
+
+.view-profile-address-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px;
+
+    padding: 20px;
+}
+
+
+/* ============================================================
+   ADDRESS CARD
+============================================================ */
+
+.view-profile-address-card {
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 9px;
+
+    padding: 16px;
+}
+
+
+.view-profile-address-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    color: #475569;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    margin-bottom: 10px;
+}
+
+
+.view-profile-address-title svg {
+    color: #0f766e;
+}
+
+
+.view-profile-address-card p {
+    margin: 0;
+
+    color: #334155;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* ============================================================
+   DOCUMENT AREA
+============================================================ */
+
+.view-profile-document-area {
+    padding: 20px;
+}
+
+
+/* ============================================================
+   DOCUMENT CARD
+============================================================ */
+
+.view-profile-document-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 15px;
+
+    border: 1px solid #ddd6fe;
+    border-radius: 9px;
+
+    background: #f5f3ff;
+
+    color: #6d28d9;
+}
+
+
+.view-profile-document-card svg {
+    flex-shrink: 0;
+}
+
+
+.view-profile-document-card div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+
+.view-profile-document-card strong {
+    color: #4c1d95;
+    font-size: 14px;
+}
+
+
+.view-profile-document-card span {
+    color: #7c3aed;
+    font-size: 12px;
+}
+
+
+/* ============================================================
+   NO DOCUMENT
+============================================================ */
+
+.view-profile-no-document {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 18px;
+
+    border: 1px dashed #cbd5e1;
+    border-radius: 9px;
+
+    background: #f8fafc;
+
+    color: #94a3b8;
+}
+
+
+.view-profile-no-document div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+
+.view-profile-no-document strong {
+    color: #475569;
+    font-size: 14px;
+}
+
+
+.view-profile-no-document span {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+.view-profile-footer {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 11px;
+
+    padding: 15px 18px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 0 4px 13px rgba(15, 23, 42, 0.05);
+}
+
+
+/* ============================================================
+   FOOTER BUTTONS
+============================================================ */
+
+.view-profile-footer-actions {
+    display: flex;
+    gap: 9px;
+}
+
+
+.view-profile-footer-back,
+.view-profile-footer-document,
+.view-profile-footer-salary,
+.view-profile-footer-attendence {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    border: none;
+    border-radius: 7px;
+
+    padding: 10px 15px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+/* ===== FOOTER BACK ===== */
+
+.view-profile-footer-back {
+    background: #64748b;
+    color: #ffffff;
+}
+
+
+.view-profile-footer-back:hover {
+    background: #475569;
+}
+
+
+/* ===== FOOTER DOCUMENT ===== */
+
+.view-profile-footer-document {
+    background: #0ea5e9;
+    color: #ffffff;
+}
+
+
+.view-profile-footer-document:hover {
+    background: #0284c7;
+}
+
+
+/* ===== FOOTER SALARY ===== */
+
+.view-profile-footer-salary {
+    background: #16a34a;
+    color: #ffffff;
+}
+
+
+.view-profile-footer-salary:hover {
+    background: #15803d;
+}
+
+/* ===== FOOTER Attendence ===== */
+
+.view-profile-footer-attendence{
+    background:rgb(221, 221, 0);
+    color: #fff;
+}
+
+
+.view-profile-footer-attendence:hover {
+    background:rgb(203, 203, 0);
+}
+
+/* ============================================================
+   EMPLOYEE SALARY POPUP OVERLAY
+============================================================ */
+
+.employee-salary-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(15, 23, 42, 0.48);
+
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   SALARY MODAL
+============================================================ */
+
+.employee-salary-modal {
+    width: min(760px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 20px 50px rgba(15, 23, 42, 0.20);
+
+    padding: 24px;
+
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   MODAL HEADER
+============================================================ */
+
+.employee-salary-modal-header {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 18px;
+
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.employee-salary-modal-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: #2563eb;
+}
+
+
+.employee-salary-modal-title h2 {
+    margin: 0;
+
+    font-size: 20px;
+
+    font-weight: 650;
+
+    color: #1e293b;
+}
+
+
+.employee-salary-modal-header p {
+    margin: 5px 0 0;
+
+    font-size: 13px;
+
+    color: #64748b;
+}
+
+
+/* ============================================================
+   CLOSE BUTTON
+============================================================ */
+
+.employee-salary-close-btn {
+    width: 34px;
+
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid #d7dde7;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #64748b;
+
+    font-size: 23px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.employee-salary-close-btn:hover {
+    background: #f8fafc;
+
+    color: #1e293b;
+}
+
+
+/* ============================================================
+   SALARY FORM
+============================================================ */
+
+.employee-salary-form {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+.employee-salary-form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.employee-salary-form-group label {
+    font-size: 13px;
+
+    font-weight: 550;
+
+    color: #334155;
+}
+
+
+/* ============================================================
+   SALARY INPUT
+============================================================ */
+
+.employee-salary-input {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+.employee-salary-input > svg {
+    position: absolute;
+
+    left: 13px;
+
+    color: #64748b;
+
+    pointer-events: none;
+}
+
+
+.employee-salary-input input {
+    width: 100%;
+
+    min-height: 44px;
+
+    padding: 10px 13px 10px 39px;
+
+    border: 1px solid #d7dde7;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #1e293b;
+
+    font-size: 14px;
+
+    box-sizing: border-box;
+}
+
+
+.employee-salary-input input:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+
+.employee-salary-input input[readonly] {
+    background: #f8fafc;
+
+    cursor: default;
+}
+
+
+/* ============================================================
+   VIEW SALARY BUTTON
+============================================================ */
+
+.employee-salary-view-btn {
+    grid-column: 1 / -1;
+
+    min-height: 43px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 0 18px;
+
+    border: 1px solid #2563eb;
+
+    border-radius: 8px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.employee-salary-view-btn:hover:not(:disabled) {
+    background: #1d4ed8;
+
+    box-shadow:
+        0 5px 12px rgba(37, 99, 235, 0.20);
+}
+
+
+.employee-salary-view-btn:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+}
+
+
+/* ============================================================
+   SALARY ERROR
+============================================================ */
+
+.employee-salary-error {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    margin-top: 18px;
+
+    padding: 13px 15px;
+
+    border: 1px solid #fecaca;
+
+    border-radius: 8px;
+
+    background: #fef2f2;
+}
+
+
+.employee-salary-error strong {
+    font-size: 13px;
+
+    color: #b91c1c;
+}
+
+
+.employee-salary-error span {
+    font-size: 12px;
+
+    color: #dc2626;
+}
+
+
+/* ============================================================
+   SALARY DETAILS
+============================================================ */
+
+.employee-salary-details {
+    margin-top: 22px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+
+.employee-salary-details-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 15px;
+}
+
+
+.employee-salary-details-header h3 {
+    margin: 0;
+
+    font-size: 17px;
+
+    font-weight: 650;
+
+    color: #1e293b;
+}
+
+
+.employee-salary-details-header span {
+    padding: 5px 9px;
+
+    border-radius: 6px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   SALARY DETAILS GRID
+============================================================ */
+
+.employee-salary-details-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+
+.employee-salary-detail-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    min-height: 48px;
+
+    padding: 11px 13px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 8px;
+
+    background: #f8fafc;
+
+    box-sizing: border-box;
+}
+
+
+.employee-salary-detail-item span {
+    font-size: 13px;
+
+    color: #64748b;
+}
+
+
+.employee-salary-detail-item strong {
+    font-size: 14px;
+
+    color: #1e293b;
+
+    text-align: right;
+}
+
+
+/* ============================================================
+   REMARK
+============================================================ */
+
+.employee-salary-remark {
+    grid-column: 1 / -1;
+
+    align-items: flex-start;
+}
+
+
+.employee-salary-remark strong {
+    max-width: 60%;
+
+    font-weight: 500;
+
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 650px) {
+
+    .employee-salary-modal {
+        padding: 17px;
+
+        max-height: 94vh;
+    }
+
+
+    .employee-salary-form {
+        grid-template-columns: 1fr;
+    }
+
+
+    .employee-salary-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .employee-salary-remark {
+        grid-column: auto;
+    }
+
+
+    .employee-salary-remark strong {
+        max-width: 100%;
+    }
+
+}
+
+/* ============================================================
+   NO DATA
+============================================================ */
+
+.view-profile-no-data {
+    min-height: 350px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: #94a3b8;
+}
+
+
+.view-profile-no-data h2 {
+    margin: 12px 0 5px;
+
+    color: #475569;
+
+    font-size: 22px;
+}
+
+
+.view-profile-no-data p {
+    margin: 0 0 18px;
+
+    color: #94a3b8;
+
+    font-size: 14px;
+}
+
+
+.view-profile-back-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    border: none;
+    border-radius: 7px;
+
+    padding: 10px 16px;
+
+    background: #64748b;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 1000px) {
+
+    .view-profile-header {
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .view-profile-header-actions {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .view-profile-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .view-profile-header {
+        flex-direction: column;
+    }
+
+    .view-profile-header-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .view-profile-basic-info h1 {
+        font-size: 24px;
+    }
+
+    .view-profile-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .view-profile-address-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .view-profile-footer {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .view-profile-footer-actions {
+        width: 100%;
+    }
+
+    .view-profile-footer-back,
+    .view-profile-footer-document,
+    .view-profile-footer-salary {
+        flex: 1;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .view-profile-header {
+        padding: 18px;
+    }
+
+    .view-profile-header-left {
+        align-items: flex-start;
+    }
+
+    .view-profile-photo {
+        width: 62px;
+        height: 62px;
+    }
+
+    .view-profile-header-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .view-profile-btn {
+        width: 100%;
+    }
+
+    .view-profile-footer-actions {
+        flex-direction: column;
+    }
+
+}

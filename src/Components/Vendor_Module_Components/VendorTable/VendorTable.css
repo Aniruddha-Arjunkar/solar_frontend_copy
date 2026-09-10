@@ -1,0 +1,245 @@
+
+/* =========================================
+   VENDOR TABLE SECTION
+========================================= */
+
+.vendor-table-section {
+
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 11px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 15px rgba(15, 23, 42, 0.05);
+
+}
+
+
+/* =========================================
+   TABLE HEADER
+========================================= */
+
+.vendor-table-header {
+
+    padding: 20px 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-bottom: 1px solid #e2e8f0;
+
+}
+
+
+.vendor-table-header h2 {
+
+    margin: 0;
+
+    font-size: 27px;
+
+    color: #1e3a70;
+
+}
+
+
+.vendor-table-header p {
+
+    margin: 5px 0 0;
+
+    font-size: 15px;
+
+    color: #64748b;
+
+}
+
+
+/* =========================================
+   RECORD COUNT
+========================================= */
+
+.vendor-record-count {
+
+    background: #eafafa;
+
+    color: #159c9a;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================
+   TABLE WRAPPER
+========================================= */
+
+.vendor-table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    overflow-y: visible;
+
+}
+
+
+/* =========================================
+   TABLE
+========================================= */
+
+.vendor-data-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+}
+
+
+/* =========================================
+   TABLE HEADER CELLS
+========================================= */
+
+.vendor-data-table th {
+
+    background: #f8fafc;
+
+    color: #475569;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    text-align: left;
+
+    padding: 13px 15px;
+
+    border-bottom: 1px solid #e2e8f0;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================
+   TABLE DATA CELLS
+========================================= */
+
+.vendor-data-table td {
+
+    padding: 14px 15px;
+
+    font-size: 16px;
+
+    color: #334155;
+
+    border-bottom: 1px solid #edf2f7;
+
+    white-space: nowrap;
+
+    height: 50px;
+
+}
+
+
+/* =========================================
+   TABLE ROW HOVER
+========================================= */
+
+.vendor-data-table tbody tr {
+
+    transition: background 0.15s ease;
+
+}
+
+
+.vendor-data-table tbody tr:hover {
+
+    background: #f8fafc;
+
+}
+
+
+/* =========================================
+   ACTION BUTTON SECTION
+========================================= */
+
+.vendor-table-action-btn {
+
+    display: flex;
+
+    gap: 7px;
+
+}
+
+
+/* =========================================
+   NO DATA
+========================================= */
+
+.vendor-no-data {
+
+    text-align: center !important;
+
+    padding: 35px !important;
+
+    color: #94a3b8 !important;
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .vendor-table-header {
+
+        align-items: flex-start;
+
+        gap: 15px;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .vendor-table-header {
+
+        padding: 18px;
+
+    }
+
+
+    .vendor-table-header h2 {
+
+        font-size: 23px;
+
+    }
+
+
+    .vendor-table-header p {
+
+        font-size: 14px;
+
+    }
+
+}
+

@@ -1,0 +1,517 @@
+/* =========================================
+   OVERLAY
+========================================= */
+
+.lead-form-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(15, 23, 42, 0.45);
+
+    backdrop-filter: blur(4px);
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    z-index: 2000;
+
+}
+
+
+/* =========================================
+   FORM CONTAINER
+========================================= */
+
+.refollowup-form-container {
+
+    width: 700px;
+
+    max-width: 100%;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #ffffff;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.18);
+
+    animation: leadFormAppear 0.2s ease-out;
+
+}
+
+
+@keyframes leadFormAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-15px) scale(0.98);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+
+    }
+
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.lead-form-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    padding: 24px 28px;
+
+    border-bottom: 1px solid #e2e8f0;
+
+}
+
+
+.lead-form-header h2 {
+
+    margin: 0;
+
+    color: #1e3a70;
+
+    font-size: 25px;
+
+}
+
+
+.lead-form-header p {
+
+    margin: 6px 0 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+}
+
+
+.lead-form-close {
+
+    width: 36px;
+
+    height: 36px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #64748b;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.lead-form-close:hover {
+
+    background: #f1f5f9;
+
+    color: #1e3a70;
+
+}
+
+
+/* =========================================
+   FORM SECTION
+========================================= */
+
+.lead-form-section {
+
+    padding: 24px 28px;
+
+    border-bottom: 1px solid #e2e8f0;
+
+}
+
+
+.lead-form-section-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 20px;
+
+    color: #1e3a70;
+
+}
+
+
+.lead-form-section-title h3 {
+
+    margin: 0;
+
+    font-size: 18px;
+
+}
+
+
+/* =========================================
+   GRID
+========================================= */
+
+.lead-form-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+}
+
+
+/* =========================================
+   FORM GROUP
+========================================= */
+
+.lead-form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.lead-form-group.full-width {
+
+    grid-column: 1 / -1;
+
+}
+
+
+.lead-form-group label {
+
+    margin-bottom: 7px;
+
+    color: #334155;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+.lead-form-group label span {
+
+    color: #ef4444;
+
+}
+
+
+/* =========================================
+   READ ONLY FIELD
+========================================= */
+
+.lead-readonly-field {
+
+    min-height: 42px;
+
+    box-sizing: border-box;
+
+    padding: 10px 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    border: 1px solid #dbe2ea;
+
+    border-radius: 7px;
+
+    background: #f8fafc;
+
+    color: #475569;
+
+    font-size: 14px;
+
+}
+
+
+.lead-readonly-field svg {
+
+    color: #94a3b8;
+
+    flex-shrink: 0;
+
+}
+
+
+/* =========================================
+   INPUT
+========================================= */
+
+.lead-input-wrapper {
+
+    position: relative;
+
+}
+
+
+.lead-input-wrapper svg {
+
+    position: absolute;
+
+    left: 12px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #94a3b8;
+
+    pointer-events: none;
+
+}
+
+
+.lead-input-wrapper input {
+
+    width: 100%;
+
+    height: 42px;
+
+    box-sizing: border-box;
+
+    padding: 9px 12px 9px 38px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    color: #334155;
+
+}
+
+
+.lead-input-wrapper input:focus {
+
+    border-color: #20bcb9;
+
+    box-shadow:
+        0 0 0 3px rgba(32, 188, 185, 0.12);
+
+}
+
+
+/* =========================================
+   TEXTAREA
+========================================= */
+
+.lead-textarea-wrapper {
+
+    position: relative;
+
+}
+
+
+.lead-textarea-wrapper svg {
+
+    position: absolute;
+
+    left: 12px;
+
+    top: 13px;
+
+    color: #94a3b8;
+
+}
+
+
+.lead-textarea-wrapper textarea {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 11px 12px 11px 38px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    resize: vertical;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+}
+
+
+.lead-textarea-wrapper textarea:focus {
+
+    border-color: #20bcb9;
+
+    box-shadow:
+        0 0 0 3px rgba(32, 188, 185, 0.12);
+
+}
+
+
+.lead-textarea-wrapper textarea::placeholder {
+
+    color: #94a3b8;
+
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.lead-form-footer {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    padding-top: 22px;
+
+}
+
+
+/* =========================================
+   CANCEL
+========================================= */
+
+.lead-form-cancel {
+
+    padding: 10px 20px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #475569;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+
+.lead-form-cancel:hover {
+
+    background: #f8fafc;
+
+}
+
+
+/* =========================================
+   SAVE
+========================================= */
+
+.lead-form-save {
+
+    padding: 10px 20px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #20bcb9;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.lead-form-save:hover {
+
+    background: #18a7a5;
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 650px) {
+
+    .lead-form-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .lead-form-group.full-width {
+
+        grid-column: auto;
+
+    }
+
+    .refollowup-form-container {
+
+        max-height: 95vh;
+
+    }
+
+}

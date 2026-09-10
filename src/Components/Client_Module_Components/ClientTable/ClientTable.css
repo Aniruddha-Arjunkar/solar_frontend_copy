@@ -1,0 +1,127 @@
+/* =========== CLIENT TABLE SECTION ============== */
+
+.client-table-section {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 11px;
+    overflow: visible;
+    box-shadow: 0 5px 15px rgba(15, 23, 42, 0.05);
+}
+
+/* ============= TABLE HEADER =========== */
+
+.client-table-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.client-table-header h2 {
+    margin: 0;
+    font-size: 25px;
+    color: #1e3a70;
+}
+
+.client-table-header p {
+    margin: 5px 0 0;
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* =========== RECORD COUNT ================ */
+
+.client-record-count {
+    background: #eafafa;
+    color: #159c9a;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* =============== TABLE WRAPPER ============ */
+
+.client-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+}
+
+/* ========= TABLE ================ */
+
+.client-data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* ================== TABLE HEAD =========== */
+
+.client-data-table th {
+    background: #f8fafc;
+    color: #475569;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: left;
+    padding: 13px 15px;
+    border-bottom: 1px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+/* ==============  TABLE DATA ========= */
+
+.client-data-table td {
+    padding: 14px 15px;
+    font-size: 16px;
+    color: #334155;
+    border-bottom: 1px solid #edf2f7;
+    white-space: nowrap;
+    height: 50px;
+}
+
+.client-data-table tbody tr {
+    transition: background 0.15s ease;
+}
+
+.client-data-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* ======== ACTION COLUMN ============= */
+
+.client-table-action {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+/* ======= NO DATA =========== */
+
+.client-no-data {
+    text-align: center !important;
+    padding: 35px !important;
+    color: #94a3b8 !important;
+
+}
+
+
+/* ============== RESPONSIVE ========== */
+
+@media (max-width: 800px) {
+
+    .client-table-header {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .client-table-header h2 {
+        font-size: 23px;
+    }
+
+    .client-table-header p {
+        font-size: 14px;
+    }
+}

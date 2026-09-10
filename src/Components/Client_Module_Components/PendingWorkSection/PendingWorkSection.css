@@ -1,0 +1,374 @@
+/* =========================================================
+   PENDING WORK SECTION
+========================================================= */
+
+.pending-work-section {
+    margin-top: 18px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.pending-work-header {
+    padding: 11px 14px;
+    background: #fad26e;
+}
+
+
+.pending-work-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #0e1524;
+}
+
+
+.pending-work-title h3 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.pending-work-body {
+    padding: 12px;
+}
+
+
+/* =========================================================
+   ADD BUTTON
+========================================================= */
+
+.add-pending-work-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    background: linear-gradient(
+        135deg,
+        rgba(20, 202, 190, 0.85),
+        rgba(13, 181, 173, 0.70)
+    );
+    color: #ffffff;
+    padding: 9px 12px;
+    border-radius: 6px;
+    font-size: 13px;    
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 10px;
+     transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.add-pending-work-btn:hover {
+   background: linear-gradient(
+        135deg,
+        rgba(20, 202, 190, 0.95),
+        rgba(13, 181, 173, 0.82)
+    );
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.pending-work-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+
+.pending-work-table {
+    width: 100%;
+    min-width: 650px;
+    border-collapse: collapse;
+}
+
+
+.pending-work-table th {
+    background:#eaf2ff;
+    color: #172554;
+    font-size: 15px;
+    padding: 9px 7px;
+    text-align: left;
+}
+
+
+.pending-work-table td {
+    padding: 9px 7px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+    color: #334155;
+}
+
+
+.pending-work-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+
+.work-description {
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.pending-work-empty {
+    text-align: center !important;
+    color: #94a3b8 !important;
+    padding: 24px !important;
+}
+
+/* =========================================================
+   DISABLED SAVE BUTTON
+========================================================= */
+
+.pending-work-save-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.work-status {
+    display: inline-flex;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+.work-status.pending {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+
+.work-status.completed {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.work-actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+.work-actions button {
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
+.work-edit-btn {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+
+.work-complete-btn {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+
+.work-delete-btn {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+
+/* =========================================================
+   MODAL OVERLAY
+========================================================= */
+
+.pending-work-form-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 10001;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.pending-work-form-modal {
+    width: 100%;
+    max-width: 480px;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.pending-work-form-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.pending-work-form-header h3 {
+    margin: 0;
+    color: #1e293b;
+    font-size: 20px;
+}
+
+
+.pending-work-form-header p {
+    margin: 4px 0 0;
+    color: #64748b;
+    font-size: 12px;
+}
+
+
+.pending-work-form-close {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.pending-work-form {
+    padding: 18px;
+}
+
+
+.pending-work-form-group {
+    margin-bottom: 14px;
+}
+
+
+.pending-work-form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.pending-work-form-group label span {
+    color: #dc2626;
+    margin-left: 3px;
+}
+
+
+.pending-work-form-group input,
+.pending-work-form-group textarea,
+.pending-work-form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    outline: none;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+
+.pending-work-form-group input:focus,
+.pending-work-form-group textarea:focus,
+.pending-work-form-group select:focus {
+    border-color: #1677ff;
+}
+
+
+/* =========================================================
+   FORM FOOTER
+========================================================= */
+
+.pending-work-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding-top: 6px;
+}
+
+
+.pending-work-cancel-btn,
+.pending-work-save-btn {
+    border: none;
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+.pending-work-cancel-btn {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+
+.pending-work-save-btn {
+    background: #1677ff;
+    color: #ffffff;
+}
+
+
+.pending-work-save-btn:hover {
+    background: #0d6efd;
+}

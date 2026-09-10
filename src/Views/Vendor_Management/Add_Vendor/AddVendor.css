@@ -1,0 +1,277 @@
+/* ==================== ADD VENDOR ===================== */
+.add-vendor {
+     width: 100%;
+}
+
+/* ========================================= VENDOR FORM CARD ========================================= */
+.vendor-form-card {
+     width: 100%;
+     background: #ffffff;
+     border: 1px solid #e6eaf2;
+     border-radius: 12px;
+     box-shadow: 0 5px 20px rgba(38, 54, 85, 0.06);
+     overflow: hidden;
+}
+
+/* ========================================= FORM CARD HEADER ========================================= */
+.vendor-form-card-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 20px 24px;
+     border-bottom: 1px solid #edf0f5;
+}
+
+.vendor-form-card-header h2 {
+     margin: 0;
+     color: #263968;
+     font-size: 22px;
+     font-weight: 700;
+}
+
+.vendor-form-card-header p {
+     margin: 5px 0 0;
+     color: #8790a5;
+     font-size: 14px;
+}
+
+/* ========================================= REQUIRED TEXT ========================================= */
+.vendor-form-required-text {
+     color: #8b93a7;
+     font-size: 14px;
+}
+
+.vendor-form-required-text span {
+     color: #e45656;
+     font-weight: 700;
+}
+
+/* ========================================= FORM ========================================= */
+.vendor-form {
+     padding: 24px;
+}
+
+/* ========================================= FORM SECTION ========================================= */
+.vendor-form-section {
+     margin-bottom: 28px;
+}
+
+.vendor-form-section:last-of-type {
+     margin-bottom: 10px;
+}
+
+/* ========================================= SECTION TITLE ========================================= */
+.vendor-form-section-title {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     margin-bottom: 18px;
+     color: #354b82;
+}
+
+.vendor-form-section-title svg {
+     color: #536aa5;
+}
+
+.vendor-form-section-title h3 {
+     margin: 0;
+     font-size: 16px;
+     font-weight: 700;
+}
+
+/* ========================================= FORM GRID ========================================= */
+.vendor-form-grid {
+     display: grid;
+     grid-template-columns: repeat(2, minmax(0, 1fr));
+     gap: 18px 22px;
+}
+
+/* ========================================= FORM GROUP ========================================= */
+.vendor-form-group {
+     display: flex;
+     flex-direction: column;
+}
+
+.vendor-form-group-full {
+     grid-column: 1 / -1;
+}
+
+.vendor-form-group label {
+     margin-bottom: 7px;
+     color: #4c5871;
+     font-size: 15px;
+     font-weight: 600;
+}
+
+.vendor-form-group label span {
+     color: #e45656;
+}
+
+/* ========================================= INPUT WRAPPER ========================================= */
+.vendor-input-wrapper {
+     width: 100%;
+     display: flex;
+     align-items: center;
+     box-sizing: border-box;
+     border: 1px solid #dfe4ed;
+     border-radius: 7px;
+     background: #ffffff;
+     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vendor-input-wrapper svg {
+     flex-shrink: 0;
+     margin-left: 12px;
+     color: #8c96aa;
+}
+
+.vendor-input-wrapper input {
+     width: 100%;
+     height: 43px;
+     padding: 0 12px;
+     border: none;
+     outline: none;
+     background: transparent;
+     color: #26344f;
+     font-family: inherit;
+     font-size: 18px;
+}
+
+.vendor-input-wrapper input::placeholder {
+     color: #a5adbd;
+}
+
+.vendor-input-wrapper:focus-within {
+     border-color: #6b7ec1;
+     box-shadow: 0 0 0 3px rgba(91, 109, 174, 0.10);
+}
+
+/* ========================================= TEXTAREA ========================================= */
+.vendor-textarea-wrapper {
+     display: flex;
+     align-items: flex-start;
+     border: 1px solid #dfe4ed;
+     border-radius: 7px;
+     background: #ffffff;
+     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vendor-textarea-wrapper svg {
+     flex-shrink: 0;
+     margin: 13px 0 0 12px;
+     color: #8c96aa;
+}
+
+.vendor-textarea-wrapper textarea {
+     width: 100%;
+     padding: 12px;
+     border: none;
+     outline: none;
+     resize: vertical;
+     background: transparent;
+     color: #26344f;
+     font-family: inherit;
+     font-size: 17px;
+}
+
+.vendor-textarea-wrapper textarea::placeholder {
+     color: #a5adbd;
+}
+
+.vendor-textarea-wrapper:focus-within {
+     border-color: #6b7ec1;
+     box-shadow: 0 0 0 3px rgba(91, 109, 174, 0.10);
+}
+
+/* ========================================= FORM FOOTER ========================================= */
+.vendor-form-footer {
+     display: flex;
+     justify-content: flex-end;
+     align-items: center;
+     gap: 10px;
+     padding-top: 20px;
+     border-top: 1px solid #edf0f5;
+}
+
+/* ========================================= COMMON BUTTON ========================================= */
+.vendor-cancel-button,
+.vendor-save-button {
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     gap: 7px;
+     height: 40px;
+     padding: 0 17px;
+     border-radius: 7px;
+     font-family: inherit;
+     font-size: 18px;
+     font-weight: 600;
+     cursor: pointer;
+     transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* ========================================= CANCEL BUTTON ========================================= */
+.vendor-cancel-button {
+     border: 1px solid #dfe4ed;
+     background: rgb(255, 82, 82);
+     color: #ffffff;
+}
+
+.vendor-cancel-button:hover {
+     background: rgb(255, 39, 39);
+     transform: translateY(-1px);
+}
+
+/* ========================================= SAVE BUTTON ========================================= */
+.vendor-save-button {
+     border: none;
+     background: rgb(0, 151, 0);
+     color: #ffffff;
+}
+
+.vendor-save-button:hover {
+     background: rgb(0, 94, 0);
+     transform: translateY(-1px);
+     box-shadow: 0 5px 14px rgba(63, 83, 143, 0.20);
+}
+
+/* ========================================= RESPONSIVE ========================================= */
+@media (max-width: 800px) {
+     .vendor-form-card-header {
+          align-items: flex-start;
+          gap: 15px;
+          flex-direction: column;
+     }
+
+     .vendor-form-card-header h2 {
+          font-size: 28px;
+     }
+
+     .vendor-form-grid {
+          grid-template-columns: 1fr;
+     }
+
+     .vendor-form-group-full {
+          grid-column: auto;
+     }
+}
+
+@media (max-width: 500px) {
+     .vendor-form {
+          padding: 18px;
+     }
+
+     .vendor-form-card-header {
+          padding: 18px;
+     }
+
+     .vendor-form-footer {
+          flex-direction: column-reverse;
+          align-items: stretch;
+     }
+
+     .vendor-cancel-button,
+     .vendor-save-button {
+          width: 100%;
+     }
+}

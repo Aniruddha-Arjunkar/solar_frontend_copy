@@ -1,0 +1,464 @@
+/* ======= SIDEBAR - GLASSMORPHISM ========== */
+
+.sidebar {
+    
+    position: relative;
+
+    width: 280px;
+    height: 100vh;
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+
+    padding: 18px 10px;
+
+    /* Glass effect */
+    background: linear-gradient(
+        180deg,
+        rgba(34, 51, 95, 0.78),
+        rgba(27, 43, 82, 0.72)
+    );
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    /* Glass border */
+    border-right: 1px solid rgba(255, 255, 255, 0.16);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+    /* Depth */
+    box-shadow:
+        8px 0 30px rgba(15, 23, 42, 0.18),
+        inset -1px 0 rgba(255, 255, 255, 0.08);
+
+    overflow-y: auto;
+    overflow-x:hidden;
+
+    transition:
+        width 0.3s ease,
+        padding 0.3s ease;
+
+    z-index: 1000;
+}
+
+
+/* =============== SIDEBAR TOGGLE BUTTON ============= */
+
+.sidebar-toggle {
+    position: absolute;
+
+    top: 20px;
+    right: -15px;
+
+    width: 30px;
+    height: 30px;
+
+    padding: 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.88);
+
+    color: #344a83;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 2000;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.22),
+        0 0 0 3px rgba(255, 255, 255, 0.06);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.sidebar-toggle:hover {
+    background: rgba(255, 255, 255, 1);
+
+    transform: scale(1.08);
+
+    box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.28),
+        0 0 0 4px rgba(255, 255, 255, 0.08);
+}
+
+
+.sidebar-toggle:active {
+    transform: scale(0.95);
+}
+
+
+/* =========== SIDEBAR HEADER ================ */
+
+.sidebar-header {
+    min-height: 70px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    color: white;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+
+    padding-bottom: 12px;
+}
+
+
+.sidebar-header h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    letter-spacing: 0.2px;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.20);
+}
+
+
+.sidebar-header p {
+    margin: 4px 0 0;
+    color: rgba(255, 255, 255, 0.70);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+}
+
+
+/* ======== MENU SECTION ============== */
+
+.menu-section {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+
+/* ================ SECTION TITLE   ==================*/
+
+.section-title {
+    margin: 28px 14px 8px;
+    color: rgba(214, 225, 255, 0.68);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+
+/* =========== MAIN MENU ITEM ================= */
+
+.menu-item {
+    position: relative;
+    width: 100%;
+    min-height: 35px; /* 40px */
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+
+    text-decoration: none !important;
+}
+
+
+/* ========= MENU ICON ============== */
+
+.menu-item svg {
+    flex-shrink: 0;
+
+    width: 19px;
+    height: 19px;
+
+    color: rgba(255, 255, 255, 0.90);
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* ========== MENU HOVER ============== */
+
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.09);
+
+    color: #ffffff;
+}
+
+
+.menu-item:hover svg {
+    color: #6ff7f0;
+    transform: translateX(1px);
+}
+
+
+/* ============ ACTIVE DASHBOARD ========== */
+
+.menu-item.active {
+    background: linear-gradient(
+        135deg,
+        rgba(20, 202, 190, 0.85),
+        rgba(13, 181, 173, 0.70)
+    );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 16px rgba(0, 0, 0, 0.15),
+        inset 0 1px rgba(255, 255, 255, 0.20);
+}
+
+
+.menu-item.active svg {
+    color: #ffffff;
+}
+
+
+.menu-item.active:hover {
+    background: linear-gradient(
+        135deg,
+        rgba(20, 202, 190, 0.95),
+        rgba(13, 181, 173, 0.82)
+    );
+}
+
+
+/* ============= DROPDOWN MENU ================= */
+
+.dropdown-menu {
+    justify-content: flex-start;
+}
+
+
+.dropdown-menu svg:last-child {
+    margin-left: auto;
+
+    width: 15px;
+    height: 15px;
+
+    color: rgba(255, 255, 255, 0.75);
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.dropdown-menu:hover svg:last-child {
+    color: #ffffff;
+}
+
+
+/* === SUBMENU =========== */
+
+.submenu {
+    width: 100%;
+    padding: 4px 0 7px;
+    box-sizing: border-box;
+    background: rgba(10, 25, 60, 0.18);
+    border-radius: 7px;
+}
+
+
+.submenu-item {
+    min-height: 25px;
+    padding: 8px 12px 8px 45px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+    
+    text-decoration: none !important;
+}
+
+
+.submenu-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+
+    color: #ffffff;
+}
+
+
+/* ============= GLASS SCROLLBAR ===============*/
+
+.sidebar {
+    scrollbar-width:thin;
+
+    scrollbar-color:
+        rgba(255, 255, 255, 0.20)
+        transparent;
+}
+
+
+/* Chrome / Edge / Safari */
+
+.sidebar::-webkit-scrollbar {
+    width: 3px;
+}
+
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+
+    border-radius: 20px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    transition: background 0.2s ease;
+}
+
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.34);
+}
+
+
+.sidebar::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+
+/* =========== COLLAPSED SIDEBAR ================= */
+
+.sidebar.collapsed {
+    width: 70px;
+
+    padding-left: 7px;
+    padding-right: 7px;
+
+    align-items: center;
+}
+
+
+/* ========== COLLAPSED HEADER =========== */
+
+.sidebar.collapsed .sidebar-header {
+    width: 100%;
+
+    min-height: 70px;
+}
+
+
+.sidebar.collapsed .sidebar-header h2,
+.sidebar.collapsed .sidebar-header p {
+    display: none;
+}
+
+
+/* ============== COLLAPSED SECTION TITLES ============== */
+
+.sidebar.collapsed .section-title {
+    display: none;
+}
+
+
+/* ========== COLLAPSED MENU ITEMS ============ */
+
+.sidebar.collapsed .menu-item {
+    width: 100%;
+
+    min-height: 48px;
+
+    padding: 0;
+
+    justify-content: center;
+
+    gap: 0;
+
+    border-radius: 8px;
+}
+
+
+/* ======== HIDE MENU TEXT ============= */
+
+.sidebar.collapsed .menu-item span {
+    display: none;
+}
+
+
+/* ======== COLLAPSED ICON ============= */
+
+.sidebar.collapsed .menu-item svg {
+    width: 20px;
+    height: 20px;
+}
+
+
+/* ======== HIDE DROPDOWN ARROWS ============= */
+
+.sidebar.collapsed .dropdown-menu svg:last-child {
+    display: none;
+}
+
+
+/* ============= HIDE SUBMENUS ================== */
+
+.sidebar.collapsed .submenu {
+    display: none;
+}
+
+
+/* ============ COLLAPSED ACTIVE ITEM =========== */
+
+.sidebar.collapsed .menu-item.active {
+    width: 48px;
+
+    margin: 0 auto;
+
+    background: linear-gradient(
+        135deg,
+        rgba(20, 202, 190, 0.90),
+        rgba(13, 181, 173, 0.75)
+    );
+}
+
+
+/* =========== TOGGLE POSITION - COLLAPSED =============*/
+
+.sidebar.collapsed .sidebar-toggle {
+    right: -15px;
+}

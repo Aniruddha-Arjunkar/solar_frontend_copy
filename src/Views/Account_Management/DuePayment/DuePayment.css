@@ -1,0 +1,630 @@
+/* ============================================================
+   ACCOUNTS - DUE PAYMENTS PAGE
+   ============================================================ */
+
+.accounts-due-page {
+    width: 100%;
+    padding: 28px;
+    box-sizing: border-box;
+    background: #f7f8fc;
+    min-height: 100%;
+}
+
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+
+.accounts-due-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+
+.accounts-due-header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+
+.accounts-due-header-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef2ff;
+    color: #4f46e5;
+    flex-shrink: 0;
+}
+
+
+.accounts-due-breadcrumb {
+    margin: 0 0 5px;
+    font-size: 13px;
+    color: #7a8191;
+}
+
+
+.accounts-due-header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #20242c;
+}
+
+
+.accounts-due-subtitle {
+    margin: 6px 0 0;
+    color: #777f8f;
+    font-size: 14px;
+}
+
+
+.accounts-due-refresh-btn {
+    border: 1px solid #dfe3eb;
+    background: #ffffff;
+    color: #343945;
+    border-radius: 9px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+
+.accounts-due-refresh-btn:hover {
+    border-color: #c8ceda;
+    background: #f9fafc;
+}
+
+
+.accounts-due-refresh-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+
+/* ============================================================
+   REFRESH ANIMATION
+   ============================================================ */
+
+.accounts-due-refresh-spin {
+    animation: accountsDueRefreshSpin 1s linear infinite;
+}
+
+
+@keyframes accountsDueRefreshSpin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* ============================================================
+   STATISTICS
+   ============================================================ */
+
+.accounts-due-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+
+.accounts-due-stat-card {
+    background: #ffffff;
+    border: 1px solid #e7e9ef;
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+.accounts-due-stat-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+
+.accounts-due-stat-danger {
+    background: #fff0f0;
+    color: #dc3545;
+}
+
+
+.accounts-due-stat-warning {
+    background: #fff7e6;
+    color: #d97706;
+}
+
+
+.accounts-due-stat-success {
+    background: #ecfdf3;
+    color: #15803d;
+}
+
+
+.accounts-due-stat-card span {
+    display: block;
+    font-size: 13px;
+    color: #7b8190;
+    margin-bottom: 5px;
+}
+
+
+.accounts-due-stat-card strong {
+    display: block;
+    font-size: 21px;
+    color: #20242c;
+}
+
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+
+.accounts-due-content {
+    background: #ffffff;
+    border: 1px solid #e7e9ef;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   TABLE TOP
+   ============================================================ */
+
+.accounts-due-table-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 21px 22px;
+    border-bottom: 1px solid #eceef3;
+}
+
+
+.accounts-due-table-top h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #252932;
+}
+
+
+.accounts-due-table-top p {
+    margin: 5px 0 0;
+    font-size: 13px;
+    color: #818796;
+}
+
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+
+.accounts-due-search {
+    width: 310px;
+    height: 40px;
+    border: 1px solid #dfe3eb;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 12px;
+    color: #8a909d;
+    box-sizing: border-box;
+}
+
+
+.accounts-due-search:focus-within {
+    border-color: #9ca3af;
+}
+
+
+.accounts-due-search input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13px;
+    color: #30343d;
+}
+
+
+.accounts-due-search input::placeholder {
+    color: #9ba1ad;
+}
+
+
+/* ============================================================
+   ERROR
+   ============================================================ */
+
+.accounts-due-error {
+    margin: 18px 22px 0;
+    padding: 13px 15px;
+    border: 1px solid #fecaca;
+    background: #fff5f5;
+    color: #b42318;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 13px;
+}
+
+
+.accounts-due-error button {
+    margin-left: auto;
+    border: none;
+    background: transparent;
+    color: #b42318;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   TABLE WRAPPER
+   ============================================================ */
+
+.accounts-due-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+
+/* ============================================================
+   TABLE
+   ============================================================ */
+
+.accounts-due-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1150px;
+}
+
+
+.accounts-due-table thead {
+    background: #f8f9fb;
+}
+
+
+.accounts-due-table th {
+    padding: 13px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    color: #747b89;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    white-space: nowrap;
+}
+
+
+.accounts-due-table td {
+    padding: 15px 14px;
+    border-top: 1px solid #eef0f4;
+    vertical-align: middle;
+    font-size: 13px;
+    color: #3d424d;
+}
+
+
+.accounts-due-table tbody tr {
+    transition: background 0.15s ease;
+}
+
+
+.accounts-due-table tbody tr:hover {
+    background: #fafbfe;
+}
+
+
+/* ============================================================
+   INDEX
+   ============================================================ */
+
+.accounts-due-index {
+    width: 27px;
+    height: 27px;
+    border-radius: 7px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f3f7;
+    color: #6e7481;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   CLIENT
+   ============================================================ */
+
+.accounts-due-client {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 165px;
+}
+
+
+.accounts-due-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef2ff;
+    color: #4f46e5;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+
+.accounts-due-client strong {
+    display: block;
+    color: #292d35;
+    font-size: 13px;
+    margin-bottom: 3px;
+}
+
+
+.accounts-due-client small {
+    display: block;
+    color: #9298a4;
+    font-size: 11px;
+}
+
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+
+.accounts-due-contact span {
+    display: block;
+    color: #3e434d;
+    font-weight: 500;
+}
+
+
+.accounts-due-contact small {
+    display: block;
+    color: #969ba6;
+    margin-top: 3px;
+    font-size: 11px;
+}
+
+
+/* ============================================================
+   SERVICE
+   ============================================================ */
+
+.accounts-due-service {
+    display: inline-block;
+    max-width: 145px;
+    color: #4b5260;
+}
+
+
+/* ============================================================
+   AMOUNTS
+   ============================================================ */
+
+.accounts-due-total {
+    color: #343943;
+    white-space: nowrap;
+}
+
+
+.accounts-due-paid {
+    color: #16803c;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+.accounts-due-amount {
+    display: inline-block;
+    padding: 6px 9px;
+    border-radius: 7px;
+    background: #fff1f1;
+    color: #d92d20;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+
+/* ============================================================
+   DUE DATE
+   ============================================================ */
+
+.accounts-due-date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #676e7b;
+    white-space: nowrap;
+}
+
+
+.accounts-due-date svg {
+    color: #8b92a0;
+}
+
+
+/* ============================================================
+   ADD PAYMENT BUTTON
+   ============================================================ */
+
+.accounts-due-payment-btn {
+    border: 1px solid #d8ddff;
+    background: #f4f5ff;
+    color: #4f46e5;
+    border-radius: 8px;
+    padding: 8px 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.2s ease;
+}
+
+
+.accounts-due-payment-btn:hover {
+    background: #e9ebff;
+    border-color: #c7ccff;
+}
+
+
+/* ============================================================
+   LOADING
+   ============================================================ */
+
+.accounts-due-loading {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #777e8c;
+}
+
+
+.accounts-due-loading p {
+    margin: 13px 0 0;
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+
+.accounts-due-empty {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+}
+
+
+.accounts-due-empty-icon {
+    width: 62px;
+    height: 62px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f3f7;
+    color: #858c99;
+    margin-bottom: 14px;
+}
+
+
+.accounts-due-empty h3 {
+    margin: 0;
+    font-size: 17px;
+    color: #30343d;
+}
+
+
+.accounts-due-empty p {
+    margin: 7px 0 0;
+    color: #858c98;
+    font-size: 13px;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1000px) {
+
+    .accounts-due-page {
+        padding: 20px;
+    }
+
+
+    .accounts-due-stats {
+        grid-template-columns: 1fr;
+    }
+
+
+    .accounts-due-header {
+        align-items: flex-start;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .accounts-due-page {
+        padding: 15px;
+    }
+
+
+    .accounts-due-header {
+        flex-direction: column;
+    }
+
+
+    .accounts-due-header-left {
+        align-items: flex-start;
+    }
+
+
+    .accounts-due-refresh-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+
+    .accounts-due-table-top {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+
+    .accounts-due-search {
+        width: 100%;
+    }
+
+}

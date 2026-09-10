@@ -1,0 +1,353 @@
+/* =========== CLIENT FORM OVERLAY ========== */
+.client-form-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    z-index: 2000;
+}
+
+/* =========== CLIENT FORM CONTAINER ============== */
+
+.add-client-form-container {
+    width: 700px;
+    max-width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.18);
+    animation: clientFormAppear 0.2s ease-out;
+}
+
+@keyframes clientFormAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ========== HEADER =============== */
+.client-form-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 18px 28px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.client-form-header h2 {
+    margin: 0;
+    color: #1e3a70;
+    font-size: 25px;
+}
+
+.client-form-header p {
+    margin: 6px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* ======== CLOSE BUTTON ======== */
+.client-form-close {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.client-form-close:hover {
+    background: #f1f5f9;
+    color: #1e3a70;
+}
+
+/* ========= FORM SECTION ======== */
+.client-form-section {
+    padding: 20px 24px;
+}
+
+/* ========== SECTION TITLE ================ */
+.client-form-section-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 12px;
+    color: #1e3a70;
+}
+
+.client-form-section-title h3 {
+    margin: 0;
+    font-size: 17px;
+}
+
+/* ====== FORM ====== */
+
+.client-form {
+    width: 100%;
+}
+
+
+/* ======= GRID ========== */
+
+.client-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+/* ======= FORM GROUP ============ */
+.client-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.client-form-full {
+    grid-column: 1 / -1;
+}
+
+.client-form-group label {
+    margin-bottom: 7px;
+    color: #334155;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.client-form-group label span {
+    color: #ef4444;
+}
+
+/* ============= INPUT WRAPPER ==================== */
+
+.client-input-wrapper {
+    width: 100%;
+    min-height: 42px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    background: #ffffff;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.client-input-wrapper svg {
+    flex-shrink: 0;
+    margin-left: 12px;
+    color: #94a3b8;
+}
+
+
+.client-input-wrapper input {
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;
+    padding: 7px 10px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #334155;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.client-input-wrapper input::placeholder {
+    color: #94a3b8;
+}
+
+.client-input-wrapper:focus-within {
+    border-color: #20bcb9;
+    box-shadow:
+        0 0 0 3px rgba(32, 188, 185, 0.12);
+}
+
+/* =====================================================
+   SELECT DROPDOWN
+===================================================== */
+
+.client-input-wrapper select {
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;
+    padding: 9px 12px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #334155;
+    font-family: inherit;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+.client-input-wrapper select:invalid {
+    color: #94a3b8;
+}
+
+
+.client-input-wrapper select option {
+    color: #334155;
+}
+
+
+/* =====================================================
+   SELECT FOCUS
+===================================================== */
+
+.client-input-wrapper:focus-within {
+    border-color: #20bcb9;
+
+    box-shadow:
+        0 0 0 3px rgba(32, 188, 185, 0.12);
+}
+
+
+/* ======== TEXTAREA ================= */
+
+.client-textarea-wrapper {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    background: #ffffff;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.client-textarea-wrapper svg {
+    flex-shrink: 0;
+    margin: 13px 0 0 12px;
+    color: #94a3b8;
+}
+
+.client-textarea-wrapper textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    border: none;
+    outline: none;
+    resize: vertical;
+    background: transparent;
+    color: #334155;
+    font-family: inherit;
+    font-size: 17px;
+}
+
+.client-textarea-wrapper textarea::placeholder {
+    color: #94a3b8;
+}
+
+.client-textarea-wrapper:focus-within {
+    border-color: #20bcb9;
+    box-shadow:
+        0 0 0 3px rgba(32, 188, 185, 0.12);
+}
+
+/* ==== FORM FOOTER ==== */
+
+.client-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* =========== CANCEL BUTTON ================ */
+
+.client-form-cancel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 8px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #475569;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.client-form-cancel:hover {
+    background: #f8fafc;
+}
+
+/* =========== SAVE BUTTON ================== */
+
+.client-form-save {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 7px;
+    background: #20bcb9;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+
+.client-form-save:hover {
+    background: #18a7a5;
+    transform: translateY(-1px);
+    box-shadow:
+        0 5px 14px rgba(32, 188, 185, 0.20);
+}
+
+/* ======= RESPONSIVE ==================== */
+
+@media (max-width: 650px) {
+    .client-form-overlay {
+        padding: 15px;
+    }
+
+    .client-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .client-form-full {
+        grid-column: auto;
+    }
+
+    .add-client-form-container {
+        max-height: 95vh;
+    }
+
+    .client-form-header {
+        padding: 20px;
+    }
+    .client-form-section {
+        padding: 20px;
+    }
+}

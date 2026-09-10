@@ -1,0 +1,407 @@
+/* ============================================================
+   ADD SALARY PAGE
+============================================================ */
+
+.salary-add-page {
+    width: 100%;
+    padding-bottom: 30px;
+}
+
+
+/* ============================================================
+   FORM
+============================================================ */
+
+.salary-add-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+/* ============================================================
+   FORM SECTION
+============================================================ */
+
+.salary-form-section {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 22px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+
+/* ============================================================
+   SECTION HEADER
+============================================================ */
+
+.salary-section-header {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    margin-bottom: 22px;
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    color: #2563eb;
+}
+
+
+.salary-section-header h3 {
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 650;
+
+    color: #1e293b;
+}
+
+
+.salary-section-header p {
+    margin: 4px 0 0;
+
+    font-size: 13px;
+
+    color: #64748b;
+}
+
+
+/* ============================================================
+   FORM GRID
+============================================================ */
+
+.salary-form-grid {
+    display: grid;
+    gap: 18px;
+}
+
+
+.salary-two-column {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+
+/* ============================================================
+   SALARY COMPONENT GRID
+============================================================ */
+
+.salary-component-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin: 20px 0;
+}
+
+
+/* ============================================================
+   FORM GROUP
+============================================================ */
+
+.salary-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+
+.salary-form-group label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 13px;
+    font-weight: 550;
+
+    color: #334155;
+}
+
+
+.salary-form-group label span {
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+/* ============================================================
+   INPUT WITH ICON
+============================================================ */
+
+.salary-input-with-icon {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+
+.salary-input-with-icon > svg {
+    position: absolute;
+    left: 13px;
+
+    color: #64748b;
+
+    pointer-events: none;
+}
+
+
+.salary-input-with-icon input,
+.salary-input-with-icon select {
+    width: 100%;
+
+    min-height: 44px;
+
+    padding: 10px 13px 10px 39px;
+
+    border: 1px solid #d7dde7;
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #1e293b;
+
+    font-size: 14px;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.salary-input-with-icon input:focus,
+.salary-input-with-icon select:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+
+/* ============================================================
+   SELECT
+============================================================ */
+
+.salary-input-with-icon select {
+    appearance: auto;
+
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   READ ONLY CALCULATED FIELDS
+============================================================ */
+
+.salary-input-with-icon input[readonly] {
+    background: #f8fafc;
+
+    color: #334155;
+
+    cursor: default;
+}
+
+
+/* ============================================================
+   NUMBER INPUT
+============================================================ */
+
+.salary-input-with-icon input[type="number"] {
+    appearance: auto;
+}
+
+
+/* ============================================================
+   SALARY SUMMARY
+============================================================ */
+
+.salary-summary-card {
+    width: 100%;
+
+    padding: 18px 20px;
+
+    border: 1px solid #bfdbfe;
+    border-radius: 10px;
+
+    background: #eff6ff;
+
+    box-sizing: border-box;
+}
+
+
+.salary-summary-card > div {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.salary-summary-card span {
+    font-size: 13px;
+    font-weight: 550;
+
+    color: #475569;
+}
+
+
+.salary-summary-card strong {
+    font-size: 18px;
+
+    color: #2563eb;
+}
+
+
+.salary-summary-card p {
+    margin: 8px 0 0;
+
+    font-size: 12px;
+    line-height: 1.6;
+
+    color: #64748b;
+}
+
+
+/* ============================================================
+   FORM ACTIONS
+============================================================ */
+
+.salary-form-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding-top: 4px;
+}
+
+
+/* ============================================================
+   CANCEL BUTTON
+============================================================ */
+
+.salary-cancel-btn,
+.salary-save-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    min-height: 42px;
+
+    padding: 0 18px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.salary-cancel-btn {
+    border: 1px solid #d1d5db;
+
+    background: #ffffff;
+
+    color: #475569;
+}
+
+
+.salary-cancel-btn:hover {
+    background: #f8fafc;
+}
+
+
+/* ============================================================
+   SAVE BUTTON
+============================================================ */
+
+.salary-save-btn {
+    border: 1px solid #2563eb;
+
+    background: #2563eb;
+
+    color: #ffffff;
+}
+
+
+.salary-save-btn:hover {
+    background: #1d4ed8;
+
+    box-shadow:
+        0 5px 12px rgba(37, 99, 235, 0.22);
+
+    transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 900px) {
+
+    .salary-component-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .salary-form-section {
+        padding: 16px;
+    }
+
+
+    .salary-two-column {
+        grid-template-columns: 1fr;
+    }
+
+
+    .salary-component-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .salary-form-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+
+    .salary-cancel-btn,
+    .salary-save-btn {
+        width: 100%;
+    }
+
+}
