@@ -11,6 +11,8 @@ import {
     MessageSquare
 } from "lucide-react";
 
+import API_BASE_URL from "./../../../config/api";
+
 import "./ReFollowUpForm.css";
 
 function ReFollowUpForm({ lead, onClose }) {
@@ -52,7 +54,7 @@ function ReFollowUpForm({ lead, onClose }) {
             setLoading(true);
 
             const response = await fetch(
-                `http://localhost:8080/api/leads/${lead.id}/refollowup`,
+                `${API_BASE_URL}/leads/${lead.id}/refollowup`,
                 {
                     method: "POST",
 

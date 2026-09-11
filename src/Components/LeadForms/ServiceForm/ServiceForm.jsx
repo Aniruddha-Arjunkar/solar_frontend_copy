@@ -11,6 +11,8 @@ import {
     MessageSquare
 } from "lucide-react";
 
+import API_BASE_URL from "./../../../config/api";
+
 import "./ServiceForm.css";
 
 function ServiceForm({ lead, onClose }) {
@@ -49,7 +51,7 @@ function ServiceForm({ lead, onClose }) {
         try {
 
             const response = await fetch(
-                `http://localhost:8080/api/leads/${lead.id}/service`,
+                `${API_BASE_URL}/leads/${lead.id}/service`,
                 {
                     method: "POST",
                     headers: {

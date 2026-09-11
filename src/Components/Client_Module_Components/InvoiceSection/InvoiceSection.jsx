@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Eye, FileText, LoaderCircle } from "lucide-react";
 import { useNavigate } from "react-router";
 
+import API_BASE_URL from './../../../config/api';
+
 import "./InvoiceSection.css";
 
 function InvoiceSection({ clientId }) {
@@ -35,7 +37,7 @@ function InvoiceSection({ clientId }) {
                 setError("");
 
                 const response = await fetch(
-                    `http://localhost:8080/api/invoices/client/${clientId}`
+                    `${API_BASE_URL}/invoices/client/${clientId}`
                 );
 
                 if (!response.ok) {

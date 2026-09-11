@@ -13,6 +13,7 @@ import {
 
 import "./VisitForm.css";
 
+import API_BASE_URL from "./../../../config/api";
 
 function VisitForm({ lead, onClose }) {
 
@@ -59,7 +60,7 @@ function VisitForm({ lead, onClose }) {
         try {
             setLoading(true);
             const response = await fetch(
-                `http://localhost:8080/api/leads/${lead.id}/visit`,
+                `${API_BASE_URL}/leads/${lead.id}/visit`,
                 {
                     method: "POST",
                     headers: {

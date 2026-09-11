@@ -12,6 +12,8 @@ import {
     Phone
 } from "lucide-react";
 
+import API_BASE_URL from "./../../../config/api";
+
 import axios from "axios";
 
 import { useState, useEffect } from "react";
@@ -48,11 +50,6 @@ function ViewUsers() {
     });
 
 
-    // ============================================================
-    // API BASE URL
-    // ============================================================
-
-    const API_BASE_URL = "http://localhost:8080/api";
 
 
     // ============================================================
@@ -69,9 +66,7 @@ function ViewUsers() {
         });
 
         setEditingUserId(null);
-
         setShowForm(false);
-
     };
 
 

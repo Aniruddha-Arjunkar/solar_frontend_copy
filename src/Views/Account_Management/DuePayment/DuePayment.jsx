@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 
+import API_BASE_URL from "./../../../config/api";
+
 import {
     Search,
     RefreshCw,
@@ -13,13 +15,6 @@ import {
 } from "lucide-react";
 
 import "./DuePayment.css";
-
-
-// ============================================================
-// API BASE URL
-// ============================================================
-
-const API_BASE_URL = "http://localhost:8080/api";
 
 
 // ============================================================

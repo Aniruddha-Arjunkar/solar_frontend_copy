@@ -10,6 +10,8 @@ import ReFollowUpForm from "./../../../Components/LeadForms/ReFollowupForm/ReFol
 import ServiceForm from "./../../../Components/LeadForms/ServiceForm/ServiceForm.jsx"
 import ScheduleForm from "./../../../Components/LeadForms/ScheduleForm/ScheduleForm.jsx";
 
+import API_BASE_URL from "./../../../config/api.js";
+
 import { Users } from "lucide-react";
 
 import "./ViewInquiry.css";
@@ -27,7 +29,7 @@ function ViewInquiry() {
     // Fetch All Leads from API
 
     const fetchLeads = () => {
-        fetch("http://localhost:8080/api/leads/status/NEW")
+        fetch(`${API_BASE_URL}/leads/status/NEW`)
         .then((responce) => {
             if(!responce.ok){
                 throw new Error("Failed to Fetch Leads")
@@ -86,7 +88,7 @@ function ViewInquiry() {
         try{
             //Delete Request
               const response = await fetch(
-                `http://localhost:8080/api/leads/${lead.id}`,
+                `${API_BASE_URL}/leads/${lead.id}`,
                 {
                     method: "DELETE"
                 }

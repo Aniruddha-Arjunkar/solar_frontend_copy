@@ -101,7 +101,7 @@ function ViewVendor() {
             // ====================================================
 
             const response = await fetch(
-                "${API_BASE_URL}/vendors"
+                `${API_BASE_URL}/vendors`
             );
 
 

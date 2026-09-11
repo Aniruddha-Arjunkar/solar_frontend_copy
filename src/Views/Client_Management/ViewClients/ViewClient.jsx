@@ -3,6 +3,8 @@ import {
     UsersRound
 } from "lucide-react";
 
+import API_BASE_URL from "./../../../config/api.js";
+
 import ClientHeader
     from "./../../../Components/Client_Module_Components/ClientHeader/ClientHeader.jsx";
 
@@ -42,7 +44,7 @@ function ViewClient() {
             setLoading(true);
 
             const response = await fetch(
-                "http://localhost:8080/api/clients/non-gst"
+                `${API_BASE_URL}/clients/non-gst`
             );
 
             if (!response.ok) {

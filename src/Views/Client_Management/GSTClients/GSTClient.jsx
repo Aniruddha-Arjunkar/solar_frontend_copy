@@ -4,6 +4,8 @@ import {
     FileText
 } from "lucide-react";
 
+import API_BASE_URL from "./../../../config/api.js";
+
 import ClientHeader
     from "./../../../Components/Client_Module_Components/ClientHeader/ClientHeader.jsx";
 
@@ -43,7 +45,7 @@ function GSTClient() {
 
 
             const response = await fetch(
-                "http://localhost:8080/api/clients/gst"
+                `${API_BASE_URL}/clients/gst`
             );
 
 

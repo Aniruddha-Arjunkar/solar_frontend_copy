@@ -12,6 +12,8 @@ import {
 
 import "./GSTInvoice.css";
 
+import API_BASE_URL from "./../../../config/api";
+
 
 function GSTInvoice() {
 
@@ -28,13 +30,6 @@ function GSTInvoice() {
 
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState("");
-
-
-   // ============================================================
-   // API
-   // ============================================================
-
-   const API_BASE_URL = "http://localhost:8080/api";
 
 
    // ============================================================

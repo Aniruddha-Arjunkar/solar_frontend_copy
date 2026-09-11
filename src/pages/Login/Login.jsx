@@ -5,6 +5,8 @@ import {
     X
 } from "lucide-react";
 
+import API_BASE_URL from "./../../config/api";
+
 import { useNavigate } from "react-router";
 
 import { useState } from "react";
@@ -57,7 +59,7 @@ function Login() {
         try {
 
             const response = await fetch(
-                "http://localhost:8080/api/auth/login",
+                `${API_BASE_URL}/auth/login`,
                 {
                     method: "POST",
 

@@ -25,7 +25,7 @@ function Visit(){
      
       const fetchVisitLeads = () => {
 
-    fetch("${API_BASE_URL}/leads/status/VISIT")
+    fetch(`${API_BASE_URL}/leads/status/VISIT`)
         .then((response) => {
 
             if (!response.ok) {

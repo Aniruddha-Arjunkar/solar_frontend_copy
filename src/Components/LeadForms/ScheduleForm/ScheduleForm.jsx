@@ -11,6 +11,8 @@ import {
     MessageSquare
 } from "lucide-react";
 
+import API_BASE_URL from "./../../../config/api";
+
 import "./ScheduleForm.css";
 
 
@@ -48,7 +50,7 @@ function ScheduleForm({ lead, onClose }) {
         try {
 
             const response = await fetch(
-                `http://localhost:8080/api/leads/${lead.id}/schedule`,
+                `${API_BASE_URL}/leads/${lead.id}/schedule`,
                 {
                     method: "POST",
                     headers: {

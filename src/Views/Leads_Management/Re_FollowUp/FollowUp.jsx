@@ -23,7 +23,7 @@ function FollowUp(){
     
      //Fetch Follow-ups from API
         const fetchFollowUps = () => {
-    fetch("${API_BASE_URL}/leads/status/FOLLOW_UP")
+    fetch(`${API_BASE_URL}/leads/status/FOLLOW_UP`)
         .then((response) => {
             if (!response.ok) {
                 throw new Error("Failed to fetch follow-ups");

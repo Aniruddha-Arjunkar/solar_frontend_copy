@@ -21,7 +21,7 @@ function FutureClients(){
 
     const fetchFutureLeads = () => {
 
-    fetch("${API_BASE_URL}/leads/status/SERVICE")
+    fetch(`${API_BASE_URL}/leads/status/SERVICE`)
         .then((response) => {
 
             if (!response.ok) {

@@ -9,6 +9,8 @@ import {
     Save
 } from "lucide-react";
 
+import API_BASE_URL from "./../../../config/api";
+
 import { useState } from "react";
 
 import "./AddClient.css";
@@ -74,7 +76,7 @@ const handleSubmit = async (e) => {
         ================================================= */
 
         const response = await fetch(
-            `http://localhost:8080/api/clients/vendor/${vendor.id}`,
+            `${API_BASE_URL}/clients/vendor/${vendor.id}`,
             {
                 method: "POST",
 

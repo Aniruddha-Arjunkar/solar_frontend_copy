@@ -66,7 +66,7 @@ function AddSalary() {
                 setEmployeesError("");
 
                 const response = await fetch(
-                    "${API_BASE_URL}/employees"
+                    `${API_BASE_URL}/employees`
                 );
 
                 if (!response.ok) {

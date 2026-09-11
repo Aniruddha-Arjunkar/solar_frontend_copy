@@ -30,7 +30,7 @@ function ScheduleClient(){
     const fetchScheduleLeads = () => {
 
     fetch(
-        "${API_BASE_URL}/leads/status/SCHEDULED"
+        `${API_BASE_URL}/leads/status/SCHEDULED`
     )
 
         .then((response) => {

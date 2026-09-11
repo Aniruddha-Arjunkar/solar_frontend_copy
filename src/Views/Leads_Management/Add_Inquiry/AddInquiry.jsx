@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
+import API_BASE_URL from "./../../../config/api.js";
+
 import {
     UserRoundPlus,
     User,
@@ -57,7 +59,7 @@ function AddInquiry() {
         try {
 
             const response = await fetch(
-                "http://localhost:8080/api/leads",
+                `${API_BASE_URL}/leads`,
                 {
                     method: "POST",
 

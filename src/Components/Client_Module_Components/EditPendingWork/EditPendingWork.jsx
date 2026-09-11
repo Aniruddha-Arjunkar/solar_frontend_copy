@@ -7,6 +7,7 @@ import {
 
 import "./EditPendingWork.css";
 
+import API_BASE_URL from "./../../../config/api";
 
 function EditPendingWork({
     work,
@@ -90,7 +91,7 @@ function EditPendingWork({
             setError("");
 
             const response = await fetch(
-                `http://localhost:8080/api/pending-work/${work.id}`,
+                `${API_BASE_URL}/pending-work/${work.id}`,
                 {
                     method: "PUT",
 

@@ -5,6 +5,8 @@ import {
     TrendingUp
 } from "lucide-react";
 
+import API_BASE_URL from "./../../config/api";
+
 import {
     PieChart,
     Pie,
@@ -68,7 +70,7 @@ function DashBoard() {
 
 
                 const response = await fetch(
-                    "http://localhost:8080/api/leads"
+                    `${API_BASE_URL}/leads`
                 );
 
 

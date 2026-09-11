@@ -19,7 +19,7 @@ function Quotation() {
     
     useEffect(() => {
 
-        fetch("${API_BASE_URL}/leads/quotations")
+        fetch(`${API_BASE_URL}/leads/quotations`)
 
             .then((response) => {
                 if (!response.ok) {
