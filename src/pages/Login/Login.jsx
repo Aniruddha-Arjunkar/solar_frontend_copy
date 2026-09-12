@@ -2,7 +2,9 @@ import {
     UserRound,
     Mail,
     LockKeyhole,
-    X
+    X,
+    Eye,
+    EyeOff
 } from "lucide-react";
 
 import API_BASE_URL from "./../../config/api";
@@ -18,6 +20,7 @@ function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
 
     const [message, setMessage] = useState("");
@@ -32,6 +35,7 @@ function Login() {
         setPassword("");
         setMessage("");
         setLoginSuccess(false);
+        setShowPassword(false);
     };
 
 
@@ -223,13 +227,28 @@ function Login() {
                                     <input
                                         id="password"
                                         className="admin-input-field"
-                                        type="password"
+                                        type={showPassword ? "text" : "password"}
                                         placeholder="Enter your password"
                                         value={password}
                                         onChange={(event) =>
                                             setPassword(event.target.value)
                                         }
                                         required/>
+
+                                    <button
+                                       type="button"
+                                       className="password-toggle-btn"
+                                       onClick={() =>setShowPassword(!showPassword)}
+                                        aria-label={showPassword
+                                          ? "Hide password"
+                                          : "Show password"
+                                        }>
+                                        {showPassword ? (
+                                            <EyeOff size={19} />
+                                             ) : (
+                                            <Eye size={19} />
+                                             )}
+                                     </button>
                                 </div>
                             </div>
 
