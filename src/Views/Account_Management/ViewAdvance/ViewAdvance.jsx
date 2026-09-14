@@ -353,9 +353,9 @@ function ViewAdvance() {
 
                     <div>
 
-                        <p className="accounts-view-advance-breadcrumb">
+                        {/* <p className="accounts-view-advance-breadcrumb">
                             Dashboard / Accounts / View Advance
-                        </p>
+                        </p> */}
 
                         <h1>
                             Employee Advance

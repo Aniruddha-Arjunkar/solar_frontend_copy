@@ -392,19 +392,15 @@ function ViewUsers() {
 
                     <div>
 
-                        <div className="accounts-user-management-breadcrumb">
-
+                        {/* <div className="accounts-user-management-breadcrumb">
                             Dashboard
                             <span>/</span>
                             User Management
-
-                        </div>
-
+                        </div> */}
 
                         <h1>
                             User Management
                         </h1>
-
 
                         <p>
                             Create, update and manage system users.

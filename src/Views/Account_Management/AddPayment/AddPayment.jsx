@@ -470,9 +470,9 @@ function AddPayment() {
 
                     <div>
 
-                        <p className="accounts-add-payment-breadcrumb">
+                        {/* <p className="accounts-add-payment-breadcrumb">
                             Dashboard / Accounts / Due Payments / Add Payment
-                        </p>
+                        </p> */}
 
                         <h1>
                             Add Payment

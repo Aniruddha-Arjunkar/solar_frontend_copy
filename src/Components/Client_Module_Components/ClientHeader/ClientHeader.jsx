@@ -90,13 +90,13 @@ function ClientHeader({ currectPage, title, description, buttonType
             <div className="client-page-heading">
 
                 {/* ===== BREADCRUMB ===== */}
-                <div className="client-current-page-location">
+                {/* <div className="client-current-page-location">
                     Dashboard
                     <span>
                         /
                     </span>
                     {currectPage}
-                </div>
+                </div> */}
 
                 {/* ===== TITLE ===== */}
                 <h1>

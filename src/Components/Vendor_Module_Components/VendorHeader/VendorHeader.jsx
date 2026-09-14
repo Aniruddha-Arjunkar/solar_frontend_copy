@@ -36,11 +36,11 @@ function VendorHeader({
             {/* ================= LEFT ================= */}
             <div className="vendor-page-heading">
 
-                <div className="vendor-currectPage-location">
+                {/* <div className="vendor-currectPage-location">
                     Dashboard
                     <span>/</span>
                     {currectPage}
-                </div>
+                </div> */}
 
 
                 <h1>

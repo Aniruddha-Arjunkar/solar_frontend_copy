@@ -593,17 +593,13 @@ function ViewPayment() {
 
                     <div>
 
-                        <p className="accounts-view-payment-breadcrumb">
-
+                        {/* <p className="accounts-view-payment-breadcrumb">
                             Dashboard / Accounts / View Payments
-
-                        </p>
+                        </p> */}
 
 
                         <h1>
-
                             View Payments
-
                         </h1>
 
 

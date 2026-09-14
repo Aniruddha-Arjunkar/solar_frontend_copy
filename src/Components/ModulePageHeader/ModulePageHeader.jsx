@@ -26,11 +26,11 @@ function ModulePageHeader({currectPage,title,description,
         <div className="module-page-header">
             {/* ==== LEFT ================= */}
             <div className="module-page-heading">
-                <div className="module-currectPage-location">
+                {/* <div className="module-currectPage-location">
                     Dashboard
                     <span>/</span>
                     {currectPage}
-                </div>
+                </div> */}
 
                 <h1>
                     {

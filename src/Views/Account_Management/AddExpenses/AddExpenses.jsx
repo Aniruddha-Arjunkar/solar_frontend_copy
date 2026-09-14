@@ -284,11 +284,9 @@ function AddExpenses() {
 
                     <div>
 
-                        <p className="accounts-add-expense-breadcrumb">
-
+                        {/* <p className="accounts-add-expense-breadcrumb">
                             Dashboard / Accounts / Add Expense
-
-                        </p>
+                        </p> */}
 
 
                         <h1>

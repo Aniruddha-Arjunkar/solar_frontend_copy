@@ -492,9 +492,9 @@ function DuePayment() {
 
                     <div>
 
-                        <p className="accounts-due-breadcrumb">
+                        {/* <p className="accounts-due-breadcrumb">
                             Dashboard / Accounts / Due Payments
-                        </p>
+                        </p> */}
 
                         <h1>
                             Due Payments

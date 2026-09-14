@@ -307,7 +307,7 @@ function DashBoard() {
                 PAGE HEADER
             ==================================================== */}
 
-            <div className="page-header">
+            {/* <div className="page-header">
 
                 <div>
 
@@ -321,7 +321,7 @@ function DashBoard() {
 
                 </div>
 
-            </div>
+            </div> */}
 
 
             {/* ====================================================

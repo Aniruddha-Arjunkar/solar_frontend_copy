@@ -524,9 +524,9 @@ function AdvanceDetails() {
 
                     <div>
 
-                        <p className="accounts-advance-details-breadcrumb">
+                        {/* <p className="accounts-advance-details-breadcrumb">
                             Dashboard / Accounts / View Advance / Details
-                        </p>
+                        </p> */}
 
                         <h1>
                             Advance Details

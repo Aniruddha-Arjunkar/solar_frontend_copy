@@ -56,7 +56,7 @@ function EmployeeHeader({
                     BREADCRUMB
                 ================================================= */}
 
-                <div className="employee-current-page-location">
+                {/* <div className="employee-current-page-location">
 
                     Dashboard
 
@@ -66,7 +66,7 @@ function EmployeeHeader({
 
                     {currectPage}
 
-                </div>
+                </div> */}
 
 
                 {/* =================================================

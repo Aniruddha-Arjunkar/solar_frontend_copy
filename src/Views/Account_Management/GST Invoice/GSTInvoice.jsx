@@ -268,9 +268,9 @@ function GSTInvoice() {
 
                <div>
 
-                  <div className="accounts-gst-invoice-breadcrumb">
+                  {/* <div className="accounts-gst-invoice-breadcrumb">
                      Dashboard / Accounts / GST Invoice
-                  </div>
+                  </div> */}
 
                   <h1>
                      GST Invoices

@@ -313,9 +313,9 @@ function AddAdvance() {
 
                     <div>
 
-                        <p className="accounts-add-advance-breadcrumb">
+                        {/* <p className="accounts-add-advance-breadcrumb">
                             Dashboard / Accounts / Add Advance
-                        </p>
+                        </p> */}
 
                         <h1>
                             Add Employee Advance

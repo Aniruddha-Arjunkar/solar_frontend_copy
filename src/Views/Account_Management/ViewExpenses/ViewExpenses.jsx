@@ -356,9 +356,9 @@ function ViewExpenses() {
 
                     <div>
 
-                        <p className="accounts-view-expense-breadcrumb">
+                        {/* <p className="accounts-view-expense-breadcrumb">
                             Dashboard / Accounts / View Expenses
-                        </p>
+                        </p> */}
 
 
                         <h1>
