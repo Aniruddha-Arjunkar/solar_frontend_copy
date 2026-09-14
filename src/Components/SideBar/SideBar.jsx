@@ -19,7 +19,12 @@ import {
     FileText,
     ClipboardList,
     CreditCard,
-    ReceiptIndianRupee
+    ReceiptIndianRupee,
+    CircleArrowLeft,
+    CircleArrowOutUpRight,
+    CircleArrowRight,
+    CircleChevronLeft,
+    CircleChevronRight
 } from "lucide-react";
 
 import "./SideBar.css";
@@ -27,7 +32,10 @@ import "./SideBar.css";
 function SideBar() {
      
     const [openMenu, setOpenMenu] = useState("lead");
-    const [collapsed, setCollapsed] = useState(false);
+    // const [collapsed, setCollapsed] = useState(false);
+    const [collapsed, setCollapsed] = useState(
+    () => window.innerWidth <= 1024
+);
 
 const toggleMenu = (menuName) => {
 
@@ -48,6 +56,23 @@ const toggleMenu = (menuName) => {
     );
       };
     return (
+
+        <>
+        {/* =====================================================
+            MOBILE / TABLET SIDEBAR OPEN BUTTON
+            This button appears only when the sidebar is closed.
+        ====================================================== */}
+
+        {collapsed && (
+            <button
+                className="mobile-sidebar-open-btn"
+                onClick={() => setCollapsed(false)}
+                title="Open Sidebar"
+            >
+                <CircleChevronRight size={22} />
+            </button>
+        )}
+
         <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
 
     <button
@@ -55,9 +80,17 @@ const toggleMenu = (menuName) => {
     onClick={() => setCollapsed(!collapsed)}
     title={collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
 >
-    {collapsed
+    {/* {collapsed
         ? <PanelLeftOpen size={30} />
         : <PanelLeftClose size={30} />
+    } */}
+    {/* {collapsed
+        ? <CircleArrowRight size={30} />
+        : <CircleArrowLeft size={30} />
+    } */}
+    {collapsed
+        ? <CircleChevronRight size={22} />
+        : <CircleChevronLeft size={22} />
     }
 </button>
 
@@ -65,12 +98,11 @@ const toggleMenu = (menuName) => {
             <div className="sidebar-header">
 
                 <div className="logo">
-                    <span></span>
+                    <img src='/SideBar-withoutBG-image.png' alt="This is logo"/>
+                    {/* <span></span> */}
                 </div>
-
                 <h2>Solar Systems</h2>
                 <p>SOLAR SOLUTIONS</p>
-
             </div>
 
 
@@ -473,6 +505,8 @@ const toggleMenu = (menuName) => {
             </div>
 
         </aside>
+
+        </>
     );
 }
 
