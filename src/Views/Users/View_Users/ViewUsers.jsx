@@ -397,32 +397,23 @@ function ViewUsers() {
                             <span>/</span>
                             User Management
                         </div> */}
-
+                        
                         <h1>
                             User Management
                         </h1>
-
                         <p>
                             Create, update and manage system users.
                         </p>
-
                     </div>
-
                 </div>
-
 
                 <button
                     type="button"
                     className="accounts-user-management-add-btn"
-                    onClick={handleAddUser}
-                >
-
+                    onClick={handleAddUser}>
                     <UserRoundPlus size={18} />
-
                     Add User
-
                 </button>
-
             </div>
 
 
@@ -430,12 +421,12 @@ function ViewUsers() {
                 STAT CARDS
             ==================================================== */}
 
-            <div className="accounts-user-management-stats">
+            {/* <div className="accounts-user-management-stats"> */}
 
 
-                {/* TOTAL USERS */}
+            {/* TOTAL USERS */}
 
-                <div className="accounts-user-management-stat-card">
+            {/* <div className="accounts-user-management-stat-card">
 
                     <div className="accounts-user-management-stat-icon">
                         <Users size={21} />
@@ -454,12 +445,12 @@ function ViewUsers() {
 
                     </div>
 
-                </div>
+                </div> */}
 
 
-                {/* SEARCH RESULTS */}
+            {/* SEARCH RESULTS */}
 
-                <div className="accounts-user-management-stat-card">
+            {/* <div className="accounts-user-management-stat-card">
 
                     <div className="accounts-user-management-stat-icon">
                         <Search size={21} />
@@ -478,12 +469,12 @@ function ViewUsers() {
 
                     </div>
 
-                </div>
+                </div> */}
 
 
-                {/* SYSTEM ACCESS */}
+            {/* SYSTEM ACCESS */}
 
-                <div className="accounts-user-management-stat-card">
+            {/* <div className="accounts-user-management-stat-card">
 
                     <div className="accounts-user-management-stat-icon">
                         <UserRound size={21} />
@@ -504,7 +495,7 @@ function ViewUsers() {
 
                 </div>
 
-            </div>
+            </div> */}
 
 
             {/* ====================================================
@@ -662,29 +653,22 @@ function ViewUsers() {
                     <div className="accounts-user-management-empty">
 
                         <div className="accounts-user-management-empty-icon">
-
                             <Users size={34} />
-
                         </div>
-
 
                         <h3>
                             No Users Found
                         </h3>
 
-
                         <p>
-
                             {searchTerm
                                 ? "No users match your current search."
                                 : "No users have been added yet."
                             }
-
                         </p>
 
 
                         {searchTerm ? (
-
                             <button
                                 type="button"
                                 onClick={() =>
@@ -705,9 +689,7 @@ function ViewUsers() {
                             </button>
 
                         )}
-
                     </div>
-
                 ) : (
 
                     /* ==================================================
@@ -715,145 +697,93 @@ function ViewUsers() {
                     ================================================== */
 
                     <div className="accounts-user-management-table-wrapper">
-
                         <table className="accounts-user-management-table">
-
                             <thead>
-
                                 <tr>
-
                                     <th>
                                         #
                                     </th>
-
                                     <th>
                                         User
                                     </th>
-
                                     <th>
                                         Contact Number
                                     </th>
-
                                     <th>
                                         Email
                                     </th>
-
                                     <th>
                                         Action
                                     </th>
-
                                 </tr>
-
                             </thead>
 
-
                             <tbody>
-
                                 {filteredUsers.map(
                                     (user, index) => (
-
                                         <tr key={user.id}>
 
-
                                             {/* SERIAL NUMBER */}
-
                                             <td>
-
                                                 <span className="accounts-user-management-serial">
                                                     {index + 1}
                                                 </span>
-
                                             </td>
-
 
                                             {/* USER */}
 
                                             <td>
-
                                                 <div className="accounts-user-management-user-cell">
-
                                                     <div className="accounts-user-management-avatar">
-
                                                         {user.name
                                                             ?.charAt(0)
                                                             .toUpperCase() || "U"}
-
                                                     </div>
 
-
                                                     <div className="accounts-user-management-user-info">
-
                                                         <strong>
                                                             {user.name}
                                                         </strong>
-
-                                                        <small>
+                                                        {/* <small>
                                                             User ID: #{user.id}
-                                                        </small>
-
+                                                        </small> */}
                                                     </div>
-
                                                 </div>
-
                                             </td>
 
-
                                             {/* CONTACT */}
-
                                             <td>
-
                                                 <div className="accounts-user-management-contact">
-
                                                     <Phone size={15} />
-
                                                     <span>
                                                         {user.contact || "-"}
                                                     </span>
-
                                                 </div>
-
                                             </td>
 
-
                                             {/* EMAIL */}
-
                                             <td>
-
                                                 <div className="accounts-user-management-contact">
-
                                                     <Mail size={15} />
-
                                                     <span>
                                                         {user.email || "-"}
                                                     </span>
-
                                                 </div>
-
                                             </td>
 
-
                                             {/* ACTION */}
-
                                             <td>
-
                                                 <div className="accounts-user-management-actions">
-
                                                     <button
                                                         type="button"
                                                         className="accounts-user-management-edit-btn"
                                                         onClick={() =>
                                                             handleEditUser(
                                                                 user
-                                                            )
-                                                        }
-                                                    >
-
+                                                            )}>
                                                         <Pencil size={15} />
-
                                                         Edit
-
                                                     </button>
-
 
                                                     <button
                                                         type="button"
@@ -861,40 +791,23 @@ function ViewUsers() {
                                                         onClick={() =>
                                                             handleDeleteUser(
                                                                 user.id
-                                                            )
-                                                        }
-                                                    >
-
+                                                            )}>
                                                         <Trash2 size={15} />
-
                                                         Delete
-
                                                     </button>
-
                                                 </div>
-
                                             </td>
-
                                         </tr>
-
-                                    )
-                                )}
-
+                                    ))}
                             </tbody>
-
                         </table>
-
                     </div>
-
                 )}
-
             </div>
-
 
             {/* ====================================================
                 ADD / EDIT USER MODAL
             ==================================================== */}
-
             {showForm && (
 
                 <div

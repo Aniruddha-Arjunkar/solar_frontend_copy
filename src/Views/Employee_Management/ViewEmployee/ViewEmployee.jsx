@@ -124,7 +124,7 @@ function ViewEmployee() {
 
         {
             key: "id",
-            label: "Employee Id"
+            label: "Id"
         },
 
         {

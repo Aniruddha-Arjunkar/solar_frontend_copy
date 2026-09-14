@@ -2,49 +2,64 @@ import {
     Plus,
     List
 } from "lucide-react";
-
 import { useNavigate } from "react-router";
-
 import "./ModulePageHeader.css";
 
-
-function ModulePageHeader({currectPage,title,description,
-                            buttonType , icon : Icon}) {
+function ModulePageHeader({
+    currectPage,
+    title,
+    description,
+    buttonType,
+    icon: Icon
+}) {
 
     const navigate = useNavigate();
-
     const handleButtonClick = () => {
         if (buttonType === "add") {
             navigate("/dashboard/add-inquiry");
-        } else{
+        } else {
             navigate("/dashboard/view-inquiry");
-        } 
+        }
     };
 
+
     return (
-
         <div className="module-page-header">
-            {/* ==== LEFT ================= */}
-            <div className="module-page-heading">
-                {/* <div className="module-currectPage-location">
-                    Dashboard
-                    <span>/</span>
-                    {currectPage}
-                </div> */}
+            {/* =================================================
+                            LEFT SECTION
+            ================================================== */}
 
-                <h1>
-                    {
-                        Icon && (<Icon size={25} strokeWidth={1.8}/>)
-                    }
-                    {title}
-                </h1>
+            <div className="module-page-header-left">
 
-                <p>
-                    {description}
-                </p>
+                {/* ================= ICON ================= */}
+
+                <div className="module-page-header-icon">
+                    {Icon && (
+                        <Icon
+                            size={26}
+                            strokeWidth={1.8}
+                        />
+                    )}
+                </div>
+
+
+                {/* ================= HEADING ================= */}
+
+                <div className="module-page-heading">
+                    <h1>
+                        {title}
+                    </h1>
+                    <p>
+                        {description}
+                    </p>
+                </div>
             </div>
 
-            {/* ================= RIGHT ================= */}
+
+            {/* =================================================
+                            RIGHT SECTION
+            ================================================== */}
+
             <div className="module-page-header-button">
                 {buttonType === "add" ? (
                     <button
@@ -56,10 +71,11 @@ function ModulePageHeader({currectPage,title,description,
                 ) : (
                     <button
                         className="module-header-btn"
-                        onClick={handleButtonClick} >
+                        onClick={handleButtonClick}
+                    >
                         <List size={19} />
                         View Inquiries
-                    </button>
+                  </button>
                 )}
             </div>
         </div>
