@@ -1,4 +1,5 @@
 import {useState} from "react";
+import { useNavigate } from "react-router";
 import {
     X,
     User,
@@ -16,6 +17,8 @@ import API_BASE_URL from "./../../../config/api";
 import "./ServiceForm.css";
 
 function ServiceForm({ lead, onClose }) {
+
+    const navigate = useNavigate();
     
         const [formData, setFormData] = useState({
         serviceType: "",
@@ -78,6 +81,7 @@ function ServiceForm({ lead, onClose }) {
                 "Service scheduled successfully!"
             );
             onClose();
+            navigate("/dashboard/future-client");
         } catch (error) {
             window.alert(
                 "Failed to schedule service. Please try again."

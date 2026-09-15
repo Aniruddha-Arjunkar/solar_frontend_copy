@@ -199,7 +199,7 @@ function FutureClients(){
               icon={Calendar}/>
 
       {/*============== Stats ================= */}
-            <ModuleStats stats={Stats}/>
+            {/* <ModuleStats stats={Stats}/> */}
 
       {/*=============== Tables ================  */}
             <ModuleTable columns={Columns} 

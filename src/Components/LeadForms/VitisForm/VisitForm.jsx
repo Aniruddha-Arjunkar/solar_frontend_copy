@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router";
 import {
     X,
     User,
@@ -17,6 +18,7 @@ import API_BASE_URL from "./../../../config/api";
 
 function VisitForm({ lead, onClose }) {
 
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         visitDate: "",
         visitTime: "",
@@ -89,6 +91,7 @@ function VisitForm({ lead, onClose }) {
             );
             // Close form after successful API call
             onClose();
+            navigate("/dashboard/visit");
 
         } catch (error) {
             window.alert(

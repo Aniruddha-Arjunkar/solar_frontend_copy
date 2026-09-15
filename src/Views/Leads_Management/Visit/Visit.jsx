@@ -126,18 +126,18 @@ function Visit(){
 
     };
 
-    const Stats = [
+    // const Stats = [
 
-        {
-            title: "Total Visits",
-            value: LeadData.length
-        },
+    //     {
+    //         title: "Total Visits",
+    //         value: LeadData.length
+    //     },
 
-        {
-            title: "Today's Visits",
-            value: 0
-        }
-    ];
+    //     {
+    //         title: "Today's Visits",
+    //         value: 0
+    //     }
+    // ];
 
 
     const Columns = [
@@ -222,9 +222,9 @@ function Visit(){
                 icon={MapPinHouse}/>
 
             {/* ================= STATS ================= */}
-            <ModuleStats
+            {/* <ModuleStats
                 stats={Stats}
-            />
+            /> */}
 
             {/* ================= TABLE ================= */}
             <ModuleTable columns={Columns} 

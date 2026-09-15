@@ -32,16 +32,12 @@
 .accounts-user-management-header-icon {
     width: 56px;
     height: 56px;
-
     border-radius: 14px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background: #f1f5f9;
     color: #334155;
-
     flex-shrink: 0;
 }
 
@@ -88,22 +84,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     gap: 8px;
-
     padding: 11px 17px;
-
     border: none;
     border-radius: 9px;
-
     background: #20bcb9;
     color: #ffffff;
-
     font-size: 14px;
     font-weight: 600;
-
     cursor: pointer;
-
     transition:
         background 0.2s ease,
         transform 0.2s ease,
@@ -113,9 +102,7 @@
 
 .accounts-user-management-add-btn:hover {
     background: #18a7a5;
-
     transform: translateY(-1px);
-
     box-shadow:
         0 5px 14px rgba(32, 188, 185, 0.22);
 }
@@ -174,20 +161,15 @@
 
 .accounts-user-management-stat-card span {
     display: block;
-
     margin-bottom: 4px;
-
     color: #64748b;
-
     font-size: 13px;
 }
 
 
 .accounts-user-management-stat-card strong {
     display: block;
-
     color: #0f172a;
-
     font-size: 23px;
     font-weight: 700;
 }
@@ -200,20 +182,13 @@
 .accounts-user-management-error {
     display: flex;
     align-items: center;
-
     gap: 12px;
-
     padding: 14px 16px;
-
     margin-bottom: 20px;
-
     border: 1px solid #fecaca;
     border-radius: 10px;
-
     background: #fef2f2;
-
     color: #991b1b;
-
     font-size: 14px;
 }
 
@@ -225,14 +200,10 @@
 
 .accounts-user-management-error button {
     border: none;
-
     background: transparent;
-
     color: #991b1b;
-
     font-size: 13px;
     font-weight: 700;
-
     cursor: pointer;
 }
 
@@ -243,13 +214,9 @@
 
 .accounts-user-management-table-card {
     background: #ffffff;
-
     border: 1px solid #e2e8f0;
-
     border-radius: 14px;
-
     overflow: hidden;
-
     box-shadow:
         0 2px 8px rgba(15, 23, 42, 0.04);
 }
@@ -263,20 +230,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     gap: 20px;
-
     padding: 20px 22px;
-
     border-bottom: 1px solid #e2e8f0;
 }
 
 
 .accounts-user-management-table-header h2 {
     margin: 0;
-
     color: #0f172a;
-
     font-size: 17px;
     font-weight: 700;
 }
@@ -284,9 +246,7 @@
 
 .accounts-user-management-table-header p {
     margin: 5px 0 0;
-
     color: #64748b;
-
     font-size: 13px;
 }
 
@@ -298,7 +258,6 @@
 .accounts-user-management-table-controls {
     display: flex;
     align-items: center;
-
     gap: 10px;
 }
 
@@ -309,26 +268,16 @@
 
 .accounts-user-management-search {
     height: 40px;
-
     width: 290px;
-
     display: flex;
     align-items: center;
-
     gap: 8px;
-
     padding: 0 10px 0 12px;
-
     box-sizing: border-box;
-
     border: 1px solid #cbd5e1;
-
     border-radius: 9px;
-
     background: #ffffff;
-
     color: #64748b;
-
     transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease;
@@ -337,7 +286,6 @@
 
 .accounts-user-management-search:focus-within {
     border-color: #20b7b5;
-
     box-shadow:
         0 0 0 3px rgba(32, 183, 181, 0.10);
 }
@@ -345,16 +293,11 @@
 
 .accounts-user-management-search input {
     width: 100%;
-
     border: none;
     outline: none;
-
     background: transparent;
-
     color: #0f172a;
-
     font-size: 13px;
-
     font-family: inherit;
 }
 
@@ -367,20 +310,14 @@
 .accounts-user-management-clear-search {
     width: 25px;
     height: 25px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding: 0;
-
     border: none;
     border-radius: 6px;
-
     background: #f1f5f9;
-
     color: #64748b;
-
     cursor: pointer;
 }
 
@@ -397,9 +334,7 @@
 
 .accounts-user-management-count {
     padding: 7px 12px;
-
     border-radius: 20px;
-
     background: #eefafa;
 
     color: #168f8d;
@@ -418,23 +353,15 @@
 .accounts-user-management-refresh-btn {
     width: 40px;
     height: 40px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding: 0;
-
     border: 1px solid #e2e8f0;
-
     border-radius: 9px;
-
     background: #ffffff;
-
     color: #475569;
-
     cursor: pointer;
-
     transition:
         background 0.2s ease,
         border-color 0.2s ease;
@@ -443,14 +370,12 @@
 
 .accounts-user-management-refresh-btn:hover:not(:disabled) {
     background: #f8fafc;
-
     border-color: #cbd5e1;
 }
 
 
 .accounts-user-management-refresh-btn:disabled {
     opacity: 0.65;
-
     cursor: not-allowed;
 }
 
@@ -471,7 +396,6 @@
     from {
         transform: rotate(0deg);
     }
-
     to {
         transform: rotate(360deg);
     }
@@ -485,7 +409,6 @@
 
 .accounts-user-management-table-wrapper {
     width: 100%;
-
     overflow-x: auto;
 }
 
@@ -496,9 +419,7 @@
 
 .accounts-user-management-table {
     width: 100%;
-
     min-width: 850px;
-
     border-collapse: collapse;
 }
 
@@ -514,18 +435,12 @@
 
 .accounts-user-management-table th {
     padding: 13px 18px;
-
     text-align: left;
-
     border-bottom: 1px solid #e2e8f0;
-
     color: #64748b;
-
     font-size: 12px;
     font-weight: 700;
-
     text-transform: uppercase;
-
     letter-spacing: 0.04em;
 }
 
@@ -536,13 +451,9 @@
 
 .accounts-user-management-table td {
     padding: 15px 18px;
-
     border-bottom: 1px solid #f1f5f9;
-
     color: #334155;
-
     font-size: 14px;
-
     vertical-align: middle;
 }
 
@@ -568,7 +479,6 @@
 
 .accounts-user-management-serial {
     color: #64748b;
-
     font-size: 13px;
     font-weight: 600;
 }
@@ -581,7 +491,6 @@
 .accounts-user-management-user-cell {
     display: flex;
     align-items: center;
-
     gap: 11px;
 }
 
@@ -589,19 +498,13 @@
 .accounts-user-management-avatar {
     width: 38px;
     height: 38px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     flex-shrink: 0;
-
     border-radius: 50%;
-
     background: #e8fafa;
-
     color: #159c9a;
-
     font-size: 14px;
     font-weight: 700;
 }
@@ -610,14 +513,12 @@
 .accounts-user-management-user-info {
     display: flex;
     flex-direction: column;
-
     gap: 3px;
 }
 
 
 .accounts-user-management-user-info strong {
     color: #0f172a;
-
     font-size: 14px;
     font-weight: 700;
 }
@@ -625,7 +526,6 @@
 
 .accounts-user-management-user-info small {
     color: #94a3b8;
-
     font-size: 11px;
 }
 
@@ -637,18 +537,14 @@
 .accounts-user-management-contact {
     display: flex;
     align-items: center;
-
     gap: 7px;
-
     color: #475569;
-
     white-space: nowrap;
 }
 
 
 .accounts-user-management-contact svg {
     color: #64748b;
-
     flex-shrink: 0;
 }
 
@@ -660,7 +556,6 @@
 .accounts-user-management-actions {
     display: flex;
     align-items: center;
-
     gap: 8px;
 }
 

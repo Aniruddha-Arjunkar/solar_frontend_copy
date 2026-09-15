@@ -12,7 +12,7 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    min-width: 85px;
+    min-width: 80px;
     padding: 9px 13px;
     border: none;
     border-radius: 8px;
@@ -97,3 +97,21 @@
 .table-action-menu .table-action-delete:hover {
     background: #fef2f2;
 }
+
+.action-refollowup-icon{
+    color: rgb(211, 211, 1);
+}
+
+.action-schedule-icon{
+    color: #1269d6;
+}
+
+.action-visit-icon{
+ color: aqua;
+}
+
+.action-service-icon{
+  color: green;
+}
+
+/* this  */

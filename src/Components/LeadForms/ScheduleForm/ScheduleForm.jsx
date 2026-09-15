@@ -1,4 +1,7 @@
 import {useState} from "react";
+
+import { useNavigate } from "react-router";
+
 import {
     X,
     User,
@@ -15,8 +18,10 @@ import API_BASE_URL from "./../../../config/api";
 
 import "./ScheduleForm.css";
 
-
 function ScheduleForm({ lead, onClose }) {
+
+
+    const navigate = useNavigate();
     
         const [formData, setFormData] = useState({
         scheduleDate: "",
@@ -76,6 +81,7 @@ function ScheduleForm({ lead, onClose }) {
             );
 
             onClose();
+            navigate("/dashboard/schedule-client");
 
         } catch (error) {
             window.alert(
@@ -282,7 +288,7 @@ function ScheduleForm({ lead, onClose }) {
                             </div>
 
                             {/* Schedule Type */}
-                            <div className="schedule-form-group full-width">
+                            {/* <div className="schedule-form-group full-width">
                                 <label htmlFor="schedule-type">
                                     Schedule Type
                                     <span>*</span>
@@ -321,7 +327,7 @@ function ScheduleForm({ lead, onClose }) {
                                            </option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* Remarks */}
                             <div className="schedule-form-group full-width">

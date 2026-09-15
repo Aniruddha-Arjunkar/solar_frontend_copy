@@ -32,10 +32,9 @@ import "./SideBar.css";
 function SideBar() {
      
     const [openMenu, setOpenMenu] = useState("lead");
+
     // const [collapsed, setCollapsed] = useState(false);
-    const [collapsed, setCollapsed] = useState(
-    () => window.innerWidth <= 1024
-);
+    const [collapsed, setCollapsed] = useState(() => window.innerWidth <= 1024);
 
 const toggleMenu = (menuName) => {
 
@@ -55,20 +54,27 @@ const toggleMenu = (menuName) => {
         openMenu === menuName ? null : menuName
     );
       };
+
+    const handleNavLinkClick = () => {
+    // Automatically collapse sidebar
+    // on mobile and tablet after navigation
+    if (window.innerWidth <= 1024) {
+         setCollapsed(true);
+        }
+    };
+
+
     return (
 
         <>
-        {/* =====================================================
-            MOBILE / TABLET SIDEBAR OPEN BUTTON
-            This button appears only when the sidebar is closed.
-        ====================================================== */}
+        {/* MOBILE / TABLET SIDEBAR OPEN BUTTON
+            This button appears only when the sidebar is closed. */}
 
         {collapsed && (
             <button
                 className="mobile-sidebar-open-btn"
                 onClick={() => setCollapsed(false)}
-                title="Open Sidebar"
-            >
+                title="Open Sidebar">
                 <CircleChevronRight size={22} />
             </button>
         )}
@@ -88,6 +94,7 @@ const toggleMenu = (menuName) => {
         ? <CircleArrowRight size={30} />
         : <CircleArrowLeft size={30} />
     } */}
+
     {collapsed
         ? <CircleChevronRight size={22} />
         : <CircleChevronLeft size={22} />
@@ -98,7 +105,7 @@ const toggleMenu = (menuName) => {
             <div className="sidebar-header">
 
                 <div className="logo">
-                    <img src='/SideBar-withoutBG-image.png' alt="This is logo"/>
+                    <img src='/SideBar-withBG-image.png' alt="This is logo"/>
                     {/* <span></span> */}
                 </div>
                 <h2>Solar Systems</h2>
@@ -107,7 +114,9 @@ const toggleMenu = (menuName) => {
 
 
             {/* ================= DASHBOARD ================= */}
-            <NavLink to='/' className="menu-item active"style={{marginTop:'5px', minHeight:'40px'}}>
+            <NavLink to='/' className="menu-item active"
+            style={{marginTop:'5px', minHeight:'40px'}}
+            onClick={handleNavLinkClick}>
 
                 <Home size={25} />
                 <span>Dashboard</span>
@@ -148,37 +157,50 @@ const toggleMenu = (menuName) => {
 
                         <NavLink  
                         to='/dashboard/add-inquiry' 
-                        className="submenu-item">
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <Plus size={20} />
                             <span>Add Inquiry</span>
                         </NavLink>
 
-                        <NavLink to='/dashboard/view-inquiry' className="submenu-item">
+                        <NavLink to='/dashboard/view-inquiry' 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <Eye size={20} />
                             <span>View Inquiry</span>
                         </NavLink>
 
-                        <NavLink to='/dashboard/re-followup' className="submenu-item">
+                        <NavLink to='/dashboard/re-followup' 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <Phone size={20} />
                             <span>Re Followup</span>
                         </NavLink>
 
-                        <NavLink to='/dashboard/visit' className="submenu-item">
+                        <NavLink to='/dashboard/visit' 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <ClipboardList size={20} />
                             <span>Visit</span>
                         </NavLink>
 
-                        <NavLink to='/dashboard/future-client' className="submenu-item">
+                        <NavLink to='/dashboard/future-client'
+                         className="submenu-item"
+                         onClick={handleNavLinkClick}>
                             <Users size={20} />
                             <span>Future Client</span>
                         </NavLink>
 
-                        <NavLink to='/dashboard/schedule-client' className="submenu-item">
+                        <NavLink to='/dashboard/schedule-client' 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <Calendar size={20} />
                             <span>Schedule Client</span>
                         </NavLink>
 
-                        <NavLink to='/dashboard/quotations' className="submenu-item">
+                        <NavLink to='/dashboard/quotations' 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <FileText size={20} />
                             <span>Quotations</span>
                         </NavLink>
@@ -221,18 +243,21 @@ const toggleMenu = (menuName) => {
 
                     <div className="submenu">
 
-                        <NavLink to="/dasboard/add-vendor" className="submenu-item">
+                        <NavLink to="/dasboard/add-vendor" 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <Plus size={20} />
                             <span>Add Vendor</span>
                         </NavLink>
 
-                        <NavLink to="/dashboard/view-vendor" className="submenu-item">
+                        <NavLink to="/dashboard/view-vendor" 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <Eye size={20} />
                             <span>View Vendor</span>
                         </NavLink>
 
                     </div>
-
                 )}
 
             </div>
@@ -269,17 +294,23 @@ const toggleMenu = (menuName) => {
 
                     <div className="submenu">
 
-                        <NavLink to="/dashboard/view-client" className="submenu-item">
+                        <NavLink to="/dashboard/view-client" 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <Eye size={20} />
                             <span>View Client</span>
                         </NavLink>
 
-                        <NavLink to="/dashboard/gst-client" className="submenu-item">
+                        <NavLink to="/dashboard/gst-client" 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <FileText size={20} />
                             <span>GST Client</span>
                         </NavLink>
 
-                        <NavLink to="/dashboard/pending-work" className="submenu-item">
+                        <NavLink to="/dashboard/pending-work" 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <ClipboardList size={20} />
                             <span>Pending Work</span>
                         </NavLink>
@@ -319,23 +350,28 @@ const toggleMenu = (menuName) => {
 
                     <div className="submenu">
 
-                        <NavLink to="/dashboard/add-employee" className="submenu-item">
+                        <NavLink to="/dashboard/add-employee" 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <Plus size={20} />
                             <span>Add Employee</span>
                         </NavLink>
 
-                        <NavLink to="/dashboard/view-employee" className="submenu-item">
+                        <NavLink to="/dashboard/view-employee" 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <Eye size={20} />
                             <span>View Employee</span>
                         </NavLink>
 
-                        <NavLink to="/dashboard/add-salary" className="submenu-item">
+                        <NavLink to="/dashboard/add-salary"
+                         className="submenu-item"
+                         onClick={handleNavLinkClick}>
                             <Wallet size={20} />
                             <span>Add Salary</span>
                         </NavLink>
 
                     </div>
-
                 )}
 
             </div>
@@ -372,12 +408,16 @@ const toggleMenu = (menuName) => {
 
                     <div className="submenu">
 
-                        <NavLink to="/dashboard/add-attendence" className="submenu-item">
+                        <NavLink to="/dashboard/add-attendence" 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <Plus size={20} />
                             <span>Add Attendance</span>
                         </NavLink>
 
-                        <NavLink to="/dashboard/view-attendence" className="submenu-item">
+                        <NavLink to="/dashboard/view-attendence" 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <Eye size={20} />
                             <span>View Attendance</span>
                         </NavLink>
@@ -420,37 +460,51 @@ const toggleMenu = (menuName) => {
 
                     <div className="submenu">
 
-                        <NavLink to="/dashboard/due-payment" className="submenu-item">
+                        <NavLink to="/dashboard/due-payment" 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <CreditCard size={20} />
                             <span>Due Payment</span>
                         </NavLink>
 
-                        <NavLink to="/dashboard/view-payment" className="submenu-item">
+                        <NavLink to="/dashboard/view-payment" 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <Eye size={20} />
                             <span>View Payment</span>
                         </NavLink>
 
-                        <NavLink to="/dashboard/add-advance" className="submenu-item">
+                        <NavLink to="/dashboard/add-advance" 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <Plus size={20} />
                             <span>Add Advance</span>
                         </NavLink>
 
-                        <NavLink to="/dashboard/view-advance" className="submenu-item">
+                        <NavLink to="/dashboard/view-advance" 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <Eye size={20} />
                             <span>View Advance</span>
                         </NavLink>
 
-                        <NavLink to="/dashboard/add-expenses" className="submenu-item">
+                        <NavLink to="/dashboard/add-expenses" 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <ReceiptIndianRupee size={20} />
                             <span>Add Expenses</span>
                         </NavLink>
 
-                        <NavLink to="/dashboard/view-expenses" className="submenu-item">
+                        <NavLink to="/dashboard/view-expenses" 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <Eye size={20} />
                             <span>View Expenses</span>
                         </NavLink>
 
-                        <NavLink to="/dashboard/gst-invoice" className="submenu-item">
+                        <NavLink to="/dashboard/gst-invoice" 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <FileText size={20} />
                             <span>GST Invoice</span>
                         </NavLink>
@@ -493,7 +547,9 @@ const toggleMenu = (menuName) => {
 
                     <div className="submenu">
 
-                        <NavLink  to='dashboard/view-users' className="submenu-item">
+                        <NavLink  to='dashboard/view-users' 
+                        className="submenu-item"
+                        onClick={handleNavLinkClick}>
                             <Eye size={20} />
                             <span>View Users</span>
                         </NavLink>

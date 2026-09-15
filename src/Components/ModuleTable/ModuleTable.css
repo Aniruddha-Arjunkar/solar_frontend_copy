@@ -10,7 +10,206 @@
 
 /* =========== TABLE HEADER =============== */
 
+
 .module-table-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.module-table-header h2 {
+    margin: 0;
+    font-size: 25px;
+    color: #1e3a70;
+}
+
+.module-table-header p {
+    margin: 5px 0 0;
+    font-size: 15px;
+    color: #64748b;
+}
+
+/* =========================================
+   RIGHT SIDE
+========================================= */
+
+.module-table-header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* =========================================
+   SEARCH
+========================================= */
+
+.module-table-search {
+    width: 280px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+.module-table-search svg {
+    flex-shrink: 0;
+    color: #64748b;
+}
+
+.module-table-search input {
+    width: 100%;
+    min-width: 0;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #1e293b;
+    background: transparent;
+}
+
+.module-table-search input::placeholder {
+    color: #94a3b8;
+}
+
+/* Clear search button */
+
+.module-table-clear-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    border: none;
+    background: transparent;
+    color: #64748b;
+    cursor: pointer;
+}
+
+.module-table-clear-search:hover {
+    color: #1e3a70;
+}
+
+/* =========================================
+   RECORD COUNT
+========================================= */
+
+.lead-record-count {
+    white-space: nowrap;
+    background: #eafafa;
+    color: #159c9a;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   TABLET
+   768px - 1024px
+========================================= */
+
+@media (max-width: 1024px) {
+
+    .module-table-header {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .module-table-header-right {
+        flex: 1;
+        justify-content: flex-end;
+    }
+
+    .module-table-search {
+        width: 240px;
+    }
+
+    .module-table-header h2 {
+        font-size: 23px;
+    }
+
+    .module-table-header p {
+        font-size: 14px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL TABLET
+   600px - 767px
+========================================= */
+
+@media (max-width: 767px) {
+
+    .module-table-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .module-table-header-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .module-table-search {
+        flex: 1;
+        width: auto;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+   Below 600px
+========================================= */
+
+@media (max-width: 600px) {
+
+    .module-table-header {
+        padding: 16px;
+        gap: 14px;
+    }
+
+    .module-table-header h2 {
+        font-size: 21px;
+    }
+
+    .module-table-header p {
+        margin-top: 4px;
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+    .module-table-header-right {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .module-table-search {
+        width: 100%;
+        min-height: 40px;
+        box-sizing: border-box;
+    }
+
+    .lead-record-count {
+        align-self: flex-start;
+        font-size: 13px;
+        padding: 6px 11px;
+    }
+
+}
+
+/* .module-table-header {
     padding: 20px 20px;
     display: flex;
     justify-content: space-between;
@@ -37,7 +236,7 @@
     border-radius: 20px;
     font-size: 15px;
     font-weight: 600;
-}
+} */
 
 /* ======== TABLE WRAPPER ===================== */
 .module-table-wrapper {
@@ -153,4 +352,139 @@
 
 .module-table-pdf-btn:hover {
     background: #e42626;
+}
+
+/* =====================================================
+   TABLE HEADER RIGHT SECTION
+===================================================== */
+
+.module-table-header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+/* =====================================================
+   TABLE SEARCH
+===================================================== */
+
+.module-table-search {
+    height: 40px;
+    width: 290px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 0 10px 0 12px;
+    box-sizing: border-box;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: #64748b;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.module-table-search:focus-within {
+    border-color: #20b7b5;
+
+    box-shadow:
+        0 0 0 3px rgba(32, 183, 181, 0.10);
+}
+
+
+.module-table-search input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #0f172a;
+
+    font-size: 13px;
+    font-family: inherit;
+}
+
+
+.module-table-search input::placeholder {
+    color: #94a3b8;
+}
+
+
+/* =====================================================
+   CLEAR SEARCH BUTTON
+===================================================== */
+
+.module-table-clear-search {
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 6px;
+
+    background: #f1f5f9;
+    color: #64748b;
+
+    cursor: pointer;
+}
+
+
+.module-table-clear-search:hover {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+
+/* =====================================================
+   LEAD NAME + AVATAR
+===================================================== */
+
+.module-table-user-cell {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+
+.module-table-avatar {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #e8fafa;
+    color: #159c9a;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+.module-table-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+
+.module-table-user-info strong {
+    color: #0f172a;
+    font-size: 15px;
+    font-weight: 700;
 }

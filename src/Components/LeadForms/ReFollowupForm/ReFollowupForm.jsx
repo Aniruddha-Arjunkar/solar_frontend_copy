@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 import {
     X,
@@ -16,6 +17,8 @@ import API_BASE_URL from "./../../../config/api";
 import "./ReFollowUpForm.css";
 
 function ReFollowUpForm({ lead, onClose }) {
+
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         followUpDate: "",
@@ -79,7 +82,8 @@ function ReFollowUpForm({ lead, onClose }) {
             window.alert(
                 "Re-Follow-up created successfully!"
             );
-
+             
+            navigate("/dashboard/re-followup");
             // Close the form
             onClose();
 

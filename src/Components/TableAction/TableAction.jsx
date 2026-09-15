@@ -77,7 +77,7 @@ function TableAction({ row, onAction , showQuotation = false ,
                         onClick={() =>
                             handleAction("refollowup")
                         }>
-                        <RotateCcw size={20} />
+                        <RotateCcw size={20}  className="action-refollowup-icon"/>
                         <span>
                             Re Followup
                         </span>
@@ -91,7 +91,7 @@ function TableAction({ row, onAction , showQuotation = false ,
                         onClick={() =>
                             handleAction("visit")
                         }>
-                        <MapPin size={20} />
+                        <MapPin size={20} className="action-visit-icon"/>
                         <span>
                             Visit
                         </span>
@@ -105,7 +105,7 @@ function TableAction({ row, onAction , showQuotation = false ,
                         onClick={() =>
                             handleAction("service")
                         }>
-                        <Wrench size={20} />
+                        <Wrench size={20} className="action-service-icon"/>
                         <span>
                             Service
                         </span>
@@ -120,7 +120,7 @@ function TableAction({ row, onAction , showQuotation = false ,
                             handleAction("schedule")
                         }>
 
-                        <CalendarDays size={20} />
+                        <CalendarDays size={20} className="action-schedule-icon"/>
                         <span>
                             Schedule
                         </span>
