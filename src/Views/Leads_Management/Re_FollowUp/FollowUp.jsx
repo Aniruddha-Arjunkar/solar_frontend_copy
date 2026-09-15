@@ -108,20 +108,20 @@ function FollowUp(){
 
      }
 
-     const Stats = [
-        {
-            title: "Pending Follow-ups",
-            value: 1
-        },
-        {
-            title: "Today's Follow-ups",
-            value: 1
-        },
-        {
-            title: "Total Follow-ups",
-            value: LeadData.length
-        }
-    ];
+    //  const Stats = [
+    //     {
+    //         title: "Pending Follow-ups",
+    //         value: 1
+    //     },
+    //     {
+    //         title: "Today's Follow-ups",
+    //         value: 1
+    //     },
+    //     {
+    //         title: "Total Follow-ups",
+    //         value: LeadData.length
+    //     }
+    // ];
 
 
     const Columns = [
@@ -206,9 +206,9 @@ function FollowUp(){
                 icon={PhoneCall}/>
 
             {/* ================= STATS ================= */}
-            <ModuleStats
+            {/* <ModuleStats
                 stats={Stats}
-            />
+            /> */}
 
             {/* ================= TABLE ================= */}
             <ModuleTable columns={Columns} 

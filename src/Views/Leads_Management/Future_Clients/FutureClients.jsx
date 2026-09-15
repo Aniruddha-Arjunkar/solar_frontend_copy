@@ -120,12 +120,12 @@ function FutureClients(){
 
     };
 
-  const Stats = [
-       {
-        title:"Total Future Services",
-        value:LeadData.length
-       }
-  ];
+//   const Stats = [
+//        {
+//         title:"Total Future Services",
+//         value:LeadData.length
+//        }
+//   ];
 
   const Columns = [
         {

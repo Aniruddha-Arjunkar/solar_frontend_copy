@@ -129,24 +129,24 @@ function ViewInquiry() {
 
     /* ================= STATS ================= */
 
-    const stats = [
+    // const stats = [
 
-        {
-            title: "Total Inquiry",
-            value: LeadData.length
-        },
+    //     {
+    //         title: "Total Inquiry",
+    //         value: LeadData.length
+    //     },
 
-        {
-            title: "Today's Inquiry",
-            value: 0
-        },
+    //     {
+    //         title: "Today's Inquiry",
+    //         value: 0
+    //     },
 
-        {
-            title: "Pending Inquiry",
-            value: LeadData.length
-        }
+    //     {
+    //         title: "Pending Inquiry",
+    //         value: LeadData.length
+    //     }
 
-    ];
+    // ];
 
 
     /* ================= TABLE COLUMNS ================= */
@@ -221,9 +221,9 @@ function ViewInquiry() {
 
             {/* ================= STATS ================= */}
 
-            <ModuleStats
+            {/* <ModuleStats
                 stats={stats}
-            />
+            /> */}
 
             {/* ================= TABLE ================= */}
 

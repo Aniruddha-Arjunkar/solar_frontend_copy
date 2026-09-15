@@ -137,18 +137,18 @@ function ScheduleClient(){
 
     };
 
-    const Stats = [
+    // const Stats = [
 
-        {
-            title: "Total Schedule",
-            value: LeadData.length
-        },
+    //     {
+    //         title: "Total Schedule",
+    //         value: LeadData.length
+    //     },
 
-        {
-            title: "Today's Schedule",
-            value: 0
-        }
-    ];
+    //     {
+    //         title: "Today's Schedule",
+    //         value: 0
+    //     }
+    // ];
 
 
     const Columns = [
@@ -238,9 +238,9 @@ function ScheduleClient(){
                   icon={CalendarCheck}/>
 
             {/* ================= STATS ================= */}
-            <ModuleStats
-                stats={Stats}
-            />
+             {/* <ModuleStats
+                 stats={Stats}
+             /> */}
 
             {/* ================= TABLE ================= */}
             <ModuleTable columns={Columns} 

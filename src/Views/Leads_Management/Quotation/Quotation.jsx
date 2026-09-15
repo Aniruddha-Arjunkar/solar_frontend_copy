@@ -122,14 +122,14 @@ function Quotation() {
 
 
     // Stats 
-    const Stats = [
+    // const Stats = [
 
-        {
-            title: "Total Quotation Sended",
-            value: Data.length
-        }
+    //     {
+    //         title: "Total Quotation Sended",
+    //         value: Data.length
+    //     }
 
-    ];
+    // ];
 
 
     // Table Columns
@@ -187,9 +187,9 @@ function Quotation() {
 
             {/* ================= STATS ================= */}
 
-            <ModuleStats
+            {/* <ModuleStats
                 stats={Stats}
-            />
+            /> */}
 
 
             {/* ================= TABLE ================= */}
