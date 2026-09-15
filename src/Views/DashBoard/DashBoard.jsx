@@ -2,10 +2,15 @@ import {
     CalendarDays,
     Sun,
     ArrowRight,
-    TrendingUp
+    TrendingUp,
+    Users,
+    Truck,
+    UserCog
 } from "lucide-react";
 
 import API_BASE_URL from "./../../config/api";
+
+import { useNavigate } from "react-router";
 
 import {
     PieChart,
@@ -32,21 +37,18 @@ import "./DashBoard.css";
 
 function DashBoard() {
 
-    // ============================================================
-    // STATE
-    // ============================================================
-
     const [leads, setLeads] = useState([]);
+    const [clients, setClients] = useState([]);
+    const [vendors, setVendors] = useState([]);
+    const [employees, setEmployees] = useState([]);
 
     const [loading, setLoading] = useState(true);
-
     const [error, setError] = useState("");
 
+    const navigate = useNavigate();
 
-    // ============================================================
+
     // CURRENT DATE
-    // ============================================================
-
     const currentDate = new Date().toLocaleDateString("en-IN", {
         day: "2-digit",
         month: "short",
@@ -54,46 +56,97 @@ function DashBoard() {
     });
 
 
-    // ============================================================
     // FETCH LEADS FROM BACKEND
-    // ============================================================
-
     useEffect(() => {
-
         const fetchLeads = async () => {
-
             try {
-
                 setLoading(true);
-
                 setError("");
 
+                // Fetch Leads
+                // const response = await fetch(
+                //     `${API_BASE_URL}/leads`
+                // );
 
-                const response = await fetch(
-                    `${API_BASE_URL}/leads`
-                );
+                // if (!response.ok) {
+                //     throw new Error(
+                //         "Failed to fetch dashboard data."
+                //     );
+                // }
+
+                // const data = await response.json();
+
+                // setLeads(
+                //     Array.isArray(data)
+                //         ? data
+                //         : []
+                // );
+                const [
+                    leadsResponse,
+                    clientsResponse,
+                    vendorsResponse,
+                    employeesResponse
+                ] = await Promise.all([
+                    fetch(`${API_BASE_URL}/leads`),
+                    fetch(`${API_BASE_URL}/clients`),
+                    fetch(`${API_BASE_URL}/vendors`),
+                    fetch(`${API_BASE_URL}/employees`)
+                ]);
 
 
-                if (!response.ok) {
-
+                if (
+                    !leadsResponse.ok ||
+                    !clientsResponse.ok ||
+                    !vendorsResponse.ok ||
+                    !employeesResponse.ok
+                ) {
                     throw new Error(
                         "Failed to fetch dashboard data."
                     );
-
                 }
 
 
-                const data = await response.json();
+                const [
+                    leadsData,
+                    clientsData,
+                    vendorsData,
+                    employeesData
+                ] = await Promise.all([
+                    leadsResponse.json(),
+                    clientsResponse.json(),
+                    vendorsResponse.json(),
+                    employeesResponse.json()
+                ]);
 
 
                 setLeads(
-                    Array.isArray(data)
-                        ? data
+                    Array.isArray(leadsData)
+                        ? leadsData
+                        : []
+                );
+
+
+                setClients(
+                    Array.isArray(clientsData)
+                        ? clientsData
+                        : []
+                );
+
+
+                setVendors(
+                    Array.isArray(vendorsData)
+                        ? vendorsData
+                        : []
+                );
+
+
+                setEmployees(
+                    Array.isArray(employeesData)
+                        ? employeesData
                         : []
                 );
 
             } catch (error) {
-
                 console.error(
                     "Dashboard API Error:",
                     error
@@ -104,88 +157,76 @@ function DashBoard() {
                 );
 
             } finally {
-
                 setLoading(false);
-
             }
-
         };
-
-
         fetchLeads();
-
     }, []);
-
-
-    // ============================================================
-    // DASHBOARD COUNTS
-    // ============================================================
 
     const dashboardCounts = useMemo(() => {
 
-        const total = leads.length;
-
-
-        const newQueries = leads.filter(
+        const newLeads = leads.filter(
             (lead) =>
                 lead.status === "NEW"
         ).length;
 
 
-        const scheduledQueries = leads.filter(
-            (lead) =>
-                lead.status === "SCHEDULED"
-        ).length;
-
-
-        const serviceQueries = leads.filter(
-            (lead) =>
-                lead.status === "SERVICE"
-        ).length;
-
-
         return {
-            total,
-            newQueries,
-            scheduledQueries,
-            serviceQueries
+            newLeads,
+            totalCustomers: clients.length,
+            totalVendors: vendors.length,
+            totalEmployees: employees.length
         };
 
-    }, [leads]);
+    }, [
+        leads,
+        clients,
+        vendors,
+        employees
+    ]);
 
-
-    // ============================================================
     // DASHBOARD CARDS
-    // ============================================================
 
     const data = [
 
         {
             sr: "1",
-            title: "Total Queries",
-            count: dashboardCounts.total,
-            type: "total"
+            title: "New Leads",
+            count: dashboardCounts.newLeads,
+            description: "New inquiries waiting for attention",
+            type: "new",
+            icon: Users,
+            path: "/dashboard/view-inquiry"
         },
 
         {
             sr: "2",
-            title: "New Queries",
-            count: dashboardCounts.newQueries,
-            type: "new"
+            title: "Total Customers",
+            count: dashboardCounts.totalCustomers,
+            description: "Total registered customers",
+            type: "customers",
+            icon: Users,
+            path: "/dashboard/view-client"
         },
 
         {
             sr: "3",
-            title: "Service Queries",
-            count: dashboardCounts.serviceQueries,
-            type: "resolved"
+            title: "Total Vendors",
+            count: dashboardCounts.totalVendors,
+            description: "Total registered vendors",
+            type: "vendors",
+            icon: Truck,
+            path: "/dashboard/view-vendor"
         },
 
         {
             sr: "4",
-            title: "Scheduled Queries",
-            count: dashboardCounts.scheduledQueries,
-            type: "scheduled"
+            title: "Total Employees",
+            count: dashboardCounts.totalEmployees,
+            description: "Total registered employees",
+            type: "employees",
+            icon: UserCog,
+            path: "/dashboard/view-employee"
         }
 
     ];
@@ -260,9 +301,9 @@ function DashBoard() {
 
                         return (
                             date.getFullYear() ===
-                                currentYear &&
+                            currentYear &&
                             date.getMonth() ===
-                                index
+                            index
                         );
 
                     }
@@ -294,10 +335,6 @@ function DashBoard() {
     ];
 
 
-    // ============================================================
-    // RETURN
-    // ============================================================
-
     return (
 
         <section className="main-body">
@@ -324,76 +361,54 @@ function DashBoard() {
             </div> */}
 
 
-            {/* ====================================================
-                ERROR MESSAGE
-            ==================================================== */}
-
+            {/* === ERROR MESSAGE ==*/}
             {error && (
-
                 <div className="dashboard-error">
-
                     {error}
-
                 </div>
-
             )}
 
 
-            {/* ====================================================
-                WELCOME BANNER
-            ==================================================== */}
+            {/* ================ WELCOME BANNER ============== */}
 
             <div className="greet_bar">
 
                 <div className="greet_bar_greeting">
-
                     <span className="welcome-label">
                         ADMIN DASHBOARD
                     </span>
 
-
-                    <h1>
-                        Welcome Back, Admin!
-                    </h1>
-
+                    <h1> Welcome Back, Admin! </h1>
 
                     <p>
-
                         You have{" "}
-
                         <strong>
                             {loading
                                 ? "..."
-                                : dashboardCounts.newQueries
+                                : dashboardCounts.newLeads
                             }
                         </strong>
-
                         {" "}
                         new inquiries
                         waiting for your attention.
-
                     </p>
 
 
                     <button
                         className="check-now-btn"
-                    >
-
+                        onClick={() => {
+                            navigate("/dashboard/view-inquiry");
+                        }}>
                         Check Now
-
                         <ArrowRight size={16} />
-
                     </button>
-
                 </div>
 
 
                 <div className="greet_bar_image">
 
                     <div className="welcome-illustration">
-
                         <TrendingUp size={75} />
-
                     </div>
 
                 </div>
@@ -401,80 +416,56 @@ function DashBoard() {
             </div>
 
 
-            {/* ====================================================
-                DASHBOARD CARDS
-            ==================================================== */}
+            {/* ============== DASHBOARD CARDS ================ */}
 
             <div className="cards_section">
 
-
-                {/* ==================================================
-                    DATE & GREETING CARD
-                ================================================== */}
+                {/* =============== DATE & GREETING CARD =================== */}
 
                 <div className="greet_card">
 
                     <div className="greet_card_top">
 
                         <div className="sun-icon">
-
                             <Sun size={25} />
-
                         </div>
 
-
                         <span className="greet_card_label">
-
                             TODAY
-
                         </span>
 
                     </div>
 
 
                     <h2>
-
                         Good Morning,
-
                         <br />
-
                         <span>
                             Admin!
                         </span>
-
                     </h2>
 
 
                     <div className="card-date">
-
                         <CalendarDays size={18} />
-
                         <div>
-
                             <span>
                                 Date
                             </span>
-
                             <strong>
                                 {currentDate}
                             </strong>
-
                         </div>
-
                     </div>
-
                 </div>
 
 
-                {/* ==================================================
-                    DATA CARDS
-                ================================================== */}
+                {/* ================= DATA CARDS ============== */}
 
                 <div className="data_cards">
 
                     {
                         data.map((item) => (
-
                             <div
                                 className={`card ${item.type}`}
                                 key={item.sr}
@@ -482,35 +473,48 @@ function DashBoard() {
 
                                 <div className="card-top">
 
-                                    <span className="card-title">
+                                    <div className="card-heading">
 
-                                        {item.title}
+                                        <div className="card-icon">
+                                            <item.icon size={22} />
+                                        </div>
 
-                                    </span>
+                                        <span className="card-title">
+                                            {item.title}
+                                        </span>
+
+                                    </div>
 
 
                                     <span className="card-number">
-
                                         {
                                             loading
                                                 ? "..."
                                                 : item.count
                                         }
+                                    </span>
 
+
+                                    <span className="card-description">
+                                        {item.description}
                                     </span>
 
                                 </div>
 
 
-                                <div className="card-bottom">
+                                <button
+                                    type="button"
+                                    className="card-bottom"
+                                    onClick={() => navigate(item.path)}
+                                >
 
                                     <span>
-                                        View details
+                                        View Details
                                     </span>
 
-                                    <ArrowRight size={15} />
+                                    <ArrowRight size={16} />
 
-                                </div>
+                                </button>
 
                             </div>
 
@@ -518,54 +522,41 @@ function DashBoard() {
                     }
 
                 </div>
-
             </div>
 
 
-            {/* ====================================================
-                ANALYTICS SECTION
-            ==================================================== */}
+            {/* ===================== ANALYTICS SECTION ================ */}
 
             <div className="analytics-section">
 
 
-                {/* ==================================================
-                    QUERY DISTRIBUTION
-                ================================================== */}
+                {/* ================= QUERY DISTRIBUTION ================== */}
 
                 <div className="chart-card">
-
                     <div className="chart-header">
 
                         <div>
-
                             <h2>
                                 Query Distribution
                             </h2>
-
                             <p>
                                 Current query status
                             </p>
-
                         </div>
 
 
                         <span className="chart-period">
                             Current
                         </span>
-
                     </div>
 
 
                     <div className="pie-chart-container">
-
                         <ResponsiveContainer
                             width="100%"
-                            height={280}
-                        >
+                            height={280}>
 
                             <PieChart>
-
                                 <Pie
                                     data={pieData}
                                     cx="50%"
@@ -593,9 +584,7 @@ function DashBoard() {
 
                                 </Pie>
 
-
                                 <Tooltip />
-
 
                                 <Legend
                                     verticalAlign="bottom"
@@ -603,39 +592,27 @@ function DashBoard() {
                                 />
 
                             </PieChart>
-
                         </ResponsiveContainer>
-
                     </div>
-
                 </div>
 
-
-                {/* ==================================================
-                    QUERY TREND
-                ================================================== */}
+                {/* ================= QUERY TREND ================== */}
 
                 <div className="chart-card">
-
                     <div className="chart-header">
-
                         <div>
-
                             <h2>
                                 Query Overview
                             </h2>
-
                             <p>
                                 Monthly query activity
                             </p>
-
                         </div>
 
 
                         <span className="chart-period">
                             {new Date().getFullYear()}
                         </span>
-
                     </div>
 
 
@@ -701,6 +678,4 @@ function DashBoard() {
     );
 
 }
-
-
 export default DashBoard;
