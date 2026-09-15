@@ -13,7 +13,7 @@ import {
     MessageSquare,
     CalendarDays,
     Save,
-    X
+    RotateCcw
 } from "lucide-react";
 
 import MuduleHeader from "./../../../Components/ModulePageHeader/ModulePageHeader.jsx";
@@ -94,13 +94,10 @@ function AddInquiry() {
             const savedLead = await response.json();
 
             // console.log("Inquiry created:", savedLead);
-
-
             alert("Inquiry added successfully!");
 
 
             // Redirect to View Inquiry
-
            navigate("/dashboard/view-inquiry");
 
         } catch (error) {
@@ -386,14 +383,13 @@ function AddInquiry() {
                             type="button"
                             className="cancel-button"
                             onClick={handleCancel}>
-                            <X size={18} />
-                            Cancel
+                            <RotateCcw size={18} />
+                            Reset
                         </button>
 
                         <button
                             type="submit"
                             className="save-button">
-
                             <Save size={18} />
                             Save Inquiry
                         </button>

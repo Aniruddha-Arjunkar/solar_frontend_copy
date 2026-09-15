@@ -15,7 +15,6 @@
 
 .inquiry-form-card {
     width: 100%;
-
     background: #ffffff;
 
     border: 1px solid #e6eaf2;
@@ -56,7 +55,6 @@
 
 .form-required-text {
     color: #8b93a7;
-
     font-size: 14px;
 }
 
@@ -131,9 +129,7 @@
 
 .add-inquiry-form-group label {
     margin-bottom: 7px;
-
     color: #4c5871;
-
     font-size: 15px;
     font-weight: 600;
 }
@@ -148,18 +144,12 @@
 
 .add-inquiry-input-wrapper {
     width: 100%;
-
     display: flex;
     align-items: center;
-
     box-sizing: border-box;
-
     border: 1px solid #dfe4ed;
-
     border-radius: 7px;
-
     background: #ffffff;
-
     transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease;
@@ -176,18 +166,12 @@
 .add-inquiry-input-wrapper input,
 .add-inquiry-input-wrapper select {
     width: 100%;
-
     height: 43px;
-
     padding: 0 12px;
-
     border: none;
     outline: none;
-
     background: transparent;
-
     color: #26344f;
-
     font-family: inherit;
     font-size: 18px;
 }
@@ -200,7 +184,6 @@
 
 .add-inquiry-input-wrapper:focus-within {
     border-color: #6b7ec1;
-
     box-shadow: 0 0 0 3px rgba(91, 109, 174, 0.10);
 }
 
@@ -209,7 +192,6 @@
 
 .select-wrapper select {
     cursor: pointer;
-
 }
 
 
@@ -218,13 +200,9 @@
 .textarea-wrapper {
     display: flex;
     align-items: flex-start;
-
     border: 1px solid #dfe4ed;
-
     border-radius: 7px;
-
     background: #ffffff;
-
     transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease;
@@ -233,27 +211,19 @@
 
 .textarea-wrapper svg {
     flex-shrink: 0;
-
     margin: 13px 0 0 12px;
-
     color: #8c96aa;
 }
 
 
 .textarea-wrapper textarea {
     width: 100%;
-
     padding: 12px;
-
     border: none;
     outline: none;
-
     resize: vertical;
-
     background: transparent;
-
     color: #26344f;
-
     font-family: inherit;
     font-size: 17px;
 }
@@ -266,7 +236,6 @@
 
 .textarea-wrapper:focus-within {
     border-color: #6b7ec1;
-
     box-shadow: 0 0 0 3px rgba(91, 109, 174, 0.10);
 }
 
@@ -278,9 +247,7 @@
     justify-content: flex-end;
     align-items: center;
     gap: 10px;
-
     padding-top: 20px;
-
     border-top: 1px solid #edf0f5;
 }
 
@@ -293,19 +260,13 @@
     align-items: center;
     justify-content: center;
     gap: 7px;
-
     height: 40px;
-
     padding: 0 17px;
-
     border-radius: 7px;
-
     font-family: inherit;
     font-size: 18px;
     font-weight: 600;
-
     cursor: pointer;
-
     transition:
         background 0.2s ease,
         transform 0.2s ease,
@@ -316,16 +277,14 @@
 /* Cancel */
 
 .cancel-button {
-    border: 1px solid #dfe4ed;
-
-    background: rgb(255, 82, 82);
-
-    color: #ffffff;
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    color: #475569;
 }
 
 
 .cancel-button:hover {
-    background: rgb(255, 39, 39);
+    background:#f8fafc;
     transform: translateY(-1px);
 }
 
@@ -333,19 +292,15 @@
 /* Save */
 
 .save-button {
-    border: none;
-
-    background: rgb(0, 151, 0);
-
+   border: 1px solid #2563eb;
+    background: #2563eb;
     color: #ffffff;
 }
 
 
 .save-button:hover {
-    background:  rgb(0, 94, 0);
-
+    background: #1d4ed8;
     transform: translateY(-1px);
-
     box-shadow: 0 5px 14px rgba(63, 83, 143, 0.20);
 }
 
@@ -370,6 +325,13 @@
         margin-left: 0;
     }
 
+    /* .form-required-text{
+        display: block;
+    } */
+/* 
+    .cust-requirment{
+       width: 100% !important;
+    } */
 
     .form-grid {
         grid-template-columns: 1fr;
