@@ -14,7 +14,8 @@ import {
     MessageSquare,
     Save,
     X,
-    Store
+    Store,
+    RotateCcw
 } from "lucide-react";
 
 import "./AddVendor.css";
@@ -547,60 +548,31 @@ function AddVendor() {
                         ================================================== */}
 
                         <button
-
                             type="button"
-
                             className="vendor-cancel-button"
-
                             onClick={handleCancel}
-
-                            disabled={saving}
-
-                        >
-
-                            <X size={18} />
-
-                            Cancel
-
+                            disabled={saving}>
+                            <RotateCcw size={18} />
+                            Reset 
                         </button>
 
 
-                        {/* ==================================================
-                            SAVE BUTTON
-                        ================================================== */}
+                    {/* ========================  SAVE BUTTON ======================== */}
 
                         <button
-
                             type="submit"
-
                             className="vendor-save-button"
-
-                            disabled={saving}
-
-                        >
-
+                            disabled={saving}>
                             <Save size={18} />
-
                             {saving
                                 ? "Saving..."
                                 : "Save Vendor"
                             }
-
                         </button>
-
-
                     </div>
-
-
                 </form>
-
             </div>
-
         </section>
-
     );
-
 }
-
-
 export default AddVendor;

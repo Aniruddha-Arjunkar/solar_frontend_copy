@@ -248,8 +248,10 @@
 /* ================ TABLE =================== */
 .module-data-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse:collapse;
 }
+
+
 
 .module-data-table th {
     background: #f8fafc;
@@ -258,15 +260,16 @@
     font-weight: 600;
     text-align: left;
     padding: 13px 15px;
-    border-bottom: 1px solid #e2e8f0;
+    border: 1px solid #e2e8f0;
     white-space: nowrap;
+
 }
 
 .module-data-table td {
     padding: 14px 15px;
     font-size: 16px;
     color: #334155;
-    border-bottom: 1px solid #edf2f7;
+    border: 1px solid #edf2f7;
     white-space: nowrap;
     height:50px;
 }

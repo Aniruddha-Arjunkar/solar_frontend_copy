@@ -127,9 +127,7 @@ function GSTClient() {
     // ====================================================
 
     useEffect(() => {
-
         fetchGSTClients();
-
     }, []);
 
 
@@ -157,7 +155,6 @@ function GSTClient() {
       }
 
         setSelectedClient(client);
-
         setActiveAction(action);
     };
 
@@ -166,15 +163,12 @@ function GSTClient() {
     // STATISTICS
     // ====================================================
 
-    const Stats = [
-
-        {
-            title: "Total GST Clients",
-
-            value: GSTClientData.length
-        }
-
-    ];
+    // const Stats = [
+    //     {
+    //         title: "Total GST Clients",
+    //         value: GSTClientData.length
+    //     }
+    // ];
 
 
     // ====================================================
@@ -307,9 +301,9 @@ function GSTClient() {
                GST CLIENT STATS
             ================================================= */}
 
-            <ClientStats
+            {/* <ClientStats
                 stats={Stats}
-            />
+            /> */}
 
 
             {/* =================================================

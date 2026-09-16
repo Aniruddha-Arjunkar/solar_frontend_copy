@@ -3,7 +3,7 @@
      width: 100%;
 }
 
-/* ========================================= VENDOR FORM CARD ========================================= */
+/* ====== VENDOR FORM CARD ========================================= */
 .vendor-form-card {
      width: 100%;
      background: #ffffff;
@@ -13,7 +13,7 @@
      overflow: hidden;
 }
 
-/* ========================================= FORM CARD HEADER ========================================= */
+/* ========= FORM CARD HEADER ========================================= */
 .vendor-form-card-header {
      display: flex;
      justify-content: space-between;
@@ -35,7 +35,7 @@
      font-size: 14px;
 }
 
-/* ========================================= REQUIRED TEXT ========================================= */
+/* ============= REQUIRED TEXT ========================================= */
 .vendor-form-required-text {
      color: #8b93a7;
      font-size: 14px;
@@ -46,12 +46,12 @@
      font-weight: 700;
 }
 
-/* ========================================= FORM ========================================= */
+/* =============== FORM ========================================= */
 .vendor-form {
      padding: 24px;
 }
 
-/* ========================================= FORM SECTION ========================================= */
+/* =================== FORM SECTION ========================================= */
 .vendor-form-section {
      margin-bottom: 28px;
 }
@@ -60,7 +60,7 @@
      margin-bottom: 10px;
 }
 
-/* ========================================= SECTION TITLE ========================================= */
+/* =============== SECTION TITLE ========================================= */
 .vendor-form-section-title {
      display: flex;
      align-items: center;
@@ -79,14 +79,14 @@
      font-weight: 700;
 }
 
-/* ========================================= FORM GRID ========================================= */
+/* ============ FORM GRID ========================================= */
 .vendor-form-grid {
      display: grid;
      grid-template-columns: repeat(2, minmax(0, 1fr));
      gap: 18px 22px;
 }
 
-/* ========================================= FORM GROUP ========================================= */
+/* =========== FORM GROUP ========================================= */
 .vendor-form-group {
      display: flex;
      flex-direction: column;
@@ -107,7 +107,7 @@
      color: #e45656;
 }
 
-/* ========================================= INPUT WRAPPER ========================================= */
+/* ========= INPUT WRAPPER ========================================= */
 .vendor-input-wrapper {
      width: 100%;
      display: flex;
@@ -146,7 +146,7 @@
      box-shadow: 0 0 0 3px rgba(91, 109, 174, 0.10);
 }
 
-/* ========================================= TEXTAREA ========================================= */
+/* =========== TEXTAREA ========================================= */
 .vendor-textarea-wrapper {
      display: flex;
      align-items: flex-start;
@@ -183,7 +183,7 @@
      box-shadow: 0 0 0 3px rgba(91, 109, 174, 0.10);
 }
 
-/* ========================================= FORM FOOTER ========================================= */
+/* ================ FORM FOOTER ========================================= */
 .vendor-form-footer {
      display: flex;
      justify-content: flex-end;
@@ -193,7 +193,7 @@
      border-top: 1px solid #edf0f5;
 }
 
-/* ========================================= COMMON BUTTON ========================================= */
+/*===================== COMMON BUTTON ========================================= */
 .vendor-cancel-button,
 .vendor-save-button {
      display: inline-flex;
@@ -212,27 +212,27 @@
 
 /* ========================================= CANCEL BUTTON ========================================= */
 .vendor-cancel-button {
-     border: 1px solid #dfe4ed;
-     background: rgb(255, 82, 82);
-     color: #ffffff;
+     border: 1px solid #d1d5db;
+     background: #ffffff;
+     color: #475569;
 }
 
 .vendor-cancel-button:hover {
-     background: rgb(255, 39, 39);
-     transform: translateY(-1px);
+     background:#f8fafc;
+    transform: translateY(-1px);
 }
 
 /* ========================================= SAVE BUTTON ========================================= */
 .vendor-save-button {
-     border: none;
-     background: rgb(0, 151, 0);
-     color: #ffffff;
+      border: 1px solid #2563eb;
+      background: #2563eb;
+      color: #ffffff;
 }
 
 .vendor-save-button:hover {
-     background: rgb(0, 94, 0);
-     transform: translateY(-1px);
-     box-shadow: 0 5px 14px rgba(63, 83, 143, 0.20);
+         background: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(63, 83, 143, 0.20);
 }
 
 /* ========================================= RESPONSIVE ========================================= */

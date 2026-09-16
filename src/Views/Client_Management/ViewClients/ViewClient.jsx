@@ -22,10 +22,6 @@ import "./ViewClient.css";
 
 function ViewClient() {
 
-    /* =====================================================
-       STATE
-    ===================================================== */
-
     const [clientData, setClientData] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -33,9 +29,7 @@ function ViewClient() {
     const [activeAction, setActiveAction] = useState(null);
 
 
-    /* =====================================================
-       FETCH NON-GST CLIENTS
-    ===================================================== */
+    /* ===========================   FETCH NON-GST CLIENTS ============== */
 
     const fetchClients = async () => {
 
@@ -58,31 +52,21 @@ function ViewClient() {
             setClientData(data);
 
         } catch (error) {
-
             console.error("Error fetching clients:", error);
-
         } finally {
-
             setLoading(false);
-
         }
     };
 
 
-    /* =====================================================
-       FETCH CLIENTS WHEN PAGE LOADS
-    ===================================================== */
+    /* =========== FETCH CLIENTS WHEN PAGE LOADS ======================== */
 
     useEffect(() => {
-
         fetchClients();
-
     }, []);
 
 
-    /* =====================================================
-       ACTION HANDLER
-    ===================================================== */
+    /* ============ ACTION HANDLER ====================== */
 
     const handleClientAction = (action, client) => {
 
@@ -200,14 +184,14 @@ function ViewClient() {
        STATISTICS
     ===================================================== */
 
-    const Stats = [
+    // const Stats = [
 
-        {
-            title: "Total Clients",
-            value: clientData.length
-        }
+    //     {
+    //         title: "Total Clients",
+    //         value: clientData.length
+    //     }
 
-    ];
+    // ];
 
 
     /* =====================================================
@@ -231,9 +215,9 @@ function ViewClient() {
 
             {/* ================= STATS ================= */}
 
-            <ClientStats
+            {/* <ClientStats
                 stats={Stats}
-            />
+            /> */}
 
 
             {/* ================= CLIENT TABLE ================= */}

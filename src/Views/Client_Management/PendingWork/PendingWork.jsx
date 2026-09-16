@@ -150,9 +150,7 @@ function PendingWork() {
     // ============================================================
 
     useEffect(() => {
-
         fetchPendingWork();
-
     }, []);
 
 
@@ -160,18 +158,18 @@ function PendingWork() {
     // STATS
     // ============================================================
 
-    const Stats = [
+    // const Stats = [
 
-        {
-            title: "Total Pending Work",
+    //     {
+    //         title: "Total Pending Work",
 
-            value: pendingWorkData.filter(
-                (work) =>
-                    work.status?.toLowerCase() !== "completed"
-            ).length
-        }
+    //         value: pendingWorkData.filter(
+    //             (work) =>
+    //                 work.status?.toLowerCase() !== "completed"
+    //         ).length
+    //     }
 
-    ];
+    // ];
 
 
     // ============================================================
@@ -328,13 +326,9 @@ function PendingWork() {
         // ========================================================
 
         if (action === "update_work") {
-
             setSelectedWork(work);
-
             setActiveAction("update_work");
-
             return;
-
         }
 
 
@@ -343,11 +337,8 @@ function PendingWork() {
         // ========================================================
 
         if (action === "mark_complete") {
-
             handleMarkComplete(work);
-
             return;
-
         }
 
 
@@ -467,10 +458,10 @@ function PendingWork() {
             {/* ====================================================
                 STATS
             ==================================================== */}
-
+{/* 
             <ClientStats
                 stats={Stats}
-            />
+            /> */}
 
 
             {/* ====================================================

@@ -28,19 +28,12 @@ import API_BASE_URL from "./../../../config/api.js";
 function ViewVendor() {
 
     const [vendorData, setVendorData] = useState([]);
-
     const [loading, setLoading] = useState(true);
-
     const [error, setError] = useState("");
-
     const [selectedVendor, setSelectedVendor] = useState(null);
-
     const [activeAction, setActiveAction] = useState(null);
-
     const [clientData, setClientData] = useState([]);
-
     const [clientLoading, setClientLoading] = useState(false);
-
     const [clientError, setClientError] = useState("");
 
 
@@ -172,50 +165,27 @@ function ViewVendor() {
 
     }, []);
 
-
-    // ============================================================
     // FETCH CLIENTS FOR SELECTED VENDOR
-    // ============================================================
-
     const fetchVendorClients = async (vendorId) => {
 
         try {
 
             setClientLoading(true);
-
             setClientError("");
-
             setClientData([]);
 
-
-            // ====================================================
             // GET CLIENTS OF SELECTED VENDOR
-            // ====================================================
-
             const response = await fetch(
                 `${API_BASE_URL}/clients/vendor/${vendorId}`
             );
 
-
-            // ====================================================
-            // CHECK RESPONSE
-            // ====================================================
-
             if (!response.ok) {
-
                 throw new Error(
                     "Failed to fetch vendor clients."
                 );
-
             }
 
-
-            // ====================================================
-            // CONVERT RESPONSE TO JSON
-            // ====================================================
-
             const data = await response.json();
-
 
             console.log(
                 "Clients fetched for vendor:",
@@ -224,15 +194,12 @@ function ViewVendor() {
             );
 
 
-            // ====================================================
+            
             // STORE CLIENT DATA
-            // ====================================================
 
             setClientData(data);
 
-
         } catch (error) {
-
             console.error(
                 "Error fetching vendor clients:",
                 error
@@ -255,9 +222,8 @@ function ViewVendor() {
     };
 
 
-    // ============================================================
+
     // VENDOR ACTION HANDLER
-    // ============================================================
 
     const handleVendorAction = (action, vendor) => {
 
@@ -272,86 +238,53 @@ function ViewVendor() {
         );
 
 
-        // ========================================================
         // STORE SELECTED VENDOR
-        // ========================================================
 
         setSelectedVendor(vendor);
 
-
-        // ========================================================
         // ADD CLIENT
-        // ========================================================
-
         if (action === "add_client") {
 
             setClientData([]);
-
             setClientError("");
-
             setActiveAction("add_client");
-
             return;
 
         }
 
 
-        // ========================================================
+   
         // SHOW VENDOR DETAILS
-        // ========================================================
 
         if (action === "show_details") {
-
             setClientData([]);
-
             setClientError("");
-
             setActiveAction("show_details");
 
-
-            // ====================================================
             // FETCH CLIENTS FROM BACKEND
-            // ====================================================
-
             fetchVendorClients(vendor.id);
-
             return;
-
         }
 
 
-        // ========================================================
         // DEFAULT ACTION
-        // ========================================================
-
         setActiveAction(action);
 
     };
 
 
-    // ============================================================
+
     // CLOSE ACTION
-    // ============================================================
-
     const handleCloseAction = () => {
-
         setActiveAction(null);
-
         setSelectedVendor(null);
-
         setClientData([]);
-
         setClientError("");
-
     };
 
 
-    // ============================================================
     // CLIENT ADDED
-    // ============================================================
-
     const handleClientAdded = (client) => {
-
         console.log(
             "Client added successfully:",
             client
@@ -364,18 +297,12 @@ function ViewVendor() {
          */
 
         setClientData((previousClients) => [
-
             ...previousClients,
-
             client
-
         ]);
 
-
         setActiveAction(null);
-
         setSelectedVendor(null);
-
     };
 
 
@@ -383,26 +310,20 @@ function ViewVendor() {
     // STATS
     // ============================================================
 
-    const Stats = [
+    // const Stats = [
 
-        {
-            title: "Total Vendors",
-            value: vendorData.length
-        }
+    //     {
+    //         title: "Total Vendors",
+    //         value: vendorData.length
+    //     }
 
-    ];
+    // ];
 
-
-    // ============================================================
     // LOADING UI
-    // ============================================================
 
     if (loading) {
-
         return (
-
             <section className="view-vendor-page">
-
 
                 {/* ==================================================
                     HEADER
@@ -510,9 +431,9 @@ function ViewVendor() {
                 STATS
             ==================================================== */}
 
-            <VendorStats
+            {/* <VendorStats
                 stats={Stats}
-            />
+            /> */}
 
 
             {/* ====================================================
