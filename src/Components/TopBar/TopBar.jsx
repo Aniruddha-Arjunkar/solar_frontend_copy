@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import API_BASE_URL from "./../../config/api";
 
 import {
     Search,
@@ -20,11 +22,240 @@ function Topbar() {
     const [profileOpen, setProfileOpen] = useState(false);
     const navigate = useNavigate();
 
+
+    // GLOBAL SEARCH
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
+    const [searchLoading, setSearchLoading] = useState(false);
+    const [searchOpen, setSearchOpen] = useState(false);
+
+    const [globalData, setGlobalData] = useState({
+        leads: [],
+        clients: [],
+        vendors: [],
+        employees: []
+    });
+
+
+    // LOAD GLOBAL SEARCH DATA
+    useEffect(() => {
+
+        const loadGlobalData = async () => {
+
+            try {
+
+                const [
+                    leadsResponse,
+                    clientsResponse,
+                    vendorsResponse,
+                    employeesResponse
+                ] = await Promise.all([
+                    fetch(`${API_BASE_URL}/leads`),
+                    fetch(`${API_BASE_URL}/clients`),
+                    fetch(`${API_BASE_URL}/vendors`),
+                    fetch(`${API_BASE_URL}/employees`)
+                ]);
+
+
+                if (
+                    !leadsResponse.ok ||
+                    !clientsResponse.ok ||
+                    !vendorsResponse.ok ||
+                    !employeesResponse.ok
+                ) {
+                    throw new Error(
+                        "Failed to load global search data."
+                    );
+                }
+
+                const [
+                    leads,
+                    clients,
+                    vendors,
+                    employees
+                ] = await Promise.all([
+                    leadsResponse.json(),
+                    clientsResponse.json(),
+                    vendorsResponse.json(),
+                    employeesResponse.json()
+                ]);
+
+
+                setGlobalData({
+                    leads: Array.isArray(leads)
+                        ? leads
+                        : [],
+
+                    clients: Array.isArray(clients)
+                        ? clients
+                        : [],
+
+                    vendors: Array.isArray(vendors)
+                        ? vendors
+                        : [],
+
+                    employees: Array.isArray(employees)
+                        ? employees
+                        : []
+                });
+
+            } catch (error) {
+
+                console.error(
+                    "Global Search Data Error:",
+                    error
+                );
+            }
+        };
+        loadGlobalData();
+    }, []);
+
+
+    // SEARCH GLOBAL DATA LOCALLY
+
+    useEffect(() => {
+
+        if (!searchTerm.trim()) {
+            setSearchResults([]);
+            setSearchOpen(false);
+            return;
+        }
+
+        const searchValue =
+            searchTerm.trim().toLowerCase();
+
+        const results = [];
+
+
+        // LEADS
+        globalData.leads
+            .filter((lead) =>
+                [
+                    lead.name,
+                    lead.contact,
+                    lead.email,
+                    lead.address
+                ].some((value) =>
+                    String(value || "")
+                        .toLowerCase()
+                        .includes(searchValue)
+                )
+            )
+            .slice(0, 5)
+            .forEach((lead) => {
+                results.push({
+                    id: `lead-${lead.id}`,
+                    type: "Lead",
+                    name: lead.name,
+                    contact: lead.contact,
+                    path: "/dashboard/view-inquiry"
+                });
+            });
+
+
+        // CLIENTS
+
+        globalData.clients
+            .filter((client) =>
+                [
+                    [
+                        client.custName,
+                        client.custPhone,
+                        client.custEmail,
+                        client.custAddress,
+                        client.service
+                    ]
+                ].some((value) =>
+                    String(value || "")
+                        .toLowerCase()
+                        .includes(searchValue)
+                )
+            )
+            .slice(0, 5)
+            .forEach((client) => {
+
+                results.push({
+                    id: `client-${client.id}`,
+                    type: "Client",
+                    name: client.custName,
+                    contact: client.custPhone,
+                    path: "/dashboard/view-client"
+                });
+
+            });
+
+
+        // VENDORS
+
+        globalData.vendors
+            .filter((vendor) =>
+                [
+                    vendor.name,
+                    vendor.vendorName,
+                    vendor.contact,
+                    vendor.email,
+                    vendor.address
+                ].some((value) =>
+                    String(value || "")
+                        .toLowerCase()
+                        .includes(searchValue)
+                )
+            )
+            .slice(0, 5)
+            .forEach((vendor) => {
+
+                results.push({
+                    id: `vendor-${vendor.id}`,
+                    type: "Vendor",
+                    name:
+                        vendor.name ||
+                        vendor.vendorName ||
+                        "Vendor",
+                    contact: vendor.contact,
+                    path: "/dashboard/view-vendor"
+                });
+
+            });
+
+
+        // EMPLOYEES
+        globalData.employees
+            .filter((employee) =>
+                [
+                    employee.name,
+                    employee.contact,
+                    employee.email,
+                    employee.address
+                ].some((value) =>
+                    String(value || "")
+                        .toLowerCase()
+                        .includes(searchValue)
+                )
+            )
+            .slice(0, 5)
+            .forEach((employee) => {
+
+                results.push({
+                    id: `employee-${employee.id}`,
+                    type: "Employee",
+                    name: employee.name,
+                    contact: employee.contact,
+                    path: "/dashboard/view-employee"
+                });
+
+            });
+
+
+        setSearchResults(results.slice(0, 10));
+        setSearchOpen(true);
+
+    }, [searchTerm, globalData]);
+
     // Get Logged-In User
-      const storedUser = localStorage.getItem("user");
-      const user = storedUser
+    const storedUser = localStorage.getItem("user");
+    const user = storedUser
         ? JSON.parse(storedUser) : null;
-    
+
     /* ===== USER DETAILS =========*/
 
     const userName = user?.name || "Admin";
@@ -62,7 +293,7 @@ function Topbar() {
 
             {/* ==========SEARCH SECTION =========== */}
 
-            <div className="topbar-search">
+            {/* <div className="topbar-search">
 
                 <Search className="search-icon" size={19} />
 
@@ -71,8 +302,86 @@ function Topbar() {
                     placeholder="Search here..."
                 />
 
-            </div>
+            </div> */}
 
+            <div className="topbar-search">
+
+                <Search
+                    className="search-icon"
+                    size={19}
+                />
+
+                <input
+                    type="search"
+                    placeholder="Search leads, clients, vendors..."
+                    value={searchTerm}
+                    onChange={(event) =>
+                        setSearchTerm(event.target.value)
+                    }
+                    onFocus={() => {
+                        if (searchTerm.trim()) {
+                            setSearchOpen(true);
+                        }
+                    }}
+                />
+
+                {/* =====  GLOBAL SEARCH RESULTS ======== */}
+
+                {searchOpen && searchTerm.trim() && (
+
+                    <div className="topbar-search-results">
+
+                        {searchLoading ? (
+
+                            <div className="topbar-search-message">
+                                Searching...
+                            </div>
+
+                        ) : searchResults.length > 0 ? (
+                            searchResults.map((result) => (
+
+                                <button
+                                    type="button"
+                                    className="topbar-search-result"
+                                    key={result.id}
+                                    onClick={() => {
+                                        navigate(result.path);
+                                        setSearchTerm("");
+                                        setSearchOpen(false);
+                                    }}
+                                >
+
+                                    <div className="topbar-search-result-avatar">
+                                        {result.name
+                                            ?.charAt(0)
+                                            .toUpperCase() || "?"}
+                                    </div>
+
+                                    <div className="topbar-search-result-info">
+
+                                        <strong>
+                                            {result.name}
+                                        </strong>
+
+                                        <span>
+                                            {result.type}
+                                            {result.contact
+                                                ? ` • ${result.contact}`
+                                                : ""}
+                                        </span>
+                                    </div>
+                                </button>
+                            ))
+
+                        ) : (
+
+                            <div className="topbar-search-message">
+                                No results found.
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
 
             {/* ======= RIGHT SIDE ============= */}
 
@@ -146,7 +455,7 @@ function Topbar() {
                     >
 
                         <div className="profile-avatar">
-                             {userInitial}
+                            {userInitial}
                         </div>
 
                         <div className="profile-info">
@@ -162,9 +471,8 @@ function Topbar() {
                         </div>
 
                         <ChevronDown
-                            className={`profile-arrow ${
-                                profileOpen ? "rotate" : ""
-                            }`}
+                            className={`profile-arrow ${profileOpen ? "rotate" : ""
+                                }`}
                             size={20}
                         />
 
@@ -180,7 +488,7 @@ function Topbar() {
                             <div className="dropdown-user">
 
                                 <div className="profile-avatar large">
-                                     {userInitial}
+                                    {userInitial}
                                 </div>
 
                                 <div>
@@ -211,8 +519,8 @@ function Topbar() {
 
 
                             <button className="dropdown-item logout"
-                            type="button"
-                            onClick={handleLogout}>
+                                type="button"
+                                onClick={handleLogout}>
                                 <LogOut size={22} />
                                 <span>
                                     Logout
