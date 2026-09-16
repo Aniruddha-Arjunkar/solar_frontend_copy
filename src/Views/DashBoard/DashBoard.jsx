@@ -171,8 +171,28 @@ function DashBoard() {
         ).length;
 
 
+        // return {
+        //     newLeads,
+        //     totalCustomers: clients.length,
+        //     totalVendors: vendors.length,
+        //     totalEmployees: employees.length
+        // };
         return {
             newLeads,
+
+            // PIE CHART COUNTS
+            newQueries: leads.filter(
+                (lead) => lead.status === "NEW"
+            ).length,
+
+            serviceQueries: leads.filter(
+                (lead) => lead.status === "SERVICE"
+            ).length,
+
+            scheduledQueries: leads.filter(
+                (lead) => lead.status === "SCHEDULED"
+            ).length,
+
             totalCustomers: clients.length,
             totalVendors: vendors.length,
             totalEmployees: employees.length
