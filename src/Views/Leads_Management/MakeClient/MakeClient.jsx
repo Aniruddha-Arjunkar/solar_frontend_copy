@@ -15,24 +15,19 @@ import "./MakeClient.css";
 
 function MakeClient() {
 
-    //====================================================
-    // ROUTER
-    //====================================================
-
     const { leadId } = useParams();
     const navigate = useNavigate();
 
 
-
-    //====================================================
-    // LEAD DATA
-    //====================================================
-
     const [lead, setLead] = useState(null);
-
     const [loading, setLoading] = useState(true);
-
     const [saving, setSaving] = useState(false);
+
+
+    // ASSIGN CLIENT
+    const [assignmentType, setAssignmentType] = useState("INHOUSE");
+    const [vendors, setVendors] = useState([]);
+    const [vendorLoading, setVendorLoading] = useState(false);
 
 
 
@@ -56,7 +51,7 @@ function MakeClient() {
         billingAddress: "",
         shippingAddress: "",
 
-        documents: "",
+        // documents: "",
         consumerNo: "",
         subdivision: "",
         technicalName: ""
@@ -70,10 +65,7 @@ function MakeClient() {
     //====================================================
 
     const [gstAmount, setGstAmount] = useState(0);
-
     const [finalAmount, setFinalAmount] = useState(0);
-
-
 
     //====================================================
     // FETCH LEAD
@@ -103,7 +95,7 @@ function MakeClient() {
                     "Make Client Lead:",
                     data
                 );
-                
+
                 setLead(data);
 
                 // AUTO-FILL FORM FROM LEAD
@@ -149,6 +141,55 @@ function MakeClient() {
             fetchLead();
         }
     }, [leadId]);
+
+
+    // FETCH VENDORS WHEN VENDOR IS SELECTED
+    useEffect(() => {
+        if (assignmentType !== "VENDOR") {
+            return;
+        }
+        const fetchVendors = async () => {
+
+            try {
+                setVendorLoading(true);
+
+                const response = await fetch(
+                    `${API_BASE_URL}/vendors`
+                );
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Failed to fetch vendors."
+                    );
+                }
+
+                const data = await response.json();
+
+                setVendors(
+                    Array.isArray(data)
+                        ? data
+                        : []
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Fetch Vendors Error:",
+                    error
+                );
+
+                window.alert(
+                    "Unable to load vendors."
+                );
+
+            } finally {
+                setVendorLoading(false);
+            }
+        };
+
+        fetchVendors();
+
+    }, [assignmentType]);
 
 
     // HANDLE INPUT CHANGE
@@ -212,20 +253,141 @@ function MakeClient() {
         );
     };
 
+
+
     //====================================================
-    // SAVE CLIENT
+    // ASSIGN LEAD TO VENDOR
     //====================================================
+
+    const handleAssignToVendor = async (vendorId) => {
+
+        if (!formData.totalAmount) {
+
+            window.alert(
+                "Please enter the total amount."
+            );
+            return;
+        }
+
+        try {
+            setSaving(true);
+
+            // REQUEST BODY
+            const clientData = {
+
+                service:
+                    formData.service,
+
+                serviceTermCondition:
+                    formData.serviceTermCondition,
+
+                totalAmount:
+                    Number(formData.totalAmount),
+
+                warranty:
+                    formData.warranty,
+
+                serviceCovered:
+                    formData.serviceCovered,
+
+                serviceDate:
+                    formData.serviceDate || null,
+
+                applyGst:
+                    formData.applyGst,
+
+                gstType:
+                    formData.gstType,
+
+                gstInvoiceNo:
+                    formData.gstInvoiceNo,
+
+                billingAddress:
+                    formData.billingAddress,
+
+                shippingAddress:
+                    formData.shippingAddress,
+
+                consumerNo:
+                    formData.consumerNo,
+
+                subdivision:
+                    formData.subdivision,
+
+                technicalName:
+                    formData.technicalName
+            };
+
+            
+            // CONVERT LEAD → CLIENT VIA VENDOR
+            const response = await fetch(
+                `${API_BASE_URL}/clients/convert-from-lead/${leadId}/vendor/${vendorId}`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+                    body:
+                        JSON.stringify(clientData)
+                }
+            );
+
+            if (!response.ok) {
+                const errorText =
+                    await response.text();
+
+                throw new Error(
+                    errorText ||
+                    "Failed to assign client to vendor."
+                );
+            }
+
+            const savedClient =
+                await response.json();
+
+
+            console.log(
+                "Vendor Client Created:",
+                savedClient
+            );
+          
+            // SUCCESS
+            window.alert(
+                "Client assigned to vendor successfully."
+            );
+
+
+            // REDIRECT
+            if (savedClient.applyGst) {
+                navigate("/dashboard/gst-client");
+            } else {
+                navigate("/dashboard/view-client");
+            }
+
+        } catch (error) {
+            console.error(
+                "Assign Vendor Error:",
+                error
+            );
+            window.alert(
+                "Failed to assign client to vendor. Please try again."
+            );
+        } finally {
+            setSaving(false);
+        }
+    };
+
+  
+    //=============== SAVE CLIENT ======================
 
     const handleSaveClient = async (event) => {
 
         event.preventDefault();
 
-        //================================================
+        
         // BASIC VALIDATION
-        //================================================
-
         if (!formData.totalAmount) {
-
             window.alert(
                 "Please enter the total amount."
             );
@@ -277,8 +439,8 @@ function MakeClient() {
                 shippingAddress:
                     formData.shippingAddress,
 
-                documents:
-                    formData.documents,
+                // documents:
+                //     formData.documents,
 
                 consumerNo:
                     formData.consumerNo,
@@ -729,8 +891,167 @@ function MakeClient() {
                             <strong>
                                 ₹ {formatAmount(finalAmount)}
                             </strong>
-                      </div>
+                        </div>
                     </div>
+                </div>
+
+                {/*====================================================
+    ASSIGN TO
+====================================================*/}
+
+                <div className="make-client-card">
+
+                    <div className="make-client-card-header">
+
+                        <h2>
+                            Assign To
+                        </h2>
+
+                        <p>
+                            Choose whether this client will be handled
+                            in-house or through a vendor.
+                        </p>
+
+                    </div>
+
+
+                    <div className="make-client-grid">
+
+                        {/*================ INHOUSE =================*/}
+
+                        <label className="make-client-assignment-option">
+
+                            <input
+                                type="radio"
+                                name="assignmentType"
+                                value="INHOUSE"
+                                checked={
+                                    assignmentType === "INHOUSE"
+                                }
+                                onChange={() =>
+                                    setAssignmentType("INHOUSE")
+                                }
+                            />
+
+                            <div>
+                                <strong>
+                                    InHouse (Admin)
+                                </strong>
+
+                                <span>
+                                    Create client under Admin.
+                                </span>
+                            </div>
+
+                        </label>
+
+
+                        {/*================ VENDOR =================*/}
+
+                        <label className="make-client-assignment-option">
+
+                            <input
+                                type="radio"
+                                name="assignmentType"
+                                value="VENDOR"
+                                checked={
+                                    assignmentType === "VENDOR"
+                                }
+                                onChange={() =>
+                                    setAssignmentType("VENDOR")
+                                }
+                            />
+
+                            <div>
+                                <strong>
+                                    Vendor
+                                </strong>
+
+                                <span>
+                                    Assign this client to a vendor.
+                                </span>
+                            </div>
+                        </label>
+                    </div>
+
+
+                    {/*==================== VENDOR LIST ===================*/}
+
+                    {assignmentType === "VENDOR" && (
+
+                        <div className="make-client-vendor-section">
+
+                            <h3>
+                                Available Vendors
+                            </h3>
+
+
+                            {vendorLoading ? (
+
+                                <div className="make-client-vendor-message">
+                                    Loading vendors...
+                                </div>
+
+                            ) : vendors.length === 0 ? (
+
+                                <div className="make-client-vendor-message">
+                                    No vendors available.
+                                </div>
+
+                            ) : (
+
+                                <div className="make-client-vendor-list">
+
+                                    {vendors.map((vendor) => (
+
+                                        <div
+                                            className="make-client-vendor-row"
+                                            key={vendor.id}
+                                        >
+
+                                            <div className="make-client-vendor-info">
+
+                                                <div className="make-client-vendor-avatar">
+                                                    {vendor.name
+                                                        ?.charAt(0)
+                                                        .toUpperCase() || "V"}
+                                                </div>
+
+                                                <div>
+                                                    <strong>
+                                                        {vendor.vendorName}
+                                                    </strong>
+
+                                                    {vendor.contact && (
+                                                        <span>
+                                                            {vendor.contact}
+                                                        </span>
+                                                    )}
+                                                </div>
+
+                                            </div>
+
+
+                                            <button
+                                                type="button"
+                                                className="make-client-vendor-assign-btn"
+                                                onClick={() =>
+                                                    handleAssignToVendor(
+                                                        vendor.id
+                                                    )
+                                                }
+                                                disabled={saving}
+                                            >
+                                                {saving
+                                                    ? "Assigning..."
+                                                    : "Assign"}
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </div>
 
 
@@ -780,7 +1101,7 @@ function MakeClient() {
                         </div>
 
 
-                        <div className="form-group">
+                        {/* <div className="form-group">
                             <label>
                               Required Documents
                             </label>
@@ -791,7 +1112,7 @@ function MakeClient() {
                                 onChange={handleChange}
                                 placeholder="Example: Aadhar, PAN"
                             />
-                        </div>
+                        </div> */}
 
                         <div className="form-group">
 
@@ -817,7 +1138,7 @@ function MakeClient() {
                                 name="subdivision"
                                 value={formData.subdivision}
                                 onChange={handleChange}
-                                placeholder="Enter subdivision"/>
+                                placeholder="Enter subdivision" />
                         </div>
 
 
