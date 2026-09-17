@@ -4,6 +4,8 @@ import ModuleStats from "./../../../Components/LeadStats/LeadStats.jsx";
 import ModuleTable from "./../../../Components/ModuleTable/ModuleTable.jsx";
 import { PhoneCall } from "lucide-react";
 
+import { useNavigate } from "react-router";
+
 import API_BASE_URL from "./../../../config/api.js"
 
 //============== Action Button Forms ==================
@@ -20,6 +22,8 @@ function FollowUp(){
      const [LeadData, setLeadData] = useState([]);
      const [selectedLead, setSelectedLead] = useState(null);
      const[activeAction , setActiveAction] = useState(null);
+
+     const navigate = useNavigate();
     
      //Fetch Follow-ups from API
         const fetchFollowUps = () => {
@@ -98,6 +102,14 @@ function FollowUp(){
 
         // console.log("Action:", action);
         // console.log("Select Lead:", lead);
+
+        if (action === "quotation") {
+            navigate(
+                `/dashboard/add-quotation/${lead.id}`
+            );
+            return;
+        }
+
         if (action === "delete") {
         await handleDeleteLead(lead);
         return;

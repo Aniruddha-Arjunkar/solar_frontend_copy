@@ -1,4 +1,6 @@
 import { useState , useEffect} from "react";
+import { useNavigate } from "react-router";
+
 import ModuleHeader from "../../../Components/ModulePageHeader/ModulePageHeader.jsx";
 import ModuleTable from "./../../../Components/ModuleTable/ModuleTable.jsx";
 import ModuleStats from "./../../../Components/LeadStats/LeadStats.jsx";
@@ -10,6 +12,7 @@ import VisitForm from "./../../../Components/LeadForms/VitisForm/VisitForm.jsx";
 import ReFollowUpForm from "./../../../Components/LeadForms/ReFollowupForm/ReFollowupForm.jsx";
 import ServiceForm from "./../../../Components/LeadForms/ServiceForm/ServiceForm.jsx"
 import ScheduleForm from "./../../../Components/LeadForms/ScheduleForm/ScheduleForm.jsx";
+
 import API_BASE_URL from "./../../../config/api.js";
 
 function FutureClients(){
@@ -17,7 +20,8 @@ function FutureClients(){
     const [LeadData, setLeadData] = useState([]);
     const [selectedLead, setSelectedLead] = useState(null);
     const [activeAction, setActiveAction] = useState(null);
-
+    
+    const navigate = useNavigate();
 
     const fetchFutureLeads = () => {
 
@@ -110,6 +114,14 @@ function FutureClients(){
 
         // console.log("Action:", action);
         // console.log("Selected Lead:", lead);
+
+       if (action === "quotation") {
+            navigate(
+                `/dashboard/add-quotation/${lead.id}`
+            );
+            return;
+        }
+
         if (action === "delete") {
         await handleDeleteLead(lead);
         return;
@@ -202,7 +214,8 @@ function FutureClients(){
             {/* <ModuleStats stats={Stats}/> */}
 
       {/*=============== Tables ================  */}
-            <ModuleTable columns={Columns} 
+            <ModuleTable 
+            columns={Columns} 
             data={LeadData} 
             onAction={handleAction}/>
 

@@ -1,4 +1,5 @@
 import { useState , useEffect} from "react";
+import { useNavigate } from "react-router";
 
 import ModuleHeader from "./../../../Components/ModulePageHeader/ModulePageHeader.jsx";
 import ModuleStats from "./../../../Components/LeadStats/LeadStats.jsx";
@@ -21,7 +22,8 @@ function Visit(){
     const [LeadData, setLeadData] = useState([]);
     const [selectedLead, setSelectedLead] = useState(null);
     const [activeAction, setActiveAction] = useState(null);
-
+     
+    const navigate = useNavigate();
      
       const fetchVisitLeads = () => {
 
@@ -115,6 +117,14 @@ function Visit(){
 
         // console.log("Action:", action);
         // console.log("Selected Lead:", lead);
+
+        if (action === "quotation") {
+
+            navigate(
+                `/dashboard/add-quotation/${lead.id}`
+            );
+            return;
+        }
 
         if (action === "delete") {
         await handleDeleteLead(lead);
@@ -227,7 +237,8 @@ function Visit(){
             /> */}
 
             {/* ================= TABLE ================= */}
-            <ModuleTable columns={Columns} 
+            <ModuleTable 
+            columns={Columns} 
             data={LeadData} 
             onAction={handleAction}/>
 

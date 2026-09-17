@@ -121,6 +121,15 @@ function ScheduleClient(){
 
         // console.log("Action:", action);
         // console.log("Selected Lead:", lead);
+
+        if (action === "quotation") {
+
+            navigate(
+                `/dashboard/add-quotation/${lead.id}`
+            );
+            return;
+        }
+
         if (action === "delete") {
         await handleDeleteLead(lead);
         return;

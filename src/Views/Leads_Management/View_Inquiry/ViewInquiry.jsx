@@ -28,56 +28,53 @@ function ViewInquiry() {
 
     // Fetch All Leads from API
 
-    // const fetchLeads = () => {
-    //     fetch(`${API_BASE_URL}/leads/status/NEW`)
-    //     .then((responce) => {
-    //         if(!responce.ok){
-    //             throw new Error("Failed to Fetch Leads")
-    //         }
-    //         return responce.json();
-    //     })
-    //     .then((data) => {
-    //         setLeadData(data);
-    //     })
-    //     .catch((error) => {
-    //         window.alert("Fail to Fetch Leads",error);
-    //     })
-    // }
     const fetchLeads = () => {
+        fetch(`${API_BASE_URL}/leads/status/NEW`)
+        .then((responce) => {
+            if(!responce.ok){
+                throw new Error("Failed to Fetch Leads")
+            }
+            return responce.json();
+        })
+        .then((data) => {
+            setLeadData(data);
+        })
+        .catch((error) => {
+            window.alert("Fail to Fetch Leads",error);
+        })
+    }
+    // const fetchLeads = () => {
 
-        Promise.all([
-            fetch(`${API_BASE_URL}/leads/status/NEW`),
-            fetch(`${API_BASE_URL}/leads/status/QUOTATION`)
-        ])
-            .then(async ([newResponse, quotationResponse]) => {
+    //     Promise.all([
+    //         fetch(`${API_BASE_URL}/leads/status/NEW`),
+    //         fetch(`${API_BASE_URL}/leads/status/QUOTATION`)
+    //     ])
+    //         .then(async ([newResponse, quotationResponse]) => {
 
-                if (!newResponse.ok || !quotationResponse.ok) {
-                    throw new Error("Failed to Fetch Leads");
-                }
+    //             if (!newResponse.ok || !quotationResponse.ok) {
+    //                 throw new Error("Failed to Fetch Leads");
+    //             }
 
-                const newLeads = await newResponse.json();
-                const quotationLeads = await quotationResponse.json();
-
-                return [
-                    ...newLeads,
-                    ...quotationLeads
-                ];
-            })
-            .then((data) => {
-                setLeadData(data);
-            })
-            .catch((error) => {
-
-                console.error(
-                    "Fetch Leads Error:",
-                    error
-                );
-
-                window.alert(
-                    "Failed to Fetch Leads. Please try again."
-                );
-            });
-    };
+    //             const newLeads = await newResponse.json();
+    //             const quotationLeads = await quotationResponse.json();
+    //             return [
+    //                 ...newLeads,
+    //                 ...quotationLeads
+    //             ];
+    //         })
+    //         .then((data) => {
+    //             setLeadData(data);
+    //         })
+    //         .catch((error) => {
+    //             console.error(
+    //                 "Fetch Leads Error:",
+    //                 error
+    //             );
+    //             window.alert(
+    //                 "Failed to Fetch Leads. Please try again."
+    //             );
+    //         });
+    // };
 
     useEffect(() => {
         fetchLeads();
@@ -266,7 +263,6 @@ function ViewInquiry() {
                 columns={columns}
                 data={LeadData}
                 onAction={handleAction}
-                showQuotation={true}
             />
 
 

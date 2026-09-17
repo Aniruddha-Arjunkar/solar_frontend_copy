@@ -11,7 +11,6 @@ function ModuleTable({
     data,
     onAction,
     showAction = true,
-    showQuotation = false,
     showMakeClient = false
 }) {
 
@@ -195,7 +194,6 @@ function ModuleTable({
                                                 <TableAction
                                                     row={item}
                                                     onAction={onAction}
-                                                    showQuotation={showQuotation}
                                                     showMakeClient={showMakeClient}
                                                 />
                                             </div>
