@@ -33,7 +33,7 @@ function AddQuotation() {
         subject: "",
 
         pvPlantSize: "",
-        gstIncluded:true,
+        gstIncluded: true,
         systemType: "",
         powerGenerationMonth: "",
         powerGenerationYear: "",
@@ -49,6 +49,115 @@ function AddQuotation() {
 
         status: "DRAFT"
     });
+
+    // ================= AUTO CALCULATIONS =================
+
+    useEffect(() => {
+
+        const kw = Number(formData.pvPlantSize) || 0;
+        const totalCost = Number(formData.totalSystemCost) || 0;
+
+        // ================= SUMMARY CALCULATIONS =================
+
+        const monthlyGeneration = kw * 120;
+
+        const yearlyGeneration =
+            monthlyGeneration * 12;
+
+        const annualSaving =
+            yearlyGeneration * 13;
+
+        const investmentRecovery =
+            annualSaving > 0
+                ? totalCost / annualSaving
+                : 0;
+
+
+        // ================= GOVERNMENT SUBSIDY =================
+
+        let subsidy = 0;
+
+        if (kw > 0 && kw <= 2) {
+
+            subsidy = 68000;
+
+        } else if (kw > 2) {
+
+            subsidy = 78000;
+
+        }
+
+
+        // ================= COMMERCIAL CALCULATIONS =================
+
+        const supplyInstallation =
+            totalCost / 1.05;
+
+        const gstAmount =
+            supplyInstallation * 0.05;
+
+        const commercialTotal =
+            supplyInstallation + gstAmount;
+
+        const actualProjectCost =
+            commercialTotal - subsidy;
+
+
+        // ================= UPDATE FORM =================
+
+        setFormData((previousData) => ({
+            ...previousData,
+
+            powerGenerationMonth:
+                monthlyGeneration
+                    ? monthlyGeneration.toFixed(2)
+                    : "",
+
+            powerGenerationYear:
+                yearlyGeneration
+                    ? yearlyGeneration.toFixed(2)
+                    : "",
+
+            minAnnualSaving:
+                annualSaving
+                    ? annualSaving.toFixed(2)
+                    : "",
+
+            investmentRecoveryYears:
+                investmentRecovery
+                    ? investmentRecovery.toFixed(1)
+                    : "",
+
+            supplyInstallation:
+                supplyInstallation
+                    ? supplyInstallation.toFixed(2)
+                    : "",
+
+            gstAmount:
+                gstAmount
+                    ? gstAmount.toFixed(2)
+                    : "",
+
+            commercialTotal:
+                commercialTotal
+                    ? commercialTotal.toFixed(2)
+                    : "",
+
+            govtSubsidy:
+                subsidy
+                    ? subsidy.toFixed(2)
+                    : "",
+
+            actualProjectCost:
+                actualProjectCost
+                    ? actualProjectCost.toFixed(2)
+                    : ""
+        }));
+
+    }, [
+        formData.pvPlantSize,
+        formData.totalSystemCost
+    ]);
 
 
     // ================= COMPONENT ITEMS =================
@@ -219,7 +328,7 @@ function AddQuotation() {
 
         const quotationData = {
 
-            quotationNo: formData.quotationNo,
+            // quotationNo: formData.quotationNo,
             quotationDate: formData.quotationDate,
 
             clientName: formData.clientName,
@@ -440,8 +549,8 @@ function AddQuotation() {
                                 name="quotationNo"
                                 value={formData.quotationNo}
                                 onChange={handleChange}
-                                placeholder="QT-001"
-                                required
+                                placeholder="Auto Generated"
+                                readOnly
                             />
 
                         </div>
@@ -693,6 +802,7 @@ function AddQuotation() {
                                 name="powerGenerationMonth"
                                 value={formData.powerGenerationMonth}
                                 onChange={handleChange}
+                                readOnly
                             />
 
                         </div>
@@ -710,6 +820,7 @@ function AddQuotation() {
                                 name="powerGenerationYear"
                                 value={formData.powerGenerationYear}
                                 onChange={handleChange}
+                                readOnly
                             />
 
                         </div>
@@ -727,6 +838,7 @@ function AddQuotation() {
                                 name="minAnnualSaving"
                                 value={formData.minAnnualSaving}
                                 onChange={handleChange}
+                                readOnly
                             />
 
                         </div>
@@ -762,6 +874,7 @@ function AddQuotation() {
                                 name="investmentRecoveryYears"
                                 value={formData.investmentRecoveryYears}
                                 onChange={handleChange}
+                                readOnly
                             />
 
                         </div>
@@ -904,7 +1017,7 @@ function AddQuotation() {
                                                         index,
                                                         event
                                                     )
-                                                }/>
+                                                } />
 
                                         </td>
 
@@ -943,11 +1056,9 @@ function AddQuotation() {
                 <div className="add-quotationpage-section">
 
                     <div className="add-quotationpage-section-title">
-
                         <h2>
                             Commercial
                         </h2>
-
                     </div>
 
 
@@ -965,6 +1076,7 @@ function AddQuotation() {
                                 name="supplyInstallation"
                                 value={formData.supplyInstallation}
                                 onChange={handleChange}
+                                readOnly
                             />
 
                         </div>
@@ -972,9 +1084,7 @@ function AddQuotation() {
 
                         <div className="add-quotationpage-form-group">
 
-                            <label>
-                                Commercial Total (₹)
-                            </label>
+                            <label>Commercial Total (₹)</label>
 
                             <input
                                 type="number"
@@ -982,6 +1092,7 @@ function AddQuotation() {
                                 name="commercialTotal"
                                 value={formData.commercialTotal}
                                 onChange={handleChange}
+                                readOnly
                             />
 
                         </div>
@@ -999,6 +1110,7 @@ function AddQuotation() {
                                 name="govtSubsidy"
                                 value={formData.govtSubsidy}
                                 onChange={handleChange}
+                                readOnly
                             />
 
                         </div>
@@ -1016,6 +1128,7 @@ function AddQuotation() {
                                 name="gstAmount"
                                 value={formData.gstAmount}
                                 onChange={handleChange}
+                                readOnly
                             />
 
                         </div>
