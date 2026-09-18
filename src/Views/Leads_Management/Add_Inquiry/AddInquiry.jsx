@@ -364,7 +364,7 @@ function AddInquiry() {
                                     <MessageSquare size={18} />
                                     <textarea
                                         id="serviceRequirement"
-                                        rows="4"
+                                        rows="2"
                                         placeholder="Describe the customer's requirement..."
                                         value={formData.serviceRequirement}
                                         onChange={handleChange}

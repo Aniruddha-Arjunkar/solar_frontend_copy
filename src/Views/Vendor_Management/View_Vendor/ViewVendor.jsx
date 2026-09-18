@@ -37,10 +37,6 @@ function ViewVendor() {
     const [clientError, setClientError] = useState("");
 
 
-    // ============================================================
-    // TABLE COLUMNS
-    // ============================================================
-
     const Columns = [
 
         {
@@ -75,10 +71,7 @@ function ViewVendor() {
 
     ];
 
-
-    // ============================================================
     // FETCH VENDORS
-    // ============================================================
 
     const fetchVendors = async () => {
 
@@ -88,19 +81,11 @@ function ViewVendor() {
 
             setError("");
 
-
-            // ====================================================
             // GET VENDORS FROM BACKEND
-            // ====================================================
 
             const response = await fetch(
                 `${API_BASE_URL}/vendors`
             );
-
-
-            // ====================================================
-            // CHECK RESPONSE
-            // ====================================================
 
             if (!response.ok) {
 
@@ -111,9 +96,7 @@ function ViewVendor() {
             }
 
 
-            // ====================================================
             // CONVERT RESPONSE TO JSON
-            // ====================================================
 
             const data = await response.json();
 
@@ -123,13 +106,9 @@ function ViewVendor() {
                 data
             );
 
-
-            // ====================================================
             // STORE VENDORS
-            // ====================================================
 
             setVendorData(data);
-
 
         } catch (error) {
 
@@ -155,14 +134,9 @@ function ViewVendor() {
     };
 
 
-    // ============================================================
     // LOAD VENDORS WHEN PAGE OPENS
-    // ============================================================
-
     useEffect(() => {
-
         fetchVendors();
-
     }, []);
 
     // FETCH CLIENTS FOR SELECTED VENDOR
@@ -186,13 +160,12 @@ function ViewVendor() {
             }
 
             const data = await response.json();
-
+            
             console.log(
                 "Clients fetched for vendor:",
                 vendorId,
                 data
             );
-
 
             
             // STORE CLIENT DATA
@@ -212,11 +185,8 @@ function ViewVendor() {
                 "Unable to load clients for this vendor."
             );
 
-
         } finally {
-
             setClientLoading(false);
-
         }
 
     };
@@ -321,62 +291,49 @@ function ViewVendor() {
 
     // LOADING UI
 
-    if (loading) {
-        return (
-            <section className="view-vendor-page">
+    // if (loading) {
+    //     return (
+    //         <section className="view-vendor-page">
 
-                {/* ==================================================
-                    HEADER
-                ================================================== */}
+    //             {/* ==================================================
+    //                 HEADER
+    //             ================================================== */}
 
-                <VendorHeader
-                    currectPage="View Vendors"
-                    title="Vendor Management"
-                    description="View and manage all registered vendors."
-                    buttonType="add"
-                    icon={UsersRound}
-                />
+    //             <VendorHeader
+    //                 currectPage="View Vendors"
+    //                 title="Vendor Management"
+    //                 description="View and manage all registered vendors."
+    //                 buttonType="add"
+    //                 icon={UsersRound}
+    //             />
 
+    //             {/* ================== LOADING ========================== */}
 
-                {/* ==================================================
-                    LOADING
-                ================================================== */}
+    //             <div className="vendor-loading">
+    //                 <LoaderCircle
+    //                     size={30}
+    //                     className="vendor-loading-icon"
+    //                 />
+    //                 <span>
+    //                     Loading vendors...
+    //                 </span>
+    //             </div>
+    //         </section>
 
-                <div className="vendor-loading">
+    //     );
 
-                    <LoaderCircle
-                        size={30}
-                        className="vendor-loading-icon"
-                    />
-
-                    <span>
-                        Loading vendors...
-                    </span>
-
-                </div>
-
-
-            </section>
-
-        );
-
-    }
+    // }
 
 
-    // ============================================================
     // ERROR UI
-    // ============================================================
 
     if (error) {
 
         return (
-
             <section className="view-vendor-page">
 
 
-                {/* ==================================================
-                    HEADER
-                ================================================== */}
+                {/============ HEADER ============ */}
 
                 <VendorHeader
                     currectPage="View Vendors"
@@ -387,16 +344,11 @@ function ViewVendor() {
                 />
 
 
-                {/* ==================================================
-                    ERROR
-                ================================================== */}
+                {/* =================== ERROR ============ */}
 
                 <div className="vendor-error">
-
                     {error}
-
                 </div>
-
 
             </section>
 
@@ -405,18 +357,13 @@ function ViewVendor() {
     }
 
 
-    // ============================================================
-    // MAIN UI
-    // ============================================================
+    // Main UI
 
     return (
 
         <section className="view-vendor-page">
 
-
-            {/* ====================================================
-                HEADER
-            ==================================================== */}
+            {/* =========== HEADER ============ */}
 
             <VendorHeader
                 currectPage="View Vendors"
@@ -427,18 +374,14 @@ function ViewVendor() {
             />
 
 
-            {/* ====================================================
-                STATS
-            ==================================================== */}
+            {/* ========= STATS =========== */}
 
             {/* <VendorStats
                 stats={Stats}
             /> */}
 
 
-            {/* ====================================================
-                VENDOR TABLE
-            ==================================================== */}
+            {/* =================== VENDOR TABLE ================= */}
 
             <VendorTable
                 columns={Columns}
@@ -448,9 +391,7 @@ function ViewVendor() {
             />
 
 
-            {/* ====================================================
-                ADD CLIENT
-            ==================================================== */}
+            {/* ================= ADD CLIENT =========== */}
 
             {activeAction === "add_client" && (
 
@@ -463,9 +404,7 @@ function ViewVendor() {
             )}
 
 
-            {/* ====================================================
-                VIEW VENDOR DETAILS
-            ==================================================== */}
+            {/* ================= VIEW VENDOR DETAILS ================ */}
 
             {activeAction === "show_details" && (
 
@@ -478,15 +417,12 @@ function ViewVendor() {
             )}
 
 
-            {/* ====================================================
-                CLIENT LOADING
-            ==================================================== */}
+            {/* ================= CLIENT LOADING ============= */}
 
             {activeAction === "show_details" &&
                 clientLoading && (
 
                     <div className="vendor-client-loading">
-
                         <LoaderCircle
                             size={28}
                             className="vendor-loading-icon"
@@ -501,26 +437,16 @@ function ViewVendor() {
                 )}
 
 
-            {/* ====================================================
-                CLIENT ERROR
-            ==================================================== */}
+            {/* =========  CLIENT ERROR ================= */}
 
             {activeAction === "show_details" &&
                 clientError && (
 
                     <div className="vendor-client-error">
-
                         {clientError}
-
                     </div>
-
                 )}
-
         </section>
-
     );
-
 }
-
-
 export default ViewVendor;

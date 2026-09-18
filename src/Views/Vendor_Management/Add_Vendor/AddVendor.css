@@ -5,12 +5,16 @@
 
 /* ====== VENDOR FORM CARD ========================================= */
 .vendor-form-card {
-     width: 100%;
+     width: 80%;
      background: #ffffff;
      border: 1px solid #e6eaf2;
      border-radius: 12px;
      box-shadow: 0 5px 20px rgba(38, 54, 85, 0.06);
      overflow: hidden;
+     margin: auto;
+     box-shadow:
+        8px 0 30px rgba(15, 23, 42, 0.18),
+        inset -1px 0 rgba(255, 255, 255, 0.08);
 }
 
 /* ========= FORM CARD HEADER ========================================= */
@@ -20,24 +24,33 @@
      align-items: center;
      padding: 20px 24px;
      border-bottom: 1px solid #edf0f5;
+     background: linear-gradient(
+        135deg,
+            #3f518c 0%,
+            #435e9d 55%,
+            #287f91 100%
+    );
 }
 
 .vendor-form-card-header h2 {
      margin: 0;
-     color: #263968;
+     /* color: #263968; */
+     color: white;
      font-size: 22px;
      font-weight: 700;
 }
 
 .vendor-form-card-header p {
      margin: 5px 0 0;
-     color: #8790a5;
+     /* color: #8790a5; */
+     color: rgba(255, 255, 255, 0.92);
      font-size: 14px;
 }
 
 /* ============= REQUIRED TEXT ========================================= */
 .vendor-form-required-text {
-     color: #8b93a7;
+     /* color: #8b93a7; */
+     color: rgba(255, 255, 255, 0.92);
      font-size: 14px;
 }
 

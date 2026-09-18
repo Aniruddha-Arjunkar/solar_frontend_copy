@@ -14,16 +14,16 @@
 /* ========= FORM CARD ================= */
 
 .inquiry-form-card {
-    width: 100%;
+    width: 80%;
     background: #ffffff;
-
     border: 1px solid #e6eaf2;
-
     border-radius: 12px;
-
-    box-shadow: 0 5px 20px rgba(38, 54, 85, 0.06);
-
+    /* box-shadow: 0 5px 20px rgba(38, 54, 85, 0.06); */
+     box-shadow:
+        8px 0 30px rgba(15, 23, 42, 0.18),
+        inset -1px 0 rgba(255, 255, 255, 0.08);
     overflow: hidden;
+    margin: auto;
 }
 
 
@@ -35,12 +35,21 @@
     align-items: center;
     padding: 20px 24px;
     border-bottom: 1px solid #edf0f5;
+    background: linear-gradient(
+        135deg,
+            #3f518c 0%,
+            #435e9d 55%,
+            #287f91 100%
+    );
+    /* text-align: center; */
+
 }
 
 
 .form-card-header h2 {
     margin: 0;
-    color: #263968;
+    /* color: #263968; */
+    color: white;
     font-size: 22px;
     font-weight: 700;
 }
@@ -48,13 +57,15 @@
 
 .form-card-header p {
     margin: 5px 0 0;
-    color: #8790a5;
+    /* color: #8790a5; */
+    color: rgba(255, 255, 255, 0.92);
     font-size: 13px;
 }
 
 
 .form-required-text {
-    color: #8b93a7;
+    /* color: #8b93a7; */
+    color: rgba(255, 255, 255, 0.92);
     font-size: 14px;
 }
 
@@ -68,7 +79,7 @@
 /* ========== FORM =============== */
 
 .inquiry-form {
-    padding: 24px;
+    padding: 20px;
 }
 
 
@@ -244,7 +255,7 @@
 
 .form-footer {
     display: flex;
-    justify-content: flex-end;
+    justify-content:flex-end;
     align-items: center;
     gap: 10px;
     padding-top: 20px;

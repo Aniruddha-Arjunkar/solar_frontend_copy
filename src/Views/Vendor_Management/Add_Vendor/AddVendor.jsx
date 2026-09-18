@@ -511,41 +511,25 @@ function AddVendor() {
                                     <MessageSquare size={18} />
 
                                     <textarea
-
                                         id="remarks"
-
                                         name="remarks"
-
-                                        rows="4"
-
+                                        rows="2"
                                         placeholder="Enter any additional remarks about the vendor..."
-
                                         value={formData.remarks}
-
                                         onChange={handleChange}
-
                                     />
-
                                 </div>
-
                             </div>
-
-
                         </div>
-
                     </div>
 
 
-                    {/* ==================================================
-                        FORM FOOTER
-                    ================================================== */}
+                    {/* ============ FORM FOOTER ================ */}
 
                     <div className="vendor-form-footer">
 
 
-                        {/* ==================================================
-                            CANCEL BUTTON
-                        ================================================== */}
+                        {/* ================ CANCEL BUTTON ============ */}
 
                         <button
                             type="button"

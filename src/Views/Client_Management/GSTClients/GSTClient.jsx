@@ -219,30 +219,30 @@ function GSTClient() {
     // LOADING STATE
     // ====================================================
 
-    if (loading) {
+    // if (loading) {
 
-        return (
+    //     return (
 
-            <section className="gst-client-page">
+    //         <section className="gst-client-page">
 
-                <ClientHeader
-                    currectPage="GST Clients"
-                    title="GST Client Management"
-                    description="View and manage clients with GST information."
-                    buttonType="view"
-                    icon={FileText}
-                />
+    //             <ClientHeader
+    //                 currectPage="GST Clients"
+    //                 title="GST Client Management"
+    //                 description="View and manage clients with GST information."
+    //                 buttonType="view"
+    //                 icon={FileText}
+    //             />
 
-                <div className="gst-client-loading">
+    //             <div className="gst-client-loading">
 
-                    Loading GST clients...
+    //                 Loading GST clients...
 
-                </div>
+    //             </div>
 
-            </section>
+    //         </section>
 
-        );
-    }
+    //     );
+    // }
 
 
     // ====================================================

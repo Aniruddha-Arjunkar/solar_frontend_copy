@@ -25,14 +25,11 @@ function ModulePageHeader({
 
     return (
         <div className="module-page-header">
-            {/* =================================================
-                            LEFT SECTION
-            ================================================== */}
 
+            {/* =============== LEFT SECTION ======= */}
             <div className="module-page-header-left">
 
                 {/* ================= ICON ================= */}
-
                 <div className="module-page-header-icon">
                     {Icon && (
                         <Icon

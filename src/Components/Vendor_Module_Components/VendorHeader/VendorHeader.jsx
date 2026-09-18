@@ -22,7 +22,7 @@ function VendorHeader({
     const handleButtonClick = () => {
 
         if (buttonType === "add") {
-            navigate("/dashboard/add-vendor");
+            navigate("/dasboard/add-vendor");
         } else {
             navigate("/dashboard/view-vendor");
         }
@@ -34,69 +34,49 @@ function VendorHeader({
         <div className="vendor-page-header">
 
             {/* ================= LEFT ================= */}
-            <div className="vendor-page-heading">
+            <div className="vendor-page-header-left">
+                <div className="vendor-page-header-icon">
+                    {Icon && (
+                        <Icon size={35} strokeWidth={1.8} />
+                    )}
+                </div>
 
-                {/* <div className="vendor-currectPage-location">
+                <div className="vendor-page-heading">
+
+                    {/* <div className="vendor-currectPage-location">
                     Dashboard
                     <span>/</span>
                     {currectPage}
                 </div> */}
 
-
-                <h1>
-                    {
-                        Icon && (
-                            <Icon
-                                size={35}
-                                strokeWidth={1.8}
-                            />
-                        )
-                    }
-
-                    {title}
-                </h1>
-
-
-                <p>
-                    {description}
-                </p>
-
+                    <h1>{title}</h1>
+                    <p> {description} </p>
+                </div>
             </div>
 
 
             {/* ================= RIGHT ================= */}
             <div className="vendor-page-header-button">
 
-                {
-                    buttonType === "add" ? (
+                {buttonType === "add" ? (
 
-                        <button
-                            className="vendor-header-btn"
-                            onClick={handleButtonClick}
-                        >
+                    <button
+                        className="vendor-header-btn"
+                        onClick={handleButtonClick}>
+                        <Plus size={19} />
+                        Add Vendor
+                    </button>
 
-                            <Plus size={19} />
+                ) : (
 
-                            Add Vendor
-
-                        </button>
-
-                    ) : (
-
-                        <button
-                            className="vendor-header-btn"
-                            onClick={handleButtonClick}
-                        >
-
-                            <List size={19} />
-
-                            View Vendors
-
-                        </button>
-
-                    )
+                    <button
+                        className="vendor-header-btn"
+                        onClick={handleButtonClick}>
+                        <List size={19} />
+                        View Vendors
+                    </button>
+                )
                 }
-
             </div>
 
         </div>

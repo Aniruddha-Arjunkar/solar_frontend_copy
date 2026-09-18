@@ -76,9 +76,8 @@
     font-weight: 600;
     text-align: left;
     padding: 13px 15px;
-    border:1px solid #edf2f7;
+    border: 1px solid #e2e8f0;
     white-space: nowrap;
-
 }
 
 
@@ -93,7 +92,6 @@
     border:1px solid #edf2f7;
     white-space: nowrap;
     height: 50px;
-
 }
 
 
@@ -131,7 +129,7 @@
 
 
 /*============ RESPONSIVE ==================== */
-
+/* 
 @media (max-width: 800px) {
     .vendor-table-header {
         align-items: flex-start;
@@ -154,5 +152,258 @@
         font-size: 14px;
     }
 
+} */
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1024px) {
+
+    .vendor-table-header {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+
+    .vendor-table-header-right {
+        flex: 1;
+        justify-content: flex-end;
+    }
+
+
+    .vendor-table-search {
+        width: 240px;
+    }
+
+
+    .vendor-table-header h2 {
+        font-size: 23px;
+    }
+
+
+    .vendor-table-header p {
+        font-size: 14px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL TABLET
+===================================================== */
+
+@media (max-width: 767px) {
+
+    .vendor-table-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+
+    .vendor-table-header-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+
+    .vendor-table-search {
+        flex: 1;
+        width: auto;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .vendor-table-header {
+        padding: 16px;
+        gap: 14px;
+    }
+
+
+    .vendor-table-header h2 {
+        font-size: 21px;
+    }
+
+
+    .vendor-table-header p {
+        margin-top: 4px;
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+
+    .vendor-table-header-right {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+
+    .vendor-table-search {
+        width: 100%;
+        min-height: 40px;
+        box-sizing: border-box;
+    }
+
+
+    .vendor-record-count {
+        align-self: flex-start;
+        font-size: 13px;
+        padding: 6px 11px;
+    }
+
+}
+
+/* =====================================================
+   TABLE HEADER RIGHT
+===================================================== */
+
+.vendor-table-header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.vendor-table-search {
+    height: 40px;
+    width: 290px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 0 10px 0 12px;
+    box-sizing: border-box;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: #64748b;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.vendor-table-search:focus-within {
+    border-color: #20b7b5;
+
+    box-shadow:
+        0 0 0 3px rgba(32, 183, 181, 0.10);
+}
+
+
+.vendor-table-search svg {
+    flex-shrink: 0;
+}
+
+
+.vendor-table-search input {
+    width: 100%;
+    min-width: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #0f172a;
+
+    font-size: 13px;
+    font-family: inherit;
+}
+
+
+.vendor-table-search input::placeholder {
+    color: #94a3b8;
+}
+
+
+/* =====================================================
+   CLEAR SEARCH
+===================================================== */
+
+.vendor-table-clear-search {
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 6px;
+
+    background: #f1f5f9;
+    color: #64748b;
+
+    cursor: pointer;
+}
+
+
+.vendor-table-clear-search:hover {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+/* =====================================================
+   VENDOR NAME + AVATAR
+===================================================== */
+
+.vendor-table-user-cell {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+
+.vendor-table-avatar {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #e8fafa;
+    color: #159c9a;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+.vendor-table-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+
+.vendor-table-user-info strong {
+    color: #0f172a;
+    font-size: 15px;
+    font-weight: 700;
 }
 

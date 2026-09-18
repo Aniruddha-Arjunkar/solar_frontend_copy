@@ -1,11 +1,8 @@
 .dashboard_layout{
    width: 100%;
     height: 100vh;
-
     display: flex;
-
     overflow: hidden;
-
     background: #f7f9fc;
 }
 
@@ -23,25 +20,18 @@
 
 .dashboard_content{
      flex: 1;
-
     min-width: 0;
     height: 100vh;
-
     display: flex;
     flex-direction: column;
-
     overflow: hidden;
 }
 
 .dashboard_content > .topbar {
     width: 100%;
-
     height: 74px;
-
     flex-shrink: 0;
-
     position: relative;
-
     z-index: 1000;
 }
 

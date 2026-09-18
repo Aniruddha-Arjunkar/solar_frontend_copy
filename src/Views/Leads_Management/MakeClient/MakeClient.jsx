@@ -318,7 +318,7 @@ function MakeClient() {
                     formData.technicalName
             };
 
-            
+
             // CONVERT LEAD → CLIENT VIA VENDOR
             const response = await fetch(
                 `${API_BASE_URL}/clients/convert-from-lead/${leadId}/vendor/${vendorId}`,
@@ -351,7 +351,7 @@ function MakeClient() {
                 "Vendor Client Created:",
                 savedClient
             );
-          
+
             // SUCCESS
             window.alert(
                 "Client assigned to vendor successfully."
@@ -378,14 +378,14 @@ function MakeClient() {
         }
     };
 
-  
+
     //=============== SAVE CLIENT ======================
 
     const handleSaveClient = async (event) => {
 
         event.preventDefault();
 
-        
+
         // BASIC VALIDATION
         if (!formData.totalAmount) {
             window.alert(
@@ -563,14 +563,61 @@ function MakeClient() {
         <section className="make-client">
 
             {/*========== PAGE HEADER ============*/}
+            <div className="module-page-header">
 
-            <div className="make-client-header">
+                {/* =============== LEFT SECTION =============== */}
 
-                <div className="make-client-heading">
-                    <p>
+                <div className="module-page-header-left">
+
+                    {/* ================= ICON ================= */}
+
+                    <div className="module-page-header-icon">
+                        <UserRoundPlus
+                            size={26}
+                            strokeWidth={1.8}
+                        />
+                    </div>
+
+
+                    {/* ================= HEADING ================= */}
+
+                    <div className="module-page-heading">
+                        <h1>Make Client</h1>
+                        <p>
+                            Complete customer information
+                            and convert the scheduled lead
+                            into a client.
+                        </p>
+                    </div>
+                </div>
+
+
+                {/* ================= RIGHT SECTION ================= */}
+
+                <div className="module-page-header-button">
+
+                    <button
+                        type="button"
+                        className="module-header-btn"
+                        onClick={() =>
+                            navigate(-1)
+                        }
+                    >
+                        <ArrowLeft size={19} />
+                        Back
+                    </button>
+
+                </div>
+
+            </div>
+
+            {/* <div className="make-client-header">
+
+                <div className="make-client-heading"> */}
+            {/* <p>
                         Dashboard / Schedule / Make Client
-                    </p>
-                    <h1>
+                    </p> */}
+            {/* <h1>
                         <UserRoundPlus size={40} />
                         Make Client
                     </h1>
@@ -579,9 +626,9 @@ function MakeClient() {
                         and convert the scheduled lead
                         into a client.
                     </span>
-                </div>
+                </div> */}
 
-                <button
+            {/* <button
                     type="button"
                     className="make-client-back-btn"
                     onClick={() =>
@@ -590,7 +637,7 @@ function MakeClient() {
                     <ArrowLeft size={18} />
                     Back
                 </button>
-            </div>
+            </div> */}
 
 
             {/*====== FORM ===========*/}
@@ -664,7 +711,7 @@ function MakeClient() {
                             <textarea
                                 value={lead.message || ""}
                                 readOnly
-                                rows="3"
+                                rows="2"
                             />
                         </div>
                     </div>
@@ -981,10 +1028,7 @@ function MakeClient() {
 
                         <div className="make-client-vendor-section">
 
-                            <h3>
-                                Available Vendors
-                            </h3>
-
+                            <h3>Available Vendors</h3>
 
                             {vendorLoading ? (
 

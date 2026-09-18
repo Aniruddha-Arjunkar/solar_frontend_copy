@@ -368,38 +368,38 @@ function PendingWork() {
     // LOADING
     // ============================================================
 
-    if (loading) {
+    // if (loading) {
 
-        return (
+    //     return (
 
-            <section className="pending-work-page">
+    //         <section className="pending-work-page">
 
-                <ClientHeader
-                    currectPage="Pending Work"
-                    title="Pending Client Work"
-                    description="Track and manage pending work for clients."
-                    buttonType="view"
-                    icon={Clock}
-                />
+    //             <ClientHeader
+    //                 currectPage="Pending Work"
+    //                 title="Pending Client Work"
+    //                 description="Track and manage pending work for clients."
+    //                 buttonType="view"
+    //                 icon={Clock}
+    //             />
 
-                <div className="pending-work-loading">
+    //             <div className="pending-work-loading">
 
-                    <LoaderCircle
-                        size={30}
-                        className="pending-work-loader"
-                    />
+    //                 <LoaderCircle
+    //                     size={30}
+    //                     className="pending-work-loader"
+    //                 />
 
-                    <span>
-                        Loading pending work...
-                    </span>
+    //                 <span>
+    //                     Loading pending work...
+    //                 </span>
 
-                </div>
+    //             </div>
 
-            </section>
+    //         </section>
 
-        );
+    //     );
 
-    }
+    // }
 
 
     // ============================================================

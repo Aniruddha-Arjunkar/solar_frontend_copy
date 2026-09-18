@@ -34,9 +34,7 @@ function ViewClient() {
     const fetchClients = async () => {
 
         try {
-
             setLoading(true);
-
             const response = await fetch(
                 `${API_BASE_URL}/clients/non-gst`
             );
@@ -141,23 +139,16 @@ function ViewClient() {
     const tableData = clientData.map((client) => ({
 
         id: client.id,
-
         name: client.custName || "-",
-
         contact: client.custPhone || "-",
-
         email: client.custEmail || "-",
-
         address: client.custAddress || "-",
-
         service: client.service || "-",
-
         amount:
             client.totalAmount !== null &&
             client.totalAmount !== undefined
                 ? `₹${Number(client.totalAmount).toLocaleString("en-IN")}`
                 : "₹0",
-
         addedBy:
             client.addedBy === "ADMIN"
                 ? "Admin"
@@ -222,13 +213,13 @@ function ViewClient() {
 
             {/* ================= CLIENT TABLE ================= */}
 
-            {loading ? (
+            {/* {loading ? (
 
                 <div className="client-loading">
                     Loading clients...
                 </div>
 
-            ) : (
+            ) : ( */}
 
                 <ViewClientTable
                     columns={Columns}
@@ -238,7 +229,7 @@ function ViewClient() {
                     title="All Clients"
                     description="View and manage all registered clients."
                 />
-            )}
+             {/* )} */}
 
         {/* =============VIEW CLIENT DETAILS  =========== */}
 

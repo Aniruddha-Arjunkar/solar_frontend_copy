@@ -347,7 +347,7 @@ const handleSubmit = async (e) => {
                                 TOTAL AMOUNT
                             ================================================= */}
 
-                            <div className="client-form-group">
+                            {/* <div className="client-form-group">
 
                                 <label htmlFor="totalAmount">
 
@@ -375,7 +375,7 @@ const handleSubmit = async (e) => {
 
                                 </div>
 
-                            </div>
+                            </div> */}
 
 
                             {/* =================================================
