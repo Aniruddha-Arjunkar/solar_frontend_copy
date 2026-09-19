@@ -157,7 +157,7 @@
     border-radius: 7px;
     background: #ffffff;
     color: #334155;
-    font-family: inherit;
+    /* font-family: inherit; */
     font-size: 13px;
     outline: none;
     transition:
@@ -373,7 +373,7 @@
 
     color: #ffffff;
 
-    font-family: inherit;
+    /* font-family: inherit; */
 
     font-size: 13px;
 
@@ -423,7 +423,7 @@
 
     color: #ffffff;
 
-    font-family: inherit;
+    /* font-family: inherit; */
 
     font-size: 13px;
 

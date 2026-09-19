@@ -298,7 +298,7 @@
     background: transparent;
     color: #0f172a;
     font-size: 13px;
-    font-family: inherit;
+    /* font-family: inherit; */
 }
 
 
@@ -990,17 +990,12 @@
 
 .accounts-user-management-form-input input {
     width: 100%;
-
     border: none;
     outline: none;
-
     background: transparent;
-
     color: #0f172a;
-
     font-size: 14px;
-
-    font-family: inherit;
+    /* font-family: inherit; */
 }
 
 

@@ -140,7 +140,7 @@
 
     padding: 11px 15px;
 
-    font-family: inherit;
+    /* font-family: inherit; */
     font-size: 14px;
     font-weight: 600;
 
@@ -574,7 +574,7 @@
 
     padding: 10px 15px;
 
-    font-family: inherit;
+    mily: inherit;
     font-size: 14px;
     font-weight: 600;
 
@@ -1175,7 +1175,7 @@
     background: #64748b;
     color: #ffffff;
 
-    font-family: inherit;
+    /* font-family: inherit; */
     font-size: 14px;
     font-weight: 600;
 

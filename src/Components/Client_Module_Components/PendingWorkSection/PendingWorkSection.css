@@ -322,7 +322,7 @@
     border: 1px solid #cbd5e1;
     border-radius: 6px;
     outline: none;
-    font-family: inherit;
+    /* font-family: inherit; */
     font-size: 15px;
 }
 

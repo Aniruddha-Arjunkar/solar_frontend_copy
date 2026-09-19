@@ -268,10 +268,8 @@
 
     border: none;
     outline: none;
-
     background: transparent;
-
-    font-family: inherit;
+    /* font-family: inherit; */
     font-size: 14px;
 
     color: #273142;
@@ -337,7 +335,7 @@
 
     color: #566174;
 
-    font-family: inherit;
+    /* font-family: inherit; */
     font-size: 14px;
     font-weight: 600;
 
@@ -386,7 +384,7 @@
 
     color: #ffffff;
 
-    font-family: inherit;
+    /* font-family: inherit; */
     font-size: 14px;
     font-weight: 600;
 

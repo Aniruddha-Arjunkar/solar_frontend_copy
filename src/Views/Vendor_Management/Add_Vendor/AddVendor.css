@@ -146,7 +146,7 @@
      outline: none;
      background: transparent;
      color: #26344f;
-     font-family: inherit;
+     /* font-family: inherit; */
      font-size: 18px;
 }
 
@@ -183,7 +183,7 @@
      resize: vertical;
      background: transparent;
      color: #26344f;
-     font-family: inherit;
+     /* font-family: inherit; */
      font-size: 17px;
 }
 
@@ -216,7 +216,7 @@
      height: 40px;
      padding: 0 17px;
      border-radius: 7px;
-     font-family: inherit;
+     /* font-family: inherit; */
      font-size: 18px;
      font-weight: 600;
      cursor: pointer;

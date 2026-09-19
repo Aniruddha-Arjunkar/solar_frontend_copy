@@ -330,7 +330,7 @@
     background: transparent;
     color: #30353c;
     font-size: 14px;
-    font-family: inherit;
+    /* font-family: inherit; */
 }
 
 .accounts-add-payment-input-wrapper input::placeholder {

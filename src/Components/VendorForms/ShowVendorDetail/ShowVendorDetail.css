@@ -461,7 +461,7 @@
     border-radius: 7px;
     background: #ffffff;
     color: #475569;
-    font-family: inherit;
+    /* font-family: inherit; */
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;

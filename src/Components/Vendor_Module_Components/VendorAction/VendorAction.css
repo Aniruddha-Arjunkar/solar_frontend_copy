@@ -24,7 +24,7 @@
     border-radius: 8px;
     background: #1677f0;
     color: white;
-    font-family: inherit;
+    /* font-family: inherit; */
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
@@ -106,7 +106,7 @@
 
     color: #334155;
 
-    font-family: inherit;
+    /* font-family: inherit; */
 
     font-size: 16px;
 

@@ -198,7 +198,7 @@
     border: 1px solid #dbe3ee;
     border-radius: 7px;
     padding: 11px 12px;
-    font-family: inherit;
+    /* font-family: inherit; */
     font-size: 14px;
     color: #1e293b;
     outline: none;

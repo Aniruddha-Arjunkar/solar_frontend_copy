@@ -262,7 +262,7 @@
     border: none;
     outline: none;
     resize: vertical;
-    font-family: inherit;
+    /* font-family: inherit; */
     font-size: 14px;
     color: #202938;
 }
