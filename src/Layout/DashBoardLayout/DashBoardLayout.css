@@ -9,11 +9,8 @@
 /* .dashboard_layout > .sidebar {
     width: 250px;
     height: 100vh;
-
     flex-shrink: 0;
-
     position: relative;
-
     overflow-y: auto;
     overflow-x: visible;
 } */
@@ -36,17 +33,13 @@
 }
 
 .dashboard_main{
-  flex: 1;
-  
-  padding: 24px 24px 40px;
-  color: #26345f;
-
+    flex: 1;
+    padding: 24px 24px 40px;
+    color: #26345f;
     min-width: 0;
     min-height: 0;
-
     overflow-y: auto;
     overflow-x: hidden;
-
     box-sizing: border-box;
 }
 
@@ -57,7 +50,6 @@
 
 .dashboard_main {
     scrollbar-width: thin;
-
     scrollbar-color:
         rgba(63, 81, 140, 0.22)
         transparent;

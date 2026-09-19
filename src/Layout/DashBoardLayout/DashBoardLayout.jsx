@@ -19,5 +19,4 @@ function DashBoardLayout(){
         </>
     )
 }
-
 export default DashBoardLayout;
