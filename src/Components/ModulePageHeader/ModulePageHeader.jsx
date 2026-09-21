@@ -22,7 +22,6 @@ function ModulePageHeader({
         }
     };
 
-
     return (
         <div className="module-page-header">
 

@@ -11,7 +11,7 @@ import "./ClientHeader.css";
 
 
 function ClientHeader({ currectPage, title, description, buttonType
-    , icon: Icon}) {
+    , icon: Icon }) {
 
     const navigate = useNavigate();
 
@@ -79,53 +79,106 @@ function ClientHeader({ currectPage, title, description, buttonType
                 return null;
         }
     };
-
     return (
 
         <div className="client-page-header">
 
-            {/* =========================================
-                LEFT SECTION
-            ========================================= */}
-            <div className="client-page-heading">
+            {/* =============== LEFT SECTION =============== */}
 
-                {/* ===== BREADCRUMB ===== */}
-                {/* <div className="client-current-page-location">
-                    Dashboard
-                    <span>
-                        /
-                    </span>
-                    {currectPage}
-                </div> */}
+            <div className="client-page-header-left">
 
-                {/* ===== TITLE ===== */}
-                <h1>
+                {/* ================= ICON ================= */}
+
+                <div className="client-page-header-icon">
+
                     {Icon && (
                         <Icon
-                            size={35}
-                            strokeWidth={1.8}/>
+                            size={26}
+                            strokeWidth={1.8}
+                        />
                     )}
-                    {title}
-                </h1>
 
-                {/* ===== DESCRIPTION ===== */}
-                <p>
-                    {description}
-                </p>
+                </div>
+
+
+                {/* ================= HEADING ================= */}
+
+                <div className="client-page-heading">
+
+                    <h1>
+                        {title}
+                    </h1>
+
+                    <p>
+                        {description}
+                    </p>
+
+                </div>
+
             </div>
 
-            {/* ========== RIGHT BUTTON  ========== */}
+
+            {/* =============== RIGHT SECTION =============== */}
+
             <div className="client-page-header-button">
+
                 {buttonType && (
                     <button
                         type="button"
                         className="client-header-btn"
-                        onClick={handleButtonClick}>
+                        onClick={handleButtonClick}
+                    >
                         {getButtonContent()}
                     </button>
                 )}
+
             </div>
+
         </div>
+        // <div className="client-page-header">
+
+        //     {/* =========================================
+        //         LEFT SECTION
+        //     ========================================= */}
+        //     <div className="client-page-heading">
+
+        //         {/* ===== BREADCRUMB ===== */}
+        //         {/* <div className="client-current-page-location">
+        //             Dashboard
+        //             <span>
+        //                 /
+        //             </span>
+        //             {currectPage}
+        //         </div> */}
+
+        //         {/* ===== TITLE ===== */}
+        //         <h1>
+        //             {Icon && (
+        //                 <Icon
+        //                     size={35}
+        //                     strokeWidth={1.8}/>
+        //             )}
+        //             {title}
+        //         </h1>
+
+        //         {/* ===== DESCRIPTION ===== */}
+        //         <p>
+        //             {description}
+        //         </p>
+        //     </div>
+
+        //     {/* ========== RIGHT BUTTON  ========== */}
+        //     <div className="client-page-header-button">
+        //         {buttonType && (
+        //             <button
+        //                 type="button"
+        //                 className="client-header-btn"
+        //                 onClick={handleButtonClick}>
+        //                 {getButtonContent()}
+        //             </button>
+        //         )}
+        //     </div>
+        // </div>
     );
 }
 export default ClientHeader;

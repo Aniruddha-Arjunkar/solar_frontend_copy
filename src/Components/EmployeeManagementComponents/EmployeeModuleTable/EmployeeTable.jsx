@@ -15,17 +15,9 @@ function EmployeeTable({
     showAction = true
 }) {
 
-    // ============================================================
-    // SEARCH STATE
-    // ============================================================
-
     const [searchTerm, setSearchTerm] = useState("");
 
-
-    // ============================================================
     // FILTER EMPLOYEES
-    // ============================================================
-
     const filteredEmployees = useMemo(() => {
 
         const search = searchTerm.trim().toLowerCase();
@@ -58,29 +50,19 @@ function EmployeeTable({
 
         <div className="employee-table-section">
 
-
-            {/* ====================================================
-                TABLE HEADER
-            ==================================================== */}
-
+            {/* ==========  TABLE HEADER ============ */}
             <div className="employee-table-header">
-
                 <div className="employee-table-heading">
-
                     <h2>
                         All Employees
                     </h2>
-
                     <p>
                         Manage employee information and details.
                     </p>
-
                 </div>
 
 
-                {/* ====================================================
-                    TABLE CONTROLS
-                ==================================================== */}
+                {/* =============== TABLE CONTROLS ============ */}
 
                 <div className="employee-table-controls">
 
@@ -109,22 +91,15 @@ function EmployeeTable({
                     {/* ================= RECORD COUNT ================= */}
 
                     <span className="employee-record-count">
-
                         {filteredEmployees.length} Records
-
                     </span>
-
                 </div>
-
             </div>
 
 
-            {/* ====================================================
-                TABLE WRAPPER
-            ==================================================== */}
+            {/* =================== TABLE WRAPPER ============== */}
 
             <div className="employee-table-wrapper">
-
 
                 <table className="employee-data-table">
 
@@ -142,34 +117,23 @@ function EmployeeTable({
                                 <th
                                     key={column.key}
                                 >
-
                                     {column.label}
-
                                 </th>
-
                             ))}
 
-
                             {showAction && (
-
                                 <th>
                                     Action
                                 </th>
-
                             )}
 
                         </tr>
-
                     </thead>
 
 
-                    {/* ==================================================
-                        TABLE BODY
-                    ================================================== */}
+                    {/* ================= TABLE BODY =============== */}
 
                     <tbody>
-
-
                         {filteredEmployees.length > 0 ? (
 
                             filteredEmployees.map((employee) => (
@@ -179,61 +143,42 @@ function EmployeeTable({
                                 >
 
 
-                                    {/* ==================================================
-                                        TABLE COLUMNS
-                                    ================================================== */}
+                                    {/* ============== TABLE COLUMNS ================== */}
 
                                     {columns.map((column) => (
-
                                         <td
                                             key={column.key}
                                         >
 
 
-                                            {/* ==========================================
-                                                EMPLOYEE ID
-                                            ========================================== */}
+                                            {/* ============ EMPLOYEE ID ================= */}
 
                                             {column.key === "id" ? (
-
                                                 employee.id
-
                                             ) : column.key === "name" ? (
 
 
-                                                /* ==========================================
-                                                    EMPLOYEE NAME
-                                                ========================================== */
+                                                /* =============== EMPLOYEE NAME ======= */
 
                                                 <div className="employee-name-cell">
-
                                                     <strong>
                                                         {employee.name}
                                                     </strong>
-
                                                 </div>
 
 
                                             ) : column.key === "phone" ? (
 
 
-                                                /* ==========================================
-                                                    PHONE
-                                                ========================================== */
+                                                /* ============ PHONE =================== */
 
                                                 <span className="employee-phone">
-
                                                     {employee.phone || "N/A"}
-
                                                 </span>
-
-
                                             ) : column.key === "designation" ? (
 
 
-                                                /* ==========================================
-                                                    DESIGNATION
-                                                ========================================== */
+                                                /* ================= DESIGNATION ============ */
 
                                                 <span
                                                     className={
@@ -242,18 +187,12 @@ function EmployeeTable({
                                                             : "employee-na"
                                                     }
                                                 >
-
                                                     {employee.designation || "N/A"}
-
                                                 </span>
-
 
                                             ) : column.key === "department" ? (
 
-
-                                                /* ==========================================
-                                                    DEPARTMENT
-                                                ========================================== */
+                                                /* ========== DEPARTMENT ============ */
 
                                                 <span
                                                     className={
@@ -262,62 +201,33 @@ function EmployeeTable({
                                                             : "employee-na"
                                                     }
                                                 >
-
                                                     {employee.department || "N/A"}
-
                                                 </span>
-
-
                                             ) : (
-
-
-                                                /* ==========================================
-                                                    DEFAULT COLUMN
-                                                ========================================== */
-
+                                                /* ======== DEFAULT COLUMN ============= */
                                                 employee[column.key] || "N/A"
-
                                             )}
-
                                         </td>
-
                                     ))}
 
-
-                                    {/* ==================================================
-                                        ACTION
-                                    ================================================== */}
+                                    {/* ==============  ACTION ===================== */}
 
                                     {showAction && (
-
                                         <td>
-
                                             <div className="employee-table-action-btn">
-
                                                 <EmployeeAction
                                                     row={employee}
                                                     onAction={onAction}
                                                 />
-
                                             </div>
-
                                         </td>
-
                                     )}
-
                                 </tr>
-
                             ))
-
                         ) : (
-
-
-                            /* ==================================================
-                                NO DATA
-                            ================================================== */
+                            /* =============== NO DATA ================ */
 
                             <tr>
-
                                 <td
                                     colSpan={
                                         showAction
@@ -331,24 +241,13 @@ function EmployeeTable({
                                         ? "No employees found matching your search."
                                         : "No employees found."
                                     }
-
                                 </td>
-
                             </tr>
-
                         )}
-
                     </tbody>
-
                 </table>
-
             </div>
-
         </div>
-
     );
-
 }
-
-
 export default EmployeeTable;

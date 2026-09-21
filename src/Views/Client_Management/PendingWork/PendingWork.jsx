@@ -24,24 +24,12 @@ import "./PendingWork.css";
 
 function PendingWork() {
 
-    // ============================================================
-    // STATE
-    // ============================================================
-
     const [pendingWorkData, setPendingWorkData] = useState([]);
-
     const [loading, setLoading] = useState(true);
-
     const [error, setError] = useState("");
-
     const [selectedWork, setSelectedWork] = useState(null);
-
     const [activeAction, setActiveAction] = useState(null);
 
-
-    // ============================================================
-    // TABLE COLUMNS
-    // ============================================================
 
     const Columns = [
 
@@ -85,9 +73,7 @@ function PendingWork() {
     const fetchPendingWork = async () => {
 
         try {
-
             setLoading(true);
-
             setError("");
 
             const response = await fetch(
@@ -96,16 +82,12 @@ function PendingWork() {
 
 
             if (!response.ok) {
-
                 throw new Error(
                     "Failed to fetch pending work"
                 );
-
             }
 
-
             const data = await response.json();
-
 
             /*
              * Backend returns PendingWorkResponse:
@@ -137,17 +119,9 @@ function PendingWork() {
             );
 
         } finally {
-
             setLoading(false);
-
         }
-
     };
-
-
-    // ============================================================
-    // LOAD DATA
-    // ============================================================
 
     useEffect(() => {
         fetchPendingWork();
