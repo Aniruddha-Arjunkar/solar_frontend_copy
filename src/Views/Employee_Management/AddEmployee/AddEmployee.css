@@ -38,17 +38,12 @@
 ============================================================ */
 
 .employee-form-section-header {
-    min-height: 38px;
-
+    min-height: 50px;
     display: flex;
     align-items: center;
-
     gap: 8px;
-
     padding: 0 15px;
-
     color: #ffffff;
-
     font-size: 14px;
     font-weight: 600;
 }
@@ -93,9 +88,7 @@
 
 .employee-form-section-header h3 {
     margin: 0;
-
-    font-size: 14px;
-
+    font-size: 17px;
     font-weight: 600;
 }
 
@@ -298,13 +291,9 @@
 
 .employee-form-group input[type="file"] {
     height: auto;
-
     min-height: 35px;
-
     padding: 7px 9px;
-
     cursor: pointer;
-
     background: #f8fafc;
 }
 
@@ -348,39 +337,22 @@
 }
 
 
-/* ============================================================
-   SAVE BUTTON
-============================================================ */
+/* =================== SAVE BUTTON ============== */
 
 .employee-save-btn {
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 7px;
-
     min-width: 145px;
-
     border: none;
-
     border-radius: 6px;
-
     padding: 11px 18px;
-
     background: #2563eb;
-
     color: #ffffff;
-
-    /* font-family: inherit; */
-
     font-size: 13px;
-
     font-weight: 600;
-
     cursor: pointer;
-
     transition:
         background 0.2s ease,
         transform 0.2s ease,
@@ -390,9 +362,7 @@
 
 .employee-save-btn:hover {
     background: #1d4ed8;
-
     transform: translateY(-1px);
-
     box-shadow:
         0 4px 10px rgba(37, 99, 235, 0.20);
 }
@@ -404,33 +374,18 @@
 
 .employee-cancel-btn {
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 7px;
-
     min-width: 100px;
-
     border: none;
-
     border-radius: 6px;
-
     padding: 11px 18px;
-
     background: #64748b;
-
     color: #ffffff;
-
-    /* font-family: inherit; */
-
     font-size: 13px;
-
     font-weight: 600;
-
     cursor: pointer;
-
     transition:
         background 0.2s ease,
         transform 0.2s ease;
@@ -439,7 +394,6 @@
 
 .employee-cancel-btn:hover {
     background: #475569;
-
     transform: translateY(-1px);
 }
 

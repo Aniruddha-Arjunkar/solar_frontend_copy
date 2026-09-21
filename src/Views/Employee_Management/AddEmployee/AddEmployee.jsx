@@ -14,7 +14,8 @@ import {
     ShieldCheck,
     FileText,
     Save,
-    X
+    X,
+    ChevronDown
 } from "lucide-react";
 
 import API_BASE_URL from "./../../../config/api.js";
@@ -36,6 +37,9 @@ import "./AddEmployee.css";
 function AddEmployee() {
 
     const navigate = useNavigate();
+
+
+    const [openSection, setOpenSection] = useState("personal");
 
     const [sameAsCurrentAddress, setSameAsCurrentAddress] = useState(false);
     const [formData, setFormData] = useState({
@@ -113,19 +117,19 @@ function AddEmployee() {
         pfNo: "",
         esicNo: "",
     });
-     
-    // ============================================================
-// SYNC PERMANENT ADDRESS WITH CURRENT ADDRESS
-// ============================================================
 
-useEffect(() => {
-    if (sameAsCurrentAddress) {
-        setFormData((previousData) => ({
-            ...previousData,
-            permanentAddress: previousData.currentAddress
-        }));
-    }
-    }, [sameAsCurrentAddress,formData.currentAddress]);
+    // ============================================================
+    // SYNC PERMANENT ADDRESS WITH CURRENT ADDRESS
+    // ============================================================
+
+    useEffect(() => {
+        if (sameAsCurrentAddress) {
+            setFormData((previousData) => ({
+                ...previousData,
+                permanentAddress: previousData.currentAddress
+            }));
+        }
+    }, [sameAsCurrentAddress, formData.currentAddress]);
 
     // ============================================================
     // HANDLE INPUT CHANGE
@@ -173,243 +177,234 @@ useEffect(() => {
     };
 
 
-     // ============================================================
-// HANDLE FORM SUBMIT
-// ============================================================
+    // ============================================================
+    // HANDLE FORM SUBMIT
+    // ============================================================
 
-const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
 
-    e.preventDefault();
-
-
-    // ========================================================
-    // PREPARE EMPLOYEE DATA
-    // ========================================================
-
-    const employeeData = {
-
-        // ====================================================
-        // PERSONAL DETAILS
-        // ====================================================
-
-        title: formData.title,
-        name: formData.name,
-        phone: formData.phone,
-
-        dob:
-            formData.dob === ""
-                ? null
-                : formData.dob,
-
-        gender: formData.gender,
-        email: formData.email,
-        relationship: formData.relationship,
-        emergencyContact: formData.emergencyContact,
-        motherName: formData.motherName,
-        maritalStatus: formData.maritalStatus,
-
-        currentAddress: formData.currentAddress,
-        permanentAddress: formData.permanentAddress,
+        e.preventDefault();
 
 
-        // ====================================================
-        // EDUCATION DETAILS
-        // ====================================================
+        // ========================================================
+        // PREPARE EMPLOYEE DATA
+        // ========================================================
 
-        tenth: formData.tenth,
-        twelfth: formData.twelfth,
-        graduation: formData.graduation,
-        postGraduation: formData.postGraduation,
+        const employeeData = {
 
+            // ====================================================
+            // PERSONAL DETAILS
+            // ====================================================
 
-        // ====================================================
-        // EXPERIENCE DETAILS
-        // ====================================================
+            title: formData.title,
+            name: formData.name,
+            phone: formData.phone,
 
-        experienceType: formData.experienceType,
-        previousExperience: formData.previousExperience,
+            dob:
+                formData.dob === ""
+                    ? null
+                    : formData.dob,
 
-        workExperienceYears:
-            formData.workExperienceYears === ""
-                ? null
-                : Number(formData.workExperienceYears),
+            gender: formData.gender,
+            email: formData.email,
+            relationship: formData.relationship,
+            emergencyContact: formData.emergencyContact,
+            motherName: formData.motherName,
+            maritalStatus: formData.maritalStatus,
 
-        previousCompanyName: formData.previousCompanyName,
-        previousDesignation: formData.previousDesignation,
-
-        previousSalary:
-            formData.previousSalary === ""
-                ? null
-                : Number(formData.previousSalary),
-
-
-        // ====================================================
-        // EMPLOYEE DETAILS
-        // ====================================================
-
-        employeeType: formData.employeeType,
-        department: formData.department,
-
-        packageAmount:
-            formData.packageAmount === ""
-                ? null
-                : Number(formData.packageAmount),
-
-        joiningDate:
-            formData.joiningDate === ""
-                ? null
-                : formData.joiningDate,
-
-        designation: formData.designation,
+            currentAddress: formData.currentAddress,
+            permanentAddress: formData.permanentAddress,
 
 
-        // ====================================================
-        // BANK DETAILS
-        // ====================================================
+            // ====================================================
+            // EDUCATION DETAILS
+            // ====================================================
 
-        accountNo: formData.accountNo,
-        bankName: formData.bankName,
-        branchName: formData.branchName,
-        ifscCode: formData.ifscCode,
-
-
-        // ====================================================
-        // KYC DETAILS
-        // ====================================================
-
-        aadharNo: formData.aadharNo,
-        panNo: formData.panNo,
+            tenth: formData.tenth,
+            twelfth: formData.twelfth,
+            graduation: formData.graduation,
+            postGraduation: formData.postGraduation,
 
 
-        // ====================================================
-        // PROVIDENT FUND & ESIC
-        // ====================================================
+            // ====================================================
+            // EXPERIENCE DETAILS
+            // ====================================================
 
-        uanNo: formData.uanNo,
-        pfNo: formData.pfNo,
-        esicNo: formData.esicNo
+            experienceType: formData.experienceType,
+            previousExperience: formData.previousExperience,
 
-    };
+            workExperienceYears:
+                formData.workExperienceYears === ""
+                    ? null
+                    : Number(formData.workExperienceYears),
+
+            previousCompanyName: formData.previousCompanyName,
+            previousDesignation: formData.previousDesignation,
+
+            previousSalary:
+                formData.previousSalary === ""
+                    ? null
+                    : Number(formData.previousSalary),
 
 
-    // ========================================================
-    // CHECK DATA BEFORE SENDING
-    // ========================================================
+            // ====================================================
+            // EMPLOYEE DETAILS
+            // ====================================================
 
-    console.log(
-        "Employee Data Sending To Backend:",
-        employeeData
-    );
+            employeeType: formData.employeeType,
+            department: formData.department,
 
-    try {
+            packageAmount:
+                formData.packageAmount === ""
+                    ? null
+                    : Number(formData.packageAmount),
 
-        const response = await fetch(
-            `${API_BASE_URL}/employees`,
-            {
-                method: "POST",
+            joiningDate:
+                formData.joiningDate === ""
+                    ? null
+                    : formData.joiningDate,
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+            designation: formData.designation,
 
-                body: JSON.stringify(employeeData)
-            }
+
+            // ====================================================
+            // BANK DETAILS
+            // ====================================================
+
+            accountNo: formData.accountNo,
+            bankName: formData.bankName,
+            branchName: formData.branchName,
+            ifscCode: formData.ifscCode,
+
+
+            // ====================================================
+            // KYC DETAILS
+            // ====================================================
+
+            aadharNo: formData.aadharNo,
+            panNo: formData.panNo,
+
+
+            // ====================================================
+            // PROVIDENT FUND & ESIC
+            // ====================================================
+
+            uanNo: formData.uanNo,
+            pfNo: formData.pfNo,
+            esicNo: formData.esicNo
+
+        };
+
+
+        // ========================================================
+        // CHECK DATA BEFORE SENDING
+        // ========================================================
+
+        console.log(
+            "Employee Data Sending To Backend:",
+            employeeData
         );
 
+        try {
 
-        // ====================================================
-        // HANDLE BACKEND ERROR
-        // ====================================================
+            const response = await fetch(
+                `${API_BASE_URL}/employees`,
+                {
+                    method: "POST",
 
-        if (!response.ok) {
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
 
-            let errorMessage =
-                "Failed to create employee.";
+                    body: JSON.stringify(employeeData)
+                }
+            );
 
-            try {
 
-                const errorData =
-                    await response.json();
+            // ====================================================
+            // HANDLE BACKEND ERROR
+            // ====================================================
 
-                errorMessage =
-                    errorData.message ||
-                    errorData.error ||
-                    errorMessage;
+            if (!response.ok) {
 
-            } catch {
+                let errorMessage =
+                    "Failed to create employee.";
 
-                // Backend did not return JSON.
+                try {
+
+                    const errorData =
+                        await response.json();
+
+                    errorMessage =
+                        errorData.message ||
+                        errorData.error ||
+                        errorMessage;
+
+                } catch {
+
+                    // Backend did not return JSON.
+
+                }
+
+                throw new Error(errorMessage);
 
             }
 
-            throw new Error(errorMessage);
+
+            // ====================================================
+            // GET SAVED EMPLOYEE
+            // ====================================================
+
+            const savedEmployee =
+                await response.json();
+
+
+            console.log(
+                "Employee Created Successfully:",
+                savedEmployee
+            );
+
+
+            // ====================================================
+            // SUCCESS MESSAGE
+            // ====================================================
+
+            window.alert(
+                "Employee added successfully."
+            );
+
+
+            // ====================================================
+            // GO TO VIEW EMPLOYEE
+            // ====================================================
+
+            navigate(
+                "/dashboard/view-employee"
+            );
+
+        } catch (error) {
+
+            // ====================================================
+            // HANDLE API / NETWORK ERROR
+            // ====================================================
+
+            console.error(
+                "Error creating employee:",
+                error
+            );
+
+
+            window.alert(
+                error.message ||
+                "Unable to add employee. Please try again."
+            );
 
         }
 
-
-        // ====================================================
-        // GET SAVED EMPLOYEE
-        // ====================================================
-
-        const savedEmployee =
-            await response.json();
-
-
-        console.log(
-            "Employee Created Successfully:",
-            savedEmployee
-        );
-
-
-        // ====================================================
-        // SUCCESS MESSAGE
-        // ====================================================
-
-        window.alert(
-            "Employee added successfully."
-        );
-
-
-        // ====================================================
-        // GO TO VIEW EMPLOYEE
-        // ====================================================
-
-        navigate(
-            "/dashboard/view-employee"
-        );
-
-    } catch (error) {
-
-        // ====================================================
-        // HANDLE API / NETWORK ERROR
-        // ====================================================
-
-        console.error(
-            "Error creating employee:",
-            error
-        );
-
-
-        window.alert(
-            error.message ||
-            "Unable to add employee. Please try again."
-        );
-
-    }
-
-};
-
-    
-
-
-    // ============================================================
-    // CANCEL
-    // ============================================================
+    };
 
     const handleCancel = () => {
-
         navigate("/dashboard/view-employee");
-
     };
 
 
@@ -445,368 +440,384 @@ const handleSubmit = async (e) => {
                     PERSONAL DETAILS
                 ================================================== */}
 
-                <div className="employee-form-section">
+                {/* <div className="employee-form-section"> */}
+                <div
+                    className={`employee-form-section ${openSection === "personal" ? "open" : ""
+                        }`}>
 
 
-                    <div className="employee-form-section-header personal">
-
-                        <User size={18} />
-
+                    {/* <div className="employee-form-section-header personal"> */}
+                    <button
+                        type="button"
+                        className="employee-form-section-header personal"
+                        onClick={() => setOpenSection("personal")}
+                    >
+                        <User size={22} />
                         <h3>
                             Personal Details
                         </h3>
+                        <ChevronDown
+                            size={18}
+                            className={`employee-section-chevron ${openSection === "personal" ? "open" : ""
+                                }`}
+                        />
 
-                    </div>
+                    </button>
+                    <div
+                        className={`employee-form-section-content ${openSection === "personal" ? "open" : ""
+                            }`}
+                    >
 
-
-                    <div className="employee-form-grid">
-
-
-                        {/* TITLE */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Title
-                            </label>
-
-                            <select
-                                name="title"
-                                value={formData.title}
-                                onChange={handleChange}
-                            >
-
-                                <option value="Mr.">
-                                    Mr.
-                                </option>
-
-                                <option value="Mrs.">
-                                    Mrs.
-                                </option>
-
-                                <option value="Ms.">
-                                    Ms.
-                                </option>
-
-                                <option value="Dr.">
-                                    Dr.
-                                </option>
-
-                            </select>
-
-                        </div>
+                        {/* </div> */}
 
 
-                        {/* NAME */}
+                        <div className="employee-form-grid">
 
-                        <div className="employee-form-group">
+                            {/* TITLE */}
+                            <div className="employee-form-group">
 
-                            <label>
-                                Employee Name
-                            </label>
+                                <label>
+                                    Title
+                                </label>
 
-                            <div className="employee-input-with-icon">
+                                <select
+                                    name="title"
+                                    value={formData.title}
+                                    onChange={handleChange}
+                                >
 
-                                <User size={16} />
+                                    <option value="Mr.">
+                                        Mr.
+                                    </option>
+
+                                    <option value="Mrs.">
+                                        Mrs.
+                                    </option>
+
+                                    <option value="Ms.">
+                                        Ms.
+                                    </option>
+
+                                    <option value="Dr.">
+                                        Dr.
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            {/* NAME */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Employee Name
+                                </label>
+
+                                <div className="employee-input-with-icon">
+
+                                    <User size={16} />
+
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        placeholder="Employee Name"
+                                        required
+                                    />
+
+                                </div>
+
+                            </div>
+
+
+                            {/* PHONE */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Phone
+                                </label>
+
+                                <div className="employee-input-with-icon">
+
+                                    <Phone size={16} />
+
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        placeholder="Phone Number"
+                                    />
+
+                                </div>
+
+                            </div>
+
+
+                            {/* DOB */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Date of Birth
+                                </label>
+
+                                <div className="employee-input-with-icon">
+
+                                    <CalendarDays size={16} />
+
+                                    <input
+                                        type="date"
+                                        name="dob"
+                                        value={formData.dob}
+                                        onChange={handleChange}
+                                    />
+
+                                </div>
+
+                            </div>
+
+
+                            {/* GENDER */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Gender
+                                </label>
+
+                                <select
+                                    name="gender"
+                                    value={formData.gender}
+                                    onChange={handleChange}
+                                >
+
+                                    <option value="Male">
+                                        Male
+                                    </option>
+
+                                    <option value="Female">
+                                        Female
+                                    </option>
+
+                                    <option value="Other">
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            {/* EMAIL */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Email Address
+                                </label>
+
+                                <div className="employee-input-with-icon">
+
+                                    <Mail size={16} />
+
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        placeholder="Email Address"
+                                    />
+
+                                </div>
+
+                            </div>
+
+                            {/* Emergency Contact */}
+
+                            <div className="employee-form-group">
+                                <label>
+                                    Emergency Contact
+                                </label>
+                                <div className="employee-input-with-icon">
+                                    <Phone size={16} />
+                                    <input
+                                        type="tel"
+                                        name="emergencyContact"
+                                        value={formData.emergencyContact}
+                                        onChange={handleChange}
+                                        placeholder="Emergency Contact"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* RELATIONSHIP */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Relationship
+                                </label>
 
                                 <input
                                     type="text"
-                                    name="name"
-                                    value={formData.name}
+                                    name="relationship"
+                                    value={formData.relationship}
                                     onChange={handleChange}
-                                    placeholder="Employee Name"
-                                    required
+                                    placeholder="Relationship"
                                 />
-
                             </div>
 
-                        </div>
 
+                            {/* MOTHER NAME */}
 
-                        {/* PHONE */}
+                            <div className="employee-form-group">
 
-                        <div className="employee-form-group">
-
-                            <label>
-                                Phone
-                            </label>
-
-                            <div className="employee-input-with-icon">
-
-                                <Phone size={16} />
+                                <label>
+                                    Mother Name
+                                </label>
 
                                 <input
-                                    type="tel"
-                                    name="phone"
-                                    value={formData.phone}
+                                    type="text"
+                                    name="motherName"
+                                    value={formData.motherName}
                                     onChange={handleChange}
-                                    placeholder="Phone Number"
+                                    placeholder="Mother Name"
                                 />
 
                             </div>
 
-                        </div>
 
+                            {/* MARITAL STATUS */}
 
-                        {/* DOB */}
+                            <div className="employee-form-group">
 
-                        <div className="employee-form-group">
+                                <label>
+                                    Marital Status
+                                </label>
 
-                            <label>
-                                Date of Birth
-                            </label>
-
-                            <div className="employee-input-with-icon">
-
-                                <CalendarDays size={16} />
-
-                                <input
-                                    type="date"
-                                    name="dob"
-                                    value={formData.dob}
+                                <select
+                                    name="maritalStatus"
+                                    value={formData.maritalStatus}
                                     onChange={handleChange}
-                                />
+                                >
+
+                                    <option value="">
+                                        Select
+                                    </option>
+
+                                    <option value="Single">
+                                        Single
+                                    </option>
+
+                                    <option value="Married">
+                                        Married
+                                    </option>
+
+                                    <option value="Divorced">
+                                        Divorced
+                                    </option>
+
+                                    <option value="Widowed">
+                                        Widowed
+                                    </option>
+
+                                </select>
 
                             </div>
 
-                        </div>
 
+                            {/* CURRENT ADDRESS */}
 
-                        {/* GENDER */}
+                            <div className="employee-form-group employee-full-width">
 
-                        <div className="employee-form-group">
+                                <label>
+                                    Current Address
+                                </label>
 
-                            <label>
-                                Gender
-                            </label>
+                                <div className="employee-input-with-icon">
 
-                            <select
-                                name="gender"
-                                value={formData.gender}
-                                onChange={handleChange}
-                            >
+                                    <MapPin size={16} />
 
-                                <option value="Male">
-                                    Male
-                                </option>
+                                    <textarea
+                                        name="currentAddress"
+                                        value={formData.currentAddress}
+                                        onChange={handleChange}
+                                        placeholder="Current Address"
+                                        rows="2"
+                                    />
 
-                                <option value="Female">
-                                    Female
-                                </option>
-
-                                <option value="Other">
-                                    Other
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        {/* EMAIL */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Email Address
-                            </label>
-
-                            <div className="employee-input-with-icon">
-
-                                <Mail size={16} />
-
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    placeholder="Email Address"
-                                />
+                                </div>
 
                             </div>
 
-                        </div>
 
-                        {/* Emergency Contact */}
+                            {/* PERMANENT ADDRESS */}
 
-                        <div className="employee-form-group">
-                            <label>
-                                Emergency Contact
-                            </label>
-                            <div className="employee-input-with-icon">
-                                <Phone size={16} />
-                                <input
-                                    type="tel"
-                                    name="emergencyContact"
-                                    value={formData.emergencyContact}
-                                    onChange={handleChange}
-                                    placeholder="Emergency Contact"
-                                />
-                            </div>
-                        </div>
+                            <div className="employee-form-group employee-full-width">
 
-                        {/* RELATIONSHIP */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Relationship
-                            </label>
-
-                            <input
-                                type="text"
-                                name="relationship"
-                                value={formData.relationship}
-                                onChange={handleChange}
-                                placeholder="Relationship"
-                            />
-                        </div>
-
-
-                        {/* MOTHER NAME */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Mother Name
-                            </label>
-
-                            <input
-                                type="text"
-                                name="motherName"
-                                value={formData.motherName}
-                                onChange={handleChange}
-                                placeholder="Mother Name"
-                            />
-
-                        </div>
-
-
-                        {/* MARITAL STATUS */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Marital Status
-                            </label>
-
-                            <select
-                                name="maritalStatus"
-                                value={formData.maritalStatus}
-                                onChange={handleChange}
-                            >
-
-                                <option value="">
-                                    Select
-                                </option>
-
-                                <option value="Single">
-                                    Single
-                                </option>
-
-                                <option value="Married">
-                                    Married
-                                </option>
-
-                                <option value="Divorced">
-                                    Divorced
-                                </option>
-
-                                <option value="Widowed">
-                                    Widowed
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        {/* CURRENT ADDRESS */}
-
-                        <div className="employee-form-group employee-full-width">
-
-                            <label>
-                                Current Address
-                            </label>
-
-                            <div className="employee-input-with-icon">
-
-                                <MapPin size={16} />
-
-                                <textarea
-                                    name="currentAddress"
-                                    value={formData.currentAddress}
-                                    onChange={handleChange}
-                                    placeholder="Current Address"
-                                    rows="2"
-                                />
-
-                            </div>
-
-                        </div>
-
-
-                        {/* PERMANENT ADDRESS */}
-
-<div className="employee-form-group employee-full-width">
-
-    {/* ========================================================
+                                {/* ========================================================
         PERMANENT ADDRESS LABEL
     ======================================================== */}
 
-    <div className="employee-permanent-address-header">
+                                <div className="employee-permanent-address-header">
 
-        <label>
-            Permanent Address
-        </label>
+                                    <label>
+                                        Permanent Address
+                                    </label>
 
 
-        {/* ====================================================
+                                    {/* ====================================================
             SAME AS CURRENT ADDRESS CHECKBOX
         ==================================================== */}
 
-        <label className="employee-same-address-checkbox">
+                                    <label className="employee-same-address-checkbox">
 
-            <input
-                type="checkbox"
-                checked={sameAsCurrentAddress}
-                onChange={(e) =>
-                    setSameAsCurrentAddress(e.target.checked)
-                }
-            />
+                                        <input
+                                            type="checkbox"
+                                            checked={sameAsCurrentAddress}
+                                            onChange={(e) =>
+                                                setSameAsCurrentAddress(e.target.checked)
+                                            }
+                                        />
 
-            <span>
-                Same as Current Address
-            </span>
+                                        <span>
+                                            Same as Current Address
+                                        </span>
 
-        </label>
+                                    </label>
 
-    </div>
+                                </div>
 
 
-    {/* ========================================================
+                                {/* ========================================================
         PERMANENT ADDRESS INPUT
     ======================================================== */}
 
-    <div className="employee-input-with-icon">
+                                <div className="employee-input-with-icon">
 
-        <MapPin size={16} />
+                                    <MapPin size={16} />
 
-        <textarea
-            name="permanentAddress"
-            value={formData.permanentAddress}
-            onChange={handleChange}
-            placeholder="Permanent Address"
-            rows="2"
-            disabled={sameAsCurrentAddress}
-        />
+                                    <textarea
+                                        name="permanentAddress"
+                                        value={formData.permanentAddress}
+                                        onChange={handleChange}
+                                        placeholder="Permanent Address"
+                                        rows="2"
+                                        disabled={sameAsCurrentAddress}
+                                    />
 
-    </div>
+                                </div>
 
-</div>
+                            </div>
+
+                        </div>
 
                     </div>
-
                 </div>
 
 
@@ -814,238 +825,115 @@ const handleSubmit = async (e) => {
                     EDUCATION DETAILS
                 ================================================== */}
 
-                <div className="employee-form-section">
+                {/* <div className="employee-form-section">
 
                     <div className="employee-form-section-header education">
 
-                        <GraduationCap size={18} />
+                        <GraduationCap size={22} />
 
                         <h3>
                             Education Details
                         </h3>
 
-                    </div>
+                    </div> */}
+                <div
+                    className={`employee-form-section ${openSection === "education" ? "open" : ""
+                        }`}
+                >
 
+                    <button
+                        type="button"
+                        className="employee-form-section-header education"
+                        onClick={() => setOpenSection("education")}
+                    >
 
-                    <div className="employee-form-grid">
-
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                10th
-                            </label>
-
-                            <input
-                                type="text"
-                                name="tenth"
-                                value={formData.tenth}
-                                onChange={handleChange}
-                                placeholder="10th Qualification"
-                            />
-
-                        </div>
-
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                12th
-                            </label>
-
-                            <input
-                                type="text"
-                                name="twelfth"
-                                value={formData.twelfth}
-                                onChange={handleChange}
-                                placeholder="12th Qualification"
-                            />
-
-                        </div>
-
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Graduation
-                            </label>
-
-                            <input
-                                type="text"
-                                name="graduation"
-                                value={formData.graduation}
-                                onChange={handleChange}
-                                placeholder="Graduation"
-                            />
-
-                        </div>
-
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Post Graduation
-                            </label>
-
-                            <input
-                                type="text"
-                                name="postGraduation"
-                                value={formData.postGraduation}
-                                onChange={handleChange}
-                                placeholder="Post Graduation"
-                            />
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                {/* ==================================================
-                    EXPERIENCE DETAILS
-                ================================================== */}
-
-                <div className="employee-form-section">
-
-                    <div className="employee-form-section-header experience">
-
-                        <BriefcaseBusiness size={18} />
+                        <GraduationCap size={22} />
 
                         <h3>
-                            Experience Details
+                            Education Details
                         </h3>
 
-                    </div>
+                        <ChevronDown
+                            size={18}
+                            className={`employee-section-chevron ${openSection === "education" ? "open" : ""
+                                }`}
+                        />
+
+                    </button>
+
+                    <div
+                        className={`employee-form-section-content ${openSection === "education" ? "open" : ""
+                            }`}
+                    >
 
 
-                    <div className="employee-form-grid">
+
+                        <div className="employee-form-grid">
 
 
-                        {/* EXPERIENCE TYPE */}
+                            <div className="employee-form-group">
 
-                        <div className="employee-form-group">
-
-                            <label>
-                                Experience Type
-                            </label>
-
-                            <select
-                                name="experienceType"
-                                value={formData.experienceType}
-                                onChange={handleChange}
-                            >
-
-                                <option value="Fresher">
-                                    Fresher
-                                </option>
-
-                                <option value="Experienced">
-                                    Experienced
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        {/* PREVIOUS EXPERIENCE */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Previous Experience
-                            </label>
-
-                            <input
-                                type="text"
-                                name="previousExperience"
-                                value={formData.previousExperience}
-                                onChange={handleChange}
-                                placeholder="Previous Experience"
-                            />
-
-                        </div>
-
-
-                        {/* EXPERIENCE YEARS */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Work Experience Years
-                            </label>
-
-                            <input
-                                type="number"
-                                min="0"
-                                step="0.1"
-                                name="workExperienceYears"
-                                value={formData.workExperienceYears}
-                                onChange={handleChange}
-                                placeholder="Years"
-                            />
-
-                        </div>
-
-
-                        {/* PREVIOUS COMPANY */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Previous Company Name
-                            </label>
-
-                            <input
-                                type="text"
-                                name="previousCompanyName"
-                                value={formData.previousCompanyName}
-                                onChange={handleChange}
-                                placeholder="Previous Company"
-                            />
-
-                        </div>
-
-
-                        {/* PREVIOUS DESIGNATION */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Previous Designation
-                            </label>
-
-                            <input
-                                type="text"
-                                name="previousDesignation"
-                                value={formData.previousDesignation}
-                                onChange={handleChange}
-                                placeholder="Previous Designation"
-                            />
-
-                        </div>
-
-
-                        {/* PREVIOUS SALARY */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Previous Salary
-                            </label>
-
-                            <div className="employee-input-with-icon">
-
-                                <IndianRupee size={16} />
+                                <label>
+                                    10th
+                                </label>
 
                                 <input
-                                    type="number"
-                                    min="0"
-                                    name="previousSalary"
-                                    value={formData.previousSalary}
+                                    type="text"
+                                    name="tenth"
+                                    value={formData.tenth}
                                     onChange={handleChange}
-                                    placeholder="Previous Salary"
+                                    placeholder="10th Qualification"
+                                />
+
+                            </div>
+
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    12th
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="twelfth"
+                                    value={formData.twelfth}
+                                    onChange={handleChange}
+                                    placeholder="12th Qualification"
+                                />
+
+                            </div>
+
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Graduation
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="graduation"
+                                    value={formData.graduation}
+                                    onChange={handleChange}
+                                    placeholder="Graduation"
+                                />
+
+                            </div>
+
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Post Graduation
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="postGraduation"
+                                    value={formData.postGraduation}
+                                    onChange={handleChange}
+                                    placeholder="Post Graduation"
                                 />
 
                             </div>
@@ -1053,7 +941,193 @@ const handleSubmit = async (e) => {
                         </div>
 
                     </div>
+                </div>
 
+                {/* ==================================================
+                    EXPERIENCE DETAILS
+                ================================================== */}
+
+                {/* <div className="employee-form-section">
+
+                    <div className="employee-form-section-header experience">
+
+                        <BriefcaseBusiness size={22} />
+
+                        <h3>
+                            Experience Details
+                        </h3>
+
+                    </div> */}
+
+                <div
+                    className={`employee-form-section ${openSection === "experience" ? "open" : ""
+                        }`}
+                >
+
+                    <button
+                        type="button"
+                        className="employee-form-section-header experience"
+                        onClick={() => setOpenSection("experience")}
+                    >
+
+                        <BriefcaseBusiness size={22} />
+
+                        <h3>
+                            Experience Details
+                        </h3>
+
+                        <ChevronDown
+                            size={18}
+                            className={`employee-section-chevron ${openSection === "experience" ? "open" : ""
+                                }`}
+                        />
+
+                    </button>
+
+                    <div
+                        className={`employee-form-section-content ${openSection === "experience" ? "open" : ""
+                            }`}
+                    >
+
+
+
+
+                        <div className="employee-form-grid">
+
+
+                            {/* EXPERIENCE TYPE */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Experience Type
+                                </label>
+
+                                <select
+                                    name="experienceType"
+                                    value={formData.experienceType}
+                                    onChange={handleChange}
+                                >
+
+                                    <option value="Fresher">
+                                        Fresher
+                                    </option>
+
+                                    <option value="Experienced">
+                                        Experienced
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            {/* PREVIOUS EXPERIENCE */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Previous Experience
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="previousExperience"
+                                    value={formData.previousExperience}
+                                    onChange={handleChange}
+                                    placeholder="Previous Experience"
+                                />
+
+                            </div>
+
+
+                            {/* EXPERIENCE YEARS */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Work Experience Years
+                                </label>
+
+                                <input
+                                    type="number"
+                                    min="0"
+                                    step="0.1"
+                                    name="workExperienceYears"
+                                    value={formData.workExperienceYears}
+                                    onChange={handleChange}
+                                    placeholder="Years"
+                                />
+
+                            </div>
+
+
+                            {/* PREVIOUS COMPANY */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Previous Company Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="previousCompanyName"
+                                    value={formData.previousCompanyName}
+                                    onChange={handleChange}
+                                    placeholder="Previous Company"
+                                />
+
+                            </div>
+
+
+                            {/* PREVIOUS DESIGNATION */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Previous Designation
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="previousDesignation"
+                                    value={formData.previousDesignation}
+                                    onChange={handleChange}
+                                    placeholder="Previous Designation"
+                                />
+
+                            </div>
+
+
+                            {/* PREVIOUS SALARY */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Previous Salary
+                                </label>
+
+                                <div className="employee-input-with-icon">
+
+                                    <IndianRupee size={16} />
+
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        name="previousSalary"
+                                        value={formData.previousSalary}
+                                        onChange={handleChange}
+                                        placeholder="Previous Salary"
+                                    />
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
 
 
@@ -1061,148 +1135,179 @@ const handleSubmit = async (e) => {
                     EMPLOYEE DETAILS
                 ================================================== */}
 
-                <div className="employee-form-section">
+                {/* <div className="employee-form-section">
 
                     <div className="employee-form-section-header employee">
 
-                        <BriefcaseBusiness size={18} />
+                        <BriefcaseBusiness size={22} />
 
                         <h3>
                             Employee Details
                         </h3>
 
-                    </div>
+                    </div> */}
+                <div
+                    className={`employee-form-section ${openSection === "employee" ? "open" : ""
+                        }`}
+                >
+
+                    <button
+                        type="button"
+                        className="employee-form-section-header employee"
+                        onClick={() => setOpenSection("employee")}
+                    >
+
+                        <BriefcaseBusiness size={22} />
+
+                        <h3>
+                            Employee Details
+                        </h3>
+
+                        <ChevronDown
+                            size={18}
+                            className={`employee-section-chevron ${openSection === "employee" ? "open" : ""
+                                }`}
+                        />
+
+                    </button>
+
+                    <div
+                        className={`employee-form-section-content ${openSection === "employee" ? "open" : ""
+                            }`}
+                    >
 
 
-                    <div className="employee-form-grid">
+
+                        <div className="employee-form-grid">
 
 
-                        {/* EMPLOYEE TYPE */}
+                            {/* EMPLOYEE TYPE */}
 
-                        <div className="employee-form-group">
+                            <div className="employee-form-group">
 
-                            <label>
-                                Employee Type
-                            </label>
+                                <label>
+                                    Employee Type
+                                </label>
 
-                            <select
-                                name="employeeType"
-                                value={formData.employeeType}
-                                onChange={handleChange}
-                                required
-                            >
+                                <select
+                                    name="employeeType"
+                                    value={formData.employeeType}
+                                    onChange={handleChange}
+                                    required
+                                >
 
-                                <option value="">
-                                    Select
-                                </option>
+                                    <option value="">
+                                        Select
+                                    </option>
 
-                                <option value="Full Time">
-                                    Full Time
-                                </option>
+                                    <option value="Full Time">
+                                        Full Time
+                                    </option>
 
-                                <option value="Part Time">
-                                    Part Time
-                                </option>
+                                    <option value="Part Time">
+                                        Part Time
+                                    </option>
 
-                                <option value="Contract">
-                                    Contract
-                                </option>
+                                    <option value="Contract">
+                                        Contract
+                                    </option>
 
-                                <option value="Intern">
-                                    Intern
-                                </option>
+                                    <option value="Intern">
+                                        Intern
+                                    </option>
 
-                            </select>
+                                </select>
 
-                        </div>
-
-
-                        {/* DEPARTMENT */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Department
-                            </label>
-                            <input
-                              type="text"
-                              name="department"
-                              value={formData.department}
-                              onChange={handleChange}
-                              placeholder="Department"/>
-                        </div>
+                            </div>
 
 
-                        {/* PACKAGE */}
+                            {/* DEPARTMENT */}
 
-                        <div className="employee-form-group">
+                            <div className="employee-form-group">
 
-                            <label>
-                                Package
-                            </label>
+                                <label>
+                                    Department
+                                </label>
+                                <input
+                                    type="text"
+                                    name="department"
+                                    value={formData.department}
+                                    onChange={handleChange}
+                                    placeholder="Department" />
+                            </div>
 
-                            <div className="employee-input-with-icon">
 
-                                <IndianRupee size={16} />
+                            {/* PACKAGE */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Package
+                                </label>
+
+                                <div className="employee-input-with-icon">
+
+                                    <IndianRupee size={16} />
+
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        name="packageAmount"
+                                        value={formData.packageAmount}
+                                        onChange={handleChange}
+                                        placeholder="Annual Package"
+                                    />
+
+                                </div>
+
+                            </div>
+
+
+                            {/* JOINING DATE */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Joining Date
+                                </label>
+
+                                <div className="employee-input-with-icon">
+
+                                    <CalendarDays size={16} />
+
+                                    <input
+                                        type="date"
+                                        name="joiningDate"
+                                        value={formData.joiningDate}
+                                        onChange={handleChange}
+                                    />
+
+                                </div>
+
+                            </div>
+
+
+                            {/* DESIGNATION */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Designation
+                                </label>
 
                                 <input
-                                    type="number"
-                                    min="0"
-                                    name="packageAmount"
-                                    value={formData.packageAmount}
+                                    type="text"
+                                    name="designation"
+                                    value={formData.designation}
                                     onChange={handleChange}
-                                    placeholder="Annual Package"
+                                    placeholder="Designation"
                                 />
 
                             </div>
 
                         </div>
 
-
-                        {/* JOINING DATE */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Joining Date
-                            </label>
-
-                            <div className="employee-input-with-icon">
-
-                                <CalendarDays size={16} />
-
-                                <input
-                                    type="date"
-                                    name="joiningDate"
-                                    value={formData.joiningDate}
-                                    onChange={handleChange}
-                                />
-
-                            </div>
-
-                        </div>
-
-
-                        {/* DESIGNATION */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Designation
-                            </label>
-
-                            <input
-                                type="text"
-                                name="designation"
-                                value={formData.designation}
-                                onChange={handleChange}
-                                placeholder="Designation"
-                            />
-
-                        </div>
-
                     </div>
-
                 </div>
 
 
@@ -1210,105 +1315,136 @@ const handleSubmit = async (e) => {
                     BANK DETAILS
                 ================================================== */}
 
-                <div className="employee-form-section">
+                {/* <div className="employee-form-section">
 
                     <div className="employee-form-section-header bank">
 
-                        <Landmark size={18} />
+                        <Landmark size={22} />
 
                         <h3>
                             Bank Details
                         </h3>
 
-                    </div>
+                    </div> */}
+                <div
+                    className={`employee-form-section ${openSection === "bank" ? "open" : ""
+                        }`}
+                >
+
+                    <button
+                        type="button"
+                        className="employee-form-section-header bank"
+                        onClick={() => setOpenSection("bank")}
+                    >
+
+                        <Landmark size={22} />
+
+                        <h3>
+                            Bank Details
+                        </h3>
+
+                        <ChevronDown
+                            size={18}
+                            className={`employee-section-chevron ${openSection === "bank" ? "open" : ""
+                                }`}
+                        />
+
+                    </button>
+
+                    <div
+                        className={`employee-form-section-content ${openSection === "bank" ? "open" : ""
+                            }`}
+                    >
 
 
-                    <div className="employee-form-grid">
+
+                        <div className="employee-form-grid">
 
 
-                        {/* ACCOUNT NUMBER */}
+                            {/* ACCOUNT NUMBER */}
 
-                        <div className="employee-form-group">
+                            <div className="employee-form-group">
 
-                            <label>
-                                Account Number
-                            </label>
+                                <label>
+                                    Account Number
+                                </label>
 
-                            <div className="employee-input-with-icon">
+                                <div className="employee-input-with-icon">
 
-                                <CreditCard size={16} />
+                                    <CreditCard size={16} />
+
+                                    <input
+                                        type="text"
+                                        name="accountNo"
+                                        value={formData.accountNo}
+                                        onChange={handleChange}
+                                        placeholder="Account Number"
+                                    />
+
+                                </div>
+
+                            </div>
+
+
+                            {/* BANK NAME */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Bank Name
+                                </label>
 
                                 <input
                                     type="text"
-                                    name="accountNo"
-                                    value={formData.accountNo}
+                                    name="bankName"
+                                    value={formData.bankName}
                                     onChange={handleChange}
-                                    placeholder="Account Number"
+                                    placeholder="Bank Name"
+                                />
+
+                            </div>
+
+
+                            {/* BRANCH NAME */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    Branch Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="branchName"
+                                    value={formData.branchName}
+                                    onChange={handleChange}
+                                    placeholder="Branch Name"
+                                />
+
+                            </div>
+
+
+                            {/* IFSC */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    IFSC Code
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="ifscCode"
+                                    value={formData.ifscCode}
+                                    onChange={handleChange}
+                                    placeholder="IFSC Code"
                                 />
 
                             </div>
 
                         </div>
 
-
-                        {/* BANK NAME */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Bank Name
-                            </label>
-
-                            <input
-                                type="text"
-                                name="bankName"
-                                value={formData.bankName}
-                                onChange={handleChange}
-                                placeholder="Bank Name"
-                            />
-
-                        </div>
-
-
-                        {/* BRANCH NAME */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                Branch Name
-                            </label>
-
-                            <input
-                                type="text"
-                                name="branchName"
-                                value={formData.branchName}
-                                onChange={handleChange}
-                                placeholder="Branch Name"
-                            />
-
-                        </div>
-
-
-                        {/* IFSC */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                IFSC Code
-                            </label>
-
-                            <input
-                                type="text"
-                                name="ifscCode"
-                                value={formData.ifscCode}
-                                onChange={handleChange}
-                                placeholder="IFSC Code"
-                            />
-
-                        </div>
-
                     </div>
-
                 </div>
 
 
@@ -1316,142 +1452,199 @@ const handleSubmit = async (e) => {
                     KYC DETAILS
                 ================================================== */}
 
-                <div className="employee-form-section">
+                {/* <div className="employee-form-section">
 
                     <div className="employee-form-section-header kyc">
 
-                        <ShieldCheck size={18} />
+                        <ShieldCheck size={22} />
 
                         <h3>
                             KYC Details
                         </h3>
 
-                    </div>
+                    </div> */}
+
+                <div
+                    className={`employee-form-section ${openSection === "kyc" ? "open" : ""
+                        }`}
+                >
+
+                    <button
+                        type="button"
+                        className="employee-form-section-header kyc"
+                        onClick={() => setOpenSection("kyc")}
+                    >
+
+                        <ShieldCheck size={22} />
+
+                        <h3>
+                            KYC Details
+                        </h3>
+
+                        <ChevronDown
+                            size={18}
+                            className={`employee-section-chevron ${openSection === "kyc" ? "open" : ""
+                                }`}
+                        />
+
+                    </button>
+
+                    <div
+                        className={`employee-form-section-content ${openSection === "kyc" ? "open" : ""
+                            }`}
+                    >
 
 
-                    <div className="employee-form-grid">
+
+                        <div className="employee-form-grid">
 
 
-                        {/* AADHAR */}
+                            {/* AADHAR */}
 
-                        <div className="employee-form-group">
+                            <div className="employee-form-group">
 
-                            <label>
-                                Aadhar Number
-                            </label>
+                                <label>
+                                    Aadhar Number
+                                </label>
 
-                            <input
-                                type="text"
-                                name="aadharNo"
-                                value={formData.aadharNo}
-                                onChange={handleChange}
-                                placeholder="Aadhar Number"
-                            />
+                                <input
+                                    type="text"
+                                    name="aadharNo"
+                                    value={formData.aadharNo}
+                                    onChange={handleChange}
+                                    placeholder="Aadhar Number"
+                                />
+
+                            </div>
+
+
+                            {/* PAN */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    PAN Card Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="panNo"
+                                    value={formData.panNo}
+                                    onChange={handleChange}
+                                    placeholder="PAN Number"
+                                />
+
+                            </div>
 
                         </div>
 
-
-                        {/* PAN */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                PAN Card Number
-                            </label>
-
-                            <input
-                                type="text"
-                                name="panNo"
-                                value={formData.panNo}
-                                onChange={handleChange}
-                                placeholder="PAN Number"
-                            />
-
-                        </div>
-
                     </div>
-
                 </div>
-
 
                 {/* ==================================================
                     PROVIDENT FUND & ESIC
                 ================================================== */}
 
-                <div className="employee-form-section">
-
+                {/* <div className="employee-form-section">
                     <div className="employee-form-section-header pf">
+                        <ShieldCheck size={22} />
+                        <h3>
+                            Provident Fund & ESIC
+                        </h3>
+                    </div> */}
+                <div
+                    className={`employee-form-section ${openSection === "pf" ? "open" : ""
+                        }`}
+                >
 
-                        <ShieldCheck size={18} />
+                    <button
+                        type="button"
+                        className="employee-form-section-header pf"
+                        onClick={() => setOpenSection("pf")}
+                    >
+
+                        <ShieldCheck size={22} />
 
                         <h3>
                             Provident Fund & ESIC
                         </h3>
 
+                        <ChevronDown
+                            size={18}
+                            className={`employee-section-chevron ${openSection === "pf" ? "open" : ""
+                                }`}
+                        />
+
+                    </button>
+
+                    <div
+                        className={`employee-form-section-content ${openSection === "pf" ? "open" : ""
+                            }`}
+                    >
+
+
+
+
+                        <div className="employee-form-grid">
+
+
+                            {/* UAN */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    UAN Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="uanNo"
+                                    value={formData.uanNo}
+                                    onChange={handleChange}
+                                    placeholder="UAN Number"
+                                />
+
+                            </div>
+
+
+                            {/* PF */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    PF Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="pfNo"
+                                    value={formData.pfNo}
+                                    onChange={handleChange}
+                                    placeholder="PF Number"
+                                />
+
+                            </div>
+
+
+                            {/* ESIC */}
+
+                            <div className="employee-form-group">
+
+                                <label>
+                                    ESIC Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="esicNo"
+                                    value={formData.esicNo}
+                                    onChange={handleChange}
+                                    placeholder="ESIC Number"
+                                />
+
+                            </div>   
+                        </div>
                     </div>
-
-
-                    <div className="employee-form-grid">
-
-
-                        {/* UAN */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                UAN Number
-                            </label>
-
-                            <input
-                                type="text"
-                                name="uanNo"
-                                value={formData.uanNo}
-                                onChange={handleChange}
-                                placeholder="UAN Number"
-                            />
-
-                        </div>
-
-
-                        {/* PF */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                PF Number
-                            </label>
-
-                            <input
-                                type="text"
-                                name="pfNo"
-                                value={formData.pfNo}
-                                onChange={handleChange}
-                                placeholder="PF Number"
-                            />
-
-                        </div>
-
-
-                        {/* ESIC */}
-
-                        <div className="employee-form-group">
-
-                            <label>
-                                ESIC Number
-                            </label>
-
-                            <input
-                                type="text"
-                                name="esicNo"
-                                value={formData.esicNo}
-                                onChange={handleChange}
-                                placeholder="ESIC Number"
-                            />
-
-                        </div>
-
-                    </div>
-
                 </div>
 
 
