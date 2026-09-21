@@ -226,24 +226,8 @@ const handleClientEdit = () => {
                                 <strong className="detail-with-icon">
 
                                     <Mail size={17} />
-
                                     {custEmail || "-"}
-
                                 </strong>
-
-                            </div>
-
-
-                            <div className="client-detail-field">
-
-                                <span>
-                                    Inquiry ID
-                                </span>
-
-                                <strong>
-                                    #{inquiryId || "-"}
-                                </strong>
-
                             </div>
 
 

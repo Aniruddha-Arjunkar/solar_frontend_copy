@@ -195,9 +195,8 @@ function ViewEmployee() {
         );
 
 
-    // ============================================================
+
 // EMPLOYEE ACTION HANDLER
-// ============================================================
 
 const handleEmployeeAction =
     (action, employee) => {
@@ -323,20 +322,6 @@ const handleEmployeeAction =
             />
 
 
-           
-
-
-            {/* ====================================================
-                LOADING STATE
-            ==================================================== */}
-
-            {loading && (
-                <div className="employee-loading-message">
-                    Loading employees...
-                </div>
-            )}
-
-
             {/* ====================================================
                 ERROR STATE
             ==================================================== */}
@@ -352,14 +337,12 @@ const handleEmployeeAction =
     EMPLOYEE TABLE
 ==================================================== */}
 
-{!loading && !error && (
-
     <EmployeeTable
         columns={columns}
         data={filteredEmployees}
         onAction={handleEmployeeAction}
         showAction={true}
-    />)}   
+    />
         </section>
     );
 }

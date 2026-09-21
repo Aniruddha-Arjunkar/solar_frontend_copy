@@ -18,7 +18,7 @@ import "./GenerateInvoice.css";
 
 function GenerateInvoice() {
 
- 
+
 
     const { clientId } = useParams();
     const navigate = useNavigate();
@@ -142,24 +142,24 @@ function GenerateInvoice() {
         }
 
     }, [clientId]);
-    
+
     // ============================================================
-// VIEW INVOICE PDF
-// ============================================================
+    // VIEW INVOICE PDF
+    // ============================================================
 
-const handleViewPdf = () => {
+    const handleViewPdf = () => {
 
-    if (!createdInvoice?.id) {
-        alert("Invoice ID not found.");
-        return;
-    }
+        if (!createdInvoice?.id) {
+            alert("Invoice ID not found.");
+            return;
+        }
 
-    window.open(
-        `${API_BASE_URL}/invoices/${createdInvoice.id}/pdf`,
-        "_blank",
-        "noopener,noreferrer"
-    );
-};
+        window.open(
+            `${API_BASE_URL}/invoices/${createdInvoice.id}/pdf`,
+            "_blank",
+            "noopener,noreferrer"
+        );
+    };
 
     // ============================================================
     // HANDLE INVOICE FIELD
@@ -327,15 +327,10 @@ const handleViewPdf = () => {
 
 
         return {
-
             baseAmount,
-
             cgst,
-
             sgst,
-
             total
-
         };
     };
 
@@ -421,19 +416,13 @@ const handleViewPdf = () => {
         event.preventDefault();
 
         if (!invoice.gstInvoiceNo.trim()) {
-            alert(
-                "Please enter GST Invoice Number."
-            );
+            alert("Please enter GST Invoice Number.");
             return;
         }
 
 
         if (!invoice.dueDate) {
-
-            alert(
-                "Please select Due Date."
-            );
-
+            alert("Please select Due Date.");
             return;
         }
 
@@ -441,11 +430,7 @@ const handleViewPdf = () => {
         for (const item of invoice.items) {
 
             if (!item.itemName.trim()) {
-
-                alert(
-                    "Please enter Item / Service name."
-                );
-
+                alert("Please enter Item / Service name.");
                 return;
             }
 
@@ -454,33 +439,23 @@ const handleViewPdf = () => {
                 !item.rate ||
                 Number(item.rate) <= 0
             ) {
-
                 alert(
                     "Please enter a valid rate."
                 );
-
                 return;
             }
-
         }
 
 
-        // ========================================================
         // PREVENT DOUBLE SUBMIT
-        // ========================================================
 
         if (saving) {
-
             return;
-
         }
 
 
         try {
-
             setSaving(true);
-
-
             // ====================================================
             // PREPARE REQUEST
             // ====================================================
@@ -592,10 +567,10 @@ const handleViewPdf = () => {
             );
 
 
-          
-        // SHOW SUCCESS SCREEN
 
-         setCreatedInvoice(createdInvoice);
+            // SHOW SUCCESS SCREEN
+
+            setCreatedInvoice(createdInvoice);
 
 
         } catch (error) {
@@ -620,112 +595,112 @@ const handleViewPdf = () => {
     };
 
     // ============================================================
-// SUCCESS SCREEN
-// ============================================================
+    // SUCCESS SCREEN
+    // ============================================================
 
-if (createdInvoice) {
+    if (createdInvoice) {
 
-    return (
+        return (
 
-        <section className="generate-invoice-page">
+            <section className="generate-invoice-page">
 
-            <div className="invoice-success-card">
+                <div className="invoice-success-card">
 
-                <div className="invoice-success-icon">
+                    <div className="invoice-success-icon">
 
-                    <CheckCircle size={52} />
+                        <CheckCircle size={52} />
 
-                </div>
-
-
-                <h1>
-                    Invoice Created Successfully
-                </h1>
-
-
-                <p>
-                    Invoice{" "}
-                    <strong>
-                        {createdInvoice.gstInvoiceNo}
-                    </strong>{" "}
-                    has been created successfully.
-                </p>
-
-
-                <div className="invoice-success-details">
-
-                    <div>
-                        <span>Invoice ID</span>
-
-                        <strong>
-                            #{createdInvoice.id}
-                        </strong>
                     </div>
 
 
-                    <div>
-                        <span>Customer</span>
+                    <h1>
+                        Invoice Created Successfully
+                    </h1>
 
+
+                    <p>
+                        Invoice{" "}
                         <strong>
-                            {createdInvoice.custName}
-                        </strong>
+                            {createdInvoice.gstInvoiceNo}
+                        </strong>{" "}
+                        has been created successfully.
+                    </p>
+
+
+                    <div className="invoice-success-details">
+
+                        <div>
+                            <span>Invoice ID</span>
+
+                            <strong>
+                                #{createdInvoice.id}
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <span>Customer</span>
+
+                            <strong>
+                                {createdInvoice.custName}
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <span>Grand Total</span>
+
+                            <strong>
+                                {formatCurrency(
+                                    Number(
+                                        createdInvoice.grandTotal
+                                    ) || 0
+                                )}
+                            </strong>
+                        </div>
+
                     </div>
 
 
-                    <div>
-                        <span>Grand Total</span>
+                    <div className="invoice-success-actions">
 
-                        <strong>
-                            {formatCurrency(
-                                Number(
-                                    createdInvoice.grandTotal
-                                ) || 0
-                            )}
-                        </strong>
+                        <button
+                            type="button"
+                            className="invoice-view-pdf-btn"
+                            onClick={handleViewPdf}
+                        >
+
+                            <Eye size={19} />
+
+                            View Invoice PDF
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            className="invoice-success-back-btn"
+                            onClick={() =>
+                                navigate(
+                                    "/dashboard/gst-client"
+                                )
+                            }
+                        >
+
+                            <ArrowLeft size={18} />
+
+                            Back to GST Clients
+
+                        </button>
+
                     </div>
 
                 </div>
 
+            </section>
 
-                <div className="invoice-success-actions">
-
-                    <button
-                        type="button"
-                        className="invoice-view-pdf-btn"
-                        onClick={handleViewPdf}
-                    >
-
-                        <Eye size={19} />
-
-                        View Invoice PDF
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        className="invoice-success-back-btn"
-                        onClick={() =>
-                            navigate(
-                                "/dashboard/gst-client"
-                            )
-                        }
-                    >
-
-                        <ArrowLeft size={18} />
-
-                        Back to GST Clients
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    );
-}
+        );
+    }
     // ============================================================
     // LOADING
     // ============================================================
@@ -794,23 +769,17 @@ if (createdInvoice) {
 
         <section className="generate-invoice-page">
 
+            {/* ============ PAGE HEADER ============ */}
 
-            {/* ==================================================
-                PAGE HEADER
-            ================================================== */}
-
-            <div className="generate-invoice-header">
+            {/* <div className="generate-invoice-header">
 
                 <div className="generate-invoice-heading">
 
                     <div className="generate-invoice-icon">
-
                         <FileText size={28} />
-
                     </div>
 
                     <div>
-
                         <p>
                             GST Clients / Generate Invoice
                         </p>
@@ -818,9 +787,7 @@ if (createdInvoice) {
                         <h1>
                             Generate Invoice
                         </h1>
-
                     </div>
-
                 </div>
 
 
@@ -835,9 +802,45 @@ if (createdInvoice) {
                 >
 
                     <ArrowLeft size={18} />
-
                     Back
+                </button>
 
+            </div> */}
+
+            <div className="generate-invoice-header">
+
+                <div className="generate-invoice-header-left">
+
+                    <div className="generate-invoice-header-icon">
+                        <FileText
+                            size={26}
+                            strokeWidth={1.8}
+                        />
+                    </div>
+
+                    <div className="generate-invoice-heading">
+                        <h1>
+                            Generate Invoice
+                        </h1>
+                        <p>
+                            Create a GST invoice for this client.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    className="generate-invoice-back"
+                    onClick={() =>
+                        navigate(
+                            "/dashboard/gst-client"
+                        )
+                    }
+                >
+                    <ArrowLeft size={19} />
+                    Back
                 </button>
 
             </div>
@@ -1051,11 +1054,8 @@ if (createdInvoice) {
                             className="invoice-add-item-btn"
                             onClick={addItem}
                         >
-
                             <Plus size={18} />
-
                             Add Item
-
                         </button>
 
                     </div>
@@ -1078,9 +1078,7 @@ if (createdInvoice) {
                                     >
 
                                         <div className="invoice-item-number">
-
                                             Item {index + 1}
-
                                         </div>
 
 
@@ -1272,9 +1270,7 @@ if (createdInvoice) {
                                                 >
 
                                                     <Trash2 size={18} />
-
                                                     Remove
-
                                                 </button>
 
                                             )}
@@ -1287,11 +1283,8 @@ if (createdInvoice) {
 
                             }
                         )}
-
                     </div>
-
                 </div>
-
 
                 {/* ==================================================
                     NOTES
@@ -1321,7 +1314,7 @@ if (createdInvoice) {
                                 handleInvoiceChange
                             }
                             placeholder="Enter invoice notes..."
-                            rows="4"
+                            rows="1"
                         />
 
                     </div>

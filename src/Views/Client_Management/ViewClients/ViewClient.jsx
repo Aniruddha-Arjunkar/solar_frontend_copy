@@ -14,8 +14,8 @@ import ClientStats
 import ViewClientTable
     from "../../../Components/Client_Module_Components/ClientTable/ClientTable.jsx";
 
-import ShowClientDetails 
-       from  "./../../../Components/Client_Module_Components/ShowClientsDetails/ShowClientDetail.jsx";
+import ShowClientDetails
+    from "./../../../Components/Client_Module_Components/ShowClientsDetails/ShowClientDetail.jsx";
 
 import "./ViewClient.css";
 
@@ -27,6 +27,9 @@ function ViewClient() {
 
     const [selectedClient, setSelectedClient] = useState(null);
     const [activeAction, setActiveAction] = useState(null);
+
+    const [vendorData, setVendorData] = useState([]);
+
 
 
     /* ===========================   FETCH NON-GST CLIENTS ============== */
@@ -56,11 +59,46 @@ function ViewClient() {
         }
     };
 
+    const fetchVendors = async () => {
+
+        try {
+
+            const response = await fetch(
+                `${API_BASE_URL}/vendors`
+            );
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch vendors");
+            }
+
+            const data = await response.json();
+
+            console.log("Vendors:", data);
+
+            setVendorData(
+                Array.isArray(data)
+                    ? data
+                    : []
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Error fetching vendors:",
+                error
+            );
+
+        }
+    };
+
 
     /* =========== FETCH CLIENTS WHEN PAGE LOADS ======================== */
 
     useEffect(() => {
+
         fetchClients();
+        fetchVendors();
+
     }, []);
 
 
@@ -131,10 +169,12 @@ function ViewClient() {
     ];
 
 
-    /* =====================================================
-       CONVERT BACKEND DATA
-       INTO TABLE DATA
-    ===================================================== */
+    const vendorMap = Object.fromEntries(
+        vendorData.map((vendor) => [
+            vendor.id,
+            vendor.vendorName
+        ])
+    );
 
     const tableData = clientData.map((client) => ({
 
@@ -146,7 +186,7 @@ function ViewClient() {
         service: client.service || "-",
         amount:
             client.totalAmount !== null &&
-            client.totalAmount !== undefined
+                client.totalAmount !== undefined
                 ? `₹${Number(client.totalAmount).toLocaleString("en-IN")}`
                 : "₹0",
         addedBy:
@@ -159,7 +199,7 @@ function ViewClient() {
          * Later we can fetch vendor name from Vendor API.
          */
         vendor: client.vendorId
-            ? client.vendorId
+            ? vendorMap[client.vendorId] || "Vendor not found"
             : "-",
 
         /*
@@ -221,27 +261,27 @@ function ViewClient() {
 
             ) : ( */}
 
-                <ViewClientTable
-                    columns={Columns}
-                    data={tableData}
-                    onAction={handleClientAction}
-                    type="view-client"
-                    title="All Clients"
-                    description="View and manage all registered clients."
+            <ViewClientTable
+                columns={Columns}
+                data={tableData}
+                onAction={handleClientAction}
+                type="view-client"
+                title="All Clients"
+                description="View and manage all registered clients."
+            />
+            {/* )} */}
+
+            {/* =============VIEW CLIENT DETAILS  =========== */}
+
+            {activeAction === "view_detail" && selectedClient && (
+                <ShowClientDetails
+                    client={selectedClient.originalClient}
+                    onClose={() => {
+                        setActiveAction(null);
+                        setSelectedClient(null);
+                    }}
                 />
-             {/* )} */}
-
-        {/* =============VIEW CLIENT DETAILS  =========== */}
-
-           {activeAction === "view_detail" && selectedClient && (
-              <ShowClientDetails
-                client={selectedClient.originalClient}
-                onClose={() => {
-              setActiveAction(null);
-              setSelectedClient(null);
-        }}
-       />
-)}
+            )}
         </section>
     );
 }
