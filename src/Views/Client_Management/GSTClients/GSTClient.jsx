@@ -15,8 +15,8 @@ import ClientStats
 import GSTClientTable
     from "./../../../Components/Client_Module_Components/ClientTable/ClientTable.jsx";
 
-import ShowClientDetail from 
-         "./../../../Components/Client_Module_Components/ShowClientsDetails/ShowClientDetail.jsx";    
+import ShowClientDetail from
+    "./../../../Components/Client_Module_Components/ShowClientsDetails/ShowClientDetail.jsx";
 import "./GSTClient.css";
 
 
@@ -27,33 +27,38 @@ function GSTClient() {
     const [activeAction, setActiveAction] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [vendorData, setVendorData] = useState([]);
+
+
 
     const navigate = useNavigate();
 
 
-    // ====================================================
-    // FETCH GST CLIENTS
-    // ====================================================
-
     const fetchGSTClients = async () => {
 
         try {
-
             setLoading(true);
-
             setError(null);
 
+            // const response = await fetch(
+            //     `${API_BASE_URL}/clients/gst`
+            // );
 
-            const response = await fetch(
-                `${API_BASE_URL}/clients/gst`
-            );
+            // if (!response.ok) {
+
+            //     throw new Error(
+            //         "Failed to fetch GST clients."
+            //     );
+            // }
+
+            const [clientResponse, vendorResponse] =
+                await Promise.all([
+                    fetch(`${API_BASE_URL}/clients/gst`),
+                    fetch(`${API_BASE_URL}/vendors`)
+                ]);
 
 
-            // =================================================
-            // CHECK RESPONSE
-            // =================================================
-
-            if (!response.ok) {
+            if (!clientResponse.ok) {
 
                 throw new Error(
                     "Failed to fetch GST clients."
@@ -61,12 +66,34 @@ function GSTClient() {
             }
 
 
-            // =================================================
+            if (!vendorResponse.ok) {
+
+                throw new Error(
+                    "Failed to fetch vendors."
+                );
+            }
+
             // GET BACKEND DATA
-            // =================================================
+            // const data = await response.json();
+            const [data, vendors] = await Promise.all([
+                clientResponse.json(),
+                vendorResponse.json()
+            ]);
 
-            const data = await response.json();
+            const vendorMap = Object.fromEntries(
+                (Array.isArray(vendors) ? vendors : []).map(
+                    (vendor) => [
+                        vendor.id,
+                        vendor.vendorName
+                    ]
+                )
+            );
 
+            setVendorData(
+                Array.isArray(vendors)
+                    ? vendors
+                    : []
+            );
 
             console.log(
                 "GST Clients from Backend:",
@@ -96,8 +123,14 @@ function GSTClient() {
 
                 // Keep complete backend client object
                 // for View Detail later.
+                // originalClient: client
+                originalClient: {
+                    ...client,
 
-                originalClient: client
+                    vendorName: client.vendorId
+                        ? vendorMap[client.vendorId] || "-"
+                        : "-"
+                }
 
             }));
 
@@ -146,13 +179,13 @@ function GSTClient() {
             "Selected Client:",
             client
         );
-         
+
         if (action === "generate_invoice") {
-        navigate(
-            `/dashboard/generate-invoice/${client.id}`
-        );
-        return;
-      }
+            navigate(
+                `/dashboard/generate-invoice/${client.id}`
+            );
+            return;
+        }
 
         setSelectedClient(client);
         setActiveAction(action);
@@ -325,18 +358,18 @@ function GSTClient() {
             />
 
 
-         {/* =================================================
+            {/* =================================================
              CLIENT DETAILS
            ================================================= */}
 
-        {activeAction === "view_detail" && selectedClient && (
-           <ShowClientDetail
-              client={selectedClient.originalClient}
-              onClose={() => {
-                 setSelectedClient(null);
-                 setActiveAction(null);
-        }} />
-        )}
+            {activeAction === "view_detail" && selectedClient && (
+                <ShowClientDetail
+                    client={selectedClient.originalClient}
+                    onClose={() => {
+                        setSelectedClient(null);
+                        setActiveAction(null);
+                    }} />
+            )}
         </section>
     );
 }

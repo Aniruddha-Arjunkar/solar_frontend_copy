@@ -17,16 +17,9 @@ import {
 import "./ViewPayment.css";
 
 
-// ============================================================
-// VIEW PAYMENT COMPONENT
-// ============================================================
-
 function ViewPayment() {
 
 
-    // ============================================================
-    // STATE
-    // ============================================================
 
     const [payments, setPayments] = useState([]);
 
@@ -94,12 +87,10 @@ function ViewPayment() {
                         async (client) => {
 
                             try {
-
                                 const paymentResponse =
                                     await fetch(
                                         `${API_BASE_URL}/payments/client/${client.id}`
                                     );
-
 
                                 if (!paymentResponse.ok) {
 
@@ -108,7 +99,6 @@ function ViewPayment() {
                                     );
 
                                 }
-
 
                                 const paymentData =
                                     await paymentResponse.json();

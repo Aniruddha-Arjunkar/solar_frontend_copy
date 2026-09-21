@@ -1,4 +1,7 @@
 import { useNavigate } from "react-router";
+
+import { useState, useEffect } from "react";
+
 import {
     X,
     UserRound,
@@ -22,25 +25,81 @@ import PendingWorkSection from "./../PendingWorkSection/PendingWorkSection.jsx";
 import ClientDocumentSection from "../ClientDocumentSection/ClientDocumentsSection.jsx";
 import "./ShowClientDetail.css";
 
+import API_BASE_URL from "./../../../config/api.js";
+
 
 function ShowClientDetail({ client, onClose }) {
 
-   const navigate = useNavigate();
+    const navigate = useNavigate();
+
+    const [payments, setPayments] = useState([]);
+    const [paymentLoading, setPaymentLoading] = useState(false);
+    const [paymentError, setPaymentError] = useState(null);
 
     if (!client) {
         return null;
     }
 
+    // FETCH PAYMENT HISTORY
 
-//=========== EDIT CLIENT ===============
+    useEffect(() => {
 
-const handleClientEdit = () => {
+        const fetchPayments = async () => {
 
-    navigate(
-        `/dashboard/edit-client/${client.id}`
-    );
+            try {
 
-};
+                setPaymentLoading(true);
+                setPaymentError(null);
+
+                const response = await fetch(
+                    `${API_BASE_URL}/payments/client/${client.id}`
+                );
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Failed to fetch payment history."
+                    );
+                }
+
+                const data = await response.json();
+
+                setPayments(
+                    Array.isArray(data)
+                        ? data
+                        : []
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Payment History Error:",
+                    error
+                );
+                setPaymentError(
+                    "Unable to load payment history."
+                );
+
+                setPayments([]);
+
+            } finally {
+                setPaymentLoading(false);
+            }
+        };
+
+        fetchPayments();
+
+    }, [client.id]);
+
+
+    //=========== EDIT CLIENT ===============
+
+    const handleClientEdit = () => {
+
+        navigate(
+            `/dashboard/edit-client/${client.id}`
+        );
+
+    };
 
     /* =====================================================
        CLIENT DATA
@@ -75,7 +134,7 @@ const handleClientEdit = () => {
 
         addedBy,
         vendorId,
-
+        vendorName,
         inquiryId
     } = client;
 
@@ -118,6 +177,29 @@ const handleClientEdit = () => {
         });
 
     };
+
+
+    // PAYMENT SUMMARY CALCULATION
+
+    const amountToPay =
+        Number(
+            finalAmount ??
+            totalAmount ??
+            0
+        );
+
+    const paidAmount = payments.reduce(
+        (total, payment) =>
+            total +
+            Number(payment.paidAmount || 0),
+        0
+    );
+
+    const balanceAmount =
+        Math.max(
+            0,
+            amountToPay - paidAmount
+        );
 
 
     return (
@@ -450,12 +532,10 @@ const handleClientEdit = () => {
                                 <strong>
                                     {gstType || "-"}
                                 </strong>
-
                             </div>
 
 
                             <div className="client-detail-field">
-
                                 <span>
                                     GST Invoice No.
                                 </span>
@@ -465,8 +545,208 @@ const handleClientEdit = () => {
                                 </strong>
 
                             </div>
+                        </div>
+                    </section>
+
+                    {/* =================================================
+    PAYMENT SUMMARY
+================================================= */}
+
+                    <section className="client-detail-section">
+
+                        <div className="client-detail-section-title">
+
+                            <IndianRupee size={20} />
+
+                            <h3>
+                                Payment Summary
+                            </h3>
 
                         </div>
+
+
+                        <div className="client-payment-summary-grid">
+
+                            {/* ================= AMOUNT TO PAY ================= */}
+
+                            <div className="client-payment-summary-card">
+
+                                <span>
+                                    Amount To Pay
+                                </span>
+
+                                <strong>
+                                    {formatAmount(amountToPay)}
+                                </strong>
+
+                            </div>
+
+
+                            {/* ================= PAID AMOUNT ================= */}
+
+                            <div className="client-payment-summary-card paid">
+
+                                <span>
+                                    Paid Amount
+                                </span>
+
+                                <strong>
+                                    {formatAmount(paidAmount)}
+                                </strong>
+
+                            </div>
+
+
+                            {/* ================= BALANCE ================= */}
+
+                            <div
+                                className={
+                                    `client-payment-summary-card ${balanceAmount > 0
+                                        ? "balance"
+                                        : "balance-paid"
+                                    }`
+                                }
+                            >
+
+                                <span>
+                                    Balance Amount
+                                </span>
+
+                                <strong>
+                                    {formatAmount(balanceAmount)}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    {/* =================================================
+    PAYMENT HISTORY
+================================================= */}
+
+                    <section className="client-detail-section">
+
+                        <div className="client-detail-section-title">
+
+                            <FileText size={20} />
+
+                            <h3>
+                                Payment History
+                            </h3>
+
+                        </div>
+
+
+                        {paymentLoading ? (
+
+                            <div className="client-payment-history-message">
+                                Loading payment history...
+                            </div>
+
+                        ) : paymentError ? (
+
+                            <div className="client-payment-history-message error">
+                                {paymentError}
+                            </div>
+
+                        ) : payments.length === 0 ? (
+
+                            <div className="client-payment-history-message">
+                                No payment records found.
+                            </div>
+
+                        ) : (
+
+                            <div className="client-payment-history-wrapper">
+
+                                <table className="client-payment-history-table">
+
+                                    <thead>
+
+                                        <tr>
+
+                                            <th>
+                                                #
+                                            </th>
+
+                                            <th>
+                                                Payment Date
+                                            </th>
+
+                                            <th>
+                                                Amount
+                                            </th>
+
+                                            <th>
+                                                Payment Method
+                                            </th>
+
+                                            <th>
+                                                Due After Payment
+                                            </th>
+
+                                        </tr>
+
+                                    </thead>
+
+
+                                    <tbody>
+
+                                        {[...payments]
+                                            .sort(
+                                                (a, b) =>
+                                                    new Date(
+                                                        b.paymentDate || b.createdAt
+                                                    ) -
+                                                    new Date(
+                                                        a.paymentDate || a.createdAt
+                                                    )
+                                            )
+                                            .map((payment, index) => (
+
+                                                <tr key={payment.id}>
+
+                                                    <td>
+                                                        {index + 1}
+                                                    </td>
+
+                                                    <td>
+                                                        {formatDate(
+                                                            payment.paymentDate
+                                                        )}
+                                                    </td>
+
+                                                    <td>
+                                                        <strong>
+                                                            {formatAmount(
+                                                                payment.paidAmount
+                                                            )}
+                                                        </strong>
+                                                    </td>
+
+                                                    <td>
+                                                        {payment.paymentGateway || "-"}
+                                                    </td>
+
+                                                    <td>
+                                                        {formatAmount(
+                                                            payment.dueAmount
+                                                        )}
+                                                    </td>
+
+                                                </tr>
+
+                                            ))}
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        )}
 
                     </section>
 
@@ -541,7 +821,7 @@ const handleClientEdit = () => {
 
                         <div className="client-detail-grid">
 
-                            <div className="client-detail-field">
+                            {/* <div className="client-detail-field">
 
                                 <span>
                                    Required Documents
@@ -555,7 +835,7 @@ const handleClientEdit = () => {
 
                                 </strong>
 
-                            </div>
+                            </div> */}
 
 
                             <div className="client-detail-field">
@@ -621,11 +901,11 @@ const handleClientEdit = () => {
                             <div className="client-detail-field">
 
                                 <span>
-                                    Vendor ID
+                                    Vendor
                                 </span>
 
                                 <strong>
-                                    {vendorId || "-"}
+                                    {vendorName || "-"}
                                 </strong>
 
                             </div>
@@ -633,20 +913,20 @@ const handleClientEdit = () => {
                         </div>
 
                     </section>
-            
-            {/* ========= Client Document Section ========== */}
 
-            <ClientDocumentSection clientId={client.id}/>
+                    {/* ========= Client Document Section ========== */}
 
-            {/* ======== Invoice Section ============== */}
+                    <ClientDocumentSection clientId={client.id} />
 
-             <InvoiceSection  clientId={client.id}/>
-             
-            {/* ========= Pending Work Component Mount ========== */}
+                    {/* ======== Invoice Section ============== */}
 
-                 <PendingWorkSection clientId={client.id}/>
+                    <InvoiceSection clientId={client.id} />
 
-             </div>
+                    {/* ========= Pending Work Component Mount ========== */}
+
+                    <PendingWorkSection clientId={client.id} />
+
+                </div>
 
 
                 {/* =================================================
@@ -656,13 +936,13 @@ const handleClientEdit = () => {
                 <div className="client-detail-footer">
 
                     <button
-                       type="button"
-                       className="client-detail-edit-btn"
-                       onClick={handleClientEdit}>
-                       <Edit size={17}/>
-                       Edit Client
+                        type="button"
+                        className="client-detail-edit-btn"
+                        onClick={handleClientEdit}>
+                        <Edit size={17} />
+                        Edit Client
                     </button>
-                    
+
                     <button
                         type="button"
                         className="client-detail-close-btn"

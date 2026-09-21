@@ -206,7 +206,12 @@ function ViewClient() {
          * Keep original client object.
          * Useful when we implement View Details/Edit/Delete.
          */
-        originalClient: client
+        originalClient: {
+            ...client,
+            vendorName: client.vendorId
+                ? vendorMap[client.vendorId] || "-"
+                : "-"
+        }
 
     }));
 
