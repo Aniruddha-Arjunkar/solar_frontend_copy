@@ -1,0 +1,87 @@
+/* =====================================================
+   CLIENT SOURCE FILTER
+===================================================== */
+
+.client-source-filter {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    padding: 6px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow:
+        0 3px 10px rgba(15, 23, 42, 0.04);
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   FILTER BUTTON
+===================================================== */
+
+.client-source-filter-btn {
+    min-height: 38px;
+    padding: 8px 17px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    background: transparent;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =====================================================
+   FILTER BUTTON HOVER
+===================================================== */
+
+.client-source-filter-btn:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+
+/* =====================================================
+   ACTIVE FILTER
+===================================================== */
+
+.client-source-filter-btn.active {
+    background: #20bcb9;
+    color: #ffffff;
+    box-shadow:
+        0 3px 8px rgba(32, 188, 185, 0.18);
+}
+
+
+/* =====================================================
+   ACTIVE FILTER HOVER
+===================================================== */
+
+.client-source-filter-btn.active:hover {
+    background: #18a7a5;
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 600px) {
+    .client-source-filter {
+        overflow-x: auto;
+    }
+    .client-source-filter-btn {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+}

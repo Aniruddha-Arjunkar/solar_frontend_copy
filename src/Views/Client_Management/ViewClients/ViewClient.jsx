@@ -31,6 +31,9 @@ function ViewClient() {
     const [vendorData, setVendorData] = useState([]);
 
 
+    const [clientFilter, setClientFilter] = useState("ALL");
+
+
 
     /* ===========================   FETCH NON-GST CLIENTS ============== */
 
@@ -168,6 +171,22 @@ function ViewClient() {
 
     ];
 
+    // ========= FILTER CLIENTS BY SOURCE ========================
+
+    const filteredClientData = clientData.filter((client) => {
+
+        if (clientFilter === "ADMIN") {
+            return client.addedBy === "ADMIN";
+        }
+
+        if (clientFilter === "VENDOR") {
+            return client.addedBy === "VENDOR";
+        }
+
+        return true;
+
+    });
+
 
     const vendorMap = Object.fromEntries(
         vendorData.map((vendor) => [
@@ -176,7 +195,7 @@ function ViewClient() {
         ])
     );
 
-    const tableData = clientData.map((client) => ({
+    const tableData = filteredClientData.map((client) => ({
 
         id: client.id,
         name: client.custName || "-",
@@ -191,7 +210,7 @@ function ViewClient() {
                 : "₹0",
         addedBy:
             client.addedBy === "ADMIN"
-                ? "Admin"
+                ? "ADMIN"
                 : client.addedBy || "-",
 
         /*
@@ -266,12 +285,55 @@ function ViewClient() {
 
             ) : ( */}
 
+            {/* =====================================================
+    CLIENT SOURCE FILTER
+===================================================== */}
+
+            <div className="client-source-filter">
+
+                <button
+                    type="button"
+                    className={`client-source-filter-btn ${clientFilter === "ALL" ? "active" : ""
+                        }`}
+                    onClick={() => setClientFilter("ALL")}
+                >
+                    All
+                </button>
+
+
+                <button
+                    type="button"
+                    className={`client-source-filter-btn ${clientFilter === "ADMIN" ? "active" : ""
+                        }`}
+                    onClick={() => setClientFilter("ADMIN")}
+                >
+                    Admin Clients
+                </button>
+
+
+                <button
+                    type="button"
+                    className={`client-source-filter-btn ${clientFilter === "VENDOR" ? "active" : ""
+                        }`}
+                    onClick={() => setClientFilter("VENDOR")}
+                >
+                    Vendor Clients
+                </button>
+
+            </div>
+
             <ViewClientTable
                 columns={Columns}
                 data={tableData}
                 onAction={handleClientAction}
                 type="view-client"
-                title="All Clients"
+                title={
+                    clientFilter === "ADMIN"
+                        ? "Admin Clients"
+                        : clientFilter === "VENDOR"
+                            ? "Vendor Clients"
+                            : "All Clients"
+                }
                 description="View and manage all registered clients."
             />
             {/* )} */}

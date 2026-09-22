@@ -144,11 +144,11 @@ function ClientTable({
 
                     <tbody>
                         {filteredClients.length > 0 ? (
-                            filteredClients.map((client , index) => (
+                            filteredClients.map((client, index) => (
                                 <tr key={client.id}>
 
                                     {/* ========== DYNAMIC COLUMNS =============== */}
-
+                                    {/* 
                                     {columns.map((column) => (
                                         <td key={column.key}>
                                             {column.key === "id" ? (
@@ -171,10 +171,48 @@ function ClientTable({
                                                 client[column.key] || "-"
                                             )}
                                         </td>
-                                        // <td
-                                        //     key={column.key}>
-                                        //     {client[column.key] || "-"}
-                                        // </td>
+                                
+                                    ))} */}
+                                    {columns.map((column) => (
+                                        <td key={column.key}>
+
+                                            {column.key === "id" ? (
+
+                                                index + 1
+
+                                            ) : column.key === "name" ? (
+
+                                                <div className="client-table-user-cell">
+
+                                                    <div className="client-table-avatar">
+
+                                                        {client.name
+                                                            ?.charAt(0)
+                                                            .toUpperCase() || "C"}
+
+                                                    </div>
+
+                                                    <div className="client-table-user-info">
+
+                                                        <strong>
+                                                            {client.name || "-"}
+                                                        </strong>
+
+                                                    </div>
+
+                                                </div>
+
+                                            ) : column.key === "addedBy" ? (
+
+                                                <span className="client-added-by-badge">
+                                                    {client.addedBy || "-"}
+                                                </span>
+
+                                            ) : (
+                                                client[column.key] || "-"
+                                            )}
+
+                                        </td>
                                     ))}
                                     {/* ===================== ACTION =============== */}
                                     <td>
