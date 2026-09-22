@@ -1660,11 +1660,8 @@ function AddEmployee() {
                         className="employee-cancel-btn"
                         onClick={handleCancel}
                     >
-
                         <X size={17} />
-
                         Cancel
-
                     </button>
 
 
