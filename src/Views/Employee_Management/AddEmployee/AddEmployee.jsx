@@ -760,9 +760,7 @@ function AddEmployee() {
 
                             <div className="employee-form-group employee-full-width">
 
-                                {/* ========================================================
-        PERMANENT ADDRESS LABEL
-    ======================================================== */}
+                 {/* ============= PERMANENT ADDRESS LABEL =================== */}
 
                                 <div className="employee-permanent-address-header">
 
@@ -771,9 +769,7 @@ function AddEmployee() {
                                     </label>
 
 
-                                    {/* ====================================================
-            SAME AS CURRENT ADDRESS CHECKBOX
-        ==================================================== */}
+                {/* ============================ SAME AS CURRENT ADDRESS CHECKBOX ============== */}
 
                                     <label className="employee-same-address-checkbox">
 
@@ -790,13 +786,10 @@ function AddEmployee() {
                                         </span>
 
                                     </label>
-
                                 </div>
 
 
-                                {/* ========================================================
-        PERMANENT ADDRESS INPUT
-    ======================================================== */}
+                 {/* ================  PERMANENT ADDRESS INPUT =========== */}
 
                                 <div className="employee-input-with-icon">
 
@@ -1208,9 +1201,9 @@ function AddEmployee() {
                                         Part Time
                                     </option>
 
-                                    <option value="Contract">
+                                    {/* <option value="Contract">
                                         Contract
-                                    </option>
+                                    </option> */}
 
                                     <option value="Intern">
                                         Intern

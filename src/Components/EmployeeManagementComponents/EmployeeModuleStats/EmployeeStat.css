@@ -1,6 +1,4 @@
-/* ============================================================
-   EMPLOYEE STATS
-============================================================ */
+/* ===================== EMPLOYEE STATS ================= */
 
 .employee-stats {
     width: 90%;
@@ -12,9 +10,7 @@
 }
 
 
-/* ============================================================
-   STAT CARD
-============================================================ */
+/* ================ STAT CARD ==================== */
 
 .employee-stat-card {
     min-height: 100px;
@@ -22,8 +18,10 @@
     padding: 22px 24px;
     box-sizing: border-box;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    align-items: center;
+    justify-content: space-between;
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
@@ -39,101 +37,90 @@
 }
 
 
-/* ============================================================
-   STAT CARD HOVER
-============================================================ */
+/* .employee-stat-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} */
+
+.employee-stat-content {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.employee-stat-icon {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #f1f5ff;
+    color: #0051ff85;
+}
+
+
+/* ================= STAT CARD HOVER ================================== */
 
 .employee-stat-card:hover {
-
     transform: translateY(-2px);
-
     border-color: #d5e5e8;
-
     box-shadow:
         0 8px 24px rgba(15, 23, 42, 0.09);
 
 }
 
 
-/* ============================================================
-   STAT TITLE
-============================================================ */
+/* ===================== STAT TITLE ======================== */
 
 .employee-stat-title {
-
     margin-bottom: 8px;
-
     font-size: 14px;
-
     font-weight: 500;
-
     color: #64748b;
-
     line-height: 1.4;
-
 }
 
 
-/* ============================================================
-   STAT VALUE
-============================================================ */
+/* ================ STAT VALUE ======================== */
 
 .employee-stat-value {
-
     font-size: 28px;
-
     font-weight: 600;
-
     line-height: 1.2;
-
     color: #1e3a70;
-
 }
 
 
-/* ============================================================
-   RESPONSIVE - TABLET
-============================================================ */
+/* ================== RESPONSIVE - TABLET ================================= */
 
 @media (max-width: 900px) {
 
     .employee-stats {
-
         grid-template-columns: repeat(2, 1fr);
-
     }
 
 }
 
 
-/* ============================================================
-   RESPONSIVE - MOBILE
-============================================================ */
+/* ================= RESPONSIVE - MOBILE ======================== */
 
 @media (max-width: 600px) {
 
     .employee-stats {
-
         grid-template-columns: 1fr;
-
         gap: 14px;
-
     }
-
 
     .employee-stat-card {
-
         min-height: 95px;
-
         padding: 20px;
-
     }
 
-
     .employee-stat-value {
-
         font-size: 25px;
-
     }
 
 }

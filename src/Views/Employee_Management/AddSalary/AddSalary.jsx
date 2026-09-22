@@ -26,31 +26,25 @@ import EmployeeHeader
 import "./AddSalary.css";
 
 
+// DEFAULT SALARY FORM DATA
+const initialSalaryFormData = {
+    employeeId: "",
+    salaryMonth: "",
+    netSalary: "",
+    professionTax: "0",
+    basic: "0.00",
+    hra: "0.00",
+    conveyance: "0.00",
+    foodAllowance: "0.00",
+    performanceIncentive: "0.00",
+    advanceDeduction: "0",
+    reimbursement: "0",
+    remark: ""
+};
+
 function AddSalary() {
 
-
-    const [formData, setFormData] = useState({
-
-        employeeId: "",
-        salaryMonth: "",
-
-        netSalary: "",
-        professionTax: "0",
-
-        basic: "0.00",
-        hra: "0.00",
-        conveyance: "0.00",
-
-        foodAllowance: "0.00",
-        performanceIncentive: "0.00",
-
-        advanceDeduction: "0",
-
-        reimbursement: "0",
-
-        remark: ""
-    });
-
+    const [formData, setFormData] = useState(initialSalaryFormData);
 
     const [employees, setEmployees] = useState([]);
     const [employeesLoading, setEmployeesLoading] = useState(true);
@@ -173,167 +167,164 @@ function AddSalary() {
         // --------------------------------------------------------
 
         setFormData((previousData) => ({
-
             ...previousData,
-
             [name]: value
-
         }));
 
     };
 
 
-    // ============================================================
-// FORM SUBMIT
-// ============================================================
-
-const handleSubmit = async (e) => {
-
-    e.preventDefault();
-
-    // VALIDATE EMPLOYEE
-
-    if (!formData.employeeId) {
-
-        window.alert(
-            "Please select an employee."
-        );
-
-        return;
-
-    }
-
-    // PREPARE SALARY DATA
-
-    const salaryData = {
-
-        month: formData.salaryMonth,
-
-        amount:
-            formData.netSalary === ""
-                ? null
-                : Number(formData.netSalary),
-
-        basic:
-            formData.basic === ""
-                ? null
-                : Number(formData.basic),
-
-        hra:
-            formData.hra === ""
-                ? null
-                : Number(formData.hra),
-
-        conveyance:
-            formData.conveyance === ""
-                ? null
-                : Number(formData.conveyance),
-
-        foodAllowance:
-            formData.foodAllowance === ""
-                ? null
-                : Number(formData.foodAllowance),
-
-        performanceIncentive:
-            formData.performanceIncentive === ""
-                ? null
-                : Number(formData.performanceIncentive),
-
-        professionTax:
-            formData.professionTax === ""
-                ? null
-                : Number(formData.professionTax),
-
-        advance:
-            formData.advanceDeduction === ""
-                ? null
-                : Number(formData.advanceDeduction),
-
-        reimbursement:
-            formData.reimbursement === ""
-                ? null
-                : Number(formData.reimbursement),
-
-        remark: formData.remark
-
+    // RESET SALARY FORM
+    const resetSalaryForm = () => {
+        setFormData(initialSalaryFormData);
     };
 
 
-    console.log(
-        "Salary data being sent:",
-        salaryData
-    );
+    // FORM SUBMIT
+    const handleSubmit = async (e) => {
 
+        e.preventDefault();
 
-    // SAVE SALARY
+        // VALIDATE EMPLOYEE
 
-    try {
+        if (!formData.employeeId) {
 
-        const response = await fetch(
-            `${API_BASE_URL}/salaries/employee/${formData.employeeId}`,
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify(salaryData)
-            }
-        );
-
-
-        // ----------------------------------------------------
-        // HANDLE BACKEND ERROR
-        // ----------------------------------------------------
-
-        if (!response.ok) {
-
-            let errorMessage =
-                "Failed to save salary.";
-
-            try {
-
-                const errorData =
-                    await response.json();
-
-                errorMessage =
-                    errorData.message ||
-                    errorData.error ||
-                    errorMessage;
-
-            } catch {
-                // Backend did not return JSON.
-            }
-            throw new Error(errorMessage);
+            window.alert(
+                "Please select an employee."
+            );
+            return;
         }
 
-        // SUCCESS
-    
-        const savedSalary =
-            await response.json();
+        // PREPARE SALARY DATA
+        const salaryData = {
+
+            month: formData.salaryMonth,
+
+            amount:
+                formData.netSalary === ""
+                    ? null
+                    : Number(formData.netSalary),
+
+            basic:
+                formData.basic === ""
+                    ? null
+                    : Number(formData.basic),
+
+            hra:
+                formData.hra === ""
+                    ? null
+                    : Number(formData.hra),
+
+            conveyance:
+                formData.conveyance === ""
+                    ? null
+                    : Number(formData.conveyance),
+
+            foodAllowance:
+                formData.foodAllowance === ""
+                    ? null
+                    : Number(formData.foodAllowance),
+
+            performanceIncentive:
+                formData.performanceIncentive === ""
+                    ? null
+                    : Number(formData.performanceIncentive),
+
+            professionTax:
+                formData.professionTax === ""
+                    ? null
+                    : Number(formData.professionTax),
+
+            advance:
+                formData.advanceDeduction === ""
+                    ? null
+                    : Number(formData.advanceDeduction),
+
+            reimbursement:
+                formData.reimbursement === ""
+                    ? null
+                    : Number(formData.reimbursement),
+
+            remark: formData.remark
+
+        };
+
 
         console.log(
-            "Salary saved successfully:",
-            savedSalary
-        );
-        window.alert(
-            "Salary saved successfully."
+            "Salary data being sent:",
+            salaryData
         );
 
-        window.location.reload();
 
-    } catch (error) {
-        console.error(
-            "Error saving salary:",
-            error
-        );
-        window.alert(
-            error.message ||
-            "Unable to save salary. Please try again."
-        );
-    }
-};
+        // SAVE SALARY
+
+        try {
+
+            const response = await fetch(
+                `${API_BASE_URL}/salaries/employee/${formData.employeeId}`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify(salaryData)
+                }
+            );
+
+
+            // ----------------------------------------------------
+            // HANDLE BACKEND ERROR
+            // ----------------------------------------------------
+
+            if (!response.ok) {
+
+                let errorMessage =
+                    "Failed to save salary.";
+
+                try {
+
+                    const errorData =
+                        await response.json();
+
+                    errorMessage =
+                        errorData.message ||
+                        errorData.error ||
+                        errorMessage;
+
+                } catch {
+                    // Backend did not return JSON.
+                }
+                throw new Error(errorMessage);
+            }
+
+            // SUCCESS
+
+            const savedSalary =
+                await response.json();
+
+            console.log(
+                "Salary saved successfully:",
+                savedSalary
+            );
+            window.alert(
+                "Salary saved successfully."
+            );
+
+            resetSalaryForm();
+
+        } catch (error) {
+            console.error(
+                "Error saving salary:",
+                error
+            );
+            window.alert(
+                error.message ||
+                "Unable to save salary. Please try again."
+            );
+        }
+    };
 
 
     // ============================================================

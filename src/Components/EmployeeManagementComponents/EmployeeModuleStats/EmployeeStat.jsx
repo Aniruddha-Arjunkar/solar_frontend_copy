@@ -8,23 +8,42 @@ function EmployeeStat({
     return (
 
         <div className="employee-stats">
-            {stats.map((stat, index) => (
-                <div
-                    className="employee-stat-card"
-                    key={index}
-                >
+            {stats.map((stat, index) => {
 
-                    <span className="employee-stat-title">
-                        {stat.title}
-                    </span>
+                const Icon = stat.icon;
+
+                return (
+                    <div
+                        className="employee-stat-card"
+                        key={index}
+                    >
+
+                        <div className="employee-stat-content">
+
+                            <span className="employee-stat-title">
+                                {stat.title}
+                            </span>
+
+                            <strong className="employee-stat-value">
+                                {stat.value}
+                            </strong>
+
+                        </div>
 
 
-                    <strong className="employee-stat-value">
-                        {stat.value}
-                    </strong>
-                </div>
-            ))}
+                    {/* ============= STAT ICON ========== */}
 
+                        <div className="employee-stat-icon">
+                            {Icon && (
+                                <Icon
+                                    size={32}
+                                    strokeWidth={1.8}
+                                />
+                            )}
+                        </div>
+                    </div>
+                );
+            })}
         </div>
 
     );

@@ -19,10 +19,8 @@ function EmployeeHeader({
     const navigate = useNavigate();
 
 
-    // ============================================================
-    // BUTTON NAVIGATION
-    // ============================================================
 
+    // BUTTON NAVIGATION
     const handleButtonClick = () => {
 
         if (buttonType === "add") {
@@ -41,68 +39,34 @@ function EmployeeHeader({
 
 
     return (
-
         <div className="employee-module-header">
 
+            {/* =====================LEFT : ICON + TITLE ================== */}
 
-            {/* ====================================================
-                LEFT : PAGE INFORMATION
-            ==================================================== */}
+            <div className="employee-module-header-left">
 
-            <div className="employee-module-heading">
-
-
-                {/* =================================================
-                    BREADCRUMB
-                ================================================= */}
-
-                {/* <div className="employee-current-page-location">
-
-                    Dashboard
-
-                    <span>
-                        /
-                    </span>
-
-                    {currectPage}
-
-                </div> */}
+                <div className="employee-module-header-icon">
+                    {Icon && (
+                        <Icon
+                            size={26}
+                            strokeWidth={1.8}
+                        />
+                    )}
+                </div>
 
 
-                {/* =================================================
-                    TITLE
-                ================================================= */}
-
-                <h1>
-
-                    {
-                        Icon && (
-                            <Icon
-                                size={35}
-                                strokeWidth={1.8}
-                            />
-                        )
-                    }
-
-                    {title}
-
-                </h1>
-
-
-                {/* =================================================
-                    DESCRIPTION
-                ================================================= */}
-
-                <p>
-                    {description}
-                </p>
-
+                <div className="employee-module-heading">
+                    <h1>
+                        {title}
+                    </h1>
+                    <p>
+                        {description}
+                    </p>
+                </div>
             </div>
 
 
-            {/* ====================================================
-                RIGHT : ACTION BUTTON
-            ==================================================== */}
+            {/* =============== RIGHT : ACTION BUTTON ===================== */}
 
             <div className="employee-module-header-button">
 
@@ -112,13 +76,9 @@ function EmployeeHeader({
                         <button
                             type="button"
                             className="employee-module-header-btn"
-                            onClick={handleButtonClick}
-                        >
-
+                            onClick={handleButtonClick}>
                             <Plus size={19} />
-
                             Add Employee
-
                         </button>
 
                     ) : (
@@ -126,25 +86,13 @@ function EmployeeHeader({
                         <button
                             type="button"
                             className="employee-module-header-btn"
-                            onClick={handleButtonClick}
-                        >
-
+                            onClick={handleButtonClick}>
                             <List size={19} />
-
                             View Employees
-
                         </button>
-
-                    )
-                }
-
+                    )}
             </div>
-
         </div>
-
     );
-
 }
-
-
 export default EmployeeHeader;

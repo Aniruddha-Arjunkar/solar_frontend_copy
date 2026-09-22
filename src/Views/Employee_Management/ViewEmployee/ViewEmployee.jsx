@@ -1,10 +1,13 @@
 import {
     UsersRound,
     Search,
-    RotateCcw
+    RotateCcw,
+    BriefcaseBusiness,
+    Clock3,
+    GraduationCap
 } from "lucide-react";
 
-import API_BASE_URL from "./../../../config/api.js"
+import API_BASE_URL from "./../../../config/api.js";
 
 import {
     useEffect,
@@ -40,7 +43,7 @@ function ViewEmployee() {
     const [activeAction, setActiveAction] =
         useState(null);
 
-        
+
     const [employeeData, setEmployeeData] =
         useState([]);
 
@@ -55,16 +58,12 @@ function ViewEmployee() {
         const fetchEmployees = async () => {
 
             try {
-
                 setLoading(true);
-
                 setError("");
-
 
                 const response = await fetch(
                     `${API_BASE_URL}/employees`
                 );
-
 
                 if (!response.ok) {
 
@@ -77,16 +76,12 @@ function ViewEmployee() {
 
                 const data =
                     await response.json();
-
-
                 console.log(
                     "Employees fetched successfully:",
                     data
                 );
 
-
                 setEmployeeData(data);
-
 
             } catch (error) {
 
@@ -101,25 +96,15 @@ function ViewEmployee() {
                     "Unable to load employees."
                 );
 
-
             } finally {
-
                 setLoading(false);
-
             }
-
         };
-
-
         fetchEmployees();
-
     }, []);
 
 
-    // ============================================================
     // TABLE COLUMNS
-    // ============================================================
-
     const columns = [
 
         {
@@ -150,10 +135,7 @@ function ViewEmployee() {
     ];
 
 
-    // ============================================================
     // SEARCH FILTER
-    // ============================================================
-
     const filteredEmployees =
         employeeData.filter(
             (employee) => {
@@ -196,76 +178,52 @@ function ViewEmployee() {
 
 
 
-// EMPLOYEE ACTION HANDLER
+    // EMPLOYEE ACTION HANDLER
 
-const handleEmployeeAction =
-    (action, employee) => {
+    const handleEmployeeAction =
+        (action, employee) => {
 
-        console.log(
-            "Employee Action:",
-            action
-        );
-
-        console.log(
-            "Selected Employee:",
-            employee
-        );
-
-
-        // ========================================================
-        // VIEW PROFILE
-        // ========================================================
-
-        if (action === "view_profile") {
-
-            navigate(
-                `/dashboard/view-employee/profile/${employee.id}`
+            console.log(
+                "Employee Action:",
+                action
             );
 
-            return;
-
-        }
-
-
-        // ========================================================
-        // UPDATE EMPLOYEE
-        // ========================================================
-
-        if (action === "update_employee") {
-
-            navigate(
-                `/dashboard/update-employee/${employee.id}`
+            console.log(
+                "Selected Employee:",
+                employee
             );
 
-            return;
 
-        }
+            // VIEW PROFILE
+            if (action === "view_profile") {
 
-    };
+                navigate(
+                    `/dashboard/view-employee/profile/${employee.id}`
+                );
+
+                return;
+
+            }
 
 
-    // ============================================================
+            // UPDATE EMPLOYEE
+            if (action === "update_employee") {
+                navigate(
+                    `/dashboard/update-employee/${employee.id}`
+                );
+                return;
+            }
+        };
+
+
     // RESET SEARCH
-    // ============================================================
-
     const handleReset = () => {
-
         setSearchTerm("");
-
     };
 
-
-    // ============================================================
+    
     // STATISTICS
-    // ============================================================
-
     const stats = [
-
-        {
-            title: "Total Employees",
-            value: employeeData.length
-        },
-
 
         {
             title: "Full Time",
@@ -274,7 +232,8 @@ const handleEmployeeAction =
                     employee =>
                         employee.employeeType ===
                         "Full Time"
-                ).length
+                ).length,
+            icon: BriefcaseBusiness
         },
 
 
@@ -285,24 +244,30 @@ const handleEmployeeAction =
                     employee =>
                         employee.employeeType ===
                         "Part Time"
-                ).length
+                ).length,
+            icon: Clock3
+        },
+
+
+        {
+            title: "Interns",
+            value:
+                employeeData.filter(
+                    employee =>
+                        employee.employeeType ===
+                        "Intern"
+                ).length,
+            icon: GraduationCap
         }
 
     ];
 
 
-    // ============================================================
-    // RENDER
-    // ============================================================
+
 
     return (
 
         <section className="view-employee-page">
-
-
-            {/* ====================================================
-                PAGE HEADER
-            ==================================================== */}
 
             <EmployeeHeader
                 currectPage="View Employees"
@@ -312,19 +277,12 @@ const handleEmployeeAction =
                 icon={UsersRound}
             />
 
-
-            {/* ====================================================
-                EMPLOYEE STATISTICS
-            ==================================================== */}
-
             <EmployeeStat
                 stats={stats}
             />
 
 
-            {/* ====================================================
-                ERROR STATE
-            ==================================================== */}
+            {/* ================== ERROR STATE ============== */}
 
             {!loading && error && (
 
@@ -332,17 +290,15 @@ const handleEmployeeAction =
                     {error}
                 </div>
             )}
-        
- {/* ====================================================
-    EMPLOYEE TABLE
-==================================================== */}
 
-    <EmployeeTable
-        columns={columns}
-        data={filteredEmployees}
-        onAction={handleEmployeeAction}
-        showAction={true}
-    />
+            {/* ============= EMPLOYEE TABLE =============== */}
+
+            <EmployeeTable
+                columns={columns}
+                data={filteredEmployees}
+                onAction={handleEmployeeAction}
+                showAction={true}
+            />
         </section>
     );
 }
