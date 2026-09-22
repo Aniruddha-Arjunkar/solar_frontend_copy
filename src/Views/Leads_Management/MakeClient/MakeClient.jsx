@@ -210,31 +210,91 @@ function MakeClient() {
         }));
     };
 
+    // ====================================================
     // GST CALCULATION
+    // ====================================================
+
     useEffect(() => {
 
         const amount =
             Number(formData.totalAmount) || 0;
 
-        if (formData.applyGst) {
+
+        // =================================================
+        // GST NOT APPLIED
+        // =================================================
+
+        if (!formData.applyGst) {
+            setGstAmount(0);
+            setFinalAmount(amount);
+            return;
+        }
+
+
+        // =================================================
+        // GST APPLIED
+        // =================================================
+
+        // -------------------------------------------------
+        // EXCLUSIVE GST
+        // -------------------------------------------------
+
+        if (formData.gstType === "exclusive") {
 
             const gst =
                 amount * 0.18;
 
-            setGstAmount(gst);
-
-            setFinalAmount(
-                amount + gst
+            setGstAmount(
+                Number(gst.toFixed(2))
             );
 
-        } else {
-            setGstAmount(0);
-            setFinalAmount(amount);
+            setFinalAmount(
+                Number(
+                    (amount + gst).toFixed(2)
+                )
+            );
+            return;
         }
+
+
+        // -------------------------------------------------
+        // INCLUSIVE GST
+        // -------------------------------------------------
+
+        if (formData.gstType === "inclusive") {
+
+            const gst =
+                (amount * 18) / 118;
+
+            setGstAmount(
+                Number(gst.toFixed(2))
+            );
+
+            // Total amount already includes GST
+            setFinalAmount(
+                Number(amount.toFixed(2))
+            );
+
+            return;
+        }
+
+        const gst =
+            amount * 0.18;
+
+        setGstAmount(
+            Number(gst.toFixed(2))
+        );
+
+        setFinalAmount(
+            Number(
+                (amount + gst).toFixed(2)
+            )
+        );
 
     }, [
         formData.totalAmount,
-        formData.applyGst
+        formData.applyGst,
+        formData.gstType
     ]);
 
 
@@ -717,234 +777,7 @@ function MakeClient() {
                     </div>
                 </div>
 
-                {/*======= SERVICE INFORMATION ==============*/}
-
-                <div className="make-client-card">
-
-                    <div className="make-client-card-header">
-                        <h2>
-                            Service Information
-                        </h2>
-                        <p>
-                            Complete the service details
-                            for this client.
-                        </p>
-                    </div>
-
-                    <div className="make-client-grid">
-
-                        <div className="form-group">
-                            <label>
-                                Service
-                            </label>
-                            <input
-                                type="text"
-                                name="service"
-                                value={formData.service}
-                                onChange={handleChange}
-                                placeholder="Enter service"
-                                required
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label>
-                                Service Date
-                            </label>
-                            <input
-                                type="date"
-                                name="serviceDate"
-                                value={formData.serviceDate}
-                                onChange={handleChange}
-                            />
-                        </div>
-
-                        <div className="form-group form-group-full">
-                            <label>
-                                Service Terms & Conditions
-                            </label>
-                            <textarea
-                                name="serviceTermCondition"
-                                value={
-                                    formData.serviceTermCondition
-                                }
-                                onChange={handleChange}
-                                placeholder="Enter service terms and conditions"
-                                rows="3"
-                            />
-                        </div>
-
-
-                        <div className="form-group form-group-full">
-                            <label>
-                                Service Covered
-                            </label>
-                            <textarea
-                                name="serviceCovered"
-                                value={formData.serviceCovered}
-                                onChange={handleChange}
-                                placeholder="Enter services covered"
-                                rows="3"
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label>
-                                Warranty
-                            </label>
-                            <input
-                                type="text"
-                                name="warranty"
-                                value={formData.warranty}
-                                onChange={handleChange}
-                                placeholder="Example: 5 Years"
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                {/*================================================
-                    PAYMENT INFORMATION
-                =================================================*/}
-
-                <div className="make-client-card">
-
-                    <div className="make-client-card-header">
-
-                        <h2>
-                            Payment Information
-                        </h2>
-
-                        <p>
-                            Enter the base service amount.
-                        </p>
-                    </div>
-
-
-                    <div className="make-client-grid">
-
-                        <div className="form-group">
-
-                            <label>
-                                Total Amount
-                            </label>
-
-                            <input
-                                type="number"
-                                name="totalAmount"
-                                value={formData.totalAmount}
-                                onChange={handleChange}
-                                placeholder="Enter amount"
-                                min="0"
-                                step="0.01"
-                                required
-                            />
-                        </div>
-
-                        {/*============= GST TOGGLE  ===============*/}
-
-                        <div className="form-group">
-                            <label>
-                                Apply GST 18%
-                            </label>
-                            <label className="gst-toggle">
-                                <input
-                                    type="checkbox"
-                                    name="applyGst"
-                                    checked={formData.applyGst}
-                                    onChange={handleChange}
-                                />
-
-                                <span className="gst-toggle-slider"></span>
-                                <span className="gst-toggle-text">
-                                    {formData.applyGst
-                                        ? "GST Applied"
-                                        : "GST Not Applied"}
-
-                                </span>
-                            </label>
-                        </div>
-
-                        {formData.applyGst && (
-
-                            <div className="form-group">
-                                <label>
-                                    GST Type
-                                </label>
-
-                                <select
-                                    name="gstType"
-                                    value={formData.gstType}
-                                    onChange={handleChange} >
-                                    <option value="exclusive">
-                                        Exclusive
-                                    </option>
-                                    <option value="inclusive">
-                                        Inclusive
-                                    </option>
-                                </select>
-                            </div>
-                        )}
-
-
-                        {formData.applyGst && (
-
-                            <div className="form-group">
-
-                                <label>
-                                    GST Invoice Number
-                                </label>
-                                <input
-                                    type="text"
-                                    name="gstInvoiceNo"
-                                    value={formData.gstInvoiceNo}
-                                    onChange={handleChange}
-                                    placeholder="Enter GST invoice number"
-                                />
-                            </div>
-                        )}
-                    </div>
-
-
-                    {/*============ AMOUNT SUMMARY ===============*/}
-
-                    <div className="amount-summary">
-
-                        <div>
-                            <span>
-                                Base Amount
-                            </span>
-                            <strong>
-                                ₹ {formatAmount(formData.totalAmount)}
-                            </strong>
-                        </div>
-
-
-                        <div>
-                            <span>
-                                GST (18%)
-                            </span>
-                            <strong>
-                                ₹ {formatAmount(gstAmount)}
-                            </strong>
-                        </div>
-
-
-                        <div className="final-amount">
-                            <span>
-                                Final Amount
-                            </span>
-
-                            <strong>
-                                ₹ {formatAmount(finalAmount)}
-                            </strong>
-                        </div>
-                    </div>
-                </div>
-
-                {/*====================================================
-    ASSIGN TO
-====================================================*/}
+                {/*================ ASSIGN TO =================*/}
 
                 <div className="make-client-card">
 
@@ -1098,6 +931,274 @@ function MakeClient() {
                     )}
                 </div>
 
+                {/*======= SERVICE INFORMATION ==============*/}
+
+                <div className="make-client-card">
+
+                    <div className="make-client-card-header">
+                        <h2>
+                            Service Information
+                        </h2>
+                        <p>
+                            Complete the service details
+                            for this client.
+                        </p>
+                    </div>
+
+                    <div className="make-client-grid">
+
+                        <div className="form-group">
+                            <label>
+                                Service
+                            </label>
+                            <input
+                                type="text"
+                                name="service"
+                                value={formData.service}
+                                onChange={handleChange}
+                                placeholder="Enter service"
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label>
+                                Service Date
+                            </label>
+                            <input
+                                type="date"
+                                name="serviceDate"
+                                value={formData.serviceDate}
+                                onChange={handleChange}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label>
+                                Warranty
+                            </label>
+                            <input
+                                type="text"
+                                name="warranty"
+                                value={formData.warranty}
+                                onChange={handleChange}
+                                placeholder="Example: 5 Years"
+                            />
+                        </div>
+                        <div className="form-group">
+
+                            <label>
+                                Consumer Number
+                            </label>
+                            <input
+                                type="text"
+                                name="consumerNo"
+                                value={formData.consumerNo}
+                                onChange={handleChange}
+                                placeholder="Enter consumer number"
+                            />
+                        </div>
+
+                        <div className="form-group">
+
+                            <label>
+                                Subdivision
+                            </label>
+                            <input
+                                type="text"
+                                name="subdivision"
+                                value={formData.subdivision}
+                                onChange={handleChange}
+                                placeholder="Enter subdivision" />
+                        </div>
+
+
+                        <div className="form-group">
+
+                            <label>
+                                Technical Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="technicalName"
+                                value={formData.technicalName}
+                                onChange={handleChange}
+                                placeholder="Enter technical person name"
+                            />
+                        </div>
+                        <div className="form-group form-group-full">
+                            <label>
+                                Service Terms & Conditions
+                            </label>
+                            <textarea
+                                name="serviceTermCondition"
+                                value={
+                                    formData.serviceTermCondition
+                                }
+                                onChange={handleChange}
+                                placeholder="Enter service terms and conditions"
+                                rows="3"
+                            />
+                        </div>
+
+
+                        <div className="form-group form-group-full">
+                            <label>
+                                Service Covered
+                            </label>
+                            <textarea
+                                name="serviceCovered"
+                                value={formData.serviceCovered}
+                                onChange={handleChange}
+                                placeholder="Enter services covered"
+                                rows="3"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/*================================================
+                    PAYMENT INFORMATION
+                =================================================*/}
+
+                <div className="make-client-card">
+
+                    <div className="make-client-card-header">
+
+                        <h2>
+                            Payment Information
+                        </h2>
+
+                        <p>
+                            Enter the base service amount.
+                        </p>
+                    </div>
+
+
+                    <div className="make-client-grid">
+
+                        <div className="form-group">
+
+                            <label>
+                                Total Amount
+                            </label>
+
+                            <input
+                                type="number"
+                                name="totalAmount"
+                                value={formData.totalAmount}
+                                onChange={handleChange}
+                                placeholder="Enter amount"
+                                min="0"
+                                step="0.01"
+                                required
+                            />
+                        </div>
+
+                        {/*============= GST TOGGLE  ===============*/}
+
+                        <div className="form-group">
+                            <label>
+                                Apply GST 18%
+                            </label>
+                            <label className="gst-toggle">
+                                <input
+                                    type="checkbox"
+                                    name="applyGst"
+                                    checked={formData.applyGst}
+                                    onChange={handleChange}
+                                />
+
+                                <span className="gst-toggle-slider"></span>
+                                <span className="gst-toggle-text">
+                                    {formData.applyGst
+                                        ? "GST Applied"
+                                        : "GST Not Applied"}
+
+                                </span>
+                            </label>
+                        </div>
+
+                        {formData.applyGst && (
+
+                            <div className="form-group">
+                                <label>
+                                    GST Type
+                                </label>
+
+                                <select
+                                    name="gstType"
+                                    value={formData.gstType}
+                                    onChange={handleChange} >
+                                    <option value="exclusive">
+                                        Exclusive
+                                    </option>
+                                    <option value="inclusive">
+                                        Inclusive
+                                    </option>
+                                </select>
+                            </div>
+                        )}
+
+
+                        {formData.applyGst && (
+
+                            <div className="form-group">
+
+                                <label>
+                                    GST Invoice Number
+                                </label>
+                                <input
+                                    type="text"
+                                    name="gstInvoiceNo"
+                                    value={formData.gstInvoiceNo}
+                                    onChange={handleChange}
+                                    placeholder="Enter GST invoice number"
+                                />
+                            </div>
+                        )}
+                    </div>
+
+
+                    {/*============ AMOUNT SUMMARY ===============*/}
+
+                    <div className="amount-summary">
+
+                        <div>
+                            <span>
+                                Base Amount
+                            </span>
+                            <strong>
+                                ₹ {formatAmount(formData.totalAmount)}
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <span>
+                                GST (18%)
+                            </span>
+                            <strong>
+                                ₹ {formatAmount(gstAmount)}
+                            </strong>
+                        </div>
+
+
+                        <div className="final-amount">
+                            <span>
+                                Final Amount
+                            </span>
+
+                            <strong>
+                                ₹ {formatAmount(finalAmount)}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+
+                
+
 
                 {/*=========== GST / BILLING INFORMATION ===============*/}
 
@@ -1158,48 +1259,6 @@ function MakeClient() {
                             />
                         </div> */}
 
-                        <div className="form-group">
-
-                            <label>
-                                Consumer Number
-                            </label>
-                            <input
-                                type="text"
-                                name="consumerNo"
-                                value={formData.consumerNo}
-                                onChange={handleChange}
-                                placeholder="Enter consumer number"
-                            />
-                        </div>
-
-                        <div className="form-group">
-
-                            <label>
-                                Subdivision
-                            </label>
-                            <input
-                                type="text"
-                                name="subdivision"
-                                value={formData.subdivision}
-                                onChange={handleChange}
-                                placeholder="Enter subdivision" />
-                        </div>
-
-
-                        <div className="form-group">
-
-                            <label>
-                                Technical Name
-                            </label>
-
-                            <input
-                                type="text"
-                                name="technicalName"
-                                value={formData.technicalName}
-                                onChange={handleChange}
-                                placeholder="Enter technical person name"
-                            />
-                        </div>
                     </div>
                 </div>
 

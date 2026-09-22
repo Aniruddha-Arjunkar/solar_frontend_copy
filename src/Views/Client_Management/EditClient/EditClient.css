@@ -3,13 +3,9 @@
 ===================================================== */
 
 .edit-client-page {
-
     width: 100%;
-
     padding: 30px;
-
     box-sizing: border-box;
-
 }
 
 
@@ -17,108 +13,6 @@
    PAGE HEADER
 ===================================================== */
 
-.edit-client-page-header {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: flex-start;
-
-    gap: 20px;
-
-    margin-bottom: 30px;
-
-}
-
-
-.edit-client-page-heading p {
-
-    margin: 0 0 8px;
-
-    font-size: 14px;
-
-}
-
-
-.edit-client-page-heading h1 {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    margin: 0 0 8px;
-
-}
-
-
-.edit-client-page-heading span {
-
-    font-size: 15px;
-
-}
-
-
-/* =====================================================
-   BACK BUTTON
-===================================================== */
-
-.edit-client-back-btn {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    padding: 10px 16px;
-
-    border: none;
-
-    border-radius: 6px;
-
-    cursor: pointer;
-
-    font-size: 17px;
-
-    font-weight: 550;
-
-    background: linear-gradient(
-        135deg,
-        rgba(20, 202, 190, 0.85),
-        rgba(13, 181, 173, 0.70)
-    );
-
-    color: white;
-
-    text-decoration: none;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-
-}
-
-
-.edit-client-back-btn:hover {
-
-    background: linear-gradient(
-        135deg,
-        rgba(20, 202, 190, 0.95),
-        rgba(13, 181, 173, 0.82)
-    );
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 5px 14px rgba(80, 75, 180, 0.20);
-
-    color: #ffffff;
-
-}
 
 
 /* =====================================================
@@ -126,9 +20,7 @@
 ===================================================== */
 
 .edit-client-form {
-
     width: 100%;
-
 }
 
 
@@ -137,28 +29,21 @@
 ===================================================== */
 
 .edit-client-card {
-
     width: 100%;
-
-    margin-bottom: 24px;
-
+    margin-bottom: 10px;
     padding: 25px;
-
     box-sizing: border-box;
-
     border-radius: 10px;
-
     border: 1px solid #e5e7eb;
-
     background: #ffffff;
-
+     box-shadow:
+        8px 0 30px rgba(15, 23, 42, 0.18),
+        inset -1px 0 rgba(255, 255, 255, 0.08);
 }
 
 
 .edit-client-card-header {
-
     margin-bottom: 22px;
-
 }
 
 
@@ -228,39 +113,26 @@
 .edit-client-form-group select {
 
     width: 100%;
-
     box-sizing: border-box;
-
     padding: 11px 13px;
-
     border: 1px solid #d1d5db;
-
     border-radius: 6px;
-
     outline: none;
-
     font-size: 15px;
-
-    /* font-family: inherit; */
-
     background: #ffffff;
 
 }
 
 
 .edit-client-form-group textarea {
-
     resize: vertical;
-
 }
 
 
 .edit-client-form-group input:focus,
 .edit-client-form-group textarea:focus,
 .edit-client-form-group select:focus {
-
     border-color: #2563eb;
-
 }
 
 
@@ -269,43 +141,27 @@
 ===================================================== */
 
 .edit-client-gst-toggle {
-
     min-height: 42px;
-
     display: flex !important;
-
     flex-direction: row !important;
-
     align-items: center;
-
     gap: 12px;
-
     cursor: pointer;
-
 }
 
 
 .edit-client-gst-toggle input {
-
     display: none;
-
 }
 
 
 .edit-client-gst-slider {
-
     position: relative;
-
     width: 48px;
-
     height: 26px;
-
     border-radius: 20px;
-
     background: #d1d5db;
-
     transition: 0.2s;
-
 }
 
 

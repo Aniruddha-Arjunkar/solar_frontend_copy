@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
-import API_BASE_URL from "./../../../config/api"; 
+import API_BASE_URL from "./../../../config/api";
 
 import {
     UserRoundPlus,
@@ -25,7 +25,7 @@ function EditClient() {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
 
-    
+
     const [formData, setFormData] = useState({
 
         // Customer Information
@@ -52,7 +52,7 @@ function EditClient() {
         shippingAddress: "",
 
         // Additional Information
-        documents: "",
+        // documents: "",
         consumerNo: "",
         subdivision: "",
         technicalName: ""
@@ -169,8 +169,8 @@ function EditClient() {
 
                     // Additional Information
 
-                    documents:
-                        data.documents || "",
+                    // documents:
+                    //     data.documents || "",
 
                     consumerNo:
                         data.consumerNo || "",
@@ -245,36 +245,103 @@ function EditClient() {
     // GST CALCULATION
     // =====================================================
 
+    // =====================================================
+    // GST CALCULATION
+    // =====================================================
+
     useEffect(() => {
 
         const amount =
             Number(formData.totalAmount) || 0;
 
 
-        if (formData.applyGst) {
+        // =================================================
+        // GST NOT APPLIED
+        // =================================================
 
-            const gst =
-                amount * 0.18;
-
-
-            setGstAmount(gst);
-
-
-            setFinalAmount(
-                amount + gst
-            );
-
-        } else {
+        if (!formData.applyGst) {
 
             setGstAmount(0);
 
             setFinalAmount(amount);
 
+            return;
         }
+
+
+        // =================================================
+        // GST APPLIED
+        // =================================================
+
+        // -------------------------------------------------
+        // EXCLUSIVE GST
+        // Total Amount does NOT contain GST
+        // -------------------------------------------------
+
+        if (formData.gstType === "exclusive") {
+
+            const gst =
+                amount * 0.18;
+
+            setGstAmount(
+                Number(gst.toFixed(2))
+            );
+
+            setFinalAmount(
+                Number(
+                    (amount + gst).toFixed(2)
+                )
+            );
+
+            return;
+        }
+
+
+        // -------------------------------------------------
+        // INCLUSIVE GST
+        // Total Amount ALREADY contains GST
+        // -------------------------------------------------
+
+        if (formData.gstType === "inclusive") {
+
+            const gst =
+                (amount * 18) / 118;
+
+            setGstAmount(
+                Number(gst.toFixed(2))
+            );
+
+            // Final amount remains the entered amount
+            setFinalAmount(
+                Number(amount.toFixed(2))
+            );
+
+            return;
+        }
+
+
+        // =================================================
+        // FALLBACK
+        // Treat unknown type as EXCLUSIVE
+        // =================================================
+
+        const gst =
+            amount * 0.18;
+
+        setGstAmount(
+            Number(gst.toFixed(2))
+        );
+
+        setFinalAmount(
+            Number(
+                (amount + gst).toFixed(2)
+            )
+        );
 
     }, [
         formData.totalAmount,
-        formData.applyGst
+        formData.applyGst,
+        formData.gstType
     ]);
 
 
@@ -408,8 +475,8 @@ function EditClient() {
 
                 // Additional Information
 
-                documents:
-                    formData.documents,
+                // documents:
+                //     formData.documents,
 
                 consumerNo:
                     formData.consumerNo,
@@ -558,15 +625,10 @@ function EditClient() {
                     >
                         Go Back
                     </button>
-
                 </div>
-
             </section>
-
         );
-
     }
-
 
     // =====================================================
     // PAGE
@@ -581,46 +643,41 @@ function EditClient() {
                PAGE HEADER
             ================================================= */}
 
-            <div className="edit-client-page-header">
+            <div className="module-page-header">
 
-                <div className="edit-client-page-heading">
+                <div className="module-page-header-left">
+                    <div className="module-page-header-icon">
+                        <UserRoundPlus
+                            size={26}
+                            strokeWidth={1.8}
+                        />
+                    </div>
 
-                    <p>
-                        Dashboard / Client Management / Edit Client
-                    </p>
-
-                    <h1>
-
-                        <UserRoundPlus size={40} />
-
-                        Edit Client
-
-                    </h1>
-
-                    <span>
-                        Update complete customer,
-                        service and billing information.
-                    </span>
-
+                    <div className="module-page-heading">
+                        <h1>
+                            Edit Client
+                        </h1>
+                        <p>
+                            Update complete customer,
+                            service and billing information.
+                        </p>
+                    </div>
                 </div>
 
+                <div className="module-page-header-button">
 
-                <button
-                    type="button"
-                    className="edit-client-back-btn"
-                    onClick={() =>
-                        navigate(-1)
-                    }
-                >
-
-                    <ArrowLeft size={18} />
-
-                    Back
-
-                </button>
-
+                    <button
+                        type="button"
+                        className="module-header-btn"
+                        onClick={() =>
+                            navigate(-1)
+                        }
+                    >
+                        <ArrowLeft size={19} />
+                        Back
+                    </button>
+                </div>
             </div>
-
 
 
             {/* =================================================
@@ -640,15 +697,12 @@ function EditClient() {
                 <div className="edit-client-card">
 
                     <div className="edit-client-card-header">
-
                         <h2>
                             Customer Information
                         </h2>
-
                         <p>
                             Update the customer's basic information.
                         </p>
-
                     </div>
 
 
@@ -669,7 +723,6 @@ function EditClient() {
                                 placeholder="Enter customer name"
                                 required
                             />
-
                         </div>
 
 
@@ -721,14 +774,9 @@ function EditClient() {
                                 onChange={handleChange}
                                 placeholder="Enter customer address"
                             />
-
                         </div>
-
-
                     </div>
-
                 </div>
-
 
 
                 {/* =================================================
@@ -738,20 +786,16 @@ function EditClient() {
                 <div className="edit-client-card">
 
                     <div className="edit-client-card-header">
-
                         <h2>
                             Service Information
                         </h2>
-
                         <p>
                             Update the service details for this client.
                         </p>
-
                     </div>
 
 
                     <div className="edit-client-grid">
-
 
                         <div className="edit-client-form-group">
 
@@ -786,7 +830,67 @@ function EditClient() {
 
                         </div>
 
+                        <div className="edit-client-form-group">
 
+                            <label>
+                                Warranty
+                            </label>
+
+                            <input
+                                type="text"
+                                name="warranty"
+                                value={formData.warranty}
+                                onChange={handleChange}
+                                placeholder="Example: 5 Years"
+                            />
+                        </div>
+                        <div className="edit-client-form-group">
+
+                            <label>
+                                Consumer Number
+                            </label>
+
+                            <input
+                                type="text"
+                                name="consumerNo"
+                                value={formData.consumerNo}
+                                onChange={handleChange}
+                                placeholder="Enter consumer number"
+                            />
+
+                        </div>
+
+
+                        <div className="edit-client-form-group">
+
+                            <label>
+                                Subdivision
+                            </label>
+
+                            <input
+                                type="text"
+                                name="subdivision"
+                                value={formData.subdivision}
+                                onChange={handleChange}
+                                placeholder="Enter subdivision"
+                            />
+                        </div>
+
+
+                        <div className="edit-client-form-group">
+
+                            <label>
+                                Technical Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="technicalName"
+                                value={formData.technicalName}
+                                onChange={handleChange}
+                                placeholder="Enter technical person name"
+                            />
+                        </div>
                         <div className="edit-client-form-group edit-client-form-group-full">
 
                             <label>
@@ -821,29 +925,8 @@ function EditClient() {
                             />
 
                         </div>
-
-
-                        <div className="edit-client-form-group">
-
-                            <label>
-                                Warranty
-                            </label>
-
-                            <input
-                                type="text"
-                                name="warranty"
-                                value={formData.warranty}
-                                onChange={handleChange}
-                                placeholder="Example: 5 Years"
-                            />
-
-                        </div>
-
-
                     </div>
-
                 </div>
-
 
 
                 {/* =================================================
@@ -853,20 +936,16 @@ function EditClient() {
                 <div className="edit-client-card">
 
                     <div className="edit-client-card-header">
-
                         <h2>
                             Payment Information
                         </h2>
-
                         <p>
                             Update the base service amount and GST.
                         </p>
-
                     </div>
 
 
                     <div className="edit-client-grid">
-
 
                         <div className="edit-client-form-group">
 
@@ -886,7 +965,6 @@ function EditClient() {
                             />
 
                         </div>
-
 
 
                         {/* GST TOGGLE */}
@@ -916,11 +994,8 @@ function EditClient() {
                                         : "GST Not Applied"}
 
                                 </span>
-
                             </label>
-
                         </div>
-
 
 
                         {formData.applyGst && (
@@ -944,14 +1019,9 @@ function EditClient() {
                                     <option value="inclusive">
                                         Inclusive
                                     </option>
-
                                 </select>
-
                             </div>
-
                         )}
-
-
 
                         {formData.applyGst && (
 
@@ -968,13 +1038,9 @@ function EditClient() {
                                     onChange={handleChange}
                                     placeholder="Enter GST invoice number"
                                 />
-
                             </div>
-
                         )}
-
                     </div>
-
 
 
                     {/* =================================================
@@ -988,13 +1054,10 @@ function EditClient() {
                             <span>
                                 Base Amount
                             </span>
-
                             <strong>
                                 ₹ {formatAmount(formData.totalAmount)}
                             </strong>
-
                         </div>
-
 
                         <div>
 
@@ -1083,7 +1146,7 @@ function EditClient() {
                         </div>
 
 
-                        <div className="edit-client-form-group">
+                        {/* <div className="edit-client-form-group">
 
                             <label>
                                Required Documents
@@ -1097,65 +1160,9 @@ function EditClient() {
                                 placeholder="Example: Aadhar, PAN"
                             />
 
-                        </div>
-
-
-                        <div className="edit-client-form-group">
-
-                            <label>
-                                Consumer Number
-                            </label>
-
-                            <input
-                                type="text"
-                                name="consumerNo"
-                                value={formData.consumerNo}
-                                onChange={handleChange}
-                                placeholder="Enter consumer number"
-                            />
-
-                        </div>
-
-
-                        <div className="edit-client-form-group">
-
-                            <label>
-                                Subdivision
-                            </label>
-
-                            <input
-                                type="text"
-                                name="subdivision"
-                                value={formData.subdivision}
-                                onChange={handleChange}
-                                placeholder="Enter subdivision"
-                            />
-
-                        </div>
-
-
-                        <div className="edit-client-form-group">
-
-                            <label>
-                                Technical Name
-                            </label>
-
-                            <input
-                                type="text"
-                                name="technicalName"
-                                value={formData.technicalName}
-                                onChange={handleChange}
-                                placeholder="Enter technical person name"
-                            />
-
-                        </div>
-
-
+                        </div> */}
                     </div>
-
                 </div>
-
-
 
                 {/* =================================================
                    FOOTER
@@ -1168,8 +1175,7 @@ function EditClient() {
                         className="edit-client-cancel-btn"
                         onClick={() =>
                             navigate(-1)
-                        }
-                    >
+                        }>
                         Cancel
                     </button>
 
@@ -1177,8 +1183,7 @@ function EditClient() {
                     <button
                         type="submit"
                         className="edit-client-save-btn"
-                        disabled={saving}
-                    >
+                        disabled={saving}>
 
                         <Save size={18} />
 
@@ -1187,17 +1192,9 @@ function EditClient() {
                             : "Update Client"}
 
                     </button>
-
                 </div>
-
-
             </form>
-
         </section>
-
     );
-
 }
-
-
 export default EditClient;
