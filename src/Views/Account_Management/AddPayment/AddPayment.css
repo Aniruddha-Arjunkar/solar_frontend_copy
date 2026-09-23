@@ -630,6 +630,28 @@
     font-size: 13px;
 }
 
+/* ============================================================
+   CUSTOM PAYMENT METHOD
+============================================================ */
+
+.accounts-add-payment-other-method {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.accounts-add-payment-other-method label {
+    color: #383d45;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.accounts-add-payment-other-method label > span {
+    color: #dc2626;
+    margin-left: 3px;
+}
+
 
 /* ============================================================
    RESPONSIVE

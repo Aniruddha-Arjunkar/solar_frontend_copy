@@ -19,17 +19,8 @@ import API_BASE_URL from "./../../../config/api";
 
 function AddPayment() {
 
-    // ============================================================
-    // ROUTER
-    // ============================================================
-
     const { clientId } = useParams();
     const navigate = useNavigate();
-
-
-    // ============================================================
-    // STATE
-    // ============================================================
 
     const [client, setClient] = useState(null);
     const [payments, setPayments] = useState([]);
@@ -40,6 +31,8 @@ function AddPayment() {
     );
     const [dueDate, setDueDate] = useState("");
     const [paymentGateway, setPaymentGateway] = useState("");
+
+    const [otherPaymentMethod, setOtherPaymentMethod] = useState("");
 
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
@@ -273,11 +266,19 @@ function AddPayment() {
         // --------------------------------------------------------
 
         if (!paymentGateway) {
-
             setError(
                 "Please select a payment method."
             );
+            return;
+        }
 
+        if (
+            paymentGateway === "Other" &&
+            !otherPaymentMethod.trim()
+        ) {
+            setError(
+                "Please enter the payment method."
+            );
             return;
         }
 
@@ -287,8 +288,13 @@ function AddPayment() {
         // --------------------------------------------------------
 
         try {
-
             setSaving(true);
+
+            // FINAL PAYMENT METHOD
+            const finalPaymentGateway =
+                paymentGateway === "Other"
+                    ? otherPaymentMethod.trim()
+                    : paymentGateway;
 
             const response = await fetch(
                 `${API_BASE_URL}/payments/client/${clientId}`,
@@ -303,7 +309,7 @@ function AddPayment() {
                         paidAmount: amount,
                         paymentDate: paymentDate,
                         dueDate: dueDate || null,
-                        paymentGateway: paymentGateway
+                        paymentGateway: finalPaymentGateway
                     })
                 }
             );
@@ -531,9 +537,9 @@ function AddPayment() {
 
                 </div>
 
-                <div className="accounts-add-payment-client-id">
+                {/* <div className="accounts-add-payment-client-id">
                     Client ID: #{client.id}
-                </div>
+                </div> */}
 
             </div>
 
@@ -805,11 +811,17 @@ function AddPayment() {
 
                             <select
                                 value={paymentGateway}
-                                onChange={(event) =>
-                                    setPaymentGateway(
-                                        event.target.value
-                                    )
-                                }
+                                onChange={(event) => {
+
+                                    const value = event.target.value;
+
+                                    setPaymentGateway(value);
+
+                                    if (value !== "Other") {
+                                        setOtherPaymentMethod("");
+                                    }
+
+                                }}
                                 disabled={saving}
                             >
 
@@ -846,6 +858,42 @@ function AddPayment() {
                         </div>
 
                     </div>
+
+                    {/* ==================================================
+    CUSTOM PAYMENT METHOD
+================================================== */}
+
+                    {paymentGateway === "Other" && (
+
+                        <div className="accounts-add-payment-other-method">
+
+                            <label>
+                                Enter Payment Method
+                                <span>*</span>
+                            </label>
+
+                            <div className="accounts-add-payment-input-wrapper">
+
+                                <CreditCard size={18} />
+
+                                <input
+                                    type="text"
+                                    value={otherPaymentMethod}
+                                    onChange={(event) =>
+                                        setOtherPaymentMethod(
+                                            event.target.value
+                                        )
+                                    }
+                                    placeholder="Enter payment method"
+                                    disabled={saving}
+                                    required
+                                />
+
+                            </div>
+
+                        </div>
+
+                    )}
 
 
                     {/* ==================================================
@@ -911,44 +959,30 @@ function AddPayment() {
                         >
                             Cancel
                         </button>
-
-
                         <button
                             type="submit"
                             className="accounts-add-payment-submit-btn"
                             disabled={
                                 saving ||
                                 currentDue <= 0
-                            }
-                        >
-
+                            }>
                             {saving ? (
-
                                 <>
                                     <LoaderCircle
                                         size={18}
                                         className="accounts-add-payment-loading-spin"
                                     />
-
                                     Saving Payment...
                                 </>
-
                             ) : (
-
                                 <>
                                     <CreditCard size={18} />
-
                                     Save Payment
                                 </>
-
                             )}
-
                         </button>
-
                     </div>
-
                 </form>
-
             </div>
 
 

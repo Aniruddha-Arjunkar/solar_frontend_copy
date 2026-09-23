@@ -25,19 +25,10 @@ function DuePayment() {
 
     const navigate = useNavigate();
 
-
-    // ========================================================
-    // STATE
-    // ========================================================
-
     const [clients, setClients] = useState([]);
-
     const [duePayments, setDuePayments] = useState([]);
-
     const [searchTerm, setSearchTerm] = useState("");
-
     const [loading, setLoading] = useState(true);
-
     const [error, setError] = useState("");
 
 
@@ -225,21 +216,14 @@ function DuePayment() {
 
 
                         return {
-
                             client,
-
                             payments,
-
                             payableAmount,
-
                             totalPaid,
-
                             dueAmount,
-
                             dueDate:
                                 latestPayment?.dueDate ||
                                 null
-
                         };
 
                     })
@@ -523,13 +507,9 @@ function DuePayment() {
                             loading
                                 ? "accounts-due-refresh-spin"
                                 : ""
-                        }
-                    />
-
+                        }/>
                     Refresh
-
                 </button>
-
             </div>
 
 
@@ -638,23 +618,17 @@ function DuePayment() {
                 <div className="accounts-due-table-top">
 
                     <div>
-
                         <h2>
                             Outstanding Payments
                         </h2>
-
                         <p>
                             Clients with pending payment amounts
                         </p>
-
                     </div>
 
 
                     <div className="accounts-due-search">
-
-                        <Search
-                            size={18}
-                        />
+                        <Search size={18}/>
 
                         <input
                             type="text"
@@ -666,9 +640,7 @@ function DuePayment() {
                                 )
                             }
                         />
-
                     </div>
-
                 </div>
 
 
@@ -680,9 +652,7 @@ function DuePayment() {
 
                     <div className="accounts-due-error">
 
-                        <AlertCircle
-                            size={20}
-                        />
+                        <AlertCircle size={20}/>
 
                         <span>
                             {error}
@@ -694,9 +664,7 @@ function DuePayment() {
                         >
                             Try Again
                         </button>
-
                     </div>
-
                 )}
 
 
@@ -859,9 +827,9 @@ function DuePayment() {
                                                                     "Unnamed Client"}
                                                             </strong>
 
-                                                            <small>
+                                                            {/* <small>
                                                                 Client ID: #{client.id}
-                                                            </small>
+                                                            </small> */}
 
                                                         </div>
 
@@ -991,35 +959,19 @@ function DuePayment() {
 
                                                         Add Payment
 
-                                                        <ArrowRight
-                                                            size={15}
-                                                        />
-
+                                                        <ArrowRight size={15}/>
                                                     </button>
-
                                                 </td>
-
                                             </tr>
-
                                         );
-
                                     }
                                 )}
-
                             </tbody>
-
                         </table>
-
                     </div>
-
                 )}
-
             </div>
-
         </section>
-
     );
-
 }
-
 export default DuePayment;
