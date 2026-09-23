@@ -4,7 +4,8 @@ import {
   ChevronRight,
   Search,
   UsersRound,
-  RotateCcw
+  RotateCcw,
+  Eye
 } from "lucide-react";
 
 import API_BASE_URL from "./../../../config/api";
@@ -15,8 +16,9 @@ import {
   useState
 } from "react";
 
-import "./ViewAttendence.css";
+import { useNavigate } from "react-router";
 
+import "./ViewAttendence.css";
 
 function ViewAttendence() {
 
@@ -34,73 +36,20 @@ function ViewAttendence() {
     return `${year}-${month}`;
   };
 
-
-  // ============================================================
-  // EMPLOYEE STATE
-  // ============================================================
+  const navigate = useNavigate();
 
   const [employees, setEmployees] = useState([]);
+  const [employeesLoading, setEmployeesLoading] = useState(true);
+  const [employeesError, setEmployeesError] = useState("");
 
-  const [employeesLoading, setEmployeesLoading] =
-    useState(true);
+  const [selectedMonth, setSelectedMonth] = useState(getCurrentMonth());
+  const [searchEmployee, setSearchEmployee] = useState("");
 
-  const [employeesError, setEmployeesError] =
-    useState("");
+  const [viewMonth, setViewMonth] = useState(getCurrentMonth());
 
-
-  // ============================================================
-  // FILTER STATE
-  // ============================================================
-
-  const [selectedMonth, setSelectedMonth] =
-    useState(getCurrentMonth());
-
-  const [searchEmployee, setSearchEmployee] =
-    useState("");
-
-
-  // ============================================================
-  // REPORT STATE
-  // ============================================================
-
-  const [viewMonth, setViewMonth] =
-    useState(getCurrentMonth());
-
-
-  // ============================================================
-  // ATTENDANCE DATA
-  // ============================================================
-
-  /*
-      Attendance backend will be connected later.
-
-      Future data will look approximately like:
-
-      [
-          {
-              employeeId: 1,
-              attendanceDate: "2026-09-01",
-              status: "Present"
-          },
-          {
-              employeeId: 1,
-              attendanceDate: "2026-09-02",
-              status: "Absent"
-          }
-      ]
-
-      For now this remains empty, so the calendar
-      displays "-" for days without attendance data.
-  */
-
-   const [attendanceRecords, setAttendanceRecords] =
-  useState([]);
-
-  const [attendanceLoading, setAttendanceLoading] =
-  useState(true);
-
-  const [attendanceError, setAttendanceError] =
-  useState("");
+  const [attendanceRecords, setAttendanceRecords] = useState([]);
+  const [attendanceLoading, setAttendanceLoading] = useState(true);
+  const [attendanceError, setAttendanceError] = useState("");
 
 
   // ============================================================
@@ -112,11 +61,8 @@ function ViewAttendence() {
     const fetchEmployees = async () => {
 
       try {
-
         setEmployeesLoading(true);
-
         setEmployeesError("");
-
 
         const response = await fetch(
           `${API_BASE_URL}/employees`
@@ -131,19 +77,15 @@ function ViewAttendence() {
 
         }
 
-
         const data =
           await response.json();
-
 
         console.log(
           "Employees for attendance report:",
           data
         );
 
-
         setEmployees(data);
-
 
       } catch (error) {
 
@@ -157,92 +99,83 @@ function ViewAttendence() {
           error.message ||
           "Unable to load employees."
         );
+      } finally {
+        setEmployeesLoading(false);
+      }
+    };
+
+    fetchEmployees();
+  }, []);
+
+  // ============================================================
+  // FETCH MONTHLY ATTENDANCE
+  // ============================================================
+
+  useEffect(() => {
+
+    const fetchAttendance = async () => {
+
+      try {
+
+        setAttendanceLoading(true);
+        setAttendanceError("");
+
+        const response = await fetch(
+          `${API_BASE_URL}/attendance/month/${viewMonth}`
+        );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Failed to fetch attendance records."
+          );
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+        console.log(
+          "Attendance records for report:",
+          data
+        );
+
+
+        setAttendanceRecords(data);
+
+
+      } catch (error) {
+
+        console.error(
+          "Error fetching attendance:",
+          error
+        );
+
+
+        setAttendanceError(
+          error.message ||
+          "Unable to load attendance records."
+        );
+
+
+        setAttendanceRecords([]);
 
 
       } finally {
 
-        setEmployeesLoading(false);
+        setAttendanceLoading(false);
 
       }
-
     };
 
-
-    fetchEmployees();
-
-  }, []);
-
-    // ============================================================
-// FETCH MONTHLY ATTENDANCE
-// ============================================================
-
-useEffect(() => {
-
-  const fetchAttendance = async () => {
-
-    try {
-
-      setAttendanceLoading(true);
-
-      setAttendanceError("");
-
-
-      const response = await fetch(
-        `${API_BASE_URL}/attendance/month/${viewMonth}`
-      );
-
-
-      if (!response.ok) {
-
-        throw new Error(
-          "Failed to fetch attendance records."
-        );
-
-      }
-
-
-      const data =
-        await response.json();
-
-
-      console.log(
-        "Attendance records for report:",
-        data
-      );
-
-
-      setAttendanceRecords(data);
-
-
-    } catch (error) {
-
-      console.error(
-        "Error fetching attendance:",
-        error
-      );
-
-
-      setAttendanceError(
-        error.message ||
-        "Unable to load attendance records."
-      );
-
-
-      setAttendanceRecords([]);
-
-
-    } finally {
-
-      setAttendanceLoading(false);
-
+    if (viewMonth) {
+      fetchAttendance();
     }
-  };
 
-  if (viewMonth) {
-    fetchAttendance();
-  }
-
-}, [viewMonth]);
+  }, [viewMonth]);
 
 
   // ============================================================
@@ -442,13 +375,19 @@ useEffect(() => {
   // ============================================================
 
   const handleViewReport = (e) => {
-
     e.preventDefault();
-
     setViewMonth(selectedMonth);
-
   };
 
+  // ============= VIEW INDIVIDUAL EMPLOYEE ATTENDANCE ==========================
+
+  const handleViewEmployeeAttendance = (employee) => {
+
+    navigate(
+      `/dashboard/view-employee-attendance/${employee.id}?month=${viewMonth}`
+    );
+
+  };
 
   // ============================================================
   // PREVIOUS MONTH
@@ -856,14 +795,8 @@ useEffect(() => {
 
         </div>
 
-
-        {/* ==================================================
-                    ATTENDANCE TABLE
-                ================================================== */}
-
+        {/* ===================  ATTENDANCE TABLE ============ */}
         <div className="attendance-view-table-card">
-
-
           {employeesLoading && (
 
             <div className="attendance-view-state">
@@ -917,7 +850,7 @@ useEffect(() => {
             )}
 
 
-          { !employeesLoading &&
+          {!employeesLoading &&
             !employeesError &&
             !attendanceLoading &&
             !attendanceError &&
@@ -1005,41 +938,54 @@ useEffect(() => {
 
                           <td className="attendance-view-employee-cell">
 
-                            <div className="attendance-view-employee-info">
+                            <div className="attendance-view-employee-row">
 
-                              <div className="attendance-view-avatar">
+                              <div className="attendance-view-employee-info">
 
-                                {employee.name
-                                  ?.charAt(
-                                    0
-                                  )
-                                  ?.toUpperCase() ||
-                                  "E"}
+                                <div className="attendance-view-avatar">
 
+                                  {employee.name
+                                    ?.charAt(0)
+                                    ?.toUpperCase() ||
+                                    "E"}
+
+                                </div>
+
+                                <div className="attendance-view-employee-text">
+
+                                  <strong>
+                                    {employee.name}
+                                  </strong>
+
+                                  <span>
+                                    {employee.designation ||
+                                      "Employee"}
+                                  </span>
+                                </div>
                               </div>
 
+                              <button
+                                type="button"
+                                className="attendance-view-employee-btn"
+                                onClick={() =>
+                                  handleViewEmployeeAttendance(
+                                    employee
+                                  )
+                                }
+                                title="View individual attendance"
+                              >
 
-                              <div>
-
-                                <strong>
-                                  {
-                                    employee.name
-                                  }
-                                </strong>
+                                <Eye size={14} />
 
                                 <span>
-                                  {
-                                    employee.designation ||
-                                    "Employee"
-                                  }
+                                  View
                                 </span>
 
-                              </div>
+                              </button>
 
                             </div>
 
                           </td>
-
 
                           {/* DAYS */}
 
@@ -1061,11 +1007,8 @@ useEffect(() => {
                                   key={
                                     day.date
                                   }
-                                  className={`
-                                                                        attendance-view-day-cell
-                                                                        ${getStatusClass(
-                                    status
-                                  )}
+                                  className={`attendance-view-day-cell
+                                    ${getStatusClass(status)}
                                                                     `}
                                   title={
                                     status
@@ -1097,7 +1040,7 @@ useEffect(() => {
                 </table>
               </div>
             )}
-        </div> 
+        </div>
       </div>
     </section>
   );

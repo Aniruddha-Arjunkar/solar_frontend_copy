@@ -67,26 +67,6 @@
 }
 
 
-/* ============================================================
-   OLD BREADCRUMB
-   Kept available in case needed later.
-============================================================ */
-
-/* .module-currectPage-location {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    margin-bottom: 5px;
-    font-size: 13px;
-    color: #64748b;
-}
-
-
-.module-currectPage-location span {
-    color: #94a3b8;
-} */
-
-
 /* ================= HEADER BUTTON SECTION ========================= */
 
 .module-page-header-button {

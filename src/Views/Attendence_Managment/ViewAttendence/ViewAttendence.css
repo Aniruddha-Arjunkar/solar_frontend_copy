@@ -137,9 +137,7 @@
 }
 
 
-/* ============================================================
-   VIEW REPORT BUTTON
-============================================================ */
+/* =========================== VIEW REPORT BUTTON ========================= */
 
 .attendance-view-report-btn {
     min-height: 42px;
@@ -167,9 +165,7 @@
 }
 
 
-/* ============================================================
-   RESET BUTTON
-============================================================ */
+/* ==============  RESET BUTTON ======================= */
 
 .attendance-view-reset-btn {
     width: 42px;
@@ -196,9 +192,7 @@
 }
 
 
-/* ============================================================
-   TOOLBAR
-============================================================ */
+/* ======================= TOOLBAR ======================= */
 
 .attendance-view-toolbar {
     display: flex;
@@ -273,9 +267,7 @@
 }
 
 
-/* ============================================================
-   LEGEND
-============================================================ */
+/* =================== LEGEND ======================= */
 
 .attendance-view-legend {
     display: flex;
@@ -347,9 +339,7 @@
 }
 
 
-/* ============================================================
-   TABLE CARD
-============================================================ */
+/* ================== TABLE CARD ====================== */
 
 .attendance-view-table-card {
     overflow: hidden;
@@ -379,9 +369,7 @@
 }
 
 
-/* ============================================================
-   TABLE HEADER
-============================================================ */
+/* ==================== TABLE HEADER ============================ */
 
 .attendance-view-table thead th {
     height: 48px;
@@ -444,9 +432,7 @@
 }
 
 
-/* ============================================================
-   TABLE BODY
-============================================================ */
+/* =================== TABLE BODY ======================= */
 
 .attendance-view-table tbody td {
     height: 58px;
@@ -474,9 +460,7 @@
 }
 
 
-/* ============================================================
-   NUMBER CELL
-============================================================ */
+/* ================== NUMBER CELL ======================= */
 
 .attendance-view-number-cell {
     color: #64748b;
@@ -485,9 +469,7 @@
 }
 
 
-/* ============================================================
-   EMPLOYEE CELL
-============================================================ */
+/* ====================  EMPLOYEE CELL ========================= */
 
 .attendance-view-employee-cell {
     padding-left: 12px !important;
@@ -516,7 +498,7 @@
 }
 
 
-.attendance-view-employee-info strong {
+.attendance-view-employee-text strong {
     display: block;
     overflow: hidden;
     color: #1e293b;
@@ -527,7 +509,7 @@
 }
 
 
-.attendance-view-employee-info span {
+.attendance-view-employee-text span {
     display: block;
     margin-top: 2px;
     overflow: hidden;
@@ -537,10 +519,79 @@
     white-space: nowrap;
 }
 
+/* =================== EMPLOYEE ROW ========================== */
 
-/* ============================================================
-   DAY CELL
-============================================================ */
+.attendance-view-employee-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+}
+
+
+/* ========================== EMPLOYEE INFORMATION ============================= */
+
+.attendance-view-employee-info {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+
+/* =================== EMPLOYEE TEXT ============================== */
+
+.attendance-view-employee-text {
+    min-width: 0;
+}
+
+
+/* ======================= VIEW ATTENDANCE BUTTON =========================== */
+
+.attendance-view-employee-btn {
+    flex-shrink: 0;
+    min-height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 6px 10px;
+    border: 1px solid #bfdbfe;
+    border-radius: 7px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 10px;
+    font-weight: 650;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* ======================= VIEW BUTTON HOVER ======================== */
+
+.attendance-view-employee-btn:hover {
+    background: #dbeafe;
+    border-color: #93c5fd;
+    color: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+
+/*============== VIEW BUTTON ACTIVE ========================== */
+
+.attendance-view-employee-btn:active {
+    transform: translateY(0);
+}
+
+
+/* ==================== DAY CELL ======================= */
 
 .attendance-view-day-cell {
     padding: 0 !important;
@@ -638,9 +689,7 @@
 }
 
 
-/* ============================================================
-   LOADING / EMPTY / ERROR
-============================================================ */
+/* ===================== LOADING / EMPTY / ERROR ====================== */
 
 .attendance-view-state {
     min-height: 220px;
@@ -683,9 +732,7 @@
 }
 
 
-/* ============================================================
-   INFORMATION MESSAGE
-============================================================ */
+/* ================== INFORMATION MESSAGE ===================== */
 
 .attendance-view-info {
     display: flex;
@@ -706,9 +753,7 @@
 }
 
 
-/* ============================================================
-   RESPONSIVE
-============================================================ */
+/* ================= RESPONSIVE ================== */
 
 @media (max-width: 900px) {
 

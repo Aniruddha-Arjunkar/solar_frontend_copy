@@ -35,6 +35,7 @@ import UpdateEmployee from "./Views/Employee_Management/UpdateEmployee/UpdateEmp
 //============= Attendence Management =====================
 import AddAttendence from "./Views/Attendence_Managment/AddAttendence/AddAttendence.jsx";
 import ViewAttendence from "./Views/Attendence_Managment/ViewAttendence/ViewAttendence.jsx";
+import ViewEmployeeAttendance from "./Views/Attendence_Managment/ViewEmployeeAttendance/ViewEmployeeAttendance.jsx";
 
 //================ Account Management =======================
 import AddAdvance from './Views/Account_Management/AddAdvance/AddAdvance.jsx';
@@ -115,6 +116,7 @@ function App() {
             {/* Attendence Management */}
              <Route path="dashboard/add-attendence" element={<AddAttendence/>}/>
              <Route path="dashboard/view-attendence" element={<ViewAttendence/>}/>
+             <Route path="/dashboard/view-employee-attendance/:employeeId" element={<ViewEmployeeAttendance />}/>
 
             {/* Account Management */}
             <Route path="dashboard/add-advance" element={<AddAdvance/>}/>

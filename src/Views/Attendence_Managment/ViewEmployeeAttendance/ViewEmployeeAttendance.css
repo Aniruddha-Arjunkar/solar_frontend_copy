@@ -1,0 +1,791 @@
+/* ============================================================
+   VIEW EMPLOYEE ATTENDANCE PAGE
+============================================================ */
+
+.employee-attendance-page {
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #f7f8fa;
+}
+
+
+/* ============================================================
+   PAGE HEADER
+============================================================ */
+
+.employee-attendance-header {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+
+.employee-attendance-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    min-width: 0;
+}
+
+
+.employee-attendance-header-icon {
+    width: 54px;
+    height: 54px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #eef2ff;
+
+    color: #2563eb;
+}
+
+
+.employee-attendance-header-left h1 {
+    margin: 0;
+
+    color: #0f172a;
+
+    font-size: 27px;
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+
+.employee-attendance-header-left p {
+    margin: 5px 0 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   BACK BUTTON
+============================================================ */
+
+.employee-attendance-back-btn {
+    min-height: 40px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 9px 15px;
+
+    border: 1px solid #dbe3ef;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #334155;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.employee-attendance-back-btn:hover {
+    background: #f8fafc;
+
+    border-color: #cbd5e1;
+
+    transform: translateY(-1px);
+}
+
+
+.employee-attendance-back-btn:active {
+    transform: translateY(0);
+}
+
+
+/* ============================================================
+   MONTH TOOLBAR
+============================================================ */
+
+.employee-attendance-toolbar {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+
+    padding: 14px 16px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 11px;
+
+    box-shadow:
+        0 3px 12px rgba(15, 23, 42, 0.04);
+}
+
+
+/* ============================================================
+   MONTH NAVIGATION BUTTONS
+============================================================ */
+
+.employee-attendance-toolbar > button {
+    min-height: 38px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 8px 13px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #2563eb;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.employee-attendance-toolbar > button:hover {
+    background: #eff6ff;
+
+    border-color: #93c5fd;
+
+    transform: translateY(-1px);
+}
+
+
+.employee-attendance-toolbar > button:active {
+    transform: translateY(0);
+}
+
+
+/* ============================================================
+   CURRENT MONTH
+============================================================ */
+
+.employee-attendance-toolbar > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-width: 160px;
+}
+
+
+.employee-attendance-toolbar > div svg {
+    color: #2563eb;
+}
+
+
+.employee-attendance-toolbar > div strong {
+    color: #0f172a;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   STATUS LEGEND
+============================================================ */
+
+.employee-attendance-legend {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 18px;
+
+    padding: 13px 15px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 11px;
+}
+
+
+/* ============================================================
+   LEGEND ITEM
+============================================================ */
+
+.employee-attendance-legend span {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 5px;
+
+    min-height: 27px;
+
+    padding: 5px 9px;
+
+    border-radius: 14px;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   LEGEND COLORS
+============================================================ */
+
+.employee-attendance-legend span:nth-child(1) {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+
+.employee-attendance-legend span:nth-child(2) {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+
+.employee-attendance-legend span:nth-child(3) {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+
+.employee-attendance-legend span:nth-child(4) {
+    background: #cffafe;
+    color: #0e7490;
+}
+
+
+.employee-attendance-legend span:nth-child(5) {
+    background: #e5e7eb;
+    color: #475569;
+}
+
+
+.employee-attendance-legend span:nth-child(6) {
+    background: #1f2937;
+    color: #ffffff;
+}
+
+
+/* ============================================================
+   CALENDAR
+============================================================ */
+
+.employee-attendance-calendar {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, minmax(0, 1fr));
+
+    gap: 10px;
+
+    padding: 16px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 5px 18px rgba(15, 23, 42, 0.05);
+}
+
+
+/* ============================================================
+   CALENDAR HEADER
+============================================================ */
+
+.employee-attendance-calendar-head {
+    min-height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: #334155;
+
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   EMPTY CALENDAR CELLS
+============================================================ */
+
+.employee-attendance-calendar-empty {
+    min-height: 82px;
+
+    border: 1px solid transparent;
+}
+
+
+/* ============================================================
+   CALENDAR DAY CELL
+============================================================ */
+
+.employee-attendance-calendar-cell {
+    min-height: 82px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 10px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dbe2ea;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.employee-attendance-calendar-cell:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 10px rgba(15, 23, 42, 0.08);
+}
+
+
+/* ============================================================
+   DAY NUMBER
+============================================================ */
+
+.employee-attendance-calendar-cell strong {
+    color: #0f172a;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   STATUS LABEL
+============================================================ */
+
+.employee-attendance-calendar-cell span {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   PRESENT
+============================================================ */
+
+.employee-attendance-present {
+    background: #d1e7dd;
+
+    border-color: #b7dbc9;
+}
+
+
+.employee-attendance-present span {
+    color: #15803d;
+}
+
+
+/* ============================================================
+   ABSENT
+============================================================ */
+
+.employee-attendance-absent {
+    background: #f8d7da;
+
+    border-color: #f1b8be;
+}
+
+
+.employee-attendance-absent span {
+    color: #dc2626;
+}
+
+
+/* ============================================================
+   LEAVE
+============================================================ */
+
+.employee-attendance-leave {
+    background: #fff3cd;
+
+    border-color: #f1df9f;
+}
+
+
+.employee-attendance-leave span {
+    color: #b45309;
+}
+
+
+/* ============================================================
+   HALF DAY
+============================================================ */
+
+.employee-attendance-half-day {
+    background: #cff4fc;
+
+    border-color: #a6e4ef;
+}
+
+
+.employee-attendance-half-day span {
+    color: #0e7490;
+}
+
+
+/* ============================================================
+   HOLIDAY
+============================================================ */
+
+.employee-attendance-holiday {
+    background: #e5e7eb;
+
+    border-color: #d1d5db;
+}
+
+
+.employee-attendance-holiday span {
+    color: #475569;
+}
+
+
+/* ============================================================
+   WEEK OFF
+============================================================ */
+
+.employee-attendance-week-off {
+    background: #212529;
+
+    border-color: #212529;
+}
+
+
+.employee-attendance-week-off strong {
+    color: #ffffff;
+}
+
+
+.employee-attendance-week-off span {
+    color: #ffffff;
+}
+
+
+/* ============================================================
+   EMPTY / NO ATTENDANCE
+============================================================ */
+
+.employee-attendance-empty {
+    background: #ffffff;
+}
+
+
+.employee-attendance-empty span {
+    color: #94a3b8;
+}
+
+
+/* ============================================================
+   STATE / ERROR
+============================================================ */
+
+.employee-attendance-state {
+    min-height: 420px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    color: #64748b;
+}
+
+
+.employee-attendance-state svg {
+    color: #2563eb;
+}
+
+
+.employee-attendance-state h2 {
+    margin: 0;
+
+    color: #0f172a;
+
+    font-size: 19px;
+}
+
+
+.employee-attendance-state p {
+    margin: 0;
+
+    max-width: 420px;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+.employee-attendance-state button {
+    margin-top: 8px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    min-height: 38px;
+
+    padding: 8px 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #1677f0;
+
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.employee-attendance-state button:hover {
+    background: #1269d6;
+}
+
+
+/* ============================================================
+   RESPONSIVE - 900px
+============================================================ */
+
+@media (max-width: 900px) {
+
+    .employee-attendance-page {
+        padding: 18px;
+    }
+
+    .employee-attendance-calendar {
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .employee-attendance-calendar-cell {
+        min-height: 75px;
+    }
+
+}
+
+
+/* ============================================================
+   RESPONSIVE - 700px
+============================================================ */
+
+@media (max-width: 700px) {
+
+    .employee-attendance-header {
+        align-items: flex-start;
+    }
+
+    .employee-attendance-header-left {
+        align-items: flex-start;
+    }
+
+    .employee-attendance-header-left h1 {
+        font-size: 23px;
+    }
+
+    .employee-attendance-header-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .employee-attendance-toolbar {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .employee-attendance-toolbar > div {
+        order: -1;
+        width: 100%;
+    }
+
+    .employee-attendance-calendar {
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+    }
+
+}
+
+
+/* ============================================================
+   RESPONSIVE - 500px
+============================================================ */
+
+@media (max-width: 500px) {
+
+    .employee-attendance-page {
+        padding: 14px;
+    }
+
+    .employee-attendance-header {
+        flex-direction: column;
+    }
+
+    .employee-attendance-back-btn {
+        width: 100%;
+    }
+
+    .employee-attendance-toolbar {
+        padding: 12px;
+    }
+
+    .employee-attendance-toolbar > button {
+        flex: 1;
+    }
+
+    .employee-attendance-toolbar > div strong {
+        font-size: 15px;
+    }
+
+    .employee-attendance-calendar {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 8px;
+    }
+
+    .employee-attendance-calendar-head {
+        min-height: 35px;
+
+        font-size: 11px;
+    }
+
+    .employee-attendance-calendar-cell {
+        min-height: 70px;
+    }
+
+    .employee-attendance-legend {
+        gap: 6px;
+    }
+
+}
+
+
+/* ============================================================
+   RESPONSIVE - 360px
+============================================================ */
+
+@media (max-width: 360px) {
+
+    .employee-attendance-calendar {
+        grid-template-columns: 1fr;
+    }
+
+    .employee-attendance-calendar-head {
+        display: none;
+    }
+
+    .employee-attendance-calendar-empty {
+        display: none;
+    }
+
+}
