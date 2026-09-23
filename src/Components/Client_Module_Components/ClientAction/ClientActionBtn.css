@@ -99,3 +99,50 @@
 .client-action-delete:hover {
     background: #fef2f2;
 }
+
+/* ============================================================
+   SINGLE VIEW DETAIL BUTTON
+============================================================ */
+
+.client-action-view-btn {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 7px;
+    background: #1677f0;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* ============================================================
+   VIEW DETAIL HOVER
+============================================================ */
+
+.client-action-view-btn:hover {
+    background: #1269d6;
+    transform: translateY(-1px);
+    box-shadow:
+        0 4px 10px rgba(22, 119, 240, 0.20);
+}
+
+
+/* ============================================================
+   VIEW DETAIL ACTIVE
+============================================================ */
+
+.client-action-view-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}

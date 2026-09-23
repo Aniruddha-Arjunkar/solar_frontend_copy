@@ -158,6 +158,34 @@ function ClientActionBtn({
         return null;
     };
 
+    // ============================================================
+    // VIEW CLIENT : SINGLE ACTION BUTTON
+    // ============================================================
+
+    if (type === "view-client") {
+
+        return (
+
+            <div className="client-action-btn-container">
+
+                <button
+                    type="button"
+                    className="client-action-view-btn"
+                    onClick={() =>
+                        handleAction("view_detail")
+                    }>
+                    <Eye size={17} />
+                    <span>
+                        View Detail
+                    </span>
+
+                </button>
+
+            </div>
+
+        );
+    }
+
 
     return (
 
@@ -181,7 +209,7 @@ function ClientActionBtn({
                     className={
                         open
                             ? "client-action-arrow-open"
-                            : ""}/>
+                            : ""} />
             </button>
 
 
