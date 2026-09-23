@@ -384,7 +384,7 @@ function ViewAttendence() {
   const handleViewEmployeeAttendance = (employee) => {
 
     navigate(
-      `/dashboard/view-employee-attendance/${employee.id}?month=${viewMonth}`
+        `/dashboard/view-employee-attendance/${employee.id}?month=${viewMonth}&from=attendance`
     );
 
   };
@@ -420,9 +420,7 @@ function ViewAttendence() {
     const previousValue =
       `${previousYear}-${previousMonth}`;
 
-
     setSelectedMonth(previousValue);
-
     setViewMonth(previousValue);
 
   };
@@ -461,7 +459,6 @@ function ViewAttendence() {
 
 
     setSelectedMonth(nextValue);
-
     setViewMonth(nextValue);
 
   };
@@ -607,9 +604,7 @@ function ViewAttendence() {
           <div className="attendance-view-filter-group">
 
             <label htmlFor="attendanceViewMonth">
-
               Select Month
-
             </label>
 
 

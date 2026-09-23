@@ -33,6 +33,8 @@ function ViewEmployeeAttendance() {
 
     const navigate = useNavigate();
 
+    const attendanceSource = searchParams.get("from");
+
     const [employee,setEmployee] = useState(null);
     const [attendanceRecords,setAttendanceRecords] = useState([]);
     const [selectedMonth,setSelectedMonth] = useState(
@@ -324,6 +326,23 @@ function ViewEmployeeAttendance() {
             }
         );
 
+        // ============================================================
+// BACK TO PREVIOUS MODULE
+// ============================================================
+
+const handleBack = () => {
+
+    if (attendanceSource === "profile") {
+        navigate(`/dashboard/view-employee/profile/${employeeId}`);
+        return;
+    }
+
+    navigate(
+        "/dashboard/view-attendence"
+    );
+
+};
+
 
     // =============== LOADING ============
 
@@ -331,15 +350,11 @@ function ViewEmployeeAttendance() {
 
         return (
             <section className="employee-attendance-page">
-
                 <div className="employee-attendance-state">
-
                     <p>
                         Loading employee attendance...
                     </p>
-
                 </div>
-
             </section>
         );
 
@@ -370,11 +385,7 @@ function ViewEmployeeAttendance() {
 
                     <button
                         type="button"
-                        onClick={() =>
-                            navigate(
-                                "/dashboard/view-attendence"
-                            )
-                        }
+                        onClick={handleBack}
                     >
                         <ArrowLeft size={17} />
                         Back
@@ -413,9 +424,8 @@ function ViewEmployeeAttendance() {
                 <button
                     type="button"
                     className="employee-attendance-back-btn"
-                    onClick={() =>
-                        navigate("/dashboard/view-attendence")
-                    }>
+                    onClick={handleBack}
+                    >
                     <ArrowLeft size={17} />
                     Back
                 </button>
