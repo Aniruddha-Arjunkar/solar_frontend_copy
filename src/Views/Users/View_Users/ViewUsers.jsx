@@ -9,37 +9,28 @@ import {
     UserPlus,
     UserRound,
     Mail,
-    Phone
+    Phone,
+    Eye,
+    EyeOff
 } from "lucide-react";
-
 import API_BASE_URL from "./../../../config/api";
-
 import axios from "axios";
-
 import { useState, useEffect } from "react";
-
 import "./ViewUsers.css";
 
 
 function ViewUsers() {
 
-    // ============================================================
-    // STATE
-    // ============================================================
-
     const [showForm, setShowForm] = useState(false);
-
     const [users, setUsers] = useState([]);
-
     const [searchTerm, setSearchTerm] = useState("");
-
     const [editingUserId, setEditingUserId] = useState(null);
-
     const [loading, setLoading] = useState(true);
-
     const [submitting, setSubmitting] = useState(false);
-
     const [error, setError] = useState("");
+
+
+    const [showPassword, setShowPassword] = useState(false);
 
 
     const [formData, setFormData] = useState({
@@ -48,9 +39,6 @@ function ViewUsers() {
         email: "",
         password: ""
     });
-
-
-
 
     // ============================================================
     // RESET FORM
@@ -66,6 +54,7 @@ function ViewUsers() {
         });
 
         setEditingUserId(null);
+        setShowPassword(false);
         setShowForm(false);
     };
 
@@ -92,22 +81,11 @@ function ViewUsers() {
             );
 
         } catch (error) {
-
-            console.error(
-                "Error fetching users:",
-                error
-            );
-
-            setError(
-                "Unable to load users. Please try again."
-            );
-
+            console.error("Error fetching users:", error);
+            setError("Unable to load users. Please try again.");
         } finally {
-
             setLoading(false);
-
         }
-
     };
 
 
@@ -116,9 +94,7 @@ function ViewUsers() {
     // ============================================================
 
     useEffect(() => {
-
         fetchUsers();
-
     }, []);
 
 
@@ -153,6 +129,7 @@ function ViewUsers() {
             password: ""
         });
 
+        setShowPassword(false);
         setShowForm(true);
 
     };
@@ -266,6 +243,7 @@ function ViewUsers() {
             password: user.password || ""
         });
 
+        setShowPassword(false);
         setShowForm(true);
 
     };
@@ -362,15 +340,8 @@ function ViewUsers() {
         if (submitting) {
             return;
         }
-
         resetForm();
-
     };
-
-
-    // ============================================================
-    // RENDER
-    // ============================================================
 
     return (
 
@@ -389,15 +360,7 @@ function ViewUsers() {
                         <Users size={28} />
                     </div>
 
-
                     <div>
-
-                        {/* <div className="accounts-user-management-breadcrumb">
-                            Dashboard
-                            <span>/</span>
-                            User Management
-                        </div> */}
-                        
                         <h1>
                             User Management
                         </h1>
@@ -418,92 +381,10 @@ function ViewUsers() {
 
 
             {/* ====================================================
-                STAT CARDS
-            ==================================================== */}
-
-            {/* <div className="accounts-user-management-stats"> */}
-
-
-            {/* TOTAL USERS */}
-
-            {/* <div className="accounts-user-management-stat-card">
-
-                    <div className="accounts-user-management-stat-icon">
-                        <Users size={21} />
-                    </div>
-
-
-                    <div>
-
-                        <span>
-                            Total Users
-                        </span>
-
-                        <strong>
-                            {users.length}
-                        </strong>
-
-                    </div>
-
-                </div> */}
-
-
-            {/* SEARCH RESULTS */}
-
-            {/* <div className="accounts-user-management-stat-card">
-
-                    <div className="accounts-user-management-stat-icon">
-                        <Search size={21} />
-                    </div>
-
-
-                    <div>
-
-                        <span>
-                            Showing
-                        </span>
-
-                        <strong>
-                            {filteredUsers.length}
-                        </strong>
-
-                    </div>
-
-                </div> */}
-
-
-            {/* SYSTEM ACCESS */}
-
-            {/* <div className="accounts-user-management-stat-card">
-
-                    <div className="accounts-user-management-stat-icon">
-                        <UserRound size={21} />
-                    </div>
-
-
-                    <div>
-
-                        <span>
-                            System Accounts
-                        </span>
-
-                        <strong>
-                            {users.length}
-                        </strong>
-
-                    </div>
-
-                </div>
-
-            </div> */}
-
-
-            {/* ====================================================
                 ERROR MESSAGE
             ==================================================== */}
 
             {error && (
-
                 <div className="accounts-user-management-error">
 
                     <span>
@@ -517,9 +398,7 @@ function ViewUsers() {
                     >
                         Try Again
                     </button>
-
                 </div>
-
             )}
 
 
@@ -535,17 +414,13 @@ function ViewUsers() {
                 <div className="accounts-user-management-table-header">
 
                     <div>
-
                         <h2>
                             All Users
                         </h2>
-
                         <p>
                             Manage users registered in the system.
                         </p>
-
                     </div>
-
 
                     <div className="accounts-user-management-table-controls">
 
@@ -579,9 +454,7 @@ function ViewUsers() {
                                 >
                                     <X size={15} />
                                 </button>
-
                             )}
-
                         </div>
 
 
@@ -595,9 +468,7 @@ function ViewUsers() {
                                 ? "User"
                                 : "Users"
                             }
-
                         </span>
-
 
                         {/* REFRESH */}
 
@@ -606,8 +477,7 @@ function ViewUsers() {
                             className="accounts-user-management-refresh-btn"
                             onClick={fetchUsers}
                             disabled={loading}
-                            title="Refresh users"
-                        >
+                            title="Refresh users">
 
                             <RefreshCw
                                 size={17}
@@ -615,13 +485,9 @@ function ViewUsers() {
                                     loading
                                         ? "accounts-user-management-spin"
                                         : ""
-                                }
-                            />
-
+                                } />
                         </button>
-
                     </div>
-
                 </div>
 
 
@@ -635,15 +501,12 @@ function ViewUsers() {
 
                         <RefreshCw
                             size={30}
-                            className="accounts-user-management-spin"
-                        />
+                            className="accounts-user-management-spin" />
 
                         <p>
                             Loading users...
                         </p>
-
                     </div>
-
                 ) : filteredUsers.length === 0 ? (
 
                     /* ==================================================
@@ -809,86 +672,61 @@ function ViewUsers() {
                 ADD / EDIT USER MODAL
             ==================================================== */}
             {showForm && (
-
                 <div
                     className="accounts-user-management-overlay"
                     onMouseDown={(event) => {
-
                         if (
                             event.target === event.currentTarget &&
                             !submitting
                         ) {
                             handleCloseForm();
                         }
-
-                    }}
-                >
+                    }}>
 
                     <div className="accounts-user-management-modal">
-
 
                         {/* MODAL HEADER */}
 
                         <div className="accounts-user-management-modal-header">
-
                             <div className="accounts-user-management-modal-title">
-
                                 <div className="accounts-user-management-modal-icon">
-
                                     {editingUserId
                                         ? <Pencil size={20} />
                                         : <UserRoundPlus size={20} />
                                     }
-
                                 </div>
 
-
                                 <div>
-
                                     <h2>
-
                                         {editingUserId
                                             ? "Edit User"
                                             : "Add New User"
                                         }
-
                                     </h2>
-
                                     <p>
-
                                         {editingUserId
                                             ? "Update user account information."
                                             : "Create a new system user account."
                                         }
-
                                     </p>
-
                                 </div>
-
                             </div>
-
 
                             <button
                                 type="button"
                                 className="accounts-user-management-close-btn"
                                 onClick={handleCloseForm}
-                                disabled={submitting}
-                            >
+                                disabled={submitting}>
 
                                 <X size={20} />
-
                             </button>
-
                         </div>
-
 
                         {/* MODAL FORM */}
 
                         <form
                             className="accounts-user-management-form"
-                            onSubmit={handleSubmitUser}
-                        >
-
+                            onSubmit={handleSubmitUser}>
 
                             {/* NAME */}
 
@@ -899,9 +737,7 @@ function ViewUsers() {
                                 </label>
 
                                 <div className="accounts-user-management-form-input">
-
                                     <UserRound size={17} />
-
                                     <input
                                         type="text"
                                         id="user-name"
@@ -911,9 +747,7 @@ function ViewUsers() {
                                         onChange={handleInputChange}
                                         required
                                     />
-
                                 </div>
-
                             </div>
 
 
@@ -926,9 +760,7 @@ function ViewUsers() {
                                 </label>
 
                                 <div className="accounts-user-management-form-input">
-
                                     <Phone size={17} />
-
                                     <input
                                         type="tel"
                                         id="user-contact"
@@ -938,24 +770,18 @@ function ViewUsers() {
                                         onChange={handleInputChange}
                                         required
                                     />
-
                                 </div>
-
                             </div>
 
 
                             {/* EMAIL */}
 
                             <div className="accounts-user-management-form-group">
-
                                 <label htmlFor="user-email">
                                     Email
                                 </label>
-
                                 <div className="accounts-user-management-form-input">
-
                                     <Mail size={17} />
-
                                     <input
                                         type="email"
                                         id="user-email"
@@ -965,9 +791,7 @@ function ViewUsers() {
                                         onChange={handleInputChange}
                                         required
                                     />
-
                                 </div>
-
                             </div>
 
 
@@ -984,7 +808,11 @@ function ViewUsers() {
                                     <UserRound size={17} />
 
                                     <input
-                                        type="password"
+                                        type={
+                                            showPassword
+                                                ? "text"
+                                                : "password"
+                                        }
                                         id="user-password"
                                         name="password"
                                         placeholder="Enter password"
@@ -993,8 +821,36 @@ function ViewUsers() {
                                         required
                                     />
 
-                                </div>
+                                    <button
+                                        type="button"
+                                        className="accounts-user-management-password-toggle"
+                                        onClick={() =>
+                                            setShowPassword(
+                                                (currentValue) =>
+                                                    !currentValue
+                                            )
+                                        }
+                                        aria-label={
+                                            showPassword
+                                                ? "Hide password"
+                                                : "Show password"
+                                        }
+                                        title={
+                                            showPassword
+                                                ? "Hide password"
+                                                : "Show password"
+                                        }
+                                    >
 
+                                        {showPassword ? (
+                                            <EyeOff size={17} />
+                                        ) : (
+                                            <Eye size={17} />
+                                        )}
+
+                                    </button>
+
+                                </div>
                             </div>
 
 

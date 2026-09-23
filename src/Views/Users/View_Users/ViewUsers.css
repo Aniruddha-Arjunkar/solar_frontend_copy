@@ -1,6 +1,4 @@
-/* ============================================================
-   USER MANAGEMENT PAGE
-   ============================================================ */
+/* =================== USER MANAGEMENT PAGE ======================== */
 
 .accounts-user-management-page {
     width: 100%;
@@ -8,10 +6,7 @@
     box-sizing: border-box;
 }
 
-
-/* ============================================================
-   PAGE HEADER
-   ============================================================ */
+/* =================== PAGE HEADER ============================= */
 
 .accounts-user-management-header {
     display: flex;
@@ -21,13 +16,11 @@
     margin-bottom: 28px;
 }
 
-
 .accounts-user-management-header-left {
     display: flex;
     align-items: center;
     gap: 16px;
 }
-
 
 .accounts-user-management-header-icon {
     width: 56px;
@@ -41,44 +34,21 @@
     flex-shrink: 0;
 }
 
-
-/* .accounts-user-management-breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    margin-bottom: 5px;
-    font-size: 13px;
-    color: #64748b;
-}
-
-
-.accounts-user-management-breadcrumb span {
-    color: #94a3b8;
-} */
-
-
 .accounts-user-management-header h1 {
     margin: 0;
-
     font-size: 27px;
     font-weight: 700;
-
     color: #0f172a;
 }
 
-
 .accounts-user-management-header p {
     margin: 5px 0 0;
-
     color: #64748b;
-
     font-size: 14px;
 }
 
 
-/* ============================================================
-   ADD USER BUTTON
-   ============================================================ */
+/* ======================== ADD USER BUTTON ======================== */
 
 .accounts-user-management-add-btn {
     display: inline-flex;
@@ -108,35 +78,23 @@
 }
 
 
-/* ============================================================
-   STATISTICS
-   ============================================================ */
+/* ============== STATISTICS ===================== */
 
 .accounts-user-management-stats {
     display: grid;
-
     grid-template-columns: repeat(3, 1fr);
-
     gap: 18px;
-
     margin-bottom: 24px;
 }
-
 
 .accounts-user-management-stat-card {
     display: flex;
     align-items: center;
-
     gap: 15px;
-
     padding: 20px;
-
     background: #ffffff;
-
     border: 1px solid #e2e8f0;
-
     border-radius: 14px;
-
     box-shadow:
         0 2px 8px rgba(15, 23, 42, 0.04);
 }
@@ -145,19 +103,14 @@
 .accounts-user-management-stat-icon {
     width: 44px;
     height: 44px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     border-radius: 11px;
-
     background: #f1f5f9;
     color: #334155;
-
     flex-shrink: 0;
 }
-
 
 .accounts-user-management-stat-card span {
     display: block;
@@ -175,9 +128,7 @@
 }
 
 
-/* ============================================================
-   ERROR
-   ============================================================ */
+/* ================== ERROR ===================== */
 
 .accounts-user-management-error {
     display: flex;
@@ -208,9 +159,7 @@
 }
 
 
-/* ============================================================
-   TABLE CARD
-   ============================================================ */
+/* ============== TABLE CARD ================== */
 
 .accounts-user-management-table-card {
     background: #ffffff;
@@ -222,9 +171,7 @@
 }
 
 
-/* ============================================================
-   TABLE HEADER
-   ============================================================ */
+/* =============== TABLE HEADER ====================== */
 
 .accounts-user-management-table-header {
     display: flex;
@@ -251,9 +198,7 @@
 }
 
 
-/* ============================================================
-   TABLE CONTROLS
-   ============================================================ */
+/* ======================= TABLE CONTROLS ===================== */
 
 .accounts-user-management-table-controls {
     display: flex;
@@ -262,9 +207,7 @@
 }
 
 
-/* ============================================================
-   SEARCH
-   ============================================================ */
+/* ========== SEARCH ======================= */
 
 .accounts-user-management-search {
     height: 40px;
@@ -328,27 +271,20 @@
 }
 
 
-/* ============================================================
-   USER COUNT
-   ============================================================ */
+/* ==========  USER COUNT ================== */
 
 .accounts-user-management-count {
     padding: 7px 12px;
     border-radius: 20px;
     background: #eefafa;
-
     color: #168f8d;
-
     font-size: 13px;
     font-weight: 600;
-
     white-space: nowrap;
 }
 
 
-/* ============================================================
-   REFRESH BUTTON
-   ============================================================ */
+/* ==================== REFRESH BUTTON ====================== */
 
 .accounts-user-management-refresh-btn {
     width: 40px;
@@ -380,9 +316,7 @@
 }
 
 
-/* ============================================================
-   SPIN
-   ============================================================ */
+/* ================= SPIN ================== */
 
 .accounts-user-management-spin {
     animation:
@@ -403,9 +337,7 @@
 }
 
 
-/* ============================================================
-   TABLE WRAPPER
-   ============================================================ */
+/* ====================== TABLE WRAPPER ================================== */
 
 .accounts-user-management-table-wrapper {
     width: 100%;
@@ -413,9 +345,7 @@
 }
 
 
-/* ============================================================
-   TABLE
-   ============================================================ */
+/* ================ TABLE ============================== */
 
 .accounts-user-management-table {
     width: 100%;
@@ -424,14 +354,11 @@
 }
 
 
-/* ============================================================
-   TABLE HEAD
-   ============================================================ */
+/* ============= TABLE HEAD ===================== */
 
 .accounts-user-management-table thead {
     background: #f8fafc;
 }
-
 
 .accounts-user-management-table th {
     padding: 13px 18px;
@@ -445,9 +372,7 @@
 }
 
 
-/* ============================================================
-   TABLE BODY
-   ============================================================ */
+/* =================== TABLE BODY ========================= */
 
 .accounts-user-management-table td {
     padding: 15px 18px;
@@ -473,9 +398,7 @@
 }
 
 
-/* ============================================================
-   SERIAL
-   ============================================================ */
+/* ========================== SERIAL =================== */
 
 .accounts-user-management-serial {
     color: #64748b;
@@ -484,16 +407,13 @@
 }
 
 
-/* ============================================================
-   USER CELL
-   ============================================================ */
+/* ================= USER CELL ==================== */
 
 .accounts-user-management-user-cell {
     display: flex;
     align-items: center;
     gap: 11px;
 }
-
 
 .accounts-user-management-avatar {
     width: 38px;
@@ -548,6 +468,37 @@
     flex-shrink: 0;
 }
 
+/* ============= PASSWORD VISIBILITY TOGGLE ============= */
+
+.accounts-user-management-password-toggle {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: #64748b;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.accounts-user-management-password-toggle:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+
+.accounts-user-management-password-toggle:focus-visible {
+    outline: 2px solid rgba(32, 183, 181, 0.35);
+    outline-offset: 1px;
+}
 
 /* ============================================================
    ACTIONS
@@ -568,63 +519,41 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     gap: 6px;
-
     padding: 8px 12px;
-
     border: 1px solid #dbeafe;
-
     border-radius: 8px;
-
     background: #eff6ff;
-
     color: #2563eb;
-
     font-size: 12px;
     font-weight: 600;
-
     cursor: pointer;
-
     transition:
         background 0.2s ease,
         border-color 0.2s ease;
 }
 
-
 .accounts-user-management-edit-btn:hover {
     background: #dbeafe;
-
     border-color: #bfdbfe;
 }
 
 
-/* ============================================================
-   DELETE BUTTON
-   ============================================================ */
+/* ==================== DELETE BUTTON ====================== */
 
 .accounts-user-management-delete-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     gap: 6px;
-
     padding: 8px 12px;
-
     border: 1px solid #fee2e2;
-
     border-radius: 8px;
-
     background: #fef2f2;
-
     color: #dc2626;
-
     font-size: 12px;
     font-weight: 600;
-
     cursor: pointer;
-
     transition:
         background 0.2s ease,
         border-color 0.2s ease;
@@ -633,33 +562,25 @@
 
 .accounts-user-management-delete-btn:hover {
     background: #fee2e2;
-
     border-color: #fecaca;
 }
 
 
-/* ============================================================
-   LOADING
-   ============================================================ */
+/* ==================== LOADING =================== */
 
 .accounts-user-management-loading {
     min-height: 300px;
-
     display: flex;
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
-
     gap: 12px;
-
     color: #64748b;
 }
 
 
 .accounts-user-management-loading p {
     margin: 0;
-
     font-size: 14px;
 }
 
@@ -670,15 +591,11 @@
 
 .accounts-user-management-empty {
     min-height: 320px;
-
     display: flex;
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
-
     padding: 40px 20px;
-
     text-align: center;
 }
 

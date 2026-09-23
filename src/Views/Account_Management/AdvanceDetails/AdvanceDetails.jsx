@@ -468,9 +468,7 @@ function AdvanceDetails() {
     // ============================================================
 
     const handleBack = () => {
-
         navigate("/dashboard/view-advance");
-
     };
 
 
@@ -549,9 +547,7 @@ function AdvanceDetails() {
                 >
 
                     <ArrowLeft size={17} />
-
                     Back to Advance
-
                 </button>
 
             </div>
@@ -609,9 +605,9 @@ function AdvanceDetails() {
                             {employee.name || "Unnamed Employee"}
                         </h2>
 
-                        <p>
+                        {/* <p>
                             Employee ID: #{employee.id}
-                        </p>
+                        </p> */}
 
                     </div>
 
