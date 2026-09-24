@@ -565,6 +565,163 @@
 }
 
 /* ============================================================
+   EMPLOYEE DOCUMENT LIST
+============================================================ */
+
+.view-profile-document-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* ============================================================
+   DOCUMENT ITEM
+============================================================ */
+
+.view-profile-document-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 13px 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #f8fafc;
+}
+
+
+/* ============================================================
+   DOCUMENT INFORMATION
+============================================================ */
+
+.view-profile-document-info {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+
+.view-profile-document-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+
+.view-profile-document-info > div:last-child {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+
+.view-profile-document-info strong {
+    overflow: hidden;
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 650;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.view-profile-document-info span {
+    color: #64748b;
+    font-size: 11px;
+}
+
+
+/* ============================================================
+   DOCUMENT ACTIONS
+============================================================ */
+
+.view-profile-document-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+}
+
+
+.view-profile-document-view-btn,
+.view-profile-document-delete-btn {
+    min-height: 33px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 7px 10px;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+/* ============================================================
+   VIEW
+============================================================ */
+
+.view-profile-document-view-btn {
+    border: 1px solid #bfdbfe;
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+
+.view-profile-document-view-btn:hover {
+    background: #dbeafe;
+    border-color: #93c5fd;
+}
+
+
+/* ============================================================
+   DELETE
+============================================================ */
+
+.view-profile-document-delete-btn {
+    border: 1px solid #fecaca;
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+
+.view-profile-document-delete-btn:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
+}
+
+
+/* ============================================================
+   DISABLED UPLOAD BUTTON
+============================================================ */
+
+.view-profile-footer-document:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+
+/* ============================================================
+   DOCUMENT ERROR
+============================================================ */
+
+.view-profile-no-document.error {
+    color: #dc2626;
+}
+/* ============================================================
    EMPLOYEE SALARY POPUP OVERLAY
 ============================================================ */
 
@@ -1058,6 +1215,27 @@
 
     .view-profile-footer-actions {
         flex-direction: column;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .view-profile-document-item {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .view-profile-document-actions {
+        width: 100%;
+    }
+
+
+    .view-profile-document-view-btn,
+    .view-profile-document-delete-btn {
+        flex: 1;
     }
 
 }

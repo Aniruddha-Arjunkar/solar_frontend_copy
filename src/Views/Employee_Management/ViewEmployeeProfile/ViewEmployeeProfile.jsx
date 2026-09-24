@@ -17,6 +17,8 @@ import {
     FileText,
     UserRound,
     UsersRound,
+    Eye,
+    Trash2,
     CalendarCheck
 } from "lucide-react";
 
@@ -24,7 +26,8 @@ import API_BASE_URL from "./../../../config/api";
 
 import {
     useEffect,
-    useState
+    useState,
+    useRef
 } from "react";
 
 import {
@@ -50,6 +53,14 @@ function ViewEmployeeProfile() {
     const [salaryLoading, setSalaryLoading] = useState(false);
     const [salaryError, setSalaryError] = useState("");
 
+    // ======================  EMPLOYEE DOCUMENT STATE ===================================
+
+const [employeeDocuments, setEmployeeDocuments] = useState([]);
+const [documentsLoading, setDocumentsLoading] = useState(true);
+const [documentUploading, setDocumentUploading] = useState(false);
+const [documentError, setDocumentError] = useState("");
+const documentFileInputRef = useRef(null);
+
     useEffect(() => {
 
         const fetchEmployee = async () => {
@@ -57,25 +68,19 @@ function ViewEmployeeProfile() {
             try {
 
                 setLoading(true);
-
                 setError("");
-
 
                 const response = await fetch(
                     `${API_BASE_URL}/employees/${employeeId}`
                 );
 
-
                 if (!response.ok) {
 
                     if (response.status === 404) {
-
                         throw new Error(
                             "Employee not found."
                         );
-
                     }
-
 
                     throw new Error(
                         "Failed to fetch employee details."
@@ -83,50 +88,262 @@ function ViewEmployeeProfile() {
 
                 }
 
+                const data = await response.json();
 
-                const data =
-                    await response.json();
-
-
-                console.log(
-                    "Employee profile fetched:",
-                    data
-                );
-
-
+                console.log("Employee profile fetched:",data);
                 setEmployee(data);
-
 
             } catch (error) {
 
-                console.error(
-                    "Error fetching employee profile:",
-                    error
-                );
-
-
-                setError(
-                    error.message ||
-                    "Unable to load employee profile."
-                );
-
+                console.error("Error fetching employee profile:",error);
+                setError( error.message || "Unable to load employee profile.");
 
             } finally {
-
                 setLoading(false);
-
             }
-
         };
 
-
         if (employeeId) {
-
             fetchEmployee();
-
         }
 
     }, [employeeId]);
+
+    // ============================================================
+// FETCH EMPLOYEE DOCUMENTS
+// ============================================================
+
+useEffect(() => {
+
+    const fetchEmployeeDocuments = async () => {
+
+        try {
+
+            setDocumentsLoading(true);
+            setDocumentError("");
+
+            const response = await fetch(
+                `${API_BASE_URL}/employee-documents/employee/${employeeId}`
+            );
+
+
+            if (!response.ok) {
+                throw new Error("Unable to load employee documents.");
+            }
+
+            const data = await response.json();
+
+            setEmployeeDocuments(
+                Array.isArray(data)
+                    ? data
+                    : []
+            );
+
+        } catch (error) {
+            console.error("Employee Documents Error:",error);
+
+            setDocumentError(error.message || "Unable to load employee documents.");
+            setEmployeeDocuments([]);
+
+        } finally {
+            setDocumentsLoading(false);
+        }
+    };
+
+    if (employeeId) {
+        fetchEmployeeDocuments();
+    }
+
+}, [employeeId]);
+
+
+// ============================================================
+// UPLOAD EMPLOYEE DOCUMENT
+// ============================================================
+
+const handleUploadDocument = async (event) => {
+
+    const file = event.target.files?.[0];
+
+
+    if (!file) {
+        return;
+    }
+
+
+    // RESET PREVIOUS ERROR
+    setDocumentError("");
+
+ 
+    // VALIDATE FILE TYPE
+    const allowedTypes = [
+        "application/pdf",
+        "image/jpeg",
+        "image/png"
+    ];
+
+
+    if (!allowedTypes.includes(file.type)) {
+        setDocumentError("Only PDF, JPG, JPEG and PNG files are allowed.");
+        event.target.value = "";
+        return;
+    }
+
+
+    // --------------------------------------------------------
+    // VALIDATE FILE SIZE
+    // Backend limit = 10 MB
+    // --------------------------------------------------------
+
+    const maxFileSize =
+        10 * 1024 * 1024;
+
+
+    if (file.size > maxFileSize) {
+        setDocumentError("File size must be 10 MB or less.");
+        event.target.value = "";
+        return;
+    }
+
+    // --------------------------------------------------------
+    // CREATE FORM DATA
+    // --------------------------------------------------------
+
+    const formData =
+        new FormData();
+
+    formData.append(
+        "file",
+        file
+    );
+
+    try {
+        setDocumentUploading(true);
+
+        const response =
+            await fetch(
+                `${API_BASE_URL}/employee-documents/employee/${employeeId}`,
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+        let responseData = null;
+
+        try {
+            responseData = await response.json();
+        } catch {
+            responseData = null;
+        }
+
+        if (!response.ok) {
+            throw new Error(
+                responseData?.message ||
+                responseData?.error ||
+                "Unable to upload employee document."
+            );
+        }
+
+
+        // ----------------------------------------------------
+        // ADD NEW DOCUMENT TO UI
+        // ----------------------------------------------------
+
+        setEmployeeDocuments(
+            (currentDocuments) => [
+                ...currentDocuments,
+                responseData
+            ]
+        );
+
+    } catch (error) {
+        console.error("Upload Employee Document Error:",error);
+        setDocumentError(error.message || "Unable to upload employee document.");
+
+    } finally {
+        setDocumentUploading(false);
+
+        // Clear file input so the same file can be
+        // selected again later if required.
+
+        if (documentFileInputRef.current) {
+            documentFileInputRef.current.value = "";
+        }
+    }
+};
+
+// ============================================================
+// VIEW EMPLOYEE DOCUMENT
+// ============================================================
+
+const handleViewDocument = (documentId) => {
+
+    window.open(
+        `${API_BASE_URL}/employee-documents/${documentId}/view`,
+        "_blank"
+    );
+
+};
+
+// ============================================================
+// DELETE EMPLOYEE DOCUMENT
+// ============================================================
+
+const handleDeleteDocument = async (
+    documentId
+) => {
+
+    const confirmDelete =
+        window.confirm(
+            "Are you sure you want to delete this document?"
+        );
+
+
+    if (!confirmDelete) {
+        return;
+    }
+
+
+    try {
+
+        setDocumentError("");
+
+
+        const response =
+            await fetch(
+                `${API_BASE_URL}/employee-documents/${documentId}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to delete employee document."
+            );
+
+        }
+
+
+        setEmployeeDocuments(
+            (currentDocuments) =>
+                currentDocuments.filter(
+                    (document) =>
+                        document.id !== documentId
+                )
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Delete Employee Document Error:", error);
+        setDocumentError( error.message || "Unable to delete employee document.");
+    }
+};
 
     // ============================================================
     // BACK TO VIEW EMPLOYEES
@@ -374,6 +591,30 @@ function ViewEmployeeProfile() {
             maximumFractionDigits: 2
         })}`;
     };
+
+    // ============================================================
+// FORMAT DOCUMENT SIZE
+// ============================================================
+
+const formatDocumentSize = (bytes) => {
+
+    if (!bytes) {
+        return "0 KB";
+    }
+
+
+    const sizeInKB =
+        bytes / 1024;
+
+
+    if (sizeInKB < 1024) {
+        return `${sizeInKB.toFixed(1)} KB`;
+    }
+
+    return `${(
+        sizeInKB / 1024
+    ).toFixed(1)} MB`;
+};
 
     return (
 
@@ -903,9 +1144,7 @@ function ViewEmployeeProfile() {
                         label="ESIC Number"
                         value={employee.esicNo}
                     />
-
                 </div>
-
             </div>
 
 
@@ -915,62 +1154,121 @@ function ViewEmployeeProfile() {
 
             <div className="view-profile-section">
 
-
                 <div className="view-profile-section-header documents">
-
                     <FileText size={19} />
-
                     <h2>
                         Documents
                     </h2>
-
                 </div>
 
-
                 <div className="view-profile-document-area">
+                    {documentsLoading ? (
 
+    <div className="view-profile-no-document">
+        <FileText size={30} />
+        <div>
+            <strong>
+                Loading Documents...
+            </strong>
 
-                    {employee.documents ? (
+            <span>
+                Please wait while employee documents are loaded.
+            </span>
+        </div>
+    </div>
 
-                        <div className="view-profile-document-card">
+) : documentError ? (
+    <div className="view-profile-no-document error">
+        <FileText size={30} />
+        <div>
+            <strong>
+                Unable to Load Documents
+            </strong>
+            <span>
+                {documentError}
+            </span>
+        </div>
+    </div>
 
-                            <FileText size={24} />
+) : employeeDocuments.length === 0 ? (
+    <div className="view-profile-no-document">
+        <FileText size={30} />
+        <div>
+            <strong>
+                No Documents Uploaded
+            </strong>
+            <span>
+                Upload employee documents using the button above.
+            </span>
+        </div>
+    </div>
 
-                            <div>
+) : (
 
-                                <strong>
-                                    Employee Documents
-                                </strong>
+    <div className="view-profile-document-list">
 
-                                <span>
-                                    Documents uploaded for this employee
-                                </span>
+        {employeeDocuments.map(
+            (document) => (
+                <div key={document.id}
+                    className="view-profile-document-item">
 
-                            </div>
-
+                    <div className="view-profile-document-info">
+                        <div className="view-profile-document-icon">
+                            <FileText size={21} />
                         </div>
+                        <div>
 
-                    ) : (
+                            <strong>
+                                {document.fileName}
+                            </strong>
 
-                        <div className="view-profile-no-document">
-
-                            <FileText size={30} />
-
-                            <div>
-
-                                <strong>
-                                    No Documents Uploaded
-                                </strong>
-
-                                <span>
-                                    Upload employee documents using the button above.
-                                </span>
-
-                            </div>
-
+                            <span>
+                                {formatDocumentSize(
+                                    document.fileSize
+                                )}
+                                {" • "}
+                                {document.uploadedAt
+                                    ? new Date(
+                                        document.uploadedAt
+                                    ).toLocaleDateString(
+                                        "en-IN"
+                                    )
+                                    : "Date unavailable"
+                                }
+                            </span>
                         </div>
+                    </div>
 
-                    )}
+
+                    <div className="view-profile-document-actions">
+
+                        <button
+                            type="button"
+                            className="view-profile-document-view-btn"
+                            onClick={() =>
+                                handleViewDocument(document.id)
+                            }>
+
+                            <Eye size={16} />
+                            View
+                        </button>
+
+
+                        <button
+                            type="button"
+                            className="view-profile-document-delete-btn"
+                            onClick={() =>
+                                handleDeleteDocument(document.id)
+                            }>
+                            <Trash2 size={16} />
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            )
+        )}
+    </div>
+)}
 
                 </div>
 
@@ -998,15 +1296,27 @@ function ViewEmployeeProfile() {
                 <div className="view-profile-footer-actions">
 
                     <button
-                        type="button"
-                        className="view-profile-footer-document"
-                        onClick={() => {
-                            console.log(
-                                "Upload document for employee:", employee);
-                        }}>
-                        <Upload size={18} />
-                        Upload Document
-                    </button>
+    type="button"
+    className="view-profile-footer-document"
+    onClick={() =>
+        documentFileInputRef.current?.click()
+    }
+    disabled={documentUploading}
+>
+    <Upload size={18} />
+
+    {documentUploading
+        ? "Uploading..."
+        : "Upload Document"
+    }
+</button>
+<input
+    ref={documentFileInputRef}
+    type="file"
+    accept=".pdf,.jpg,.jpeg,.png"
+    onChange={handleUploadDocument}
+    style={{ display: "none" }}
+/>
 
                     <button
                         type="button"
