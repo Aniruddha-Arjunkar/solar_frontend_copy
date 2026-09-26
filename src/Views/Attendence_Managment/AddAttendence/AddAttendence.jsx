@@ -259,8 +259,7 @@ const handleSaveAttendance = async () => {
         // READ SUCCESS RESPONSE
         // ========================================================
 
-        const savedAttendance =
-            await response.json();
+        const savedAttendance = await response.json();
 
 
         console.log(

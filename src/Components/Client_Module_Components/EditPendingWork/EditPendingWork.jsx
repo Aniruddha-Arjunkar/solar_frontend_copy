@@ -15,10 +15,6 @@ function EditPendingWork({
     onUpdated
 }) {
 
-    // ============================================================
-    // STATE
-    // ============================================================
-
     const [formData, setFormData] = useState({
         workDescription: "",
         assignedTo: "",
@@ -31,9 +27,7 @@ function EditPendingWork({
     const [error, setError] = useState("");
 
 
-    // ============================================================
-    // LOAD SELECTED WORK INTO FORM
-    // ============================================================
+    // ================== LOAD SELECTED WORK INTO FORM =============================
 
     useEffect(() => {
 
@@ -47,22 +41,15 @@ function EditPendingWork({
             dueDate: work.dueDate || "",
             status: work.status || "Pending"
         });
-
         setError("");
-
     }, [work]);
 
 
-    // ============================================================
-    // INPUT CHANGE
-    // ============================================================
+    // =============== INPUT CHANGE ============================
 
     const handleChange = (event) => {
 
-        const {
-            name,
-            value
-        } = event.target;
+        const { name, value } = event.target;
 
         setFormData((previousData) => ({
             ...previousData,
@@ -72,9 +59,7 @@ function EditPendingWork({
     };
 
 
-    // ============================================================
-    // UPDATE PENDING WORK
-    // ============================================================
+    // ============= UPDATE PENDING WORK =========================
 
     const handleSubmit = async (event) => {
 
@@ -86,7 +71,6 @@ function EditPendingWork({
         }
 
         try {
-
             setSaving(true);
             setError("");
 
@@ -94,42 +78,26 @@ function EditPendingWork({
                 `${API_BASE_URL}/pending-work/${work.id}`,
                 {
                     method: "PUT",
-
                     headers: {
                         "Content-Type": "application/json"
                     },
 
                     body: JSON.stringify({
-                        workDescription:
-                            formData.workDescription,
-
-                        assignedTo:
-                            formData.assignedTo,
-
-                        dueDate:
-                            formData.dueDate,
-
-                        status:
-                            formData.status
+                        workDescription: formData.workDescription,
+                        assignedTo: formData.assignedTo,
+                        dueDate: formData.dueDate,
+                        status: formData.status
                     })
                 }
             );
 
             if (!response.ok) {
-
-                throw new Error(
-                    "Failed to update pending work."
-                );
-
+                throw new Error("Failed to update pending work.");
             }
 
-            const updatedWork =
-                await response.json();
+            const updatedWork = await response.json();
 
-            console.log(
-                "Updated Pending Work:",
-                updatedWork
-            );
+            console.log("Updated Pending Work:", updatedWork);
 
             // Notify parent
             if (onUpdated) {
@@ -153,16 +121,9 @@ function EditPendingWork({
             );
 
         } finally {
-
             setSaving(false);
-
         }
     };
-
-
-    // ============================================================
-    // RENDER
-    // ============================================================
 
     if (!work) {
         return null;
@@ -173,15 +134,11 @@ function EditPendingWork({
 
         <div className="edit-pendingwork-page-overlay">
 
-            {/* ====================================================
-                MODAL
-            ==================================================== */}
+            {/* ============== MODAL ================= */}
 
             <div className="edit-pendingwork-page-modal">
 
-                {/* =================================================
-                    HEADER
-                ================================================= */}
+                {/* ========= HEADER ========================== */}
 
                 <div className="edit-pendingwork-page-header">
 
@@ -207,18 +164,13 @@ function EditPendingWork({
                 </div>
 
 
-                {/* =================================================
-                    FORM
-                ================================================= */}
+                {/* ================== FORM ===================== */}
 
                 <form
                     className="edit-pendingwork-page-form"
-                    onSubmit={handleSubmit}
-                >
+                    onSubmit={handleSubmit}>
 
-                    {/* =================================================
-                        CLIENT NAME
-                    ================================================= */}
+                    {/* ================ CLIENT NAME ======================= */}
 
                     <div className="edit-pendingwork-page-field">
 
@@ -236,9 +188,7 @@ function EditPendingWork({
                     </div>
 
 
-                    {/* =================================================
-                        WORK DESCRIPTION
-                    ================================================= */}
+                    {/* =============== WORK DESCRIPTION ============== */}
 
                     <div className="edit-pendingwork-page-field">
 
@@ -261,9 +211,7 @@ function EditPendingWork({
                     </div>
 
 
-                    {/* =================================================
-                        ASSIGNED TO
-                    ================================================= */}
+                    {/* =========== ASSIGNED TO ================== */}
 
                     <div className="edit-pendingwork-page-field">
 
@@ -285,9 +233,7 @@ function EditPendingWork({
                     </div>
 
 
-                    {/* =================================================
-                        DUE DATE
-                    ================================================= */}
+                    {/* ========= DUE DATE ============ */}
 
                     <div className="edit-pendingwork-page-field">
 
@@ -308,9 +254,7 @@ function EditPendingWork({
                     </div>
 
 
-                    {/* =================================================
-                        STATUS
-                    ================================================= */}
+                    {/* ============= STATUS ================= */}
 
                     <div className="edit-pendingwork-page-field">
 
@@ -330,9 +274,9 @@ function EditPendingWork({
                                 Pending
                             </option>
 
-                            <option value="In Progress">
+                            {/* <option value="In Progress">
                                 In Progress
-                            </option>
+                            </option> */}
 
                             <option value="Completed">
                                 Completed
@@ -342,22 +286,16 @@ function EditPendingWork({
                     </div>
 
 
-                    {/* =================================================
-                        ERROR
-                    ================================================= */}
+                    {/* ================ ERROR ================== */}
 
                     {error && (
-
                         <div className="edit-pendingwork-page-error">
                             {error}
                         </div>
-
                     )}
 
 
-                    {/* =================================================
-                        ACTION BUTTONS
-                    ================================================= */}
+                    {/* ================ ACTION BUTTONS ======================== */}
 
                     <div className="edit-pendingwork-page-actions">
 
@@ -376,9 +314,7 @@ function EditPendingWork({
                             className="edit-pendingwork-page-save"
                             disabled={saving}
                         >
-
                             {saving ? (
-
                                 <>
                                     <LoaderCircle
                                         size={18}
@@ -389,29 +325,19 @@ function EditPendingWork({
                                         Updating...
                                     </span>
                                 </>
-
                             ) : (
-
                                 <>
                                     <Save size={18} />
 
                                     <span>
                                         Update Work
                                     </span>
-                                </>
-
-                            )}
-
+                                </>)}
                         </button>
-
                     </div>
-
                 </form>
-
             </div>
-
         </div>
     );
 }
-
 export default EditPendingWork;

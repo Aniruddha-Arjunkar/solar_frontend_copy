@@ -32,43 +32,34 @@ function PendingWork() {
 
 
     const Columns = [
-
         {
             key: "id",
             label: "ID"
         },
-
         {
             key: "clientName",
             label: "Client Name"
         },
-
         {
             key: "workDescription",
             label: "Work Description"
         },
-
         {
             key: "assignedTo",
             label: "Assign To"
         },
-
         {
             key: "dueDate",
             label: "Due Date"
         },
-
         {
             key: "status",
             label: "Status"
         }
-
     ];
 
 
-    // ============================================================
-    // FETCH PENDING WORK
-    // ============================================================
+    // =============== FETCH PENDING WORK ======================
 
     const fetchPendingWork = async () => {
 
@@ -80,43 +71,17 @@ function PendingWork() {
                 `${API_BASE_URL}/pending-work/pending-with-client`
             );
 
-
             if (!response.ok) {
-                throw new Error(
-                    "Failed to fetch pending work"
-                );
+                throw new Error("Failed to fetch pending work");
             }
-
             const data = await response.json();
-
-            /*
-             * Backend returns PendingWorkResponse:
-             *
-             * id
-             * clientId
-             * clientName
-             * workDescription
-             * assignedTo
-             * dueDate
-             * status
-             *
-             * The DTO already contains the client name.
-             */
-
             setPendingWorkData(data);
 
         } catch (error) {
 
-            console.error(
-                "Error fetching pending work:",
-                error
-            );
-
+            console.error("Error fetching pending work:",error);
             setPendingWorkData([]);
-
-            setError(
-                "Unable to load pending work."
-            );
+            setError("Unable to load pending work.");
 
         } finally {
             setLoading(false);
@@ -146,30 +111,22 @@ function PendingWork() {
     // ];
 
 
-    // ============================================================
-    // MARK WORK AS COMPLETE
-    // ============================================================
+    // ============= MARK WORK AS COMPLETE =============================
 
     const handleMarkComplete = async (work) => {
 
         if (!work?.id) {
-
             console.error(
                 "Pending work ID is missing."
             );
-
             return;
-
         }
 
-
         try {
-
             console.log(
                 "Marking work as complete:",
                 work
             );
-
 
             const response = await fetch(
                 `${API_BASE_URL}/pending-work/${work.id}/complete`,
@@ -178,61 +135,45 @@ function PendingWork() {
                 }
             );
 
-
             if (!response.ok) {
-
-                throw new Error(
-                    "Failed to mark pending work as complete."
-                );
-
+                throw new Error("Failed to mark pending work as complete.");
             }
-
 
             const completedWork =
                 await response.json();
-
 
             console.log(
                 "Pending Work Completed:",
                 completedWork
             );
 
-
             // Refresh table
-            await fetchPendingWork();
+            // await fetchPendingWork();
 
+            // REMOVE COMPLETED WORK FROM CURRENT TABLE
+            setPendingWorkData((currentData) =>currentData.filter((item) => 
+                item.id !== work.id));
 
         } catch (error) {
-
             console.error(
                 "Error marking pending work as complete:",
                 error
             );
-
         }
-
     };
 
-
-    // ============================================================
-    // DELETE PENDING WORK
-    // ============================================================
+    // =================== DELETE PENDING WORK ==========================
 
     const handleDeleteWork = async (work) => {
 
         if (!work?.id) {
-
             console.error(
                 "Pending work ID is missing."
             );
-
             return;
-
         }
 
-
         try {
-
             console.log(
                 "Deleting pending work:",
                 work
@@ -246,21 +187,16 @@ function PendingWork() {
                 }
             );
 
-
             if (!response.ok) {
-
                 throw new Error(
                     "Failed to delete pending work."
                 );
-
             }
-
 
             console.log(
                 "Pending Work Deleted:",
                 work.id
             );
-
 
             // Refresh table
             await fetchPendingWork();
@@ -272,15 +208,11 @@ function PendingWork() {
                 "Error deleting pending work:",
                 error
             );
-
         }
-
     };
 
 
-    // ============================================================
-    // ACTION HANDLER
-    // ============================================================
+    // ======================== ACTION HANDLER =================================
 
     const handleWorkAction = (action, work) => {
 
@@ -295,9 +227,7 @@ function PendingWork() {
         );
 
 
-        // ========================================================
-        // UPDATE WORK
-        // ========================================================
+        // ========================= UPDATE WORK ==========================
 
         if (action === "update_work") {
             setSelectedWork(work);
@@ -306,9 +236,7 @@ function PendingWork() {
         }
 
 
-        // ========================================================
-        // MARK COMPLETE
-        // ========================================================
+        // ====================== MARK COMPLETE ===================================
 
         if (action === "mark_complete") {
             handleMarkComplete(work);
@@ -316,9 +244,7 @@ function PendingWork() {
         }
 
 
-        // ========================================================
-        // DELETE WORK
-        // ========================================================
+        // ============= DELETE WORK ========================
 
         if (action === "delete_work") {
              const confirmDelete = window.confirm(
@@ -330,24 +256,16 @@ function PendingWork() {
                 }
 
             handleDeleteWork(work);
-
             return;
-
            }
-
     };
 
 
-    // ============================================================
-    // LOADING
-    // ============================================================
+    // ===================== LOADING ========================
 
     // if (loading) {
-
     //     return (
-
     //         <section className="pending-work-page">
-
     //             <ClientHeader
     //                 currectPage="Pending Work"
     //                 title="Pending Client Work"
@@ -357,33 +275,23 @@ function PendingWork() {
     //             />
 
     //             <div className="pending-work-loading">
-
     //                 <LoaderCircle
     //                     size={30}
     //                     className="pending-work-loader"
     //                 />
-
     //                 <span>
     //                     Loading pending work...
     //                 </span>
-
     //             </div>
-
     //         </section>
-
     //     );
-
     // }
 
 
-    // ============================================================
-    // ERROR
-    // ============================================================
+    // ========================= ERROR ========================
 
     if (error) {
-
         return (
-
             <section className="pending-work-page">
 
                 <ClientHeader
@@ -391,34 +299,20 @@ function PendingWork() {
                     title="Pending Client Work"
                     description="Track and manage pending work for clients."
                     buttonType="view"
-                    icon={Clock}
-                />
+                    icon={Clock}/>
 
                 <div className="pending-work-error">
-
                     {error}
-
                 </div>
-
             </section>
-
         );
-
     }
-
-
-    // ============================================================
-    // MAIN UI
-    // ============================================================
 
     return (
 
         <section className="pending-work-page">
 
-
-            {/* ====================================================
-                HEADER
-            ==================================================== */}
+            {/* =================  HEADER ======================= */}
 
             <ClientHeader
                 currectPage="Pending Work"
@@ -428,19 +322,14 @@ function PendingWork() {
                 icon={Clock}
             />
 
-
-            {/* ====================================================
-                STATS
-            ==================================================== */}
+            {/* =========== STATS ==================== */}
 {/* 
             <ClientStats
                 stats={Stats}
             /> */}
 
 
-            {/* ====================================================
-                PENDING WORK TABLE
-            ==================================================== */}
+            {/* ========== PENDING WORK TABLE ===================== */}
 
             <PendingClientTable
                 columns={Columns}
@@ -451,41 +340,23 @@ function PendingWork() {
                 description="Track and manage pending work for clients."
             />
 
-
-            {/* ====================================================
-                UPDATE PENDING WORK
-            ==================================================== */}
+            {/* ============ UPDATE PENDING WORK ============================ */}
 
             {activeAction === "update_work" &&
                 selectedWork && (
 
                     <EditPendingWork
-
                         work={selectedWork}
-
                         onClose={() => {
-
                             setSelectedWork(null);
-
                             setActiveAction(null);
-
                         }}
 
                         onUpdated={() => {
-
                             fetchPendingWork();
-
-                        }}
-
-                    />
-
+                        }}/>
                 )}
-
         </section>
-
     );
-
 }
-
-
 export default PendingWork;
