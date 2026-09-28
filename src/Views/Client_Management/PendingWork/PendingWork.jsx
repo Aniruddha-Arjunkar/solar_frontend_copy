@@ -123,10 +123,10 @@ function PendingWork() {
         }
 
         try {
-            console.log(
-                "Marking work as complete:",
-                work
-            );
+            // console.log(
+            //     "Marking work as complete:",
+            //     work
+            // );
 
             const response = await fetch(
                 `${API_BASE_URL}/pending-work/${work.id}/complete`,
@@ -142,10 +142,10 @@ function PendingWork() {
             const completedWork =
                 await response.json();
 
-            console.log(
-                "Pending Work Completed:",
-                completedWork
-            );
+            // console.log(
+            //     "Pending Work Completed:",
+            //     completedWork
+            // );
 
             // Refresh table
             // await fetchPendingWork();
@@ -174,10 +174,10 @@ function PendingWork() {
         }
 
         try {
-            console.log(
-                "Deleting pending work:",
-                work
-            );
+            // console.log(
+            //     "Deleting pending work:",
+            //     work
+            // );
 
 
             const response = await fetch(
@@ -193,10 +193,10 @@ function PendingWork() {
                 );
             }
 
-            console.log(
-                "Pending Work Deleted:",
-                work.id
-            );
+            // console.log(
+            //     "Pending Work Deleted:",
+            //     work.id
+            // );
 
             // Refresh table
             await fetchPendingWork();
@@ -216,15 +216,15 @@ function PendingWork() {
 
     const handleWorkAction = (action, work) => {
 
-        console.log(
-            "Selected Action:",
-            action
-        );
+        // console.log(
+        //     "Selected Action:",
+        //     action
+        // );
 
-        console.log(
-            "Selected Work:",
-            work
-        );
+        // console.log(
+        //     "Selected Work:",
+        //     work
+        // );
 
 
         // ========================= UPDATE WORK ==========================

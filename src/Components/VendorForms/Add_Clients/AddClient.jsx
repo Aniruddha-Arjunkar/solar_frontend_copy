@@ -68,7 +68,7 @@ const handleSubmit = async (e) => {
         };
 
 
-        console.log("Sending Client Data:", clientData);
+        // console.log("Sending Client Data:", clientData);
 
 
         /* =================================================
@@ -106,10 +106,10 @@ const handleSubmit = async (e) => {
             await response.json();
 
 
-        console.log(
-            "Client Saved Successfully:",
-            savedClient
-        );
+        // console.log(
+        //     "Client Saved Successfully:",
+        //     savedClient
+        // );
 
 
         /* =================================================

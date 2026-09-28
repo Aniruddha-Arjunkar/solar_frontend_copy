@@ -23,9 +23,9 @@ function VendorAction({
     ========================================= */
     const handleAction = (action) => {
 
-        console.log("Selected Action:", action);
+        // console.log("Selected Action:", action);
 
-        console.log("Selected Vendor:", row);
+        // console.log("Selected Vendor:", row);
 
 
         // Close dropdown

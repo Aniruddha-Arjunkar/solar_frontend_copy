@@ -80,10 +80,10 @@ function ViewAttendence() {
         const data =
           await response.json();
 
-        console.log(
-          "Employees for attendance report:",
-          data
-        );
+        // console.log(
+        //   "Employees for attendance report:",
+        //   data
+        // );
 
         setEmployees(data);
 
@@ -138,10 +138,10 @@ function ViewAttendence() {
           await response.json();
 
 
-        console.log(
-          "Attendance records for report:",
-          data
-        );
+        // console.log(
+        //   "Attendance records for report:",
+        //   data
+        // );
 
 
         setAttendanceRecords(data);

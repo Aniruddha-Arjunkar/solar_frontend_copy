@@ -35,7 +35,7 @@ function FollowUp(){
             return response.json();
         })
         .then((data) => {
-            console.log("Follow-up Data:", data);
+            // console.log("Follow-up Data:", data);
             setLeadData(data);
         })
         .catch((error) => {

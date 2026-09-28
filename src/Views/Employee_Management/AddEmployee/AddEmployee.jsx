@@ -300,10 +300,10 @@ function AddEmployee() {
         // CHECK DATA BEFORE SENDING
         // ========================================================
 
-        console.log(
-            "Employee Data Sending To Backend:",
-            employeeData
-        );
+        // console.log(
+        //     "Employee Data Sending To Backend:",
+        //     employeeData
+        // );
 
         try {
 
@@ -359,10 +359,10 @@ function AddEmployee() {
                 await response.json();
 
 
-            console.log(
-                "Employee Created Successfully:",
-                savedEmployee
-            );
+            // console.log(
+            //     "Employee Created Successfully:",
+            //     savedEmployee
+            // );
 
 
             // ====================================================

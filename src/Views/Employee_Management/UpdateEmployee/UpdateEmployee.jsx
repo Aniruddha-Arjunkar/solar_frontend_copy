@@ -70,10 +70,10 @@ useEffect(() => {
             const data =
                 await response.json();
 
-            console.log(
-                "Employee data for update:",
-                data
-            );
+            // console.log(
+            //     "Employee data for update:",
+            //     data
+            // );
 
             setEmployee(data);
 
@@ -539,10 +539,10 @@ const handleSubmit = async (e) => {
             formData.esicNo
     };
 
-    console.log(
-        "Employee update data:",
-        updatedEmployee
-    );
+    // console.log(
+    //     "Employee update data:",
+    //     updatedEmployee
+    // );
 
     try {
 
@@ -586,10 +586,10 @@ const handleSubmit = async (e) => {
         const savedEmployee =
             await response.json();
 
-        console.log(
-            "Employee updated successfully:",
-            savedEmployee
-        );
+        // console.log(
+        //     "Employee updated successfully:",
+        //     savedEmployee
+        // );
 
         window.alert(
             "Employee updated successfully."

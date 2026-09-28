@@ -161,10 +161,10 @@ function ViewUsers() {
                     formData
                 );
 
-                console.log(
-                    "User updated:",
-                    response.data
-                );
+                // console.log(
+                //     "User updated:",
+                //     response.data
+                // );
 
 
                 setUsers((currentUsers) =>
@@ -191,10 +191,10 @@ function ViewUsers() {
                     formData
                 );
 
-                console.log(
-                    "User created:",
-                    response.data
-                );
+                // console.log(
+                //     "User created:",
+                //     response.data
+                // );
 
 
                 setUsers((currentUsers) => [
@@ -272,7 +272,7 @@ function ViewUsers() {
                 `${API_BASE_URL}/users/${id}`
             );
 
-            console.log("User deleted");
+            // console.log("User deleted");
 
 
             setUsers((currentUsers) =>

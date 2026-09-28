@@ -97,7 +97,7 @@ function EditPendingWork({
 
             const updatedWork = await response.json();
 
-            console.log("Updated Pending Work:", updatedWork);
+            // console.log("Updated Pending Work:", updatedWork);
 
             // Notify parent
             if (onUpdated) {

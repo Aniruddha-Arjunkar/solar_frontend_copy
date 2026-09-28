@@ -87,10 +87,10 @@ function GenerateInvoice() {
             const data = await response.json();
 
 
-            console.log(
-                "GST Client for Invoice:",
-                data
-            );
+            // console.log(
+            //     "GST Client for Invoice:",
+            //     data
+            // );
 
 
             // ====================================================
@@ -500,10 +500,10 @@ function GenerateInvoice() {
             };
 
 
-            console.log(
-                "Invoice Request:",
-                requestBody
-            );
+            // console.log(
+            //     "Invoice Request:",
+            //     requestBody
+            // );
 
 
             // ====================================================
@@ -561,10 +561,10 @@ function GenerateInvoice() {
                 await response.json();
 
 
-            console.log(
-                "Created Invoice:",
-                createdInvoice
-            );
+            // console.log(
+            //     "Created Invoice:",
+            //     createdInvoice
+            // );
 
 
 

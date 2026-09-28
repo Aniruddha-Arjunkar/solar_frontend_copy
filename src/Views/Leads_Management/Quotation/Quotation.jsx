@@ -28,7 +28,7 @@ function Quotation() {
                 return response.json();
             })
             .then((data) => {
-                console.log("Quotation Data:", data);
+                // console.log("Quotation Data:", data);
                 setData(data);
             })
             .catch((error) => {
@@ -69,10 +69,10 @@ function Quotation() {
 
         const quotations = await response.json();
 
-        console.log(
-            "Quotations for lead:",
-            quotations
-        );
+        // console.log(
+        //     "Quotations for lead:",
+        //     quotations
+        // );
 
         // CHECK QUOTATION EXISTS
         if (

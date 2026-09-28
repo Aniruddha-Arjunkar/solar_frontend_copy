@@ -95,10 +95,10 @@ function GSTClient() {
                     : []
             );
 
-            console.log(
-                "GST Clients from Backend:",
-                data
-            );
+            // console.log(
+            //     "GST Clients from Backend:",
+            //     data
+            // );
 
 
             // =================================================
@@ -170,15 +170,15 @@ function GSTClient() {
 
     const handleClientAction = (action, client) => {
 
-        console.log(
-            "Selected Action:",
-            action
-        );
+        // console.log(
+        //     "Selected Action:",
+        //     action
+        // );
 
-        console.log(
-            "Selected Client:",
-            client
-        );
+        // console.log(
+        //     "Selected Client:",
+        //     client
+        // );
 
         if (action === "generate_invoice") {
             navigate(

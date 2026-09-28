@@ -25,9 +25,9 @@ function ClientActionBtn({
 
     const handleAction = (action) => {
 
-        console.log("Selected Action:", action);
+        // console.log("Selected Action:", action);
 
-        console.log("Selected Client:", row);
+        // console.log("Selected Client:", row);
 
         // Close dropdown
         setOpen(false);

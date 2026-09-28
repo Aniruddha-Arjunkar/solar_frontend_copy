@@ -76,10 +76,10 @@ function ViewEmployee() {
 
                 const data =
                     await response.json();
-                console.log(
-                    "Employees fetched successfully:",
-                    data
-                );
+                // console.log(
+                //     "Employees fetched successfully:",
+                //     data
+                // );
 
                 setEmployeeData(data);
 
@@ -183,15 +183,15 @@ function ViewEmployee() {
     const handleEmployeeAction =
         (action, employee) => {
 
-            console.log(
-                "Employee Action:",
-                action
-            );
+            // console.log(
+            //     "Employee Action:",
+            //     action
+            // );
 
-            console.log(
-                "Selected Employee:",
-                employee
-            );
+            // console.log(
+            //     "Selected Employee:",
+            //     employee
+            // );
 
 
             // VIEW PROFILE

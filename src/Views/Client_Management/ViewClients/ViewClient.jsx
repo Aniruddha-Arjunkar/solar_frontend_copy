@@ -51,7 +51,7 @@ function ViewClient() {
 
             const data = await response.json();
 
-            console.log("Non-GST Clients:", data);
+            // console.log("Non-GST Clients:", data);
 
             setClientData(data);
 
@@ -76,7 +76,7 @@ function ViewClient() {
 
             const data = await response.json();
 
-            console.log("Vendors:", data);
+            // console.log("Vendors:", data);
 
             setVendorData(
                 Array.isArray(data)

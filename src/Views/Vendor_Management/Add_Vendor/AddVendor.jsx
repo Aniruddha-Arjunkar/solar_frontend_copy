@@ -79,10 +79,10 @@ function AddVendor() {
             setSaving(true);
 
 
-            console.log(
-                "Vendor Data:",
-                formData
-            );
+            // console.log(
+            //     "Vendor Data:",
+            //     formData
+            // );
 
 
             // ====================================================
@@ -136,10 +136,10 @@ function AddVendor() {
                 await response.json();
 
 
-            console.log(
-                "Vendor Created Successfully:",
-                savedVendor
-            );
+            // console.log(
+            //     "Vendor Created Successfully:",
+            //     savedVendor
+            // );
 
 
             // ====================================================

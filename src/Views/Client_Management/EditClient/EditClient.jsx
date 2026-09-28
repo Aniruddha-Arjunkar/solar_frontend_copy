@@ -95,10 +95,10 @@ function EditClient() {
 
                 const data = await response.json();
 
-                console.log(
-                    "Edit Client Data:",
-                    data
-                );
+                // console.log(
+                //     "Edit Client Data:",
+                //     data
+                // );
 
 
                 setClient(data);
@@ -490,10 +490,10 @@ function EditClient() {
             };
 
 
-            console.log(
-                "Updating Client:",
-                clientData
-            );
+            // console.log(
+            //     "Updating Client:",
+            //     clientData
+            // );
 
 
             // =================================================
@@ -534,10 +534,10 @@ function EditClient() {
                 await response.json();
 
 
-            console.log(
-                "Client Updated:",
-                updatedClient
-            );
+            // console.log(
+            //     "Client Updated:",
+            //     updatedClient
+            // );
 
 
             // =================================================

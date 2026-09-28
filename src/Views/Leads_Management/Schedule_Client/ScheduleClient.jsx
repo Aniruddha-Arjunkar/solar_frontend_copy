@@ -46,10 +46,10 @@ function ScheduleClient(){
 
         .then((data) => {
 
-            console.log(
-                "Schedule Data:",
-                data
-            );
+            // console.log(
+            //     "Schedule Data:",
+            //     data
+            // );
 
             setLeadData(data);
 

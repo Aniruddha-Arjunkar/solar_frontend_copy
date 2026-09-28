@@ -541,15 +541,15 @@ function ViewPayment() {
         client
     ) => {
 
-        console.log(
-            "View Payment:",
-            payment
-        );
+        // console.log(
+        //     "View Payment:",
+        //     payment
+        // );
 
-        console.log(
-            "Client:",
-            client
-        );
+        // console.log(
+        //     "Client:",
+        //     client
+        // );
 
     };
 

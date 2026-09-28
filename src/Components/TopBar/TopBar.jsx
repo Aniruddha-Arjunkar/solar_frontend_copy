@@ -11,9 +11,7 @@ import {
     LogOut,
     User
 } from "lucide-react";
-
 import { useNavigate } from "react-router";
-
 import "./TopBar.css";
 
 
@@ -400,9 +398,9 @@ function Topbar() {
                     >
                         <Bell size={25} />
 
-                        <span className="notification-badge">
+                        {/* <span className="notification-badge">
                             3
-                        </span>
+                        </span> */}
                     </button>
 
 
@@ -414,9 +412,9 @@ function Topbar() {
                     >
                         <Mail size={25} />
 
-                        <span className="mail-badge">
+                        {/* <span className="mail-badge">
                             2
-                        </span>
+                        </span> */}
                     </button>
 
                 </div>

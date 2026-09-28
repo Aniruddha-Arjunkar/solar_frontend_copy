@@ -101,10 +101,10 @@ function ViewVendor() {
             const data = await response.json();
 
 
-            console.log(
-                "Vendors fetched successfully:",
-                data
-            );
+            // console.log(
+            //     "Vendors fetched successfully:",
+            //     data
+            // );
 
             // STORE VENDORS
 
@@ -161,11 +161,11 @@ function ViewVendor() {
 
             const data = await response.json();
             
-            console.log(
-                "Clients fetched for vendor:",
-                vendorId,
-                data
-            );
+            // console.log(
+            //     "Clients fetched for vendor:",
+            //     vendorId,
+            //     data
+            // );
 
             
             // STORE CLIENT DATA
@@ -197,15 +197,15 @@ function ViewVendor() {
 
     const handleVendorAction = (action, vendor) => {
 
-        console.log(
-            "Action:",
-            action
-        );
+        // console.log(
+        //     "Action:",
+        //     action
+        // );
 
-        console.log(
-            "Selected Vendor:",
-            vendor
-        );
+        // console.log(
+        //     "Selected Vendor:",
+        //     vendor
+        // );
 
 
         // STORE SELECTED VENDOR
@@ -255,10 +255,10 @@ function ViewVendor() {
 
     // CLIENT ADDED
     const handleClientAdded = (client) => {
-        console.log(
-            "Client added successfully:",
-            client
-        );
+        // console.log(
+        //     "Client added successfully:",
+        //     client
+        // );
 
 
         /*

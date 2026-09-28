@@ -76,10 +76,10 @@ function AddAttendence() {
           await response.json();
 
 
-        console.log(
-          "Employees for attendance:",
-          data
-        );
+        // console.log(
+        //   "Employees for attendance:",
+        //   data
+        // );
 
         setEmployees(data);
 
@@ -176,10 +176,10 @@ function AddAttendence() {
     };
 
 
-    console.log(
-      "Attendance data being sent:",
-      attendanceData
-    );
+    // console.log(
+    //   "Attendance data being sent:",
+    //   attendanceData
+    // );
 
     try {
 
@@ -230,10 +230,10 @@ function AddAttendence() {
       const savedAttendance = await response.json();
 
 
-      console.log(
-        "Attendance saved successfully:",
-        savedAttendance
-      );
+      // console.log(
+      //   "Attendance saved successfully:",
+      //   savedAttendance
+      // );
 
       window.alert(
         "Attendance saved successfully."

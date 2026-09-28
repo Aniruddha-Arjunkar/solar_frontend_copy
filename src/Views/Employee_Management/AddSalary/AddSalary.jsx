@@ -71,10 +71,10 @@ function AddSalary() {
 
                 const data = await response.json();
 
-                console.log(
-                    "Employees for salary:",
-                    data
-                );
+                // console.log(
+                //     "Employees for salary:",
+                //     data
+                // );
 
                 setEmployees(data);
 
@@ -250,10 +250,10 @@ function AddSalary() {
         };
 
 
-        console.log(
-            "Salary data being sent:",
-            salaryData
-        );
+        // console.log(
+        //     "Salary data being sent:",
+        //     salaryData
+        // );
 
 
         // SAVE SALARY
@@ -304,10 +304,10 @@ function AddSalary() {
             const savedSalary =
                 await response.json();
 
-            console.log(
-                "Salary saved successfully:",
-                savedSalary
-            );
+            // console.log(
+            //     "Salary saved successfully:",
+            //     savedSalary
+            // );
             window.alert(
                 "Salary saved successfully."
             );

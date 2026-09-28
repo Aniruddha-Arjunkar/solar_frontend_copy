@@ -90,7 +90,7 @@ function ViewEmployeeProfile() {
 
                 const data = await response.json();
 
-                console.log("Employee profile fetched:", data);
+                // console.log("Employee profile fetched:", data);
                 setEmployee(data);
 
             } catch (error) {
@@ -418,10 +418,10 @@ function ViewEmployeeProfile() {
 
             const data = await response.json();
 
-            console.log(
-                "Salary details fetched:",
-                data
-            );
+            // console.log(
+            //     "Salary details fetched:",
+            //     data
+            // );
 
             setSalary(data);
 

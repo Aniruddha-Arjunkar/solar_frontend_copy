@@ -91,10 +91,10 @@ function MakeClient() {
 
                 const data = await response.json();
 
-                console.log(
-                    "Make Client Lead:",
-                    data
-                );
+                // console.log(
+                //     "Make Client Lead:",
+                //     data
+                // );
 
                 setLead(data);
 
@@ -407,10 +407,10 @@ function MakeClient() {
                 await response.json();
 
 
-            console.log(
-                "Vendor Client Created:",
-                savedClient
-            );
+            // console.log(
+            //     "Vendor Client Created:",
+            //     savedClient
+            // );
 
             // SUCCESS
             window.alert(
@@ -512,10 +512,10 @@ function MakeClient() {
                     formData.technicalName
             };
 
-            console.log(
-                "Convert Lead To Client:",
-                clientData
-            );
+            // console.log(
+            //     "Convert Lead To Client:",
+            //     clientData
+            // );
 
             //================================================
             // Convert Lead -> Client Very Imp
@@ -546,10 +546,10 @@ function MakeClient() {
             const savedClient =
                 await response.json();
 
-            console.log(
-                "Client Created:",
-                savedClient
-            );
+            // console.log(
+            //     "Client Created:",
+            //     savedClient
+            // );
 
             // SUCCESS
             window.alert(
