@@ -55,11 +55,11 @@ function ViewEmployeeProfile() {
 
     // ======================  EMPLOYEE DOCUMENT STATE ===================================
 
-const [employeeDocuments, setEmployeeDocuments] = useState([]);
-const [documentsLoading, setDocumentsLoading] = useState(true);
-const [documentUploading, setDocumentUploading] = useState(false);
-const [documentError, setDocumentError] = useState("");
-const documentFileInputRef = useRef(null);
+    const [employeeDocuments, setEmployeeDocuments] = useState([]);
+    const [documentsLoading, setDocumentsLoading] = useState(true);
+    const [documentUploading, setDocumentUploading] = useState(false);
+    const [documentError, setDocumentError] = useState("");
+    const documentFileInputRef = useRef(null);
 
     useEffect(() => {
 
@@ -90,13 +90,13 @@ const documentFileInputRef = useRef(null);
 
                 const data = await response.json();
 
-                console.log("Employee profile fetched:",data);
+                console.log("Employee profile fetched:", data);
                 setEmployee(data);
 
             } catch (error) {
 
-                console.error("Error fetching employee profile:",error);
-                setError( error.message || "Unable to load employee profile.");
+                console.error("Error fetching employee profile:", error);
+                setError(error.message || "Unable to load employee profile.");
 
             } finally {
                 setLoading(false);
@@ -110,240 +110,240 @@ const documentFileInputRef = useRef(null);
     }, [employeeId]);
 
     // ============================================================
-// FETCH EMPLOYEE DOCUMENTS
-// ============================================================
+    // FETCH EMPLOYEE DOCUMENTS
+    // ============================================================
 
-useEffect(() => {
+    useEffect(() => {
 
-    const fetchEmployeeDocuments = async () => {
+        const fetchEmployeeDocuments = async () => {
 
-        try {
+            try {
 
-            setDocumentsLoading(true);
-            setDocumentError("");
+                setDocumentsLoading(true);
+                setDocumentError("");
 
-            const response = await fetch(
-                `${API_BASE_URL}/employee-documents/employee/${employeeId}`
-            );
-
-
-            if (!response.ok) {
-                throw new Error("Unable to load employee documents.");
-            }
-
-            const data = await response.json();
-
-            setEmployeeDocuments(
-                Array.isArray(data)
-                    ? data
-                    : []
-            );
-
-        } catch (error) {
-            console.error("Employee Documents Error:",error);
-
-            setDocumentError(error.message || "Unable to load employee documents.");
-            setEmployeeDocuments([]);
-
-        } finally {
-            setDocumentsLoading(false);
-        }
-    };
-
-    if (employeeId) {
-        fetchEmployeeDocuments();
-    }
-
-}, [employeeId]);
+                const response = await fetch(
+                    `${API_BASE_URL}/employee-documents/employee/${employeeId}`
+                );
 
 
-// ============================================================
-// UPLOAD EMPLOYEE DOCUMENT
-// ============================================================
-
-const handleUploadDocument = async (event) => {
-
-    const file = event.target.files?.[0];
-
-
-    if (!file) {
-        return;
-    }
-
-
-    // RESET PREVIOUS ERROR
-    setDocumentError("");
-
- 
-    // VALIDATE FILE TYPE
-    const allowedTypes = [
-        "application/pdf",
-        "image/jpeg",
-        "image/png"
-    ];
-
-
-    if (!allowedTypes.includes(file.type)) {
-        setDocumentError("Only PDF, JPG, JPEG and PNG files are allowed.");
-        event.target.value = "";
-        return;
-    }
-
-
-    // --------------------------------------------------------
-    // VALIDATE FILE SIZE
-    // Backend limit = 10 MB
-    // --------------------------------------------------------
-
-    const maxFileSize =
-        10 * 1024 * 1024;
-
-
-    if (file.size > maxFileSize) {
-        setDocumentError("File size must be 10 MB or less.");
-        event.target.value = "";
-        return;
-    }
-
-    // --------------------------------------------------------
-    // CREATE FORM DATA
-    // --------------------------------------------------------
-
-    const formData =
-        new FormData();
-
-    formData.append(
-        "file",
-        file
-    );
-
-    try {
-        setDocumentUploading(true);
-
-        const response =
-            await fetch(
-                `${API_BASE_URL}/employee-documents/employee/${employeeId}`,
-                {
-                    method: "POST",
-                    body: formData
+                if (!response.ok) {
+                    throw new Error("Unable to load employee documents.");
                 }
-            );
 
-        let responseData = null;
+                const data = await response.json();
 
-        try {
-            responseData = await response.json();
-        } catch {
-            responseData = null;
+                setEmployeeDocuments(
+                    Array.isArray(data)
+                        ? data
+                        : []
+                );
+
+            } catch (error) {
+                console.error("Employee Documents Error:", error);
+
+                setDocumentError(error.message || "Unable to load employee documents.");
+                setEmployeeDocuments([]);
+
+            } finally {
+                setDocumentsLoading(false);
+            }
+        };
+
+        if (employeeId) {
+            fetchEmployeeDocuments();
         }
 
-        if (!response.ok) {
-            throw new Error(
-                responseData?.message ||
-                responseData?.error ||
-                "Unable to upload employee document."
-            );
+    }, [employeeId]);
+
+
+    // ============================================================
+    // UPLOAD EMPLOYEE DOCUMENT
+    // ============================================================
+
+    const handleUploadDocument = async (event) => {
+
+        const file = event.target.files?.[0];
+
+
+        if (!file) {
+            return;
         }
 
 
-        // ----------------------------------------------------
-        // ADD NEW DOCUMENT TO UI
-        // ----------------------------------------------------
-
-        setEmployeeDocuments(
-            (currentDocuments) => [
-                ...currentDocuments,
-                responseData
-            ]
-        );
-
-    } catch (error) {
-        console.error("Upload Employee Document Error:",error);
-        setDocumentError(error.message || "Unable to upload employee document.");
-
-    } finally {
-        setDocumentUploading(false);
-
-        // Clear file input so the same file can be
-        // selected again later if required.
-
-        if (documentFileInputRef.current) {
-            documentFileInputRef.current.value = "";
-        }
-    }
-};
-
-// ============================================================
-// VIEW EMPLOYEE DOCUMENT
-// ============================================================
-
-const handleViewDocument = (documentId) => {
-
-    window.open(
-        `${API_BASE_URL}/employee-documents/${documentId}/view`,
-        "_blank"
-    );
-
-};
-
-// ============================================================
-// DELETE EMPLOYEE DOCUMENT
-// ============================================================
-
-const handleDeleteDocument = async (
-    documentId
-) => {
-
-    const confirmDelete =
-        window.confirm(
-            "Are you sure you want to delete this document?"
-        );
-
-
-    if (!confirmDelete) {
-        return;
-    }
-
-
-    try {
-
+        // RESET PREVIOUS ERROR
         setDocumentError("");
 
 
-        const response =
-            await fetch(
-                `${API_BASE_URL}/employee-documents/${documentId}`,
-                {
-                    method: "DELETE"
-                }
-            );
+        // VALIDATE FILE TYPE
+        const allowedTypes = [
+            "application/pdf",
+            "image/jpeg",
+            "image/png"
+        ];
 
 
-        if (!response.ok) {
-
-            throw new Error(
-                "Unable to delete employee document."
-            );
-
+        if (!allowedTypes.includes(file.type)) {
+            setDocumentError("Only PDF, JPG, JPEG and PNG files are allowed.");
+            event.target.value = "";
+            return;
         }
 
 
-        setEmployeeDocuments(
-            (currentDocuments) =>
-                currentDocuments.filter(
-                    (document) =>
-                        document.id !== documentId
-                )
+        // --------------------------------------------------------
+        // VALIDATE FILE SIZE
+        // Backend limit = 10 MB
+        // --------------------------------------------------------
+
+        const maxFileSize =
+            10 * 1024 * 1024;
+
+
+        if (file.size > maxFileSize) {
+            setDocumentError("File size must be 10 MB or less.");
+            event.target.value = "";
+            return;
+        }
+
+        // --------------------------------------------------------
+        // CREATE FORM DATA
+        // --------------------------------------------------------
+
+        const formData =
+            new FormData();
+
+        formData.append(
+            "file",
+            file
         );
 
+        try {
+            setDocumentUploading(true);
 
-    } catch (error) {
+            const response =
+                await fetch(
+                    `${API_BASE_URL}/employee-documents/employee/${employeeId}`,
+                    {
+                        method: "POST",
+                        body: formData
+                    }
+                );
 
-        console.error(
-            "Delete Employee Document Error:", error);
-        setDocumentError( error.message || "Unable to delete employee document.");
-    }
-};
+            let responseData = null;
+
+            try {
+                responseData = await response.json();
+            } catch {
+                responseData = null;
+            }
+
+            if (!response.ok) {
+                throw new Error(
+                    responseData?.message ||
+                    responseData?.error ||
+                    "Unable to upload employee document."
+                );
+            }
+
+
+            // ----------------------------------------------------
+            // ADD NEW DOCUMENT TO UI
+            // ----------------------------------------------------
+
+            setEmployeeDocuments(
+                (currentDocuments) => [
+                    ...currentDocuments,
+                    responseData
+                ]
+            );
+
+        } catch (error) {
+            console.error("Upload Employee Document Error:", error);
+            setDocumentError(error.message || "Unable to upload employee document.");
+
+        } finally {
+            setDocumentUploading(false);
+
+            // Clear file input so the same file can be
+            // selected again later if required.
+
+            if (documentFileInputRef.current) {
+                documentFileInputRef.current.value = "";
+            }
+        }
+    };
+
+    // ============================================================
+    // VIEW EMPLOYEE DOCUMENT
+    // ============================================================
+
+    const handleViewDocument = (documentId) => {
+
+        window.open(
+            `${API_BASE_URL}/employee-documents/${documentId}/view`,
+            "_blank"
+        );
+
+    };
+
+    // ============================================================
+    // DELETE EMPLOYEE DOCUMENT
+    // ============================================================
+
+    const handleDeleteDocument = async (
+        documentId
+    ) => {
+
+        const confirmDelete =
+            window.confirm(
+                "Are you sure you want to delete this document?"
+            );
+
+
+        if (!confirmDelete) {
+            return;
+        }
+
+
+        try {
+
+            setDocumentError("");
+
+
+            const response =
+                await fetch(
+                    `${API_BASE_URL}/employee-documents/${documentId}`,
+                    {
+                        method: "DELETE"
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to delete employee document."
+                );
+
+            }
+
+
+            setEmployeeDocuments(
+                (currentDocuments) =>
+                    currentDocuments.filter(
+                        (document) =>
+                            document.id !== documentId
+                    )
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Delete Employee Document Error:", error);
+            setDocumentError(error.message || "Unable to delete employee document.");
+        }
+    };
 
     // ============================================================
     // BACK TO VIEW EMPLOYEES
@@ -593,750 +593,834 @@ const handleDeleteDocument = async (
     };
 
     // ============================================================
-// FORMAT DOCUMENT SIZE
-// ============================================================
+    // FORMAT DOCUMENT SIZE
+    // ============================================================
 
-const formatDocumentSize = (bytes) => {
+    const formatDocumentSize = (bytes) => {
 
-    if (!bytes) {
-        return "0 KB";
-    }
-
-
-    const sizeInKB =
-        bytes / 1024;
+        if (!bytes) {
+            return "0 KB";
+        }
 
 
-    if (sizeInKB < 1024) {
-        return `${sizeInKB.toFixed(1)} KB`;
-    }
+        const sizeInKB =
+            bytes / 1024;
 
-    return `${(
-        sizeInKB / 1024
-    ).toFixed(1)} MB`;
-};
+
+        if (sizeInKB < 1024) {
+            return `${sizeInKB.toFixed(1)} KB`;
+        }
+
+        return `${(
+            sizeInKB / 1024
+        ).toFixed(1)} MB`;
+    };
 
     return (
 
         <section className="view-profile-page">
 
-
-            {/* ====================================================
-                PROFILE HEADER
-            ==================================================== */}
-
-            <div className="view-profile-header">
-
-
-                {/* ==================================================
-                    LEFT SIDE
-                ================================================== */}
-
-                <div className="view-profile-header-left">
-
-
-                    {/* PROFILE PHOTO */}
-                    <div className="view-profile-photo">
-
-                        {employee.profilePhoto ? (
-
-                            <img
-                                src={employee.profilePhoto}
-                                alt={employee.name}
-                            />
-
-                        ) : (
-
-                            <User size={42} />
-
-                        )}
-
-                    </div>
-
-
-                    {/* EMPLOYEE BASIC INFORMATION */}
-
-                    <div className="view-profile-basic-info">
-
-                        <h1>
-                            {displayValue(employee.name)}
-                        </h1>
-
-                        <div className="view-profile-designation">
-
-                            <BriefcaseBusiness size={17} />
-
-                            <span>
-                                {displayValue(employee.designation)}
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                {/* ==================================================
-                    RIGHT SIDE BUTTONS
-                ================================================== */}
-
-                <div className="view-profile-header-actions">
-
-
-                    {/* BACK */}
-
-                    <button
-                        type="button"
-                        className="view-profile-btn back"
-                        onClick={handleBack}
-                    >
-
-                        <ArrowLeft size={17} />
-                        Back
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            {/* ====================================================
-                PERSONAL DETAILS
-            ==================================================== */}
-
-            <div className="view-profile-section">
-
-
-                <div className="view-profile-section-header personal">
-
-                    <User size={19} />
-
-                    <h2>
-                        Personal Details
-                    </h2>
-
-                </div>
-
-
-                <div className="view-profile-info-grid">
-
-
-                    <ProfileItem
-                        icon={<User size={17} />}
-                        label="Title"
-                        value={employee.title}
-                    />
-
-                    <ProfileItem
-                        icon={<User size={17} />}
-                        label="Employee Name"
-                        value={employee.name}
-                        highlight
-                    />
-
-                    <ProfileItem
-                        icon={<Phone size={17} />}
-                        label="Phone"
-                        value={employee.phone}
-                    />
-
-                    <ProfileItem
-                        icon={<CalendarDays size={17} />}
-                        label="Date of Birth"
-                        value={employee.dob}
-                    />
-
-                    <ProfileItem
-                        icon={<UsersRound size={17} />}
-                        label="Gender"
-                        value={employee.gender}
-                    />
-
-                    <ProfileItem
-                        icon={<Mail size={17} />}
-                        label="Email Address"
-                        value={employee.email}
-                    />
-
-                    <ProfileItem
-                        icon={<Phone size={17} />}
-                        label="Emergency Contact"
-                        value={employee.emergencyContact || employee.altPhone}
-                    />
-
-                    <ProfileItem
-                        icon={<Heart size={17} />}
-                        label="Relationship"
-                        value={employee.relationship}
-                    />
-
-                    <ProfileItem
-                        icon={<User size={17} />}
-                        label="Mother Name"
-                        value={employee.motherName}
-                    />
-
-                    <ProfileItem
-                        icon={<Heart size={17} />}
-                        label="Marital Status"
-                        value={employee.maritalStatus}
-                    />
-
-                </div>
-
-            </div>
-
-
-            {/* ====================================================
-                ADDRESS DETAILS
-            ==================================================== */}
-
-            <div className="view-profile-section">
-
-
-                <div className="view-profile-section-header address">
-
-                    <MapPin size={19} />
-
-                    <h2>
-                        Address Details
-                    </h2>
-
-                </div>
-
-
-                <div className="view-profile-address-grid">
-
-
-                    <div className="view-profile-address-card">
-
-                        <div className="view-profile-address-title">
-
-                            <MapPin size={17} />
-
-                            <span>
-                                Current Address
-                            </span>
-
-                        </div>
-
-                        <p>
-                            {displayValue(employee.currentAddress)}
-                        </p>
-
-                    </div>
-
-
-                    <div className="view-profile-address-card">
-
-                        <div className="view-profile-address-title">
-
-                            <MapPin size={17} />
-
-                            <span>
-                                Permanent Address
-                            </span>
-
-                        </div>
-
-                        <p>
-                            {displayValue(employee.permanentAddress)}
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            {/* ====================================================
-                EDUCATION DETAILS
-            ==================================================== */}
-
-            <div className="view-profile-section">
-
-
-                <div className="view-profile-section-header education">
-
-                    <GraduationCap size={19} />
-
-                    <h2>
-                        Education Details
-                    </h2>
-
-                </div>
-
-
-                <div className="view-profile-info-grid">
-
-
-                    <ProfileItem
-                        label="10th"
-                        value={employee.tenth}
-                    />
-
-                    <ProfileItem
-                        label="12th"
-                        value={employee.twelfth}
-                    />
-
-                    <ProfileItem
-                        label="Graduation"
-                        value={employee.graduation}
-                    />
-
-                    <ProfileItem
-                        label="Post Graduation"
-                        value={employee.postGraduation}
-                    />
-
-                </div>
-
-            </div>
-
-
-            {/* ====================================================
-                EXPERIENCE DETAILS
-            ==================================================== */}
-
-            <div className="view-profile-section">
-
-
-                <div className="view-profile-section-header experience">
-
-                    <BriefcaseBusiness size={19} />
-
-                    <h2>
-                        Experience Details
-                    </h2>
-
-                </div>
-
-
-                <div className="view-profile-info-grid">
-
-
-                    <ProfileItem
-                        label="Experience Type"
-                        value={employee.experienceType}
-                    />
-
-                    <ProfileItem
-                        label="Previous Experience"
-                        value={employee.previousExperience}
-                    />
-
-                    <ProfileItem
-                        label="Work Experience"
-                        value={
-                            employee.workExperienceYears !== undefined &&
-                                employee.workExperienceYears !== ""
-                                ? `${employee.workExperienceYears} Years`
-                                : null
-                        }
-                    />
-
-                    <ProfileItem
-                        label="Previous Company"
-                        value={employee.previousCompanyName}
-                    />
-
-                    <ProfileItem
-                        label="Previous Designation"
-                        value={employee.previousDesignation}
-                    />
-
-                    <ProfileItem
-                        icon={<IndianRupee size={17} />}
-                        label="Previous Salary"
-                        value={formatAmount(employee.previousSalary)}
-                    />
-
-                </div>
-
-            </div>
-
-
-            {/* ====================================================
-                EMPLOYEE DETAILS
-            ==================================================== */}
-
-            <div className="view-profile-section">
-
-
-                <div className="view-profile-section-header employee">
-
-                    <BriefcaseBusiness size={19} />
-
-                    <h2>
-                        Employee Details
-                    </h2>
-
-                </div>
-
-
-                <div className="view-profile-info-grid">
-
-
-                    <ProfileItem
-                        label="Employee Type"
-                        value={employee.employeeType}
-                    />
-
-                    <ProfileItem
-                        icon={<Building2 size={17} />}
-                        label="Department"
-                        value={employee.department}
-                    />
-
-                    <ProfileItem
-                        icon={<IndianRupee size={17} />}
-                        label="Annual Package"
-                        value={formatAmount(employee.packageAmount)}
-                    />
-
-                    <ProfileItem
-                        icon={<CalendarDays size={17} />}
-                        label="Joining Date"
-                        value={employee.joiningDate}
-                    />
-
-                    <ProfileItem
-                        icon={<BriefcaseBusiness size={17} />}
-                        label="Designation"
-                        value={employee.designation}
-                        highlight
-                    />
-
-                </div>
-
-            </div>
-
-
-            {/* ====================================================
-                BANK DETAILS
-            ==================================================== */}
-
-            <div className="view-profile-section">
-
-
-                <div className="view-profile-section-header bank">
-
-                    <Landmark size={19} />
-
-                    <h2>
-                        Bank Details
-                    </h2>
-
-                </div>
-
-
-                <div className="view-profile-info-grid">
-
-
-                    <ProfileItem
-                        icon={<CreditCard size={17} />}
-                        label="Account Number"
-                        value={employee.accountNo}
-                    />
-
-                    <ProfileItem
-                        icon={<Landmark size={17} />}
-                        label="Bank Name"
-                        value={employee.bankName}
-                    />
-
-                    <ProfileItem
-                        icon={<Building2 size={17} />}
-                        label="Branch Name"
-                        value={employee.branchName}
-                    />
-
-                    <ProfileItem
-                        label="IFSC Code"
-                        value={employee.ifscCode}
-                    />
-
-                </div>
-
-            </div>
-
-
-            {/* ====================================================
-                KYC DETAILS
-            ==================================================== */}
-
-            <div className="view-profile-section">
-
-
-                <div className="view-profile-section-header kyc">
-
-                    <ShieldCheck size={19} />
-
-                    <h2>
-                        KYC Details
-                    </h2>
-
-                </div>
-
-
-                <div className="view-profile-info-grid">
-
-
-                    <ProfileItem
-                        label="Aadhar Number"
-                        value={employee.aadharNo}
-                    />
-
-                    <ProfileItem
-                        label="PAN Card Number"
-                        value={employee.panNo}
-                    />
-
-                    <ProfileItem
-                        label="Profile Photo"
-                        value={
-                            employee.profilePhoto
-                                ? "Uploaded"
-                                : "Not uploaded"
-                        }
-                    />
-
-                </div>
-
-            </div>
-
-
-            {/* ====================================================
-                PROVIDENT FUND & ESIC
-            ==================================================== */}
-
-            <div className="view-profile-section">
-
-
-                <div className="view-profile-section-header pf">
-
-                    <ShieldCheck size={19} />
-
-                    <h2>
-                        Provident Fund & ESIC
-                    </h2>
-
-                </div>
-
-
-                <div className="view-profile-info-grid">
-
-
-                    <ProfileItem
-                        label="UAN Number"
-                        value={employee.uanNo}
-                    />
-
-                    <ProfileItem
-                        label="PF Number"
-                        value={employee.pfNo}
-                    />
-
-                    <ProfileItem
-                        label="ESIC Number"
-                        value={employee.esicNo}
-                    />
-                </div>
-            </div>
-
-
-            {/* ====================================================
-                DOCUMENTS
-            ==================================================== */}
-
-            <div className="view-profile-section">
-
-                <div className="view-profile-section-header documents">
-                    <FileText size={19} />
-                    <h2>
-                        Documents
-                    </h2>
-                </div>
-
-                <div className="view-profile-document-area">
-                    {documentsLoading ? (
-
-    <div className="view-profile-no-document">
-        <FileText size={30} />
-        <div>
-            <strong>
-                Loading Documents...
-            </strong>
-
-            <span>
-                Please wait while employee documents are loaded.
-            </span>
-        </div>
-    </div>
-
-) : documentError ? (
-    <div className="view-profile-no-document error">
-        <FileText size={30} />
-        <div>
-            <strong>
-                Unable to Load Documents
-            </strong>
-            <span>
-                {documentError}
-            </span>
-        </div>
-    </div>
-
-) : employeeDocuments.length === 0 ? (
-    <div className="view-profile-no-document">
-        <FileText size={30} />
-        <div>
-            <strong>
-                No Documents Uploaded
-            </strong>
-            <span>
-                Upload employee documents using the button above.
-            </span>
-        </div>
-    </div>
-
-) : (
-
-    <div className="view-profile-document-list">
-
-        {employeeDocuments.map(
-            (document) => (
-                <div key={document.id}
-                    className="view-profile-document-item">
-
-                    <div className="view-profile-document-info">
-                        <div className="view-profile-document-icon">
-                            <FileText size={21} />
-                        </div>
-                        <div>
-
-                            <strong>
-                                {document.fileName}
-                            </strong>
-
-                            <span>
-                                {formatDocumentSize(
-                                    document.fileSize
-                                )}
-                                {" • "}
-                                {document.uploadedAt
-                                    ? new Date(
-                                        document.uploadedAt
-                                    ).toLocaleDateString(
-                                        "en-IN"
-                                    )
-                                    : "Date unavailable"
-                                }
-                            </span>
-                        </div>
-                    </div>
-
-
-                    <div className="view-profile-document-actions">
-
-                        <button
-                            type="button"
-                            className="view-profile-document-view-btn"
-                            onClick={() =>
-                                handleViewDocument(document.id)
-                            }>
-
-                            <Eye size={16} />
-                            View
-                        </button>
-
-
-                        <button
-                            type="button"
-                            className="view-profile-document-delete-btn"
-                            onClick={() =>
-                                handleDeleteDocument(document.id)
-                            }>
-                            <Trash2 size={16} />
-                            Delete
-                        </button>
-                    </div>
-                </div>
-            )
-        )}
-    </div>
-)}
-
-                </div>
-
-            </div>
-
-
-            {/* ====================================================
-                BOTTOM ACTIONS
-            ==================================================== */}
-
-            <div className="view-profile-footer">
-
+            {/* ============================================================
+            BACK
+        ============================================================ */}
+
+            <div className="view-profile-topbar">
 
                 <button
                     type="button"
-                    className="view-profile-footer-back"
+                    className="view-profile-btn back"
                     onClick={handleBack}
                 >
-
-                    <ArrowLeft size={18} />
+                    <ArrowLeft size={17} />
                     Back to Employees
                 </button>
 
+            </div>
 
-                <div className="view-profile-footer-actions">
 
-                    <button
-    type="button"
-    className="view-profile-footer-document"
-    onClick={() =>
-        documentFileInputRef.current?.click()
-    }
-    disabled={documentUploading}
->
-    <Upload size={18} />
+            {/* ============================================================
+            PROFILE LAYOUT
+        ============================================================ */}
 
-    {documentUploading
-        ? "Uploading..."
-        : "Upload Document"
-    }
-</button>
-<input
-    ref={documentFileInputRef}
-    type="file"
-    accept=".pdf,.jpg,.jpeg,.png"
-    onChange={handleUploadDocument}
-    style={{ display: "none" }}
-/>
+            <div className="view-profile-layout">
 
-                    <button
-                        type="button"
-                        className="view-profile-footer-salary"
-                        onClick={handleOpenSalary}>
-                        <IndianRupee size={18} />
-                        Salary
-                    </button>
 
-                    <button
-                        type="button"
-                        className="view-profile-footer-attendence"
-                        onClick={() =>
-                            navigate(
-                                `/dashboard/view-employee-attendance/${employee.id}?from=profile`
-                            )
-                        }>
-                        <CalendarCheck size={18} />
-                        Attendence
-                    </button>
+                {/* ========================================================
+                LEFT EMPLOYEE SUMMARY
+            ======================================================== */}
+
+                <aside className="view-profile-sidebar">
+
+                    <div className="view-profile-summary-card">
+
+                        {/* PROFILE PHOTO */}
+
+                        <div className="view-profile-photo">
+
+                            {employee.profilePhoto ? (
+
+                                <img
+                                    src={employee.profilePhoto}
+                                    alt={employee.name}
+                                />
+
+                            ) : (
+
+                                <User size={42} />
+
+                            )}
+
+                        </div>
+
+
+                        {/* BASIC INFO */}
+
+                        <div className="view-profile-summary-info">
+
+                            <h1>
+                                {displayValue(employee.name)}
+                            </h1>
+
+                            <div className="view-profile-summary-role">
+
+                                <BriefcaseBusiness size={15} />
+
+                                <span>
+                                    {displayValue(employee.designation)}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        {/* QUICK CONTACT */}
+
+                        <div className="view-profile-summary-contact">
+
+                            <div>
+                                <Phone size={15} />
+                                <span>
+                                    {displayValue(employee.phone)}
+                                </span>
+                            </div>
+
+                            <div>
+                                <Mail size={15} />
+                                <span>
+                                    {displayValue(employee.email)}
+                                </span>
+                            </div>
+
+                            <div>
+                                <CalendarDays size={15} />
+                                <span>
+                                    {displayValue(employee.joiningDate)}
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        {/* QUICK ACTIONS */}
+
+                        <div className="view-profile-summary-actions">
+
+
+                            <button
+                                type="button"
+                                className="view-profile-summary-btn attendance"
+                                onClick={() =>
+                                    navigate(
+                                        `/dashboard/view-employee-attendance/${employee.id}?from=profile`
+                                    )
+                                }
+                            >
+                                <CalendarCheck size={16} />
+                                Attendance
+                            </button>
+
+
+                            <button
+                                type="button"
+                                className="view-profile-summary-btn salary"
+                                onClick={handleOpenSalary}
+                            >
+                                <IndianRupee size={16} />
+                                Salary
+                            </button>
+
+
+                            <button
+                                type="button"
+                                className="view-profile-summary-btn documents"
+                                onClick={() =>
+                                    documentFileInputRef.current?.click()
+                                }
+                                disabled={documentUploading}
+                            >
+                                <Upload size={16} />
+
+                                {documentUploading
+                                    ? "Uploading..."
+                                    : "Upload Document"
+                                }
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+
+                {/* ========================================================
+                RIGHT PROFILE CONTENT
+            ======================================================== */}
+
+                <div className="view-profile-main">
+
+
+
+
+                    {/* ====================================================
+                PERSONAL DETAILS
+            ==================================================== */}
+
+                    <div className="view-profile-section">
+
+
+                        <div className="view-profile-section-header personal">
+
+                            <User size={19} />
+
+                            <h2>
+                                Personal Details
+                            </h2>
+
+                        </div>
+
+
+                        <div className="view-profile-info-grid">
+
+
+                            <ProfileItem
+                                icon={<User size={17} />}
+                                label="Title"
+                                value={employee.title}
+                            />
+
+                            <ProfileItem
+                                icon={<User size={17} />}
+                                label="Employee Name"
+                                value={employee.name}
+                                highlight
+                            />
+
+                            <ProfileItem
+                                icon={<Phone size={17} />}
+                                label="Phone"
+                                value={employee.phone}
+                            />
+
+                            <ProfileItem
+                                icon={<CalendarDays size={17} />}
+                                label="Date of Birth"
+                                value={employee.dob}
+                            />
+
+                            <ProfileItem
+                                icon={<UsersRound size={17} />}
+                                label="Gender"
+                                value={employee.gender}
+                            />
+
+                            <ProfileItem
+                                icon={<Mail size={17} />}
+                                label="Email Address"
+                                value={employee.email}
+                            />
+
+                            <ProfileItem
+                                icon={<Phone size={17} />}
+                                label="Emergency Contact"
+                                value={employee.emergencyContact || employee.altPhone}
+                            />
+
+                            <ProfileItem
+                                icon={<Heart size={17} />}
+                                label="Relationship"
+                                value={employee.relationship}
+                            />
+
+                            <ProfileItem
+                                icon={<User size={17} />}
+                                label="Mother Name"
+                                value={employee.motherName}
+                            />
+
+                            <ProfileItem
+                                icon={<Heart size={17} />}
+                                label="Marital Status"
+                                value={employee.maritalStatus}
+                            />
+
+                        </div>
+
+                    </div>
+
+
+                    {/* ====================================================
+                ADDRESS DETAILS
+            ==================================================== */}
+
+                    <div className="view-profile-section">
+
+
+                        <div className="view-profile-section-header address">
+
+                            <MapPin size={19} />
+
+                            <h2>
+                                Address Details
+                            </h2>
+
+                        </div>
+
+
+                        <div className="view-profile-address-grid">
+
+
+                            <div className="view-profile-address-card">
+
+                                <div className="view-profile-address-title">
+
+                                    <MapPin size={17} />
+
+                                    <span>
+                                        Current Address
+                                    </span>
+
+                                </div>
+
+                                <p>
+                                    {displayValue(employee.currentAddress)}
+                                </p>
+
+                            </div>
+
+
+                            <div className="view-profile-address-card">
+
+                                <div className="view-profile-address-title">
+
+                                    <MapPin size={17} />
+
+                                    <span>
+                                        Permanent Address
+                                    </span>
+
+                                </div>
+
+                                <p>
+                                    {displayValue(employee.permanentAddress)}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    {/* ====================================================
+                EDUCATION DETAILS
+            ==================================================== */}
+
+                    <div className="view-profile-section">
+
+
+                        <div className="view-profile-section-header education">
+
+                            <GraduationCap size={19} />
+
+                            <h2>
+                                Education Details
+                            </h2>
+
+                        </div>
+
+
+                        <div className="view-profile-info-grid">
+
+
+                            <ProfileItem
+                                label="10th"
+                                value={employee.tenth}
+                            />
+
+                            <ProfileItem
+                                label="12th"
+                                value={employee.twelfth}
+                            />
+
+                            <ProfileItem
+                                label="Graduation"
+                                value={employee.graduation}
+                            />
+
+                            <ProfileItem
+                                label="Post Graduation"
+                                value={employee.postGraduation}
+                            />
+
+                        </div>
+
+                    </div>
+
+
+                    {/* ====================================================
+                EXPERIENCE DETAILS
+            ==================================================== */}
+
+                    <div className="view-profile-section">
+
+
+                        <div className="view-profile-section-header experience">
+
+                            <BriefcaseBusiness size={19} />
+
+                            <h2>
+                                Experience Details
+                            </h2>
+
+                        </div>
+
+
+                        <div className="view-profile-info-grid">
+
+
+                            <ProfileItem
+                                label="Experience Type"
+                                value={employee.experienceType}
+                            />
+
+                            <ProfileItem
+                                label="Previous Experience"
+                                value={employee.previousExperience}
+                            />
+
+                            <ProfileItem
+                                label="Work Experience"
+                                value={
+                                    employee.workExperienceYears !== undefined &&
+                                        employee.workExperienceYears !== ""
+                                        ? `${employee.workExperienceYears} Years`
+                                        : null
+                                }
+                            />
+
+                            <ProfileItem
+                                label="Previous Company"
+                                value={employee.previousCompanyName}
+                            />
+
+                            <ProfileItem
+                                label="Previous Designation"
+                                value={employee.previousDesignation}
+                            />
+
+                            <ProfileItem
+                                icon={<IndianRupee size={17} />}
+                                label="Previous Salary"
+                                value={formatAmount(employee.previousSalary)}
+                            />
+
+                        </div>
+
+                    </div>
+
+
+                    {/* ====================================================
+                EMPLOYEE DETAILS
+            ==================================================== */}
+
+                    <div className="view-profile-section">
+
+
+                        <div className="view-profile-section-header employee">
+
+                            <BriefcaseBusiness size={19} />
+
+                            <h2>
+                                Employee Details
+                            </h2>
+
+                        </div>
+
+
+                        <div className="view-profile-info-grid">
+
+
+                            <ProfileItem
+                                label="Employee Type"
+                                value={employee.employeeType}
+                            />
+
+                            <ProfileItem
+                                icon={<Building2 size={17} />}
+                                label="Department"
+                                value={employee.department}
+                            />
+
+                            <ProfileItem
+                                icon={<IndianRupee size={17} />}
+                                label="Annual Package"
+                                value={formatAmount(employee.packageAmount)}
+                            />
+
+                            <ProfileItem
+                                icon={<CalendarDays size={17} />}
+                                label="Joining Date"
+                                value={employee.joiningDate}
+                            />
+
+                            <ProfileItem
+                                icon={<BriefcaseBusiness size={17} />}
+                                label="Designation"
+                                value={employee.designation}
+                                highlight
+                            />
+
+                        </div>
+
+                    </div>
+
+
+                    {/* ====================================================
+                BANK DETAILS
+            ==================================================== */}
+
+                    <div className="view-profile-section">
+
+
+                        <div className="view-profile-section-header bank">
+
+                            <Landmark size={19} />
+
+                            <h2>
+                                Bank Details
+                            </h2>
+
+                        </div>
+
+
+                        <div className="view-profile-info-grid">
+
+
+                            <ProfileItem
+                                icon={<CreditCard size={17} />}
+                                label="Account Number"
+                                value={employee.accountNo}
+                            />
+
+                            <ProfileItem
+                                icon={<Landmark size={17} />}
+                                label="Bank Name"
+                                value={employee.bankName}
+                            />
+
+                            <ProfileItem
+                                icon={<Building2 size={17} />}
+                                label="Branch Name"
+                                value={employee.branchName}
+                            />
+
+                            <ProfileItem
+                                label="IFSC Code"
+                                value={employee.ifscCode}
+                            />
+
+                        </div>
+
+                    </div>
+
+
+                    {/* ====================================================
+                KYC DETAILS
+            ==================================================== */}
+
+                    <div className="view-profile-section">
+
+
+                        <div className="view-profile-section-header kyc">
+
+                            <ShieldCheck size={19} />
+
+                            <h2>
+                                KYC Details
+                            </h2>
+
+                        </div>
+
+
+                        <div className="view-profile-info-grid">
+
+
+                            <ProfileItem
+                                label="Aadhar Number"
+                                value={employee.aadharNo}
+                            />
+
+                            <ProfileItem
+                                label="PAN Card Number"
+                                value={employee.panNo}
+                            />
+
+                            <ProfileItem
+                                label="Profile Photo"
+                                value={
+                                    employee.profilePhoto
+                                        ? "Uploaded"
+                                        : "Not uploaded"
+                                }
+                            />
+
+                        </div>
+
+                    </div>
+
+
+                    {/* ====================================================
+                PROVIDENT FUND & ESIC
+            ==================================================== */}
+
+                    <div className="view-profile-section">
+
+
+                        <div className="view-profile-section-header pf">
+
+                            <ShieldCheck size={19} />
+
+                            <h2>
+                                Provident Fund & ESIC
+                            </h2>
+
+                        </div>
+
+
+                        <div className="view-profile-info-grid">
+
+
+                            <ProfileItem
+                                label="UAN Number"
+                                value={employee.uanNo}
+                            />
+
+                            <ProfileItem
+                                label="PF Number"
+                                value={employee.pfNo}
+                            />
+
+                            <ProfileItem
+                                label="ESIC Number"
+                                value={employee.esicNo}
+                            />
+                        </div>
+                    </div>
+
+
+                    {/* ====================================================
+                DOCUMENTS
+            ==================================================== */}
+
+                    <div className="view-profile-section">
+
+                        <div className="view-profile-section-header documents">
+                            <FileText size={19} />
+                            <h2>
+                                Documents
+                            </h2>
+                        </div>
+
+                        <div className="view-profile-document-area">
+                            {documentsLoading ? (
+
+                                <div className="view-profile-no-document">
+                                    <FileText size={30} />
+                                    <div>
+                                        <strong>
+                                            Loading Documents...
+                                        </strong>
+
+                                        <span>
+                                            Please wait while employee documents are loaded.
+                                        </span>
+                                    </div>
+                                </div>
+
+                            ) : documentError ? (
+                                <div className="view-profile-no-document error">
+                                    <FileText size={30} />
+                                    <div>
+                                        <strong>
+                                            Unable to Load Documents
+                                        </strong>
+                                        <span>
+                                            {documentError}
+                                        </span>
+                                    </div>
+                                </div>
+
+                            ) : employeeDocuments.length === 0 ? (
+                                <div className="view-profile-no-document">
+                                    <FileText size={30} />
+                                    <div>
+                                        <strong>
+                                            No Documents Uploaded
+                                        </strong>
+                                        <span>
+                                            Upload employee documents using the button above.
+                                        </span>
+                                    </div>
+                                </div>
+
+                            ) : (
+
+                                <div className="view-profile-document-list">
+
+                                    {employeeDocuments.map(
+                                        (document) => (
+                                            <div key={document.id}
+                                                className="view-profile-document-item">
+
+                                                <div className="view-profile-document-info">
+                                                    <div className="view-profile-document-icon">
+                                                        <FileText size={21} />
+                                                    </div>
+                                                    <div>
+
+                                                        <strong>
+                                                            {document.fileName}
+                                                        </strong>
+
+                                                        <span>
+                                                            {formatDocumentSize(
+                                                                document.fileSize
+                                                            )}
+                                                            {" • "}
+                                                            {document.uploadedAt
+                                                                ? new Date(
+                                                                    document.uploadedAt
+                                                                ).toLocaleDateString(
+                                                                    "en-IN"
+                                                                )
+                                                                : "Date unavailable"
+                                                            }
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+
+                                                <div className="view-profile-document-actions">
+
+                                                    <button
+                                                        type="button"
+                                                        className="view-profile-document-view-btn"
+                                                        onClick={() =>
+                                                            handleViewDocument(document.id)
+                                                        }>
+
+                                                        <Eye size={16} />
+                                                        View
+                                                    </button>
+
+
+                                                    <button
+                                                        type="button"
+                                                        className="view-profile-document-delete-btn"
+                                                        onClick={() =>
+                                                            handleDeleteDocument(document.id)
+                                                        }>
+                                                        <Trash2 size={16} />
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )
+                                    )}
+                                </div>
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    {/* ====================================================
+                BOTTOM ACTIONS
+            ==================================================== */}
+
+                    <div className="view-profile-footer">
+
+
+                        <button
+                            type="button"
+                            className="view-profile-footer-back"
+                            onClick={handleBack}
+                        >
+
+                            <ArrowLeft size={18} />
+                            Back to Employees
+                        </button>
+
+
+                        <div className="view-profile-footer-actions">
+
+                            <button
+                                type="button"
+                                className="view-profile-footer-document"
+                                onClick={() =>
+                                    documentFileInputRef.current?.click()
+                                }
+                                disabled={documentUploading}
+                            >
+                                <Upload size={18} />
+
+                                {documentUploading
+                                    ? "Uploading..."
+                                    : "Upload Document"
+                                }
+                            </button>
+                            <input
+                                ref={documentFileInputRef}
+                                type="file"
+                                accept=".pdf,.jpg,.jpeg,.png"
+                                onChange={handleUploadDocument}
+                                style={{ display: "none" }}
+                            />
+
+                            <button
+                                type="button"
+                                className="view-profile-footer-salary"
+                                onClick={handleOpenSalary}>
+                                <IndianRupee size={18} />
+                                Salary
+                            </button>
+
+                            <button
+                                type="button"
+                                className="view-profile-footer-attendence"
+                                onClick={() =>
+                                    navigate(
+                                        `/dashboard/view-employee-attendance/${employee.id}?from=profile`
+                                    )
+                                }>
+                                <CalendarCheck size={18} />
+                                Attendence
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
