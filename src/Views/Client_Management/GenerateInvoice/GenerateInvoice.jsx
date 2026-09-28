@@ -1182,7 +1182,7 @@ function GenerateInvoice() {
                                                                 event
                                                             )
                                                     }
-                                                    placeholder="100000"
+                                                    placeholder="Price Per Item"
                                                 />
 
                                             </div>
@@ -1290,7 +1290,7 @@ function GenerateInvoice() {
                     NOTES
                 ================================================== */}
 
-                <div className="invoice-section">
+                {/* <div className="invoice-section">
 
                     <div className="invoice-section-header">
 
@@ -1318,15 +1318,14 @@ function GenerateInvoice() {
                         />
 
                     </div>
-
-                </div>
+                </div> */}
 
 
                 {/* ==================================================
                     TOTAL SUMMARY
                 ================================================== */}
 
-                <div className="invoice-total-section">
+                {/* <div className="invoice-total-section">
 
                     <div className="invoice-total-row">
 
@@ -1387,7 +1386,7 @@ function GenerateInvoice() {
                             }
                         </strong>
                     </div>
-                </div>
+                </div> */}
 
 
                 {/* ==================================================

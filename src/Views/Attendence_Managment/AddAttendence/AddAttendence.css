@@ -674,6 +674,21 @@
     cursor: not-allowed;
 }
 
+.attendance-add-saving-loader {
+    animation: attendance-add-spin 1s linear infinite;
+}
+
+
+@keyframes attendance-add-spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
 
 /* ============================================================
    RESPONSIVE

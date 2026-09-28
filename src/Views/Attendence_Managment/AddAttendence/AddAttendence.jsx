@@ -3,7 +3,8 @@ import {
   CalendarDays,
   CheckCircle2,
   Save,
-  UsersRound
+  UsersRound,
+  LoaderCircle
 } from "lucide-react";
 
 import API_BASE_URL from "./../../../config/api";
@@ -42,15 +43,15 @@ function AddAttendence() {
 
   // EMPLOYEE STATE
   const [employees, setEmployees] = useState([]);
-  const [employeesLoading, setEmployeesLoading] =useState(true);
-  const [employeesError, setEmployeesError] =useState("");
+  const [employeesLoading, setEmployeesLoading] = useState(true);
+  const [employeesError, setEmployeesError] = useState("");
 
 
   // ATTENDANCE STATE
   const [attendanceDate, setAttendanceDate] = useState(getTodayDate());
   const [attendanceStatus, setAttendanceStatus] = useState({});
 
-
+  const [savingAttendance, setSavingAttendance] = useState(false);
 
   // FETCH EMPLOYEES
 
@@ -129,184 +130,143 @@ function AddAttendence() {
   };
 
 
-   // ============================================================
-// SAVE ATTENDANCE
-// ============================================================
+  const handleSaveAttendance = async (event) => {
 
-const handleSaveAttendance = async () => {
-
-    // ============================================================
-    // VALIDATE DATE
-    // ============================================================
+    event.preventDefault();
 
     if (!attendanceDate) {
 
-        window.alert(
-            "Please select attendance date."
-        );
-
-        return;
+      window.alert(
+        "Please select attendance date."
+      );
+      return;
     }
 
-
-    // ============================================================
-    // CHECK ALL EMPLOYEES HAVE A STATUS
-    // ============================================================
-
     const missingEmployee = employees.find(
-        (employee) =>
-            !attendanceStatus[employee.id]
+      (employee) =>
+        !attendanceStatus[employee.id]
     );
 
 
     if (missingEmployee) {
 
-        window.alert(
-            `Please select attendance status for ${missingEmployee.name}.`
-        );
+      window.alert(
+        `Please select attendance status for ${missingEmployee.name}.`
+      );
 
-        return;
+      return;
     }
 
-
-    // ============================================================
-    // CREATE ATTENDANCE ARRAY
-    // ============================================================
-
     const attendance = employees.map(
-        (employee) => ({
+      (employee) => ({
 
-            employeeId: employee.id,
+        employeeId: employee.id,
 
-            status:
-                attendanceStatus[employee.id],
+        status:
+          attendanceStatus[employee.id],
 
-            remark: ""
-        })
+        remark: ""
+      })
     );
 
 
-    // ============================================================
-    // FINAL REQUEST BODY
-    // ============================================================
-
     const attendanceData = {
-        attendanceDate: attendanceDate,
-        attendance: attendance
+      attendanceDate: attendanceDate,
+      attendance: attendance
     };
 
 
     console.log(
-        "Attendance data being sent:",
-        attendanceData
+      "Attendance data being sent:",
+      attendanceData
     );
-
-
-    // ============================================================
-    // SEND DATA TO BACKEND
-    // ============================================================
 
     try {
 
-        const response = await fetch(
-            `${API_BASE_URL}/attendance`,
-            {
-                method: "POST",
+      setSavingAttendance(true);
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+      const response = await fetch(
+        `${API_BASE_URL}/attendance`,
+        {
+          method: "POST",
 
-                body: JSON.stringify(
-                    attendanceData
-                )
-            }
-        );
+          headers: {
+            "Content-Type": "application/json"
+          },
 
-
-        // ========================================================
-        // HANDLE ERROR RESPONSE
-        // ========================================================
-
-        if (!response.ok) {
-
-            let errorMessage =
-                "Failed to save attendance.";
-
-            try {
-
-                const errorData =
-                    await response.json();
-
-                errorMessage =
-                    errorData.message ||
-                    errorData.error ||
-                    errorMessage;
-
-            } catch {
-
-                // Backend did not return JSON.
-            }
+          body: JSON.stringify(
+            attendanceData
+          )
+        }
+      );
 
 
-            throw new Error(
-                errorMessage
-            );
+      if (!response.ok) {
+
+        let errorMessage =
+          "Failed to save attendance.";
+
+        try {
+
+          const errorData =
+            await response.json();
+
+          errorMessage =
+            errorData.message ||
+            errorData.error ||
+            errorMessage;
+
+        } catch {
+
+          // Backend did not return JSON.
         }
 
 
-        // ========================================================
-        // READ SUCCESS RESPONSE
-        // ========================================================
-
-        const savedAttendance = await response.json();
-
-
-        console.log(
-            "Attendance saved successfully:",
-            savedAttendance
+        throw new Error(
+          errorMessage
         );
+      }
+
+      const savedAttendance = await response.json();
 
 
-        // ========================================================
-        // SUCCESS MESSAGE
-        // ========================================================
+      console.log(
+        "Attendance saved successfully:",
+        savedAttendance
+      );
 
-        window.alert(
-            "Attendance saved successfully."
-        );
+      window.alert(
+        "Attendance saved successfully."
+      );
 
-
-        // ========================================================
-        // GO TO VIEW ATTENDANCE
-        // ========================================================
-
-        navigate(
-            "/dashboard/view-attendence"
-        );
+      navigate(
+        "/dashboard/view-attendence"
+      );
 
 
     } catch (error) {
 
-        console.error(
-            "Error saving attendance:",
-            error
-        );
+      console.error(
+        "Error saving attendance:",
+        error
+      );
 
 
-        window.alert(
-            error.message ||
-            "Unable to save attendance. Please try again."
-        );
+      window.alert(
+        error.message ||
+        "Unable to save attendance. Please try again."
+      );
+    } finally {
+      setSavingAttendance(false);
     }
-};
+  };
 
   // COUNT SELECTED EMPLOYEES
   const selectedCount =
     Object.keys(attendanceStatus).length;
 
 
- 
+
   // RENDER
   return (
 
@@ -321,7 +281,7 @@ const handleSaveAttendance = async () => {
           <div className="attendance-add-header-icon">
 
             <CalendarCheck
-              size={21}/>
+              size={21} />
           </div>
 
           <div>
@@ -398,9 +358,7 @@ const handleSaveAttendance = async () => {
         </div>
 
 
-        {/* ==================================================
-                    EMPLOYEE SUMMARY
-                ================================================== */}
+        {/* =============  EMPLOYEE SUMMARY =================== */}
 
         <div className="attendance-add-summary">
 
@@ -458,9 +416,7 @@ const handleSaveAttendance = async () => {
         </div>
 
 
-        {/* ==================================================
-                    EMPLOYEE TABLE
-                ================================================== */}
+        {/* ==========  EMPLOYEE TABLE ============ */}
 
         <form
           onSubmit={
@@ -715,13 +671,26 @@ const handleSaveAttendance = async () => {
               className="attendance-add-save-btn"
               disabled={
                 employeesLoading ||
-                employees.length === 0
-              }>
-              <Save
-                size={18}
-              />
-              Save Attendance
+                employees.length === 0 ||
+                savingAttendance
+              }
+            >
+              {savingAttendance ? (
+                <>
+                  <LoaderCircle
+                    size={18}
+                    className="attendance-add-saving-loader"
+                  />
+                  Saving Attendance...
+                </>
+              ) : (
+                <>
+                  <Save size={18} />
+                  Save Attendance
+                </>
+              )}
             </button>
+            
           </div>
         </form>
       </div>
