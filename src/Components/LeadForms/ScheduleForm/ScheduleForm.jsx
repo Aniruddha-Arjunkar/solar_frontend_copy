@@ -25,7 +25,7 @@ function ScheduleForm({ lead, onClose }) {
     
         const [formData, setFormData] = useState({
         scheduleDate: "",
-        scheduleTime: "",
+        // scheduleTime: "",
         scheduleType: "",
         remarks: ""
     });
@@ -64,7 +64,7 @@ function ScheduleForm({ lead, onClose }) {
 
                     body: JSON.stringify({
                         scheduleDate: formData.scheduleDate,
-                        scheduleTime: formData.scheduleTime,
+                        // scheduleTime: formData.scheduleTime,
                         scheduleType: formData.scheduleType,
                         remarks: formData.remarks
                     })
@@ -270,7 +270,7 @@ function ScheduleForm({ lead, onClose }) {
 
                             {/* Time */}
 
-                            <div className="schedule-form-group">
+                            {/* <div className="schedule-form-group">
                                 <label htmlFor="schedule-time">
                                     Schedule Time
                                     <span>*</span>
@@ -285,7 +285,7 @@ function ScheduleForm({ lead, onClose }) {
                                       onChange={handleChange}
                                       required/>
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* Schedule Type */}
                             {/* <div className="schedule-form-group full-width">

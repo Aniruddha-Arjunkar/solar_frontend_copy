@@ -75,9 +75,7 @@ function ViewAdvance() {
 
             setEmployees(sortedEmployees);
 
-            // ----------------------------------------------------
-            // FETCH SALARIES FOR EACH EMPLOYEE
-            // ----------------------------------------------------
+            // ----------------- FETCH SALARIES FOR EACH EMPLOYEE -------------------
 
             const employeeAdvanceData =
                 await Promise.all(
@@ -99,17 +97,31 @@ function ViewAdvance() {
                                     );
                                 }
 
-                                const salaries =
-                                    await salaryResponse.json();
+                                const salaries = await salaryResponse.json();
 
-                                // ------------------------------------------------
-                                // ADVANCE RECORDS
-                                // ------------------------------------------------
+                                // ----------------- PENDING ADVANCE SUMMARY --------------------
+
+                                const advanceSummaryResponse = await fetch(
+                                    `${API_BASE_URL}/salaries/employee/${employee.id}/advance-summary`
+                                );
+
+                                if (!advanceSummaryResponse.ok) {
+                                    throw new Error(
+                                        `Unable to fetch advance summary for employee ${employee.id}`
+                                    );
+                                }
+
+                                const advanceSummary =
+                                    await advanceSummaryResponse.json();
+
+                                const pendingAdvance =
+                                    Number(advanceSummary.pendingAdvance || 0);
+
+                                // ----------------- ADVANCE RECORDS --------------------
 
                                 const advanceRecords =
                                     salaries.filter(
                                         (salary) => {
-
                                             const paymentType =
                                                 (
                                                     salary.paymentType ||
@@ -123,15 +135,13 @@ function ViewAdvance() {
 
                                             return (
                                                 paymentType ===
-                                                    "ADVANCE" &&
+                                                "ADVANCE" &&
                                                 advance > 0
                                             );
                                         }
                                     );
 
-                                // ------------------------------------------------
-                                // MONTH ADVANCE
-                                // ------------------------------------------------
+                                // ------------ MONTH ADVANCE ----------
 
                                 const monthAdvance =
                                     advanceRecords.reduce(
@@ -157,9 +167,7 @@ function ViewAdvance() {
                                         0
                                     );
 
-                                // ------------------------------------------------
-                                // TOTAL ADVANCE
-                                // ------------------------------------------------
+                                // --------- TOTAL ADVANCE --------------
 
                                 const totalAdvance =
                                     advanceRecords.reduce(
@@ -176,7 +184,8 @@ function ViewAdvance() {
                                     salaries,
                                     advanceRecords,
                                     monthAdvance,
-                                    totalAdvance
+                                    totalAdvance,
+                                    pendingAdvance
                                 };
 
                             } catch (employeeError) {
@@ -190,7 +199,8 @@ function ViewAdvance() {
                                     salaries: [],
                                     advanceRecords: [],
                                     monthAdvance: 0,
-                                    totalAdvance: 0
+                                    totalAdvance: 0,
+                                    pendingAdvance: 0
                                 };
                             }
 
@@ -198,14 +208,12 @@ function ViewAdvance() {
                     )
                 );
 
-            // ----------------------------------------------------
-            // SHOW ONLY EMPLOYEES WITH ADVANCE
-            // ----------------------------------------------------
+            // ----------------- SHOW ONLY EMPLOYEES WITH ADVANCE -------------------
 
             const filteredEmployees =
                 employeeAdvanceData.filter(
                     (item) =>
-                        item.totalAdvance > 0
+                        item.pendingAdvance > 0
                 );
 
             setAdvanceData(filteredEmployees);
@@ -227,19 +235,13 @@ function ViewAdvance() {
         }
     };
 
-    // ============================================================
-    // LOAD DATA WHEN MONTH CHANGES
-    // ============================================================
+    // ============ LOAD DATA WHEN MONTH CHANGES ==========================
 
     useEffect(() => {
-
         fetchAdvanceData();
-
     }, [selectedMonth]);
 
-    // ============================================================
-    // SEARCH
-    // ============================================================
+    // =================== SEARCH =======================
 
     const filteredAdvanceData = useMemo(() => {
 
@@ -267,9 +269,7 @@ function ViewAdvance() {
 
     }, [advanceData, searchTerm]);
 
-    // ============================================================
-    // MONTH DISPLAY
-    // ============================================================
+    // =================== MONTH DISPLAY ===========================
 
     const formatMonth = (month) => {
 
@@ -290,9 +290,7 @@ function ViewAdvance() {
         );
     };
 
-    // ============================================================
-    // CURRENCY
-    // ============================================================
+    // ================ CURRENCY ==================
 
     const formatCurrency = (amount) => {
 
@@ -306,9 +304,7 @@ function ViewAdvance() {
         ).format(amount);
     };
 
-    // ============================================================
-    // TOTALS
-    // ============================================================
+    // ================ TOTALS ===========================
 
     const selectedMonthTotal =
         advanceData.reduce(
@@ -320,13 +316,11 @@ function ViewAdvance() {
     const overallAdvanceTotal =
         advanceData.reduce(
             (total, item) =>
-                total + item.totalAdvance,
+                total + item.pendingAdvance,
             0
         );
 
-    // ============================================================
-    // VIEW DETAILS
-    // ============================================================
+    // =======================  VIEW DETAILS ======================
 
     const handleViewDetails = (employeeId) => {
 
@@ -339,9 +333,7 @@ function ViewAdvance() {
 
         <section className="accounts-view-advance-page">
 
-            {/* =====================================================
-                HEADER
-            ====================================================== */}
+            {/* ================= HEADER ===================== */}
 
             <div className="accounts-view-advance-header">
 
@@ -385,9 +377,7 @@ function ViewAdvance() {
             </div>
 
 
-            {/* =====================================================
-                SUMMARY CARDS
-            ====================================================== */}
+            {/* ====================== SUMMARY CARDS =============== */}
 
             <div className="accounts-view-advance-stats">
 
@@ -444,7 +434,7 @@ function ViewAdvance() {
                     <div>
 
                         <span>
-                            Total Advance
+                            Total Advance Pending 
                         </span>
 
                         <strong>
@@ -456,19 +446,14 @@ function ViewAdvance() {
                     </div>
 
                 </div>
-
             </div>
 
 
-            {/* =====================================================
-                MAIN CONTENT
-            ====================================================== */}
+            {/* ============ MAIN CONTENT ==================== */}
 
             <div className="accounts-view-advance-content">
 
-                {/* =================================================
-                    FILTER
-                ================================================== */}
+                {/* =========== FILTER ================ */}
 
                 <div className="accounts-view-advance-filter">
 
@@ -525,17 +510,13 @@ function ViewAdvance() {
                                     : ""
                             }
                         />
-
                         Refresh
-
                     </button>
 
                 </div>
 
 
-                {/* =================================================
-                    ERROR
-                ================================================== */}
+                {/* =========== ERROR ================ */}
 
                 {error && (
 
@@ -559,9 +540,7 @@ function ViewAdvance() {
                 )}
 
 
-                {/* =================================================
-                    TABLE HEADER
-                ================================================== */}
+                {/* ================== TABLE HEADER =========== */}
 
                 <div className="accounts-view-advance-table-heading">
 
@@ -587,9 +566,7 @@ function ViewAdvance() {
                 </div>
 
 
-                {/* =================================================
-                    LOADING
-                ================================================== */}
+                {/* ================= LOADING =================== */}
 
                 {loading ? (
 
@@ -608,9 +585,7 @@ function ViewAdvance() {
 
                 ) : filteredAdvanceData.length === 0 ? (
 
-                    /* =============================================
-                       EMPTY
-                    ============================================== */
+                    /* ====================== EMPTY ============== */
 
                     <div className="accounts-view-advance-empty">
 
@@ -626,8 +601,8 @@ function ViewAdvance() {
                             {searchTerm
                                 ? "No employees match your search."
                                 : `No advance records found for ${formatMonth(
-                                      selectedMonth
-                                  )}.`
+                                    selectedMonth
+                                )}.`
                             }
                         </p>
 
@@ -635,9 +610,7 @@ function ViewAdvance() {
 
                 ) : (
 
-                    /* =============================================
-                       TABLE
-                    ============================================== */
+                    /* ================= TABLE ================= */
 
                     <div className="accounts-view-advance-table-wrapper">
 
@@ -660,7 +633,7 @@ function ViewAdvance() {
                                     </th>
 
                                     <th>
-                                        Total Advance
+                                        Pending Advance
                                     </th>
 
                                     <th>
@@ -717,10 +690,10 @@ function ViewAdvance() {
                                                                     "Unnamed Employee"}
                                                             </strong>
 
-                                                            <small>
+                                                            {/* <small>
                                                                 Employee ID: #
                                                                 {employee.id}
-                                                            </small>
+                                                            </small> */}
 
                                                         </div>
 
@@ -743,51 +716,35 @@ function ViewAdvance() {
 
 
                                                 <td>
-
                                                     <strong className="accounts-view-advance-total-amount">
-
                                                         {formatCurrency(
-                                                            item.totalAdvance
+                                                            item.pendingAdvance
                                                         )}
-
                                                     </strong>
-
                                                 </td>
 
-
                                                 <td>
-
                                                     <button
                                                         type="button"
                                                         className="accounts-view-advance-details-btn"
-                                                        onClick={() =>handleViewDetails(employee.id)}>
+                                                        onClick={() => handleViewDetails(employee.id)}>
                                                         <Eye size={16} />
                                                         Details
                                                         <ArrowRight
                                                             size={15}
                                                         />
                                                     </button>
-
                                                 </td>
-
                                             </tr>
-
                                         );
                                     }
                                 )}
-
                             </tbody>
-
                         </table>
-
                     </div>
-
                 )}
-
             </div>
-
         </section>
     );
 }
-
 export default ViewAdvance;

@@ -15,7 +15,8 @@ import {
     FileText,
     Save,
     X,
-    ChevronDown
+    ChevronDown,
+    LoaderCircle
 } from "lucide-react";
 
 import API_BASE_URL from "./../../../config/api.js";
@@ -41,6 +42,8 @@ function AddEmployee() {
 
     const [openSection, setOpenSection] = useState("personal");
 
+    const [saving, setSaving] = useState(false);
+
     const [sameAsCurrentAddress, setSameAsCurrentAddress] = useState(false);
     const [formData, setFormData] = useState({
 
@@ -58,9 +61,7 @@ function AddEmployee() {
         permanentAddress: "",
 
 
-        // ========================================================
         // EDUCATION DETAILS
-        // ========================================================
 
         tenth: "",
         twelfth: "",
@@ -68,9 +69,7 @@ function AddEmployee() {
         postGraduation: "",
 
 
-        // ========================================================
         // EXPERIENCE DETAILS
-        // ========================================================
 
         experienceType: "Fresher",
         previousExperience: "",
@@ -80,9 +79,7 @@ function AddEmployee() {
         previousSalary: "",
 
 
-        // ========================================================
         // EMPLOYEE DETAILS
-        // ========================================================
 
         employeeType: "",
         department: "",
@@ -91,9 +88,8 @@ function AddEmployee() {
         designation: "",
 
 
-        // ========================================================
+
         // BANK DETAILS
-        // ========================================================
 
         accountNo: "",
         bankName: "",
@@ -101,26 +97,19 @@ function AddEmployee() {
         ifscCode: "",
 
 
-        // ========================================================
         // KYC DETAILS
-        // ========================================================
 
         aadharNo: "",
         panNo: "",
 
-
-        // ========================================================
-        // PROVIDENT FUND & ESIC
-        // ========================================================
+        // PROVIDENT FUND & ESIC 
 
         uanNo: "",
         pfNo: "",
         esicNo: "",
     });
 
-    // ============================================================
-    // SYNC PERMANENT ADDRESS WITH CURRENT ADDRESS
-    // ============================================================
+    // ============= SYNC PERMANENT ADDRESS WITH CURRENT ADDRESS =====================
 
     useEffect(() => {
         if (sameAsCurrentAddress) {
@@ -131,9 +120,7 @@ function AddEmployee() {
         }
     }, [sameAsCurrentAddress, formData.currentAddress]);
 
-    // ============================================================
-    // HANDLE INPUT CHANGE
-    // ============================================================
+    // ================ HANDLE INPUT CHANGE ===================
 
     const handleChange = (e) => {
 
@@ -142,15 +129,10 @@ function AddEmployee() {
             value
         } = e.target;
 
-
         setFormData((previousData) => ({
-
             ...previousData,
-
             [name]: value
-
         }));
-
     };
 
 
@@ -171,30 +153,22 @@ function AddEmployee() {
             ...previousData,
 
             [name]: files[0] || null
-
         }));
-
     };
 
 
-    // ============================================================
-    // HANDLE FORM SUBMIT
-    // ============================================================
+    // ============== HANDLE FORM SUBMIT ======================
 
     const handleSubmit = async (e) => {
 
         e.preventDefault();
 
 
-        // ========================================================
         // PREPARE EMPLOYEE DATA
-        // ========================================================
 
         const employeeData = {
 
-            // ====================================================
             // PERSONAL DETAILS
-            // ====================================================
 
             title: formData.title,
             name: formData.name,
@@ -216,9 +190,7 @@ function AddEmployee() {
             permanentAddress: formData.permanentAddress,
 
 
-            // ====================================================
             // EDUCATION DETAILS
-            // ====================================================
 
             tenth: formData.tenth,
             twelfth: formData.twelfth,
@@ -226,9 +198,7 @@ function AddEmployee() {
             postGraduation: formData.postGraduation,
 
 
-            // ====================================================
             // EXPERIENCE DETAILS
-            // ====================================================
 
             experienceType: formData.experienceType,
             previousExperience: formData.previousExperience,
@@ -247,9 +217,7 @@ function AddEmployee() {
                     : Number(formData.previousSalary),
 
 
-            // ====================================================
             // EMPLOYEE DETAILS
-            // ====================================================
 
             employeeType: formData.employeeType,
             department: formData.department,
@@ -267,9 +235,8 @@ function AddEmployee() {
             designation: formData.designation,
 
 
-            // ====================================================
+
             // BANK DETAILS
-            // ====================================================
 
             accountNo: formData.accountNo,
             bankName: formData.bankName,
@@ -277,17 +244,14 @@ function AddEmployee() {
             ifscCode: formData.ifscCode,
 
 
-            // ====================================================
+
             // KYC DETAILS
-            // ====================================================
 
             aadharNo: formData.aadharNo,
             panNo: formData.panNo,
 
 
-            // ====================================================
             // PROVIDENT FUND & ESIC
-            // ====================================================
 
             uanNo: formData.uanNo,
             pfNo: formData.pfNo,
@@ -295,15 +259,12 @@ function AddEmployee() {
 
         };
 
-
-        // ========================================================
-        // CHECK DATA BEFORE SENDING
-        // ========================================================
-
         // console.log(
         //     "Employee Data Sending To Backend:",
         //     employeeData
         // );
+
+        setSaving(true);
 
         try {
 
@@ -311,7 +272,6 @@ function AddEmployee() {
                 `${API_BASE_URL}/employees`,
                 {
                     method: "POST",
-
                     headers: {
                         "Content-Type": "application/json"
                     },
@@ -321,14 +281,12 @@ function AddEmployee() {
             );
 
 
-            // ====================================================
-            // HANDLE BACKEND ERROR
-            // ====================================================
+
+            //------------ HANDLE BACKEND ERROR ---------------
 
             if (!response.ok) {
 
-                let errorMessage =
-                    "Failed to create employee.";
+                let errorMessage = "Failed to create employee.";
 
                 try {
 
@@ -351,12 +309,9 @@ function AddEmployee() {
             }
 
 
-            // ====================================================
-            // GET SAVED EMPLOYEE
-            // ====================================================
+            // ===================== GET SAVED EMPLOYEE ==================
 
-            const savedEmployee =
-                await response.json();
+            const savedEmployee = await response.json();
 
 
             // console.log(
@@ -364,29 +319,11 @@ function AddEmployee() {
             //     savedEmployee
             // );
 
+            window.alert("Employee added successfully.");
 
-            // ====================================================
-            // SUCCESS MESSAGE
-            // ====================================================
-
-            window.alert(
-                "Employee added successfully."
-            );
-
-
-            // ====================================================
-            // GO TO VIEW EMPLOYEE
-            // ====================================================
-
-            navigate(
-                "/dashboard/view-employee"
-            );
+            navigate("/dashboard/view-employee");
 
         } catch (error) {
-
-            // ====================================================
-            // HANDLE API / NETWORK ERROR
-            // ====================================================
 
             console.error(
                 "Error creating employee:",
@@ -399,6 +336,8 @@ function AddEmployee() {
                 "Unable to add employee. Please try again."
             );
 
+        } finally {
+            setSaving(false);
         }
 
     };
@@ -413,9 +352,7 @@ function AddEmployee() {
         <section className="add-employee-page">
 
 
-            {/* ====================================================
-                PAGE HEADER
-            ==================================================== */}
+            {/* ================ PAGE HEADER =========== */}
 
             <EmployeeHeader
                 currectPage="Add Employee"
@@ -426,9 +363,7 @@ function AddEmployee() {
             />
 
 
-            {/* ====================================================
-                EMPLOYEE FORM
-            ==================================================== */}
+            {/* ======== EMPLOYEE FORM ============ */}
 
             <form
                 className="add-employee-form"
@@ -436,9 +371,7 @@ function AddEmployee() {
             >
 
 
-                {/* ==================================================
-                    PERSONAL DETAILS
-                ================================================== */}
+                {/* ============== PERSONAL DETAILS =========== */}
 
                 {/* <div className="employee-form-section"> */}
                 <div
@@ -760,7 +693,7 @@ function AddEmployee() {
 
                             <div className="employee-form-group employee-full-width">
 
-                 {/* ============= PERMANENT ADDRESS LABEL =================== */}
+                                {/* ============= PERMANENT ADDRESS LABEL =================== */}
 
                                 <div className="employee-permanent-address-header">
 
@@ -769,7 +702,7 @@ function AddEmployee() {
                                     </label>
 
 
-                {/* ============================ SAME AS CURRENT ADDRESS CHECKBOX ============== */}
+                                    {/* ============================ SAME AS CURRENT ADDRESS CHECKBOX ============== */}
 
                                     <label className="employee-same-address-checkbox">
 
@@ -789,7 +722,7 @@ function AddEmployee() {
                                 </div>
 
 
-                 {/* ================  PERMANENT ADDRESS INPUT =========== */}
+                                {/* ================  PERMANENT ADDRESS INPUT =========== */}
 
                                 <div className="employee-input-with-icon">
 
@@ -1304,9 +1237,7 @@ function AddEmployee() {
                 </div>
 
 
-                {/* ==================================================
-                    BANK DETAILS
-                ================================================== */}
+                {/* ========== BANK DETAILS =========== */}
 
                 {/* <div className="employee-form-section">
 
@@ -1441,9 +1372,7 @@ function AddEmployee() {
                 </div>
 
 
-                {/* ==================================================
-                    KYC DETAILS
-                ================================================== */}
+                {/* ========== KYC DETAILS ================ */}
 
                 {/* <div className="employee-form-section">
 
@@ -1534,9 +1463,7 @@ function AddEmployee() {
                     </div>
                 </div>
 
-                {/* ==================================================
-                    PROVIDENT FUND & ESIC
-                ================================================== */}
+                {/* ================ PROVIDENT FUND & ESIC =============== */}
 
                 {/* <div className="employee-form-section">
                     <div className="employee-form-section-header pf">
@@ -1635,18 +1562,15 @@ function AddEmployee() {
                                     placeholder="ESIC Number"
                                 />
 
-                            </div>   
+                            </div>
                         </div>
                     </div>
                 </div>
 
 
-                {/* ==================================================
-                    FORM ACTIONS
-                ================================================== */}
+                {/* =============== FORM ACTIONS ================= */}
 
                 <div className="employee-form-actions">
-
 
                     <button
                         type="button"
@@ -1661,24 +1585,28 @@ function AddEmployee() {
                     <button
                         type="submit"
                         className="employee-save-btn"
+                        disabled={saving}
                     >
-
-                        <Save size={17} />
-
-                        Save Employee
-
+                        {saving ? (
+                            <>
+                                <LoaderCircle
+                                    size={17}
+                                    className="employee-save-spinner"
+                                />
+                                Saving...
+                            </>
+                        ) : (
+                            <>
+                                <Save size={17} />
+                                Save Employee
+                            </>
+                        )}
                     </button>
 
                 </div>
-
-
             </form>
 
         </section>
-
     );
-
 }
-
-
 export default AddEmployee;

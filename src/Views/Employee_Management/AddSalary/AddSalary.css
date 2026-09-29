@@ -240,6 +240,64 @@
     color: #64748b;
 }
 
+/* ============================================================
+   ADVANCE INFORMATION
+============================================================ */
+
+.salary-advance-pending-label {
+    margin-left: auto;
+    color: #2563eb;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   ADVANCE INFO
+============================================================ */
+
+.salary-advance-info {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    color: #64748b;
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+
+/* ============================================================
+   ADVANCE ERROR
+============================================================ */
+
+.salary-advance-error {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    margin-top: 5px;
+    color: #dc2626;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+
+.salary-advance-error svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+
+/* ============================================================
+   DISABLED ADVANCE INPUT
+============================================================ */
+
+.salary-input-with-icon input:disabled {
+    background-color: #f1f5f9;
+    color: #94a3b8;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
 
 /* ============================================================
    FORM ACTIONS
@@ -306,6 +364,35 @@
     box-shadow:
         0 5px 12px rgba(37, 99, 235, 0.22);
     transform: translateY(-1px);
+}
+
+/* ============================================================
+   SAVE BUTTON LOADING
+============================================================ */
+
+.salary-save-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+
+.salary-save-spinner {
+    animation: salary-save-spin 1s linear infinite;
+}
+
+
+@keyframes salary-save-spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
 }
 
 

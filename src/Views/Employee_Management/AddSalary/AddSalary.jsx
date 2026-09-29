@@ -10,6 +10,8 @@ import {
     HandCoins,
     FileText,
     Save,
+    AlertCircle,
+    LoaderCircle,
     X
 } from "lucide-react";
 
@@ -50,12 +52,20 @@ function AddSalary() {
     const [employeesLoading, setEmployeesLoading] = useState(true);
     const [employeesError, setEmployeesError] = useState("");
 
+    const [saving, setSaving] = useState(false);
+
+    // ===================== EMPLOYEE ADVANCE STATE =================
+
+    const [pendingAdvance, setPendingAdvance] = useState(0);
+    const [advanceLoading, setAdvanceLoading] = useState(false);
+    const [advanceError, setAdvanceError] = useState("");
+    const [advanceDeductionError, setAdvanceDeductionError] = useState("");
+
     useEffect(() => {
 
         const fetchEmployees = async () => {
 
             try {
-
                 setEmployeesLoading(true);
                 setEmployeesError("");
 
@@ -99,9 +109,73 @@ function AddSalary() {
         fetchEmployees();
     }, []);
 
-    // ============================================================
-    // HANDLE INPUT CHANGE
-    // ============================================================
+    // =========== FETCH PENDING ADVANCE FOR SELECTED EMPLOYEE =====================
+
+    useEffect(() => {
+
+        const fetchPendingAdvance = async () => {
+
+            // ------------- NO EMPLOYEE SELECTED -----------
+
+            if (!formData.employeeId) {
+                setPendingAdvance(0);
+                setAdvanceError("");
+                setAdvanceDeductionError("");
+                return;
+            }
+
+
+            try {
+                setAdvanceLoading(true);
+                setAdvanceError("");
+                setAdvanceDeductionError("");
+
+                // Reset previous employee deduction
+
+                setFormData((previousData) => ({
+                    ...previousData,
+                    advanceDeduction: "0"
+                }));
+
+
+                // ----------- FETCH ADVANCE SUMMARY -----------------------
+
+                const response = await fetch(
+                    `${API_BASE_URL}/salaries/employee/${formData.employeeId}/advance-summary`
+                );
+
+                if (!response.ok) {
+                    throw new Error("Unable to fetch employee pending advance.");
+                }
+
+                const data = await response.json();
+
+                // console.log(
+                //     "Employee advance summary:",
+                //     data
+                // );
+
+                setPendingAdvance(
+                    Number(data.pendingAdvance || 0));
+
+            } catch (error) {
+                console.error("Error fetching pending advance:", error);
+
+                setPendingAdvance(0);
+                setAdvanceError(
+                    error.message ||
+                    "Unable to load pending advance."
+                );
+            } finally {
+                setAdvanceLoading(false);
+            }
+        };
+
+        fetchPendingAdvance();
+
+    }, [formData.employeeId]);
+
+    // ========= HANDLE INPUT CHANGE =======================
 
     const handleChange = (e) => {
 
@@ -110,61 +184,65 @@ function AddSalary() {
             value
         } = e.target;
 
+        // --------------------------------------------------------
+        // ADVANCE DEDUCTION
+        // --------------------------------------------------------
 
-        // --------------------------------------------------------
-        // NET SALARY
-        // --------------------------------------------------------
+        if (name === "advanceDeduction") {
+
+            const deduction =
+                Number(value) || 0;
+
+
+            if (deduction > pendingAdvance) {
+                setAdvanceDeductionError(
+                    `Advance deduction cannot be greater than pending advance of ₹${pendingAdvance.toFixed(2)}.`
+                );
+
+            } else {
+                setAdvanceDeductionError("");
+            }
+
+            setFormData((previousData) => ({
+                ...previousData,
+                advanceDeduction: value
+            }));
+            return;
+        }
+
+
+        // ------- NET SALARY ------------------
 
         if (name === "netSalary") {
 
             const salary = Number(value) || 0;
 
+            const basic = salary * 0.50;
 
-            const basic =
-                salary * 0.50;
+            const hra = salary * 0.20;
 
-            const hra =
-                salary * 0.20;
+            const conveyance = salary * 0.10;
 
-            const conveyance =
-                salary * 0.10;
+            const foodAllowance = salary * 0.10;
 
-            const foodAllowance =
-                salary * 0.10;
-
-            const performanceIncentive =
-                salary * 0.10;
+            const performanceIncentive = salary * 0.10;
 
 
             setFormData((previousData) => ({
-
                 ...previousData,
 
                 netSalary: value,
-
                 basic: basic.toFixed(2),
-
                 hra: hra.toFixed(2),
-
                 conveyance: conveyance.toFixed(2),
-
-                foodAllowance:
-                    foodAllowance.toFixed(2),
-
-                performanceIncentive:
-                    performanceIncentive.toFixed(2)
-
+                foodAllowance: foodAllowance.toFixed(2),
+                performanceIncentive: performanceIncentive.toFixed(2)
             }));
-
-
             return;
-
         }
 
 
-        // --------------------------------------------------------
-        // OTHER INPUTS
-        // --------------------------------------------------------
+        // ------------  OTHER INPUTS ------------------
 
         setFormData((previousData) => ({
             ...previousData,
@@ -177,6 +255,11 @@ function AddSalary() {
     // RESET SALARY FORM
     const resetSalaryForm = () => {
         setFormData(initialSalaryFormData);
+
+        setPendingAdvance(0);
+        setAdvanceLoading(false);
+        setAdvanceError("");
+        setAdvanceDeductionError("");
     };
 
 
@@ -186,14 +269,31 @@ function AddSalary() {
         e.preventDefault();
 
         // VALIDATE EMPLOYEE
-
         if (!formData.employeeId) {
-
-            window.alert(
-                "Please select an employee."
-            );
+            window.alert("Please select an employee.");
             return;
         }
+
+        // ======== VALIDATE ADVANCE DEDUCTION =========================
+
+        const requestedAdvanceDeduction = Number(formData.advanceDeduction || 0);
+
+
+        if (requestedAdvanceDeduction < 0) {
+            window.alert("Advance deduction cannot be negative.");
+            return;
+        }
+
+        if (requestedAdvanceDeduction > pendingAdvance) {
+            const message =
+                `Advance deduction cannot be greater than pending advance of ₹${pendingAdvance.toFixed(2)}.`;
+            setAdvanceDeductionError(message);
+            window.alert(message);
+            return;
+        }
+
+
+        setAdvanceDeductionError("");
 
         // PREPARE SALARY DATA
         const salaryData = {
@@ -258,6 +358,8 @@ function AddSalary() {
 
         // SAVE SALARY
 
+        setSaving(true);
+
         try {
 
             const response = await fetch(
@@ -274,9 +376,7 @@ function AddSalary() {
             );
 
 
-            // ----------------------------------------------------
-            // HANDLE BACKEND ERROR
-            // ----------------------------------------------------
+            // ---------------  HANDLE BACKEND ERROR ----------------------
 
             if (!response.ok) {
 
@@ -323,6 +423,8 @@ function AddSalary() {
                 error.message ||
                 "Unable to save salary. Please try again."
             );
+        } finally {
+            setSaving(false);
         }
     };
 
@@ -332,9 +434,7 @@ function AddSalary() {
     // ============================================================
 
     const handleCancel = () => {
-
         window.history.back();
-
     };
 
 
@@ -697,169 +797,218 @@ function AddSalary() {
                         </div>
 
 
-                        {/* ADVANCE DEDUCTION */}
+                        {/* ================= ADVANCE DEDUCTION ========= */}
 
                         <div className="salary-form-group">
 
                             <label>
                                 Advance Deduction
+                                <span className="salary-advance-pending-label">
+                                    Pending:
+                                    {" "}
+                                    ₹{pendingAdvance.toFixed(2)}
+                                </span>
                             </label>
+
 
                             <div className="salary-input-with-icon">
 
-                                <MinusCircle size={16} />
+                                <MinusCircle
+                                    size={16}
+                                />
 
                                 <input
                                     type="number"
                                     min="0"
+                                    max={pendingAdvance}
+                                    step="0.01"
                                     name="advanceDeduction"
                                     value={
                                         formData.advanceDeduction
                                     }
                                     onChange={handleChange}
                                     placeholder="0"
-                                />
+
+                                    disabled={
+                                        !formData.employeeId ||
+                                        advanceLoading ||
+                                        pendingAdvance <= 0
+                                    } />
+                            </div>
+
+
+                            {/* LOADING */}
+                            {advanceLoading && (
+                                <small className="salary-advance-info">
+                                    Checking pending advance...
+                                </small>
+                            )}
+
+
+                            {/* NO PENDING ADVANCE */}
+                            {!advanceLoading &&
+                                formData.employeeId &&
+                                pendingAdvance <= 0 && (
+                                    <small className="salary-advance-info">
+                                        No pending advance available
+                                        for deduction.
+                                    </small>
+                                )}
+
+                            {/*FETCH ERROR */}
+                            {advanceError && (
+                                <small className="salary-advance-error">
+                                    <AlertCircle
+                                        size={13}
+                                    />
+                                    {advanceError}
+                                </small>
+                            )}
+
+
+                            {/* DEDUCTION VALIDATION ERROR */}
+
+                            {advanceDeductionError && (
+                                <small className="salary-advance-error">
+                                    <AlertCircle size={13} />
+                                    {advanceDeductionError}
+                                </small>
+                            )}
+
+                        </div>
+
+
+                        {/* ============= REIMBURSEMENT + REMARK ================== */}
+
+                        <div className="salary-form-grid salary-two-column">
+
+
+                            {/* REIMBURSEMENT */}
+
+                            <div className="salary-form-group">
+
+                                <label>
+                                    Reimbursement
+                                </label>
+
+                                <div className="salary-input-with-icon">
+
+                                    <HandCoins size={17} />
+
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        name="reimbursement"
+                                        value={
+                                            formData.reimbursement
+                                        }
+                                        onChange={handleChange}
+                                        placeholder="0"
+                                    />
+
+                                </div>
+
+                            </div>
+
+                            {/* REMARK */}
+
+                            <div className="salary-form-group">
+
+                                <label>
+                                    Remark
+                                </label>
+
+                                <div className="salary-input-with-icon">
+
+                                    <FileText size={17} />
+
+                                    <input
+                                        type="text"
+                                        name="remark"
+                                        value={formData.remark}
+                                        onChange={handleChange}
+                                        placeholder="Add a remark"
+                                    />
+
+                                </div>
 
                             </div>
 
                         </div>
+
+                    </div>
+
+
+                    {/* ========== SALARY SUMMARY ================= */}
+
+                    <div className="salary-summary-card">
+
+                        <div>
+
+                            <span>
+                                Salary Structure
+                            </span>
+
+                            <strong>
+                                100%
+                            </strong>
+
+                        </div>
+
+
+                        <p>
+                            Basic 50% + HRA 20% + Conveyance 10%
+                            + Food Allowance 10% + Performance
+                            Incentive 10%
+                        </p>
 
                     </div>
 
 
                     {/* ==================================================
-                        REIMBURSEMENT + REMARK
-                    ================================================== */}
-
-                    <div className="salary-form-grid salary-two-column">
-
-
-                        {/* REIMBURSEMENT */}
-
-                        <div className="salary-form-group">
-
-                            <label>
-                                Reimbursement
-                            </label>
-
-                            <div className="salary-input-with-icon">
-
-                                <HandCoins size={17} />
-
-                                <input
-                                    type="number"
-                                    min="0"
-                                    name="reimbursement"
-                                    value={
-                                        formData.reimbursement
-                                    }
-                                    onChange={handleChange}
-                                    placeholder="0"
-                                />
-
-                            </div>
-
-                        </div>
-
-
-                        {/* REMARK */}
-
-                        <div className="salary-form-group">
-
-                            <label>
-                                Remark
-                            </label>
-
-                            <div className="salary-input-with-icon">
-
-                                <FileText size={17} />
-
-                                <input
-                                    type="text"
-                                    name="remark"
-                                    value={formData.remark}
-                                    onChange={handleChange}
-                                    placeholder="Add a remark"
-                                />
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                {/* ==================================================
-                    SALARY SUMMARY
-                ================================================== */}
-
-                <div className="salary-summary-card">
-
-                    <div>
-
-                        <span>
-                            Salary Structure
-                        </span>
-
-                        <strong>
-                            100%
-                        </strong>
-
-                    </div>
-
-
-                    <p>
-                        Basic 50% + HRA 20% + Conveyance 10%
-                        + Food Allowance 10% + Performance
-                        Incentive 10%
-                    </p>
-
-                </div>
-
-
-                {/* ==================================================
                     FORM ACTIONS
                 ================================================== */}
 
-                <div className="salary-form-actions">
+                    <div className="salary-form-actions">
+
+                        <button
+                            type="button"
+                            className="salary-cancel-btn"
+                            onClick={handleCancel}
+                        >
+                            <X size={17} />
+                            Cancel
+                        </button>
 
 
-                    <button
-                        type="button"
-                        className="salary-cancel-btn"
-                        onClick={handleCancel}
-                    >
+                        <button
+                            type="submit"
+                            className="salary-save-btn"
+                            disabled={saving}
+                        >
+                            {saving ? (
+                                <>
+                                    <LoaderCircle
+                                        size={17}
+                                        className="salary-save-spinner"
+                                    />
+                                    Saving...
+                                </>
+                            ) : (
+                                <>
+                                    <Save size={17} />
+                                    Save Salary
+                                </>
+                            )}
+                        </button>
 
-                        <X size={17} />
-
-                        Cancel
-
-                    </button>
-
-
-                    <button
-                        type="submit"
-                        className="salary-save-btn"
-                    >
-
-                        <Save size={17} />
-
-                        Save Salary
-
-                    </button>
+                    </div>
 
                 </div>
-
 
             </form>
 
         </section>
-
     );
-
 }
-
-
 export default AddSalary;

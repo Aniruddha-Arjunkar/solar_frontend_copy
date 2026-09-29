@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate, useParams , useSearchParams } from "react-router";
+import { useNavigate, useParams, useSearchParams } from "react-router";
 
 import {
     ArrowLeft,
@@ -20,28 +20,28 @@ import API_BASE_URL from "./../../../config/api";
 
 function AdvanceDetails() {
 
-  
+
     const { employeeId } = useParams();
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [employee, setEmployee] = useState(null);
     const [salaries, setSalaries] = useState([]);
-    
+
     const currentMonth = new Date().toISOString().slice(0, 7);
     const [selectedMonth, setSelectedMonth] = useState(
-           searchParams.get("month") || currentMonth);
+        searchParams.get("month") || currentMonth);
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
     const handleMonthChange = (event) => {
 
-    const month = event.target.value;
+        const month = event.target.value;
 
-    setSelectedMonth(month);
-    setSearchParams({ month });
-     };
+        setSelectedMonth(month);
+        setSearchParams({ month });
+    };
 
 
     // ============================================================
@@ -185,33 +185,37 @@ function AdvanceDetails() {
     }, [salaries]);
 
 
-    // ============================================================
-    // MONTH DATE RANGE
-    // ============================================================
+    // ================ MONTH DATE RANGE =====================
 
     const monthStart = `${selectedMonth}-01`;
 
+    // const getLastDayOfMonth = (yearMonth) => {
+
+    //     const [year, month] = yearMonth.split("-").map(Number);
+
+    //     return new Date(year, month, 0)
+    //         .toISOString()
+    //         .slice(0, 10);
+    // };
     const getLastDayOfMonth = (yearMonth) => {
 
         const [year, month] =
             yearMonth.split("-").map(Number);
 
-        return new Date(
-            year,
-            month,
-            0
-        )
-            .toISOString()
-            .slice(0, 10);
+        const lastDay =
+            new Date(
+                year,
+                month,
+                0
+            ).getDate();
+
+        return `${yearMonth}-${String(lastDay).padStart(2, "0")}`;
     };
 
-    const monthEnd =
-        getLastDayOfMonth(selectedMonth);
+    const monthEnd = getLastDayOfMonth(selectedMonth);
 
 
-    // ============================================================
-    // CURRENT MONTH ADVANCES
-    // ============================================================
+    // ==================== CURRENT MONTH ADVANCES ==============================
 
     const currentMonthAdvances = useMemo(() => {
 
@@ -235,9 +239,7 @@ function AdvanceDetails() {
     ]);
 
 
-    // ============================================================
-    // CURRENT MONTH DEDUCTIONS
-    // ============================================================
+    // =================== CURRENT MONTH DEDUCTIONS =============================
 
     const currentMonthDeductions = useMemo(() => {
 
@@ -549,24 +551,19 @@ function AdvanceDetails() {
                     <ArrowLeft size={17} />
                     Back to Advance
                 </button>
-
             </div>
 
 
-            {/* ==================================================
-                ERROR
-            ================================================== */}
+            {/* ================ ERROR ================= */}
 
             {error && (
 
                 <div className="accounts-advance-details-error">
 
                     <AlertCircle size={20} />
-
                     <span>
                         {error}
                     </span>
-
                     <button
                         type="button"
                         onClick={fetchAdvanceDetails}
@@ -778,11 +775,10 @@ function AdvanceDetails() {
                 <div className="accounts-advance-details-summary-card">
 
                     <div
-                        className={`accounts-advance-details-summary-icon ${
-                            pendingAdvance > 0
+                        className={`accounts-advance-details-summary-icon ${pendingAdvance > 0
                                 ? "accounts-advance-details-summary-danger"
                                 : "accounts-advance-details-summary-success"
-                        }`}
+                            }`}
                     >
                         <CircleDollarSign size={22} />
                     </div>
@@ -802,17 +798,11 @@ function AdvanceDetails() {
                         <small>
                             After current deduction
                         </small>
-
                     </div>
-
                 </div>
-
             </div>
 
-
-            {/* ==================================================
-                ADVANCE TAKEN
-            ================================================== */}
+            {/* =============== ADVANCE TAKEN ================ */}
 
             <div className="accounts-advance-details-content-card">
 
@@ -979,29 +969,18 @@ function AdvanceDetails() {
                                                 totalWithCarry
                                             )}
                                         </td>
-
                                     </tr>
                                 </>
-
                             )}
-
                         </tbody>
-
                     </table>
-
                 </div>
-
             </div>
 
-
-            {/* ==================================================
-                DEDUCTION HISTORY
-            ================================================== */}
+            {/* ============= DEDUCTION HISTORY =========== */}
 
             <div className="accounts-advance-details-content-card">
-
                 <div className="accounts-advance-details-section-header">
-
                     <div>
 
                         <h2>
@@ -1159,22 +1138,16 @@ function AdvanceDetails() {
                         </tbody>
 
                     </table>
-
                 </div>
-
             </div>
 
-
-            {/* ==================================================
-                FINAL PENDING SECTION
-            ================================================== */}
+            {/* ============ FINAL PENDING SECTION ========== */}
 
             <div
-                className={`accounts-advance-details-pending-card ${
-                    pendingAdvance > 0
+                className={`accounts-advance-details-pending-card ${pendingAdvance > 0
                         ? "accounts-advance-details-pending-danger"
                         : "accounts-advance-details-pending-success"
-                }`}
+                    }`}
             >
 
                 <div className="accounts-advance-details-pending-left">
@@ -1184,33 +1157,22 @@ function AdvanceDetails() {
                         <CircleDollarSign size={25} />
 
                     </div>
-
                     <div>
-
                         <span>
                             Current Pending Advance
                         </span>
-
                         <p>
                             Carry forward + current advance
                             − current salary deduction
                         </p>
-
                     </div>
-
                 </div>
 
-
                 <strong>
-                    {formatCurrency(
-                        pendingAdvance
-                    )}
+                    {formatCurrency(pendingAdvance)}
                 </strong>
-
             </div>
-
         </section>
     );
 }
-
 export default AdvanceDetails;

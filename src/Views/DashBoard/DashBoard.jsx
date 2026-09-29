@@ -63,24 +63,6 @@ function DashBoard() {
                 setLoading(true);
                 setError("");
 
-                // Fetch Leads
-                // const response = await fetch(
-                //     `${API_BASE_URL}/leads`
-                // );
-
-                // if (!response.ok) {
-                //     throw new Error(
-                //         "Failed to fetch dashboard data."
-                //     );
-                // }
-
-                // const data = await response.json();
-
-                // setLeads(
-                //     Array.isArray(data)
-                //         ? data
-                //         : []
-                // );
                 const [
                     leadsResponse,
                     clientsResponse,
@@ -170,13 +152,6 @@ function DashBoard() {
                 lead.status === "NEW"
         ).length;
 
-
-        // return {
-        //     newLeads,
-        //     totalCustomers: clients.length,
-        //     totalVendors: vendors.length,
-        //     totalEmployees: employees.length
-        // };
         return {
             newLeads,
 
@@ -252,9 +227,7 @@ function DashBoard() {
     ];
 
 
-    // ============================================================
-    // PIE CHART DATA
-    // ============================================================
+    // =========== PIE CHART DATA ==================
 
     const pieData = [
 
@@ -262,12 +235,10 @@ function DashBoard() {
             name: "New Queries",
             value: dashboardCounts.newQueries
         },
-
         {
             name: "Service Queries",
             value: dashboardCounts.serviceQueries
         },
-
         {
             name: "Scheduled Queries",
             value: dashboardCounts.scheduledQueries
@@ -276,9 +247,7 @@ function DashBoard() {
     ];
 
 
-    // ============================================================
-    // MONTHLY QUERY TREND
-    // ============================================================
+    // ==================== MONTHLY QUERY TREND =====================
 
     const queryTrendData = useMemo(() => {
 
@@ -344,9 +313,7 @@ function DashBoard() {
     }, [leads]);
 
 
-    // ============================================================
-    // PIE COLORS
-    // ============================================================
+    // =================== PIE COLORS ==========================
 
     const PIE_COLORS = [
         "#14cabe",
@@ -359,26 +326,7 @@ function DashBoard() {
 
         <section className="main-body">
 
-
-            {/* ====================================================
-                PAGE HEADER
-            ==================================================== */}
-
-            {/* <div className="page-header">
-
-                <div>
-
-                    <p className="breadcrumb">
-                        Dashboard
-                    </p>
-
-                    <h1 className="page-heading">
-                        Overview
-                    </h1>
-
-                </div>
-
-            </div> */}
+            {/* ============ PAGE HEADER =============== */}
 
 
             {/* === ERROR MESSAGE ==*/}

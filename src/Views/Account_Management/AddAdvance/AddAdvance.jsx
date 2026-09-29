@@ -22,9 +22,7 @@ function AddAdvance() {
 
     const navigate = useNavigate();
 
-    // ============================================================
-    // FORM STATE
-    // ============================================================
+    // ============== FORM STATE ===========================
 
     const getTodayDate = () => {
         return new Date().toISOString().split("T")[0];
@@ -35,24 +33,18 @@ function AddAdvance() {
     const [advanceDate, setAdvanceDate] = useState(getTodayDate());
     const [remark, setRemark] = useState("");
 
-    // ============================================================
-    // EMPLOYEE STATE
-    // ============================================================
+    // ========== EMPLOYEE STATE ============================
 
     const [employees, setEmployees] = useState([]);
     const [loadingEmployees, setLoadingEmployees] = useState(true);
 
-    // ============================================================
-    // SUBMIT STATE
-    // ============================================================
+    // ================== SUBMIT STATE ===========================
 
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
-    // ============================================================
-    // FETCH EMPLOYEES
-    // ============================================================
+    // ================ FETCH EMPLOYEE ===================
 
     useEffect(() => {
 
@@ -100,14 +92,10 @@ function AddAdvance() {
                 setLoadingEmployees(false);
             }
         };
-
         fetchEmployees();
-
     }, []);
 
-    // ============================================================
-    // RESET FORM
-    // ============================================================
+    // ============== RESET FORM ================
 
     const handleReset = () => {
 
@@ -120,9 +108,7 @@ function AddAdvance() {
         setSuccess("");
     };
 
-    // ============================================================
-    // ERROR MESSAGE HANDLER
-    // ============================================================
+    // =============== ERROR MESSAGE HANDLER =====================
 
     const getErrorMessage = async (response) => {
 
@@ -142,9 +128,7 @@ function AddAdvance() {
         }
     };
 
-    // ============================================================
-    // SAVE ADVANCE
-    // ============================================================
+    // ============= SAVE ADVANCE ================
 
     const handleSubmit = async (event) => {
 
@@ -194,14 +178,6 @@ function AddAdvance() {
             // ----------------------------------------------------
 
             const month = advanceDate.substring(0, 7);
-
-            // ----------------------------------------------------
-            // CREATE ADVANCE
-            //
-            // Advance is stored as a Salary record with:
-            // paymentType = ADVANCE
-            // advance = advance amount
-            // ----------------------------------------------------
 
             const response = await fetch(
                 `${API_BASE_URL}/salaries/employee/${employeeId}`,
@@ -299,9 +275,7 @@ function AddAdvance() {
 
         <section className="accounts-add-advance-page">
 
-            {/* =====================================================
-                HEADER
-            ====================================================== */}
+            {/* =============== HEADER ================ */}
 
             <div className="accounts-add-advance-header">
 
@@ -343,9 +317,7 @@ function AddAdvance() {
             </div>
 
 
-            {/* =====================================================
-                FORM CARD
-            ====================================================== */}
+            {/* ==================== FORM CARD =================== */}
 
             <div className="accounts-add-advance-card">
 
@@ -370,28 +342,21 @@ function AddAdvance() {
                 </div>
 
 
-                {/* =================================================
-                    SUCCESS MESSAGE
-                ================================================== */}
+                {/* ============== SUCCESS MESSAGE ===========*/}
 
                 {success && (
 
                     <div className="accounts-add-advance-success">
 
                         <CheckCircle2 size={19} />
-
                         <span>
                             {success}
                         </span>
-
                     </div>
-
                 )}
 
 
-                {/* =================================================
-                    ERROR MESSAGE
-                ================================================== */}
+                {/* ============ ERROR MESSAGE ================= */}
 
                 {error && (
 
@@ -408,18 +373,13 @@ function AddAdvance() {
                 )}
 
 
-                {/* =================================================
-                    FORM
-                ================================================== */}
+                {/* ======= FORM ================ */}
 
                 <form
                     className="accounts-add-advance-form"
-                    onSubmit={handleSubmit}
-                >
+                    onSubmit={handleSubmit}>
 
-                    {/* =================================================
-                        EMPLOYEE
-                    ================================================== */}
+                    {/* ================= EMPLOYEE ================== */}
 
                     <div className="accounts-add-advance-field">
 
@@ -458,20 +418,14 @@ function AddAdvance() {
                                         >
                                             {employee.name}
                                         </option>
-
                                     )
                                 )}
-
                             </select>
-
                         </div>
-
                     </div>
 
 
-                    {/* =================================================
-                        ADVANCE AMOUNT
-                    ================================================== */}
+                    {/* ============== ADVANCE AMOUNT ============== */}
 
                     <div className="accounts-add-advance-field">
 
@@ -496,15 +450,11 @@ function AddAdvance() {
                                     )
                                 }
                             />
-
                         </div>
-
                     </div>
 
 
-                    {/* =================================================
-                        ADVANCE DATE
-                    ================================================== */}
+                    {/* =========== ADVANCE DATE ================ */}
 
                     <div className="accounts-add-advance-field">
 
@@ -526,15 +476,11 @@ function AddAdvance() {
                                     )
                                 }
                             />
-
                         </div>
-
                     </div>
 
 
-                    {/* =================================================
-                        REMARK
-                    ================================================== */}
+                    {/* =================== REMARK =================== */}
 
                     <div className="accounts-add-advance-field accounts-add-advance-full-field">
 
@@ -556,15 +502,11 @@ function AddAdvance() {
                                     )
                                 }
                             />
-
                         </div>
-
                     </div>
 
 
-                    {/* =================================================
-                        BUTTONS
-                    ================================================== */}
+                    {/* =============== BUTTONS ============= */}
 
                     <div className="accounts-add-advance-actions">
 
@@ -592,11 +534,8 @@ function AddAdvance() {
                         >
 
                             <RotateCcw size={17} />
-
                             Reset
-
                         </button>
-
                     </div>
 
                 </form>
@@ -606,5 +545,4 @@ function AddAdvance() {
         </section>
     );
 }
-
 export default AddAdvance;

@@ -22,7 +22,7 @@ function ReFollowUpForm({ lead, onClose }) {
 
     const [formData, setFormData] = useState({
         followUpDate: "",
-        followUpTime: "",
+        // followUpTime: "",
         remarks: ""
     });
 
@@ -218,7 +218,7 @@ function ReFollowUpForm({ lead, onClose }) {
                             </div>
 
                             {/*==== Time ======*/}
-                            <div className="lead-form-group">
+                            {/* <div className="lead-form-group">
                                 <label htmlFor="followUpTime">
                                     Follow-up Time
                                 </label>
@@ -230,7 +230,7 @@ function ReFollowUpForm({ lead, onClose }) {
                                         value={formData.followUpTime}
                                         onChange={handleChange}/>
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/*===== Remarks ============*/}
                             <div className="lead-form-group full-width">

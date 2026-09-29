@@ -21,7 +21,7 @@ function VisitForm({ lead, onClose }) {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         visitDate: "",
-        visitTime: "",
+        // visitTime: "",
         remarks: ""
     });
 
@@ -71,7 +71,7 @@ function VisitForm({ lead, onClose }) {
 
                     body: JSON.stringify({
                         visitDate: formData.visitDate,
-                        visitTime: formData.visitTime,
+                        // visitTime: formData.visitTime,
                         remarks: formData.remarks
                     })
                 }
@@ -226,7 +226,7 @@ function VisitForm({ lead, onClose }) {
                             </div>
 
                             {/* ================= TIME ================= */}
-                            <div className="lead-form-group">
+                            {/* <div className="lead-form-group">
                                 <label htmlFor="visitTime">
                                     Visit Time
                                     <span>*</span>
@@ -241,7 +241,7 @@ function VisitForm({ lead, onClose }) {
                                         onChange={handleChange}
                                         required/>
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* ================= LOCATION ================= */}
                             <div className="lead-form-group full-width">

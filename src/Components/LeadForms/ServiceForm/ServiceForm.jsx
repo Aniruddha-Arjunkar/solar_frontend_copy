@@ -23,7 +23,7 @@ function ServiceForm({ lead, onClose }) {
         const [formData, setFormData] = useState({
         serviceType: "",
         serviceDate: "",
-        serviceTime: "",
+        // serviceTime: "",
         serviceRequirement: "",
         remarks: ""
     });
@@ -64,7 +64,7 @@ function ServiceForm({ lead, onClose }) {
                     body: JSON.stringify({
                         serviceType: formData.serviceType,
                         serviceDate: formData.serviceDate,
-                        serviceTime: formData.serviceTime,
+                        // serviceTime: formData.serviceTime,
                         serviceRequirement: formData.serviceRequirement,
                         remarks: formData.remarks
                     })
@@ -263,7 +263,7 @@ function ServiceForm({ lead, onClose }) {
 
                             {/* Preferred Time */}
 
-                            <div className="service-form-group">
+                            {/* <div className="service-form-group">
                                 <label htmlFor="service-time">
                                     Preferred Time
                                 </label>
@@ -276,7 +276,7 @@ function ServiceForm({ lead, onClose }) {
                                        value={formData.serviceTime}
                                        onChange={handleChange}/>
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* Requirement */}
 
